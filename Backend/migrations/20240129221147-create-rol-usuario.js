@@ -10,6 +10,12 @@ module.exports = {
       },
       idUsuario: {
         type: Sequelize.BIGINT,
+        references: {
+          model:{
+            tableName: 'usuarios'
+          },
+          key: 'id'
+        },
         primaryKey: true,
         allowNull: false,
       }

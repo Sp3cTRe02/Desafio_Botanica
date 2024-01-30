@@ -12,6 +12,12 @@ module.exports = {
 
       idFamilia:{
         type: Sequelize.BIGINT,
+        references: {
+          model:{
+            tableName: 'familias'
+          },
+          key: 'id'
+        },
         primaryKey: true,
         allowNull: false,
       },

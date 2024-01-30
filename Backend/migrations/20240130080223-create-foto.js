@@ -12,6 +12,12 @@ module.exports = {
 
       idArbol: {
         type: Sequelize.BIGINT,
+        references: {
+          model:{
+            tableName: 'arboles'
+          },
+          key: 'id'
+        },
         primaryKey: true,
         allowNull: false,
       },
