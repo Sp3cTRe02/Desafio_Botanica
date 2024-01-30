@@ -21,7 +21,7 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
       },
-      nombre: {
+      ruta: {
         type: Sequelize.STRING
       }
     });

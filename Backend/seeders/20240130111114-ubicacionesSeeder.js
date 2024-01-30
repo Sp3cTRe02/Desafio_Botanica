@@ -1,0 +1,14 @@
+'use strict';
+const ubFactory = require('../factories/ubicacionesFactory');
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up (queryInterface, Sequelize) {
+    const ubicaciones = await ubFactory(3);
+    await queryInterface.bulkInsert('ubicaciones', ubicaciones, {});
+  },
+
+  async down (queryInterface, Sequelize) {
+    await queryInterface.bulkDelete('ubicaciones', null, {});
+  }
+};
