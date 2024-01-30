@@ -5,6 +5,12 @@ module.exports = {
     await queryInterface.createTable('rolUsuario', {
       idRol: {
         type: Sequelize.BIGINT,
+        references: {
+          model:{
+            tableName: 'roles'
+          },
+          key: 'id'
+        },
         primaryKey: true,
         allowNull: false,
       },
