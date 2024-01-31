@@ -14,6 +14,7 @@ const crearRolUsuario = async (ctos = 1) => {
             idUsuario: usuarios[Math.floor(Math.random() * usuarios.length)]            
         })
     }
+    console.log('hola desde rolUsuarioFactory');
     return Promise.all(rolUsuario)
 }
 
