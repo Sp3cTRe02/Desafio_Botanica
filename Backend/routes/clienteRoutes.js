@@ -16,6 +16,8 @@ const validator = [
 ]
 
 router.post('/' , validator, controlador.usuarioPost)
+router.post('/' , validator, controlador.usuarioGet)
+router.post('/' , validator, controlador.usuarioDelete)
 
 
 module.exports = router
