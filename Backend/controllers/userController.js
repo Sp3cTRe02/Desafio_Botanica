@@ -22,7 +22,54 @@ const usuarioPost = async (req = request, res = response) => {
         })
 }
 
+const usuarioGet = async (req = request, res = response) => {
+    Conexion.getUsuarios()
+        .then(usuarios => {
+            if (usuarios.length > 0) {
+                res.status(StatusCodes.OK).json({
+                    'usuarios': usuarios,
+                    'status': 'OK'
+                })
+            } else {
+                res.status(StatusCodes.NOT_FOUND).json({
+                    'msg': 'No se encontraron usuarios',
+                    'status': 'ERROR'
+                })
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                'msg': 'Error en el servidor',
+                'status': 'ERROR'
+            })
+        })
+}
+
+const usuarioDelete = async (req = request, res = response) => {
+    Conexion.deleteUsuarios(req.params.id)
+        .then(resultado => {
+            if (resultado === 1) {
+                res.status(StatusCodes.OK).json({
+                    'msg': 'Usuario eliminado correctamente',
+                    'status': 'OK'
+                })
+            } else {
+                res.status(StatusCodes.NOT_FOUND).json({
+                    'msg': 'Usuario no encontrado',
+                    'status': 'ERROR'
+                })
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                'msg': 'Error en el servidor',
+                'status': 'ERROR'
+            })
+        })
+}
 
 module.exports = {
-    usuarioPost
+    usuarioPost,usuarioGet,usuarioDelete
 }
