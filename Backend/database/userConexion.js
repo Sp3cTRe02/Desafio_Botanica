@@ -32,6 +32,37 @@ const createUsuario = async (body) => {
     return resultado
 }
 
+const getUsuarios = async () => {
+    bd.conectar()
+    try {
+        const usuarios = await models.Usuario.findAll()
+        return usuarios
+    } catch (error) {
+        console.log('Error al obtener usuarios de la base de datos')
+        throw error
+    } finally {
+        bd.desconectar()
+    }
+}
+
+const deleteUsuarios = async (id) => {
+    bd.conectar()
+    try {
+        const resultado = await models.Usuario.update(
+            { Desactivado: 1 },
+            { where: { id: id } }
+        )
+        return resultado
+    } catch (error) {
+        console.log('Error al eliminar usuario')
+        throw error
+    } finally {
+        bd.desconectar()
+    }
+}
+
+
+
 module.exports = {
-    createUsuario
+    createUsuario,getUsuarios,deleteUsuarios
 }
