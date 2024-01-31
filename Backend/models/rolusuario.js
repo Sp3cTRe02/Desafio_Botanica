@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  RolUser.init({
+  RolUsuario.init({
     idRol: DataTypes.BIGINT,
     idUsuario: DataTypes.BIGINT
   }, {
