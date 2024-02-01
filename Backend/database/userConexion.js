@@ -33,36 +33,56 @@ const createUsuario = async (body) => {
 }
 
 const getUsuarios = async () => {
+    let usuarios = 0
     bd.conectar()
     try {
-        const usuarios = await models.Usuario.findAll()
-        return usuarios
+        usuarios = await models.Usuario.findAll()
+       
     } catch (error) {
         console.log('Error al obtener usuarios de la base de datos')
         throw error
     } finally {
         bd.desconectar()
     }
+    return usuarios
 }
 
 const deleteUsuarios = async (id) => {
+    let usuario=0
     bd.conectar()
     try {
-        const resultado = await models.Usuario.update(
-            { Desactivado: 1 },
+         usuario = await models.Usuario.update(
+            { desactivado: 1 },
             { where: { id: id } }
         )
-        return resultado
+
     } catch (error) {
         console.log('Error al eliminar usuario')
         throw error
     } finally {
         bd.desconectar()
     }
+    return usuario[0]
 }
 
-
+// const getActivado = async (id) => {
+//     let usuario=0
+//     bd.conectar()
+//     try {
+//         usuario = await models.Usuario.get(
+//             { where: { id: id } },
+//             {where: {desactivado: 1 }},
+//         )
+    
+//     } catch (error) {
+//     console.log('Error al eliminar usuario')
+//     throw error
+//     } finally {
+//     bd.desconectar()
+//     }
+//     return usuario[0]
+// }
 
 module.exports = {
-    createUsuario,getUsuarios,deleteUsuarios
+    createUsuario,getUsuarios,deleteUsuarios,/*getActivado*/
 }
