@@ -27,7 +27,7 @@ const usuarioGet = async (req = request, res = response) => {
         .then(usuarios => {
             if (usuarios.length > 0) {
                 res.status(StatusCodes.OK).json({
-                    'usuarios': usuarios,
+                    'msg': 'usuario creado correctamente',
                     'status': 'OK'
                 })
             } else {
