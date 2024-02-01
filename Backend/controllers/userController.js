@@ -22,6 +22,30 @@ const usuarioPost = async (req = request, res = response) => {
         })
 }
 
+const usuarioPut = async (req = request, res = response) => {
+    Conexion.updateUsuario(req.body, req.params.id)
+        .then(resultado => {
+            if (resultado === 1) {
+                res.status(StatusCodes.OK).json({
+                    'msg': 'Usuario actualizado correctamente',
+                    'status': 'OK'
+                })
+            } else {
+                res.status(StatusCodes.NOT_FOUND).json({
+                    'msg': 'Usuario no encontrado',
+                    'status': 'ERROR'
+                })
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                'msg': 'Error en el servidor',
+                'status': 'ERROR'
+            })
+        })
+}
+
 const usuarioGet = async (req = request, res = response) => {
     Conexion.getUsuarios()
         .then(usuarios => {
@@ -71,5 +95,7 @@ const usuarioDelete = async (req = request, res = response) => {
 }
 
 module.exports = {
-    usuarioPost,usuarioGet,usuarioDelete
+    usuarioPost,
+    usuarioPut,
+    usuarioGet,usuarioDelete
 }

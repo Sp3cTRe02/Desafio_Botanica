@@ -7,6 +7,12 @@ const bcrypt = require('bcrypt');
 
 const bd = new db()
 
+
+/**
+ * @Jaime_Rafael
+ * @param {*} body 
+ * @returns 
+ */
 const createUsuario = async (body) => {
     let resultado = 0 
     bd.conectar()
@@ -19,6 +25,35 @@ const createUsuario = async (body) => {
          const idRol = await models.sequelize.query('SELECT id FROM roles WHERE nombre = "cliente" ', { type: QueryTypes.SELECT });
          await models.sequelize.query('INSERT INTO rolusuario (idRol, idUsuario) VALUES ('+idRol[0].id+', '+nuevoUsuario.id+')', { type: QueryTypes.INSERT });
          resultado = 1
+    }catch (error){
+        if (error instanceof Sequelize.ValidationError) {
+            console.log('El usuario no cumple los requisitos')
+        }else{
+            console.log('Error desconocido')
+        }
+        throw error
+    }finally{
+        bd.desconectar()
+    }
+    return resultado
+}
+
+/**
+ * @author @Jaime_Rafael
+ * @returns 
+ */
+const updateUsuario = async (body, id) => {
+    let resultado = 0 
+    bd.conectar()
+    try{
+        let passwd = await bcrypt.hash(body.passwd, 10)
+        body.passwd = passwd
+        const usuario = await models.Usuario.update(body, 
+            {where: 
+                {id: id}
+            }
+        )
+        resultado = 1
     }catch (error){
         if (error instanceof Sequelize.ValidationError) {
             console.log('El usuario no cumple los requisitos')
@@ -64,5 +99,8 @@ const deleteUsuarios = async (id) => {
 
 
 module.exports = {
-    createUsuario,getUsuarios,deleteUsuarios
+    createUsuario,
+    updateUsuario,
+    getUsuarios,
+    deleteUsuarios
 }
