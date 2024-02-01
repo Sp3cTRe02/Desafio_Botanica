@@ -120,10 +120,6 @@ const deleteUsuarios = async (id) => {
 
 module.exports = {
 
-    createUsuario,getUsuarios,deleteUsuarios,/*getActivado*/
-
-    createUsuario,
-    updateUsuario,
-    getUsuarios,
-    deleteUsuarios
+    createUsuario,getUsuarios,deleteUsuarios,/*getActivado*/updateUsuario,
+    
 }
