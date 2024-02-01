@@ -17,7 +17,7 @@ const validator = [
 
 router.post('/'      , validator, controlador.usuarioPost)
 router.get('/'       , controlador.usuarioGet)
-router.update(':id'  ,controlador.usuarioDelete)
+router.delete('/:id'  ,controlador.usuarioDelete)
 
 
 module.exports = router
