@@ -27,7 +27,7 @@ const usuarioGet = async (req = request, res = response) => {
         .then(usuarios => {
             if (usuarios.length > 0) {
                 res.status(StatusCodes.OK).json({
-                    'msg': 'usuario creado correctamente',
+                    'usuarios': usuarios,
                     'status': 'OK'
                 })
             } else {
@@ -47,8 +47,35 @@ const usuarioGet = async (req = request, res = response) => {
 }
 
 const usuarioDelete = async (req = request, res = response) => {
+
+    // Conexion.getActivado(req.params.id)
+    // .then(resultado => {
+    //     console.log(resultado)
+        
+    //     if (resultado === 1) {
+    //         res.status(StatusCodes.OK).json({
+    //             'msg': 'Usuario ya anteriormente eliminado',
+    //             'status': 'OK'
+    //         })
+    //     } else {
+    //         res.status(StatusCodes.NOT_FOUND).json({
+    //             'msg': 'Usuario no encontrado',
+    //             'status': 'ERROR'
+    //         })
+    //     }
+    // })
+    // .catch(error => {
+    //     console.log(error);
+    //     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    //         'msg': 'Error en el servidor',
+    //         'status': 'ERROR'
+    //     })
+    // })
+
     Conexion.deleteUsuarios(req.params.id)
         .then(resultado => {
+            console.log(resultado)
+            
             if (resultado === 1) {
                 res.status(StatusCodes.OK).json({
                     'msg': 'Usuario eliminado correctamente',
@@ -71,5 +98,5 @@ const usuarioDelete = async (req = request, res = response) => {
 }
 
 module.exports = {
-    usuarioPost,usuarioGet,usuarioDelete
+    usuarioPost,usuarioGet,usuarioDelete,
 }
