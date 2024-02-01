@@ -105,6 +105,11 @@ const usuarioDelete = async (req = request, res = response) => {
                     'msg': 'Usuario eliminado correctamente',
                     'status': 'OK'
                 })
+            // } else if (resultado === 0) {
+            //     res.status(StatusCodes.OK).json({
+            //         'msg': 'Usuario ya anteriormente eliminado',
+            //         'status': 'OK'
+            //     })
             } else {
                 res.status(StatusCodes.NOT_FOUND).json({
                     'msg': 'Usuario no encontrado',
