@@ -165,6 +165,31 @@ const addRol = async (req = request, res = response) => {
         })
 }
 
+const removeRol = async (req = request, res = response) => {
+    Conexion.removeRol(req.body.idUsuario, req.body.idRol)
+        .then(resultado => {
+            if (resultado === 1) {
+                res.status(StatusCodes.OK).json({
+                    'msg': 'Rol eliminado correctamente',
+                    'status': 'OK'
+                })
+            } else {
+                res.status(StatusCodes.NOT_FOUND).json({
+                    'msg': 'Error al eliminar el rol',
+                    'status': 'ERROR'
+                })
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                'msg': 'Error en el servidor',
+                'status': 'ERROR'
+            })
+        })
+}
+
 module.exports = {
-    usuarioPost,usuarioGet,usuarioDelete,usuarioPut,  
+    usuarioPost,usuarioGet,usuarioDelete,usuarioPut, 
+    addRol, removeRol
 }

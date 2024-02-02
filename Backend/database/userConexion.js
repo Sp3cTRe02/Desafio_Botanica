@@ -151,11 +151,32 @@ const addRol = async (idUsuario, idRol) => {
     return resultado
 }
 
-
+/**
+ * @author @Jaime_Rafael
+ * @param {*} idUsuario 
+ * @param {*} idRol 
+ */
+const removeRol = async (idUsuario, idRol) => {
+    let resultado = 0
+    bd.conectar()
+    try {
+        const rolUsuario = await models.RolUsuario.destroy({
+            where: {
+                idUsuario: idUsuario,
+                idRol: idRol
+            }
+        })
+        resultado = 1
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
+    return resultado
+}
 
 module.exports = {
 
     createUsuario,getUsuarios,deleteUsuarios,/*getActivado*/updateUsuario,
-    addRol,
+    addRol,removeRol
     
 }

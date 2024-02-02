@@ -22,7 +22,8 @@ router.delete('/:id', controlador.usuarioDelete)
 router.put('/:id', controlador.usuarioPut)
 
 // RUTAS MODIFICAR ROL CLIENTE
-
+router.put('/addRol', controlador.addRol)
+router.delete('/deleteRol', controlador.deleteRol)
 
 
 module.exports = router
