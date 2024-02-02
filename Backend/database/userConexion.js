@@ -118,8 +118,44 @@ const deleteUsuarios = async (id) => {
 //     return usuario[0]
 // }
 
+/**
+ * @author @Jaime_Rafael
+ * @param {*} idUsuario 
+ * @param {*} idRol 
+ * @returns 
+ */
+const addRol = async (idUsuario, idRol) => {
+    let resultado = 0
+    bd.conectar()
+    try{
+        let hasRol = await models.RolUsuario.findOne({
+            where: {
+                idUsuario: idUsuario,
+                idRol: idRol
+            }
+        })
+        if(!hasRol){
+            const rolUsuario = await models.RolUsuario.create({
+                idUsuario: idUsuario,
+                idRol: idRol
+            })
+            resultado = 1
+        }else{
+            console.log('El usuario ya tiene el rol')
+            resultado = 2
+        }
+    }catch (error){
+        console.log(error);
+        throw error
+    }
+    return resultado
+}
+
+
+
 module.exports = {
 
     createUsuario,getUsuarios,deleteUsuarios,/*getActivado*/updateUsuario,
+    addRol,
     
 }

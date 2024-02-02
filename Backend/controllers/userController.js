@@ -2,7 +2,11 @@ const { response, request } = require('express')
 const Conexion = require('../database/userConexion')
 const { StatusCodes } = require('http-status-codes')
 
-
+/**
+ * @author @Jaime_Rafael
+ * @param {*} req 
+ * @param {*} res 
+ */
 const usuarioPost = async (req = request, res = response) => {
 
     Conexion.createUsuario(req.body)
@@ -22,6 +26,11 @@ const usuarioPost = async (req = request, res = response) => {
         })
 }
 
+/**
+ * @author @Jaime_Rafael
+ * @param {*} req 
+ * @param {*} res 
+ */
 const usuarioPut = async (req = request, res = response) => {
     Conexion.updateUsuario(req.body, req.params.id)
         .then(resultado => {
@@ -113,6 +122,36 @@ const usuarioDelete = async (req = request, res = response) => {
             } else {
                 res.status(StatusCodes.NOT_FOUND).json({
                     'msg': 'Usuario no encontrado',
+                    'status': 'ERROR'
+                })
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                'msg': 'Error en el servidor',
+                'status': 'ERROR'
+            })
+        })
+}
+
+
+/**
+ * @author @Jaime_Rafael
+ * @param {*} req 
+ * @param {*} res 
+ */
+const addRol = async (req = request, res = response) => {
+    Conexion.addRol(req.body.idUsuario, req.body.idRol)
+        .then(resultado => {
+            if (resultado === 1) {
+                res.status(StatusCodes.OK).json({
+                    'msg': 'Rol agregado correctamente',
+                    'status': 'OK'
+                })
+            } else {
+                res.status(StatusCodes.NOT_FOUND).json({
+                    'msg': 'Rol ya asignado',
                     'status': 'ERROR'
                 })
             }
