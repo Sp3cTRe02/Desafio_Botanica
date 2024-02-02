@@ -3,6 +3,12 @@ const { StatusCodes } = require('http-status-codes')
 const authConexion = require('../database/authConexion')
 const jwt = require('jsonwebtoken')
 
+
+/**
+ * @David_Trujillo
+ * @param {*} body 
+ * @returns 
+ */
 class authController {
     static login = async (req, res) => {
         const { email, passwd } = req.body;

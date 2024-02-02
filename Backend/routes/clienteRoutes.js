@@ -1,6 +1,5 @@
 const { Router } = require('express')
 const router = Router()
-const { StatusCodes } = require('http-status-codes')
 const { check } = require('express-validator')
 const validarCampos = require('../middlewares/validarCampos')
 const controlador = require('../controllers/userController')
@@ -15,11 +14,11 @@ const validator = [
     validarCampos
 ]
 
-router.post('/'      , validator, controlador.usuarioPost)
-router.get('/'       , controlador.usuarioGet)
-router.delete('/:id'  ,controlador.usuarioDelete)
-router.delete(':id'  ,controlador.usuarioDelete)
-router.put('/:id'    ,controlador.usuarioPut)
+router.post('/', validator, controlador.usuarioPost)
+router.get('/', controlador.usuarioGet)
+router.delete('/:id', controlador.usuarioDelete)
+router.delete(':id', controlador.usuarioDelete)
+router.put('/:id', controlador.usuarioPut)
 
 
 
