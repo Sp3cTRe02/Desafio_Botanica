@@ -15,7 +15,12 @@ const validator = [
     validarCampos
 ]
 
-router.post('/' , validator, controlador.usuarioPost)
+router.post('/'      , validator, controlador.usuarioPost)
+router.get('/'       , controlador.usuarioGet)
+router.delete('/:id'  ,controlador.usuarioDelete)
+router.delete(':id'  ,controlador.usuarioDelete)
+router.put('/:id'    ,controlador.usuarioPut)
+
 
 
 module.exports = router

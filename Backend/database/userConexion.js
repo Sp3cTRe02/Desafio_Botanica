@@ -7,6 +7,12 @@ const bcrypt = require('bcrypt');
 
 const bd = new db()
 
+
+/**
+ * @Jaime_Rafael
+ * @param {*} body 
+ * @returns 
+ */
 const createUsuario = async (body) => {
     let resultado = 0 
     bd.conectar()
@@ -32,6 +38,88 @@ const createUsuario = async (body) => {
     return resultado
 }
 
+/**
+ * @author @Jaime_Rafael
+ * @returns 
+ */
+const updateUsuario = async (body, id) => {
+    let resultado = 0 
+    bd.conectar()
+    try{
+        let passwd = await bcrypt.hash(body.passwd, 10)
+        body.passwd = passwd
+        const usuario = await models.Usuario.update(body, 
+            {where: 
+                {id: id}
+            }
+        )
+        resultado = 1
+    }catch (error){
+        if (error instanceof Sequelize.ValidationError) {
+            console.log('El usuario no cumple los requisitos')
+        }else{
+            console.log('Error desconocido')
+        }
+        throw error
+    }finally{
+        bd.desconectar()
+    }
+    return resultado
+}
+
+const getUsuarios = async () => {
+    let usuarios = 0
+    bd.conectar()
+    try {
+        usuarios = await models.Usuario.findAll()
+       
+    } catch (error) {
+        console.log('Error al obtener usuarios de la base de datos')
+        throw error
+    } finally {
+        bd.desconectar()
+    }
+    return usuarios
+}
+
+const deleteUsuarios = async (id) => {
+    let usuario=0
+    bd.conectar()
+    try {
+         usuario = await models.Usuario.update(
+            { desactivado: 1 },
+            { where: { id: id } }
+        )
+
+    } catch (error) {
+        console.log('Error al eliminar usuario')
+        throw error
+    } finally {
+        bd.desconectar()
+    }
+    return usuario[0]
+}
+
+// const getActivado = async (id) => {
+//     let usuario=0
+//     bd.conectar()
+//     try {
+//         usuario = await models.Usuario.get(
+//             { where: { id: id } },
+//             {where: {desactivado: 1 }},
+//         )
+    
+//     } catch (error) {
+//     console.log('Error al eliminar usuario')
+//     throw error
+//     } finally {
+//     bd.desconectar()
+//     }
+//     return usuario[0]
+// }
+
 module.exports = {
-    createUsuario
+
+    createUsuario,getUsuarios,deleteUsuarios,/*getActivado*/updateUsuario,
+    
 }
