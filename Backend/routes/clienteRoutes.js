@@ -14,16 +14,21 @@ const validator = [
     validarCampos
 ]
 
+const validatorRol = [
+    check('idUsuario', 'El idUsuario es obligatorio').not().isEmpty(),
+    check('idRol', 'El idRol es obligatorio').not().isEmpty(),
+    validarCampos
+]
 
 // RUTAS CRUD CLIENTE
-router.post('/', validator, controlador.usuarioPost)
-router.get('/', controlador.usuarioGet)
-router.delete('/:id', controlador.usuarioDelete)
-router.put('/:id', controlador.usuarioPut)
+router.post('/usuario', validator, controlador.usuarioPost)
+router.get('/usuario', controlador.usuarioGet)
+router.delete('/usuario/:id', controlador.usuarioDelete)
+router.put('/usuario/:id', controlador.usuarioPut)
 
 // RUTAS MODIFICAR ROL CLIENTE
-router.put('/addRol', controlador.addRol)
-router.delete('/deleteRol', controlador.deleteRol)
+router.put('/addRol', validatorRol, controlador.addRol)
+router.delete('/deleteRol', validatorRol, controlador.removeRol)
 
 
 module.exports = router

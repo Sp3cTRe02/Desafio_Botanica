@@ -127,6 +127,7 @@ const deleteUsuarios = async (id) => {
 const addRol = async (idUsuario, idRol) => {
     let resultado = 0
     bd.conectar()
+    console.log('añade rol');
     try{
         let hasRol = await models.RolUsuario.findOne({
             where: {
