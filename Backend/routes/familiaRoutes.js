@@ -9,9 +9,9 @@ const validator = [
     validarCampos
 ]
 
-router.get('/familia', controlador.familiaGet)
-router.post('/familia', validator, controlador.familiaPost)
-router.put('/familia/:id', controlador.familiaPut)
-router.delete('/familia/:id', controlador.familiaDelete)
+router.get('/', controlador.familiaGet)
+router.post('/', validator, controlador.familiaPost)
+router.put('/:id', validator, controlador.familiaPut)
+router.delete('/:id', controlador.familiaDelete)
 
 module.exports = router
