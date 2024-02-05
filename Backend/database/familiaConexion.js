@@ -55,7 +55,15 @@ const updateFamilia = async (body, id) => {
 
 const getFamilias = async () => {
     bd.conectar()
-    const familias = await models.Familia.findAll()
+    const familias = await models.Familia.findAll({
+        attributes: ['nombre'],
+        include: [{
+            model: models.Arbol,
+            as: 'FamiliaArbol',
+            attributes: ['nombre', 'epFloracion', 'descripcion'],
+            required: false
+        }]
+    })
     bd.desconectar()
     return familias
 }
