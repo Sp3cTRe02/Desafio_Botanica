@@ -41,11 +41,13 @@ export class LoginmodalComponent {
           localStorage.setItem('usuario', JSON.stringify(response.data))
           this.msg = 'Login correcto'
           this.mostrarExito(this.msg);
+          this.limpiarCampos()
 
          
         } else {
           this.msg = 'Usuario o contraseña incorrectos'
           this.mostrarError(this.msg)
+          this.limpiarCampos()
         }
       })
 
@@ -53,10 +55,20 @@ export class LoginmodalComponent {
 
   mostrarExito(msg: string) {
     this.msgService.add({ severity: 'success', summary: 'Éxito', detail: msg });
+
   }
 
   mostrarError(msg: string | undefined) {
     this.msgService.add({ severity: 'error', summary: 'Error', detail: msg });
+  }
+
+
+  limpiarCampos(){
+    this.usuario = {
+      email: '',
+      passwd: ''
+    }
+  
   }
 
 }

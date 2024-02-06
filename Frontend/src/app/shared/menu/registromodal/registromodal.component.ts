@@ -49,19 +49,32 @@ export class RegistromodalComponent {
           alert('xd')
           this.msg = 'Usuario registrado exitosamente'
           this.mostrarExito(this.msg);
-        } else {
-          console.log(response)
-        }
+          this.limpiarCampos()
+        } 
+  
       },
       (error)=>{
+        console.log(error)
         let mensajesError = [];
         for (let i = 0; i < error.error.errors.length; i++) {
           mensajesError.push(error.error.errors[i].msg);
-
         }
 
         this.mostrarError(mensajesError)
+        this.limpiarCampos()
       })
   }
+
+  limpiarCampos(){
+    this.usuario = {
+      nombre: '',
+      ap1: '',
+      ap2: '',
+      email: '',
+      passwd: ''
+    }
+
+  }
+  
 
 }

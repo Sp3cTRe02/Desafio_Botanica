@@ -18,7 +18,7 @@ import { PerfildropdownComponent } from "./perfildropdown/perfildropdown.compone
     providers: [MessageService],
     templateUrl: './menu.component.html',
     styleUrl: './menu.component.scss',
-    imports: [CommonModule, RouterOutlet, FormsModule, ReactiveFormsModule, MessagesModule, ToastModule, PasswordModule, LoginmodalComponent, RegistromodalComponent, PerfildropdownComponent]
+    imports: [CommonModule, RouterOutlet,RouterModule, FormsModule, ReactiveFormsModule, MessagesModule, ToastModule, PasswordModule, LoginmodalComponent, RegistromodalComponent, PerfildropdownComponent]
 })
 export class MenuComponent {
  
