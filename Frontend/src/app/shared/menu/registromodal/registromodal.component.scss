@@ -1,0 +1,38 @@
+/* Personalización de estilos para el formulario de registro en el modal extendido */
+.modal-extended .modal-dialog {
+    max-width: 750px; 
+}
+
+.modal-extended .modal-body {
+    padding: 30px;
+}
+
+.modal-extended .form-label {
+    font-weight: bold;
+}
+
+.modal-extended .btn-primary {
+    width: 100%;
+    margin-top: 20px; 
+}
+
+/* Estilos adicionales para el modal */
+.modal-content {
+    padding: 20px;
+}
+
+.modal-header {
+    border: none;
+    display: flex;
+    justify-content: center;
+}
+
+/* Estilos para el título del modal */
+.modal-title {
+    padding-left: 10px;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente el título */
+    margin-bottom: 0;
+    font-size: 25px;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+}
