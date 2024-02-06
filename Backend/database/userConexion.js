@@ -66,7 +66,10 @@ const updateUsuario = async (body, id) => {
     }
     return resultado
 }
-
+/**
+ * @author @Ismael
+ * @returns 
+ */
 const getUsuarios = async () => {
     let usuarios = 0
     bd.conectar()
@@ -82,6 +85,11 @@ const getUsuarios = async () => {
     return usuarios
 }
 
+/**
+ * @author @Ismael
+ * @param {*} id
+ * @returns 
+ */
 const deleteUsuarios = async (id) => {
     let usuario=0
     bd.conectar()
@@ -100,6 +108,11 @@ const deleteUsuarios = async (id) => {
     return usuario[0]
 }
 
+/**
+ * @author @Ismael
+ * @param {*} id
+ * @returns 
+ */
 // const getActivado = async (id) => {
 //     let usuario=0
 //     bd.conectar()

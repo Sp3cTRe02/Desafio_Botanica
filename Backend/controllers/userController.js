@@ -54,7 +54,12 @@ const usuarioPut = async (req = request, res = response) => {
             })
         })
 }
-
+/**
+ * @author @Ismael
+ *  @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const usuarioGet = async (req = request, res = response) => {
     Conexion.getUsuarios()
         .then(usuarios => {
@@ -78,7 +83,12 @@ const usuarioGet = async (req = request, res = response) => {
             })
         })
 }
-
+/**
+ * @author @Ismael
+ *  @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const usuarioDelete = async (req = request, res = response) => {
 
     // Conexion.getActivado(req.params.id)
