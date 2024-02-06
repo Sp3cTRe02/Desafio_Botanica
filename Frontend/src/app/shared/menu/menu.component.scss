@@ -1,0 +1,117 @@
+$color_1: #343a40;
+$color_2: #007bff;
+$color_3: #fff;
+$background-color_1: #f8f9fa;
+$background-color_2: #007bff;
+$background-color_3: #0056b3;
+$border-color_1: #007bff;
+$border-color_2: #0056b3;
+
+.offcanvas {
+    width: 300px;
+}
+
+.btn-close {
+    &:focus {
+        border: none;
+        box-shadow: none;
+    }
+}
+
+.navbar {
+    background-color: $background-color_1;
+    min-height: 50px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.navbar.fixed-top {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    
+}
+
+.navbar-toggler {
+    &:focus {
+        border: none;
+        box-shadow: none;
+    }
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: $color_1;
+    line-height: 70px;
+}
+
+.nav-link {
+    font-size: 1rem;
+    color: $color_1; // Asegúrate de definir la variable $color_1
+    line-height: 70px;
+    position: relative;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.nav-link::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 65%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background-color: #2e6b75;
+    visibility: hidden;
+    transition: 0.1s ease-in-out;
+}
+
+.nav-link:hover::before,
+.nav-link.active::before {
+    width: 100%;
+    visibility: visible;
+}
+
+.offcanvas .navbar-nav .nav-link::before {
+    width: 25%;
+    transition: 0.1s ease-in-out;
+}
+
+.navbar-toggler {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: transparent; /* Fondo transparente */
+}
+
+.btn-outline-primary {
+    color: $color_2;
+    border-color: $border-color_1;
+    &:hover {
+        background-color: $background-color_2;
+        color: $color_3;
+    }
+}
+
+.btn-primary {
+    background-color: $background-color_2;
+    border-color: $border-color_1;
+    &:hover {
+        background-color: $background-color_3;
+        border-color: $border-color_2;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-nav {
+        margin-left: auto;
+        text-align: center;
+
+        .nav-item {
+            height: 50px;
+        }
+    }
+}
+

@@ -14,7 +14,6 @@ class authController {
         const { email, passwd } = req.body;
         try {
             const usu = await authConexion.getUsuarioLogin(email, passwd);
-            console.log(usu)
 
             if (usu) {
                 const roles = await this.obtenerRoles(usu.id);
@@ -24,17 +23,40 @@ class authController {
                 //const decodedPayload = jwt.decode(token, { complete: true });
                 //console.log('Decoded JWT payload:', decodedPayload.payload);
 
+                const response = {
+                    success: true,
+                    data: {
+                        id: usu.id,
+                        nombre: usu.nombre,
+                        token: token,
+                        roles: roles
+                    },
+                    msg: 'Login exitoso.'
+                };
 
-                res.status(StatusCodes.OK).json({ usu, roles, token });
+                res.status(StatusCodes.OK).json(response);
             } else {
                 console.log('No hay registro de ese usuario.');
-                res.status(StatusCodes.BAD_REQUEST).json({ 'msg': 'Login incorrecto.' });
+                const response = {
+                    success: false,
+                    data: null,
+                    msg: 'Login incorrecto.'
+                };
+
+                res.status(StatusCodes.BAD_REQUEST).json(response);
             }
         } catch (error) {
             console.log(error);
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ 'msg': 'Error en el servidor.' });
+            const response = {
+                success: false,
+                data: null,
+                msg: 'Error en el servidor.'
+            };
+
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(response);
         }
     }
+
 
 
     static obtenerRoles = async (idUsu) => {
@@ -53,9 +75,13 @@ class authController {
             const mensajeUsuarioRol = await this.crearUsuarioRol();
             console.log(mensajeUsuarioRol)
 
+
             res.status(StatusCodes.CREATED).json({
-                msg: 'Usuario registrado correctamente',
-                mensajeUsuarioRol
+                success: true,
+                data: {
+                    msg: 'Usuario registrado correctamente',
+                    mensajeUsuarioRol
+                }
             });
         } catch (error) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ 'msg': 'Error en el servidor al registrar usuario.', 'sqlMessage': error })

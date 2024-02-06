@@ -17,7 +17,6 @@ const validator = [
 router.post('/', validator, controlador.usuarioPost)
 router.get('/', controlador.usuarioGet)
 router.delete('/:id', controlador.usuarioDelete)
-router.delete(':id', controlador.usuarioDelete)
 router.put('/:id', controlador.usuarioPut)
 
 
