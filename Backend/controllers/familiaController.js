@@ -48,7 +48,21 @@ const familiaPut = async (req = request, res = response) => {
 const familiaGet = async (req = request, res = response) => {
     Conexion.getFamilias()
         .then(familias => {
-            res.status(StatusCodes.OK).json(familias)
+            res.status(StatusCodes.OK).json({"msg":familias})
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                'msg': 'Error en el servidor',
+                'status': 'ERROR'
+            })
+        })
+}
+
+const familiaAdmin = (req = request, res = response) => {
+    Conexion.getFamiliasAdmin()
+        .then(familias => {
+            res.status(StatusCodes.OK).json({"msg":familias})
         })
         .catch(error => {
             console.log(error);
@@ -87,5 +101,6 @@ module.exports = {
     familiaPost,
     familiaPut,
     familiaGet,
+    familiaAdmin,
     familiaDelete
 }

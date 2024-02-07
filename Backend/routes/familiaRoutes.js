@@ -10,6 +10,7 @@ const validator = [
 ]
 
 router.get('/', controlador.familiaGet)
+router.get('/familia-admin',controlador.familiaAdmin)
 router.post('/', validator, controlador.familiaPost)
 router.put('/:id', validator, controlador.familiaPut)
 router.delete('/:id', controlador.familiaDelete)

@@ -1,0 +1,100 @@
+<app-menu></app-menu>
+<div class="container container-table">
+    <div class="row">
+        <div class="col">
+            <p-table #dt1 [value]="familias" dataKey="id" [paginator]="true" [rows]="5" [showCurrentPageReport]="true">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="centered-text">Numero de familia</th>
+                        <th class="centered-text">Nombre de la familia</th>
+                        <th class="centered-text">Estado</th>
+                        <th class="centered-text">Acciones</th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="caption">
+                    <div class="flex justify-content-end">
+                        <button class="btn btn-success button-space" (click)="abrirAnadir()" style="margin-left:  85%;">
+                            <i class="fas fa-plus"></i> Añadir familia
+                        </button>
+                    </div>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-familia>
+                    <tr>
+                        <td class="centered-text">{{familia.id}}</td>
+                        <td class="centered-text">{{familia.nombre}}</td>
+                        <td class="centered-text">{{ familia.desactivado == 0 ? 'Activo' : 'Inactivo' }}</td>
+                        <td class="centered-text">
+                            <button class="btn btn-primary button-space" (click)="abrirEditar(familia)">Editar</button>
+                            <button class="btn btn-danger button-space"
+                                (click)="abrirEliminar(familia)">Eliminar</button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+
+<ng-template #editar let-modalEditar>
+    <div class="modal-body p-4 py-5 p-md-5">
+        <h3 class="text-center mb-3">Editar familia</h3>
+        <form class="signup-form">
+            <div class="form-group mb-2">
+                <label for="name">Número de familia</label>
+                <input type="text" [readonly]="true" class="form-control mb-2" name="idTarea" required
+                    [ngModel]="familiaSeccionada?.id != null ? familiaSeccionada?.id : ''">
+            </div>
+
+            <div class="form-group mb-2">
+                <label for="email">Nombre de la familia</label>
+                <input type="text" class="form-control mb-2" name="descTarea" required
+                    [ngModel]="familiaSeccionada?.nombre != null ? familiaSeccionada?.nombre : ''">
+            </div>
+
+            <div class="form-group mb-2">
+                <button type="submit" class="form-control btn btn-primary">Editar</button>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+
+<ng-template #anadir let-modalEditar>
+    <div class="modal-body p-4 py-5 p-md-5">
+        <h3 class="text-center mb-3">Añadir familia</h3>
+        <form (ngSubmit)="anadirFamilias()" class="signup-form">
+            <div class="form-group mb-2">
+                <label for="email">Nombre de la familia</label>
+                <input type="text" class="form-control mb-2" name="descTarea" required
+                    [(ngModel)]="familia.nombre">
+            </div>
+
+            <div class="form-group mb-2">
+                <button type="submit" class="form-control btn btn-primary">Añadir</button>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+
+<ng-template #eliminar let-modal>
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header flex-column">
+                <div class="icon-box">
+                    <i class="material-icons">&#xE5CD;</i>
+                </div>
+                <h4 class="modal-title w-100">¿Estás seguro?</h4>
+            </div>
+            <div class="modal-body">
+                <p>Do you really want to delete these records? This process cannot be undone.</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-danger" (click)="eliminarFamilia()">Eliminar</button>
+                <button type="button" class="btn btn-primary" (click)="modal.dismiss('Cancel click')">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

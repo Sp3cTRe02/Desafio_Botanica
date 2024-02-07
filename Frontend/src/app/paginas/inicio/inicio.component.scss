@@ -1,16 +1,10 @@
-$color_1: #2e6b75;
-$color_2: #333;
-$color_3: #fff;
-$background-color_1: #fff;
-$background-color_2: #2e6b75;
-
 
 .hero-section {
     padding: 50px 0;
     h1 {
         font-size: 50px;
         margin-bottom: 20px;
-        color: $color_1;
+        color: var(--color_1);
         font-weight: 600;
     }
     p {
@@ -32,8 +26,8 @@ $background-color_2: #2e6b75;
     }
 }
 .features3 {
-    background-color: $background-color_1;
-    color: $color_2;
+    background-color: var(--background-color_1);
+    color: var(--color_2);
     padding: 50px 0;
     h4 {
         font-size: 2.5em;
@@ -54,14 +48,14 @@ $background-color_2: #2e6b75;
     }
 }
 .item-btn {
-    background-color: $background-color_2;
-    color: $color_3;
+    background-color: var(--background-color_2);
+    color: var(--color_3);
     text-decoration: none;
     padding: 10px 20px;
     font-size: 15px;
     border-radius: 5px;
     &:hover {
-        background-color: $background-color_2;
+        background-color: var(--background-color_2);
     }
 }
 @media (min-width: 992px) {
@@ -71,14 +65,14 @@ $background-color_2: #2e6b75;
     }
 }
 
-.element-wrapper{
+.element-wrapper {
     border-radius: 30px;
     padding: 35px;
-    background-color: #91c2be;
+    background-color: var( --background-color_3);
     border: none;
 }
 
-.item-btn{
-    border:none;
+.item-btn {
+    border: none;
     border-radius: 30px;
 }

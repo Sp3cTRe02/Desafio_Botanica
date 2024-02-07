@@ -11,6 +11,11 @@ module.exports = {
       },
       nombre: {
         type: Sequelize.STRING
+      },
+
+      desactivado:{
+        type:Sequelize.BOOLEAN,
+        defaultValue: 0
       }
     });
   },

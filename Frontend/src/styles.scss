@@ -2,10 +2,160 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 @import "bootstrap/scss/bootstrap";
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins&display=swap");
 
-body{
-    font-family: 'Open Sans', sans-serif;
+body {
+    font-family: "Open Sans", sans-serif;
 }
+
+:root {
+    --color_1: #2e6b75;
+    --color_2: #333;
+    --color_3: #fff;
+    --color_4: #999;
+    --color_5: #636363;
+    --color_6: #f15e5es;
+    --color_7: #91c2be;
+    --color_8: #f15e5e;
+    --background-color_1: #fff;
+    --background-color_2: #2e6b75;
+    --background-color_3: #91c2be;
+    --background-color_4: #49aea9;
+    --background-color_5: #f15e5e;
+    --background-color_6: #ee3535;
+    --background-color_7: #999;
+}
+
+//Botones
+.btn-primary {
+    border-radius: 4px;
+    background: var(--background-color_2);
+    border: none;
+    margin: 0 5px;
+    &:hover {
+        background: var(--background-color_4);
+    }
+
+    &:active {
+        background: var(--background-color_4) !important;
+    }
+
+}
+
+.btn-danger {
+    border: none;
+    background: var(--background-color_6);
+    &:hover {
+        background: var(--background-color_5);
+    }
+
+    &:active {
+        background: var(--background-color_5) !important;
+    }
+}
+
+.btn-success {
+    border: none;
+    background: var(--background-color_4);
+
+    &:active {
+        background: var(--background-color_5) !important;
+    }
+
+    &:hover {
+        background: var(--background-color_4) !important;
+    }
+
+    
+}
+
+//Tablas
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+    background-color: var(--background-color_1);
+    color: var(--color_2);
+}
+
+:host ::ng-deep  .p-datatable-header {
+    background-color: var(--background-color_2);
+}
+
+.container-table {
+    margin-top: 115px;
+    padding: 20px;
+}
+
+.centered-text {
+    text-align: center;
+}
+
+.button-space {
+    margin-left: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .button-space {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}
+
+//Modal eliminación
+.modal-confirm {
+    color: var(--color_5);
+    width: 400px;
+    .modal-content {
+        padding: 20px;
+        border-radius: 5px;
+        border: none;
+        text-align: center;
+        font-size: 14px;
+    }
+    .modal-header {
+        border-bottom: none;
+        position: relative;
+    }
+    h4 {
+        text-align: center;
+        font-size: 26px;
+        margin: 30px 0 -10px;
+    }
+    .close {
+        position: absolute;
+        top: -5px;
+        right: -2px;
+    }
+
+    .modal-footer {
+        border: none;
+        text-align: center;
+        border-radius: 5px;
+        font-size: 13px;
+        padding: 10px 15px 25px;
+        a {
+            color: var(--color_3);
+        }
+    }
+    .icon-box {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto;
+        border-radius: 50%;
+        z-index: 9;
+        text-align: center;
+        border: 3px solid #f15e5e;
+        i {
+            color: var(--color_8);
+            font-size: 46px;
+            display: inline-block;
+            margin-top: 13px;
+        }
+    }
+}
+.trigger-btn {
+    display: inline-block;
+    margin: 100px auto;
+}
+
+
 
 

@@ -1,11 +1,19 @@
 import { Routes } from '@angular/router';
 import { InicioComponent } from './paginas/inicio/inicio.component';
-import { FamiliaAdminComponent } from './paginas/familia-admin/familia-admin.component';
-import { ArbolesAdminComponent } from './paginas/arboles-admin/arboles-admin.component';
-import { UsuariosAdminComponent } from './paginas/usuarios-admin/usuarios-admin.component';
+import { ArbolesAdminComponent } from './paginas/admin/arboles-admin/arboles-admin.component';
+import { FamiliasComponent } from './paginas/familias/familias.component';
+import { UsuariosAdminComponent } from './paginas/admin/usuarios-admin/usuarios-admin.component';
+import { FamiliaAdminComponent } from './paginas/admin/familia-admin/familia-admin.component';
+
 
 export const routes: Routes = [
     { path: '', component: InicioComponent },
+
+    {
+        path: 'familias',
+        component: FamiliasComponent
+    },
+
     {
         path: 'familias-admin',
         component: FamiliaAdminComponent,
@@ -21,10 +29,7 @@ export const routes: Routes = [
         component: UsuariosAdminComponent,
     },
 
-    {
-        path: 'arboles-familias',
-        component: ArbolesAdminComponent
-    }
+    
 ];
 
 

@@ -68,6 +68,13 @@ const getFamilias = async () => {
     return familias
 }
 
+const getFamiliasAdmin = async () =>{
+    bd.conectar()
+    const familias = await models.Familia.findAll()
+    bd.desconectar()
+    return familias
+}
+
 const deleteFamilias = async (id) => {
     let resultado = 0 
     bd.conectar()
@@ -95,5 +102,6 @@ module.exports = {
     createFamilia,
     updateFamilia,
     getFamilias,
+    getFamiliasAdmin,
     deleteFamilias
 }

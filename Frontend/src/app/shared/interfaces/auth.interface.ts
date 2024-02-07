@@ -7,7 +7,7 @@ export interface UserRegsitro {
     nombre: string;
     ap1: string;
     ap2: string;
-    email:string;
+    email: string;
     passwd: string;
 }
 
@@ -25,7 +25,7 @@ export interface Auth {
 export interface Registro {
     success: boolean;
     data: {
-      msg: string;
-      mensajeUsuarioRol?: string;
+        msg: string;
+        mensajeUsuarioRol?: string;
     };
-  }
+}
