@@ -6,3 +6,8 @@ export interface FamiliaAdmin{
 export interface FamiliaPost{
     nombre:string;
 }
+
+export interface FamiliaPut{
+    nombre:string;
+    estado: number;
+}
