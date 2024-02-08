@@ -8,14 +8,15 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-familia-admin',
     standalone: true,
     templateUrl: './familia-admin.component.html',
     styleUrl: './familia-admin.component.scss',
-    imports: [CommonModule, MenuComponent, TableModule, FormsModule, ToastModule],
+    imports: [CommonModule, MenuComponent, TableModule, FormsModule, ToastModule,InputSwitchModule,ReactiveFormsModule],
     providers: [MessageService]
 })
 
