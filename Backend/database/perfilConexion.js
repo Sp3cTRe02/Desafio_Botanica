@@ -1,5 +1,5 @@
 const db = require('../database/Conexion.js');
-const models = require('../models/usuario.js'); 
+const models = require('../models/index.js'); 
 const { QueryTypes } = require('sequelize');
 const { Sequelize } = require('sequelize');
 const bd = new db()
@@ -12,8 +12,11 @@ const bd = new db()
 const obtenerUsuarioPorId = async (id) => {
     bd.conectar()
     try {
+        console.log(id);
         const usuario = await models.Usuario.findByPk(id);
+        console.log(id);
         return usuario;
+        
     } catch (error) {
         if (error instanceof Sequelize.ValidationError) {
             console.error('Error de validación al obtener el usuario por ID:', error);
