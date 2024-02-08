@@ -167,6 +167,12 @@ const addRol = async (req = request, res = response) => {
         })
 }
 
+/**
+ * @author @Jaime_Rafael
+ * @param {*} req
+ * @param {*} res 
+ */
+
 const removeRol = async (req = request, res = response) => {
     Conexion.removeRol(req.body.idUsuario, req.body.idRol)
         .then(resultado => {
