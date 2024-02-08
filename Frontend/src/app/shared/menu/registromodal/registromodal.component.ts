@@ -27,7 +27,7 @@ export class RegistromodalComponent {
 
   confirmarContrasena: string = ''
   msg: string = '';
-  
+
 
   constructor(public router: Router, private sharedService: SharedService,
     private msgService: MessageService) { }
@@ -50,8 +50,15 @@ export class RegistromodalComponent {
           this.msg = 'Usuario registrado exitosamente'
           this.mostrarExito(this.msg);
           this.limpiarCampos()
-        } 
-  
+          this.usuario = {
+            nombre: '',
+            ap1: '',
+            ap2: '',
+            email: '',
+            passwd: ''
+          }
+        }
+
       },
       (error)=>{
         console.log(error)
@@ -75,6 +82,6 @@ export class RegistromodalComponent {
     }
 
   }
-  
+
 
 }

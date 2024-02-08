@@ -1,1 +1,126 @@
 <app-menu></app-menu>
+<div class="container container-table">
+  <div class="row">
+    <div class="col">
+      <p-table #dt1 [value]="usuarios" dataKey="id" [paginator]="true" [rows]="5" [showCurrentPageReport]="true">
+        <ng-template pTemplate="header">
+          <tr>
+<!--            <th class="centered-text">Numero de usuario</th>-->
+            <th class="centered-text">Nombre</th>
+            <th class="centered-text">Primer apellido</th>
+            <th class="centered-text">Segundo apellido</th>
+            <th class="centered-text">Correo</th>
+<!--            <th class="centered-text">Foto</th>-->
+            <th class="centered-text">Estado</th>
+<!--            <th class="centered-text">Creado</th>-->
+            <th class="centered-text">Acciones</th>
+<!--            <th class="centered-text">Modificado por ult. vez</th>-->
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="caption">
+          <div class="flex justify-content-end">
+            <button class="btn btn-success button-space" (click)="abrirAnadir()" style="margin-left:  85%;">
+              <i class="fas fa-plus"></i> Añadir familia
+            </button>
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-usuario>
+          <tr>
+<!--            <td class="centered-text">{{usuario.id}}</td>-->
+            <td class="centered-text">{{usuario.nombre}}</td>
+            <td class="centered-text">{{usuario.ap1}}</td>
+            <td class="centered-text">{{usuario.ap2}}</td>
+            <td class="centered-text">{{usuario.email}}</td>
+<!--            <td class="centered-text">{{usuario.foto}}</td>-->
+            <td class="centered-text">{{usuario.desactivado == 0 ? 'Activo' : 'Inactivo' }}</td>
+            <td class="centered-text">
+              <button class="btn btn-primary button-space" (click)="abrirEditar(usuario)">Editar</button>
+              <button class="btn btn-danger button-space"
+                      (click)="abrirEliminar(usuario)">Eliminar</button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+
+<ng-template #anadir let-modalEditar>
+  <div class="modal-body p-5 py-5 p-md-5">
+    <h3 class="text-center mb-3">Añadir usuario</h3>
+    <form (ngSubmit)="crearUsuario()"  class="signup-form">
+      <div class="form-group mb-2">
+        <label for="nombre">Nombre</label>
+        <input type="text" class="form-control mb-2" name="nombre" required
+               [(ngModel)]="usuario.nombre">
+        <label for="ap1">Primer apellido</label>
+        <input type="text" class="form-control mb-2" name="ap1" required
+               [(ngModel)]="usuario.ap1">
+        <label for="ap2">Segundo apellido</label>
+        <input type="text" class="form-control mb-2" name="ap2" required
+               [(ngModel)]="usuario.ap2">
+        <label for="correo">Correo</label>
+        <input type="text" class="form-control mb-2" name="correo" required
+               [(ngModel)]="usuario.email">
+        <label for="contrasena">Contraseña</label>
+        <input type="password" class="form-control mb-2" name="contrasena" required
+               [(ngModel)]="usuario.passwd">
+<!--        <label for="foto">Foto</label>-->
+<!--        <input type="text" class="form-control mb-2" name="foto" required-->
+<!--               [(ngModel)]="usuario.foto">-->
+
+      </div>
+
+      <div class="form-group mb-2">
+        <button type="submit" class="form-control btn btn-primary">Añadir</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+
+<ng-template #eliminar let-modal>
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header flex-column">
+        <div class="icon-box">
+          <i class="material-icons">&#xE5CD;</i>
+        </div>
+        <h4 class="modal-title w-100">¿Estás seguro?</h4>
+      </div>
+      <div class="modal-body">
+        <p>Deseas eliminar el usuario {{usuarioEliminar?.id}}</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-danger" (click)="eliminarUsuario(usuarioEliminar?.id)" >Eliminar</button>
+        <button type="button" class="btn btn-primary" (click)="modal.dismiss('Cancel click')">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #editar let-modalEditar>
+  <div class="modal-body p-4 py-5 p-md-5">
+    <h3 class="text-center mb-3">Editar familia</h3>
+    <form class="signup-form">
+      <div class="form-group mb-2">
+        <label for="name">Número de familia</label>
+        <input type="text" [readonly]="true" class="form-control mb-2" name="idTarea" required
+               [ngModel]="usuarioSeleccionado?.id != null ? usuarioSeleccionado?.id : ''">
+      </div>
+
+      <div class="form-group mb-2">
+        <label for="email">Nombre de la familia</label>
+        <input type="text" class="form-control mb-2" name="descTarea" required
+               [ngModel]="usuarioSeleccionado?.nombre != null ? usuarioSeleccionado?.nombre : ''">
+      </div>
+
+      <div class="form-group mb-2">
+        <button type="submit" class="form-control btn btn-primary">Editar</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
