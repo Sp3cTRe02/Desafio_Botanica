@@ -9,8 +9,10 @@ const { StatusCodes } = require('http-status-codes')
  */
 const getUsuarioPorId = async (req = request, res= response) => {
   try {
+    
     const { id } = req.params;
     const usuario = await Conexion.obtenerUsuarioPorId(id);
+    
     if (!usuario) {
       return res.status(StatusCodes.NOT_FOUND).json({ message: 'Usuario no encontrado' });
     }
