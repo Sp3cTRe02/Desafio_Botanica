@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Familia.init({
     nombre: DataTypes.STRING,
-    desactivado: DataTypes.BOOLEANS
+    desactivado: DataTypes.BOOLEAN
   }, {
     sequelize,
     timestamps: false,
