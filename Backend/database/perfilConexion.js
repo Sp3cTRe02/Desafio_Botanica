@@ -12,9 +12,7 @@ const bd = new db()
 const obtenerUsuarioPorId = async (id) => {
     bd.conectar()
     try {
-        console.log(id);
         const usuario = await models.Usuario.findByPk(id);
-        console.log(id);
         return usuario;
         
     } catch (error) {
