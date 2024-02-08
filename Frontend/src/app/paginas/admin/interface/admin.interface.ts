@@ -33,3 +33,9 @@ export interface UsuarioPost {
   passwd:       string;
   foto:         string;
 }
+
+export interface FamiliaPut{
+    nombre:string;
+    estado: number;
+}
+

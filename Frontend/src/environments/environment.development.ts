@@ -13,9 +13,14 @@ export const authRoutes = {
 
 export const familiaRoutes = {
     familiaAdmin :  "/familia-admin",
-    familiaPost: "/"
+    familiaPost: "/",
+    familiaPut: "/"
 }
 
 export const usuarioRoutes = {
     usuariobase: "/usuario",
 }
+
+   
+
+

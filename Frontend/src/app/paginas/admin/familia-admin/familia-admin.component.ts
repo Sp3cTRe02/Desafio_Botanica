@@ -2,12 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { Table, TableModule } from 'primeng/table';
 import { MenuComponent } from '../../../shared/menu/menu.component';
-import { FamiliaAdmin, FamiliaPost } from '../interface/admin.interface';
+import { FamiliaAdmin, FamiliaPost, FamiliaPut } from '../interface/admin.interface';
 import { FamiliaAdminService } from '../services/familia-admin.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { MessagesModule } from 'primeng/messages';
+import { ToastModule } from 'primeng/toast';
 
 
 @Component({
@@ -15,7 +15,7 @@ import { MessagesModule } from 'primeng/messages';
     standalone: true,
     templateUrl: './familia-admin.component.html',
     styleUrl: './familia-admin.component.scss',
-    imports: [CommonModule, MenuComponent, TableModule, FormsModule],
+    imports: [CommonModule, MenuComponent, TableModule, FormsModule, ToastModule],
     providers: [MessageService]
 })
 
@@ -27,6 +27,13 @@ export class FamiliaAdminComponent {
     familia: FamiliaPost = {
         nombre: ''
     }
+
+    familiaPut: FamiliaPut = {
+        nombre: '',
+        estado: 3
+    }
+
+    msg: string = '';
 
     @ViewChild('editar') editar: Table | undefined
     @ViewChild('anadir') anadir: Table | undefined
@@ -41,22 +48,52 @@ export class FamiliaAdminComponent {
         this.adminService.obtenerFamiliasAdmin().subscribe((response: any) => {
             if (Array.isArray(response.msg)) {
                 this.familias = response.msg;
+
             }
         })
     }
 
     anadirFamilias() {
-        console.log(this.familia)
         this.adminService.anadirFamilias(this.familia).subscribe((response: any) => {
             if (response.status = "OK") {
-                console.log('familia anadida')
-
+                this.msg = 'Familia registrada exitosamente'
+                this.mostrarExito(this.msg)
             }
-        })
+        },
+            (error) => {
+                let mensajesError = [];
+                for (let i = 0; i < error.error.errors.length; i++) {
+                    mensajesError.push(error.error.errors[i].msg);
+                }
+
+                this.mostrarError(mensajesError)
+            })
     }
 
-    eliminarFamilia() {
+    editarFamilia(idFamilia:number) {
+        this.familiaPut.nombre = this.familiaSeccionada.nombre
+        this.familiaPut.estado = this.familiaSeccionada.desactivado
 
+        console.log(this.familiaPut)
+
+        this.adminService.editarFamilias(idFamilia,this.familiaPut).subscribe((response:any)=>{
+            if(response.status="OK"){
+                this.msg = 'Familia editada correctamente';
+                this.mostrarExito(this.msg)
+            }
+        },
+
+        (error) => {
+            console.log(error)
+            let mensajesError = [];
+                for (let i = 0; i < error.error.errors.length; i++) {
+                    mensajesError.push(error.error.errors[i].msg);
+                }
+
+                this.mostrarError(mensajesError)
+        }
+        
+        )
     }
 
 
@@ -81,8 +118,10 @@ export class FamiliaAdminComponent {
 
     }
 
-    mostrarError(msg: string | undefined) {
-        this.msgService.add({ severity: 'error', summary: 'Error', detail: msg });
+    mostrarError(mensajes: string[]) {
+        mensajes.forEach((msg) => {
+            this.msgService.add({ severity: 'error', summary: 'Error', detail: msg });
+        });
     }
 
 

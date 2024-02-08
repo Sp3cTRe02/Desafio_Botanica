@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FamiliaAdmin, FamiliaPost } from '../interface/admin.interface';
+import { FamiliaAdmin, FamiliaPost, FamiliaPut } from '../interface/admin.interface';
 import { environment, familiaRoutes } from '../../../../environments/environment.development';
 
 @Injectable({
@@ -18,6 +18,10 @@ export class FamiliaAdminService {
 
   anadirFamilias(familia:FamiliaPost) {
     return this.http.post<any>(environment.baseUrl+environment.familiaEndpoint+familiaRoutes.familiaPost,familia)
+  }
+
+  editarFamilias(idFamilia:number, familia: FamiliaPut){
+    return this.http.put<any>(environment.baseUrl+environment.familiaEndpoint+familiaRoutes.familiaPost+idFamilia,familia)
   }
   
 }
