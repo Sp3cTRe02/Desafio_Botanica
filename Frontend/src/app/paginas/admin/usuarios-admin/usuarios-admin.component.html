@@ -5,7 +5,7 @@
       <p-table #dt1 [value]="usuarios" dataKey="id" [paginator]="true" [rows]="5" [showCurrentPageReport]="true">
         <ng-template pTemplate="header">
           <tr>
-            <th class="centered-text">Numero de usuario</th>
+<!--            <th class="centered-text">Numero de usuario</th>-->
             <th class="centered-text">Nombre</th>
             <th class="centered-text">Primer apellido</th>
             <th class="centered-text">Segundo apellido</th>
@@ -28,7 +28,7 @@
 
         <ng-template pTemplate="body" let-usuario>
           <tr>
-            <td class="centered-text">{{usuario.id}}</td>
+<!--            <td class="centered-text">{{usuario.id}}</td>-->
             <td class="centered-text">{{usuario.nombre}}</td>
             <td class="centered-text">{{usuario.ap1}}</td>
             <td class="centered-text">{{usuario.ap2}}</td>
@@ -94,7 +94,7 @@
         <p>Deseas eliminar el usuario {{usuarioEliminar?.id}}</p>
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-danger" (click)="eliminarUsuario(usuarioEliminar.id)" >Eliminar</button>
+        <button type="button" class="btn btn-danger" (click)="eliminarUsuario(usuarioEliminar?.id)" >Eliminar</button>
         <button type="button" class="btn btn-primary" (click)="modal.dismiss('Cancel click')">Cancelar</button>
       </div>
     </div>
