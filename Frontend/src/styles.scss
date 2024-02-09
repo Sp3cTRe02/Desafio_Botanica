@@ -152,3 +152,11 @@ body {
     display: inline-block;
     margin: 100px auto;
 }
+
+.p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
+  background: var(--background-color_4);
+}
+
+.p-inputswitch.p-inputswitch-checked:not(.p-disabled) .p-inputswitch-slider {
+  background: var(--background-color_2);
+}

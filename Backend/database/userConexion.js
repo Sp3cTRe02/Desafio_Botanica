@@ -71,8 +71,9 @@ const getUsuarios = async () => {
     let usuarios = 0
     bd.conectar()
     try {
-        usuarios = await models.Usuario.findAll()
        
+        usuarios = await models.Usuario.findAll();
+        
     } catch (error) {
         console.log('Error al obtener usuarios de la base de datos')
         throw error

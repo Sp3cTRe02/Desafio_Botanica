@@ -37,8 +37,8 @@
             <td class="centered-text">{{usuario.desactivado == 0 ? 'Activo' : 'Inactivo' }}</td>
             <td class="centered-text">
               <button class="btn btn-primary button-space" (click)="abrirEditar(usuario)">Editar</button>
-              <button class="btn btn-danger button-space"
-                      (click)="abrirEliminar(usuario)">Eliminar</button>
+              <button class="btn btn-success button-space"
+                      (click)="abrirRoles(usuario)">Roles</button>
             </td>
           </tr>
         </ng-template>
@@ -81,20 +81,26 @@
 </ng-template>
 
 
-<ng-template #eliminar let-modal>
+<ng-template #mRoles let-modal>
   <div class="modal-dialog modal-confirm">
     <div class="modal-content">
       <div class="modal-header flex-column">
-        <div class="icon-box">
-          <i class="material-icons">&#xE5CD;</i>
-        </div>
-        <h4 class="modal-title w-100">¿Estás seguro?</h4>
+        <h4 class="modal-title w-150">Modificando roles del usuario </h4>
       </div>
       <div class="modal-body">
-        <p>Deseas eliminar el usuario {{usuarioEliminar?.id}}</p>
+        @for (rol of roles; track rol.id){
+          <div class="form-group mb-2">
+            <p>{{ rol.nombre | uppercase }}
+             @if(tieneRol(rol, usuarioRoles)) {
+               <button class="btn btn-danger" (click)="removeRol(rol.id, usuarioSeleccionado.id)">Eliminar rol</button>
+             } @else {
+                <button class="btn btn-success" (click)="addRol(rol.id, usuarioSeleccionado.id)">Añadir rol</button>
+             }
+
+          </div>
+        }
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-danger" (click)="eliminarUsuario(usuarioEliminar?.id)" >Eliminar</button>
         <button type="button" class="btn btn-primary" (click)="modal.dismiss('Cancel click')">Cancelar</button>
       </div>
     </div>
@@ -151,7 +157,7 @@
           <div class="form-group mb-2">
             <div class=" flex justify-content-center">
               <p>Desactivado</p>
-              <p-inputSwitch [(ngModel)]="usuarioSeleccionado.desactivado" [ngModelOptions]="{standalone : true}" ></p-inputSwitch>
+              <p-inputSwitch class="input-switch" [(ngModel)]="usuarioSeleccionado.desactivado" [ngModelOptions]="{standalone : true}" ></p-inputSwitch>
 
             </div>
           </div>
