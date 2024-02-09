@@ -54,10 +54,10 @@
 
             <div class="form-group mb-2">
                 <label for="estadoFamilia">Estado</label>
-                <select name="estadoFamilia" class="form-control mb-2" [(ngModel)]="familiaSeccionada.desactivado">
-                    <option value="0">Activo</option>
-                    <option value="1">Inactivo</option>
-                </select>
+                <div class="flex justify-content-center">
+                    <p-inputSwitch formControlName="checked"></p-inputSwitch>
+                </div>
+                
             </div>
 
             <div class="form-group mb-2">
