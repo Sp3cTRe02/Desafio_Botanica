@@ -62,9 +62,9 @@ class authController {
     static obtenerRoles = async (idUsu) => {
         try {
             const roles = await authConexion.obtenerRoles(idUsu)
-            return roles;
+            return roles
         } catch (error) {
-            throw error;
+            throw error
         }
     }
 

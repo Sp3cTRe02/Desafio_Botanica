@@ -1,0 +1,24 @@
+<div class="card">
+    <p-dataView #dv [value]="arboles" [rows]="5" [paginator]="true" filterBy="['nombre', 'epFloracion', 'nombreFam']">
+        <ng-template let-products pTemplate="list">
+            <div class="row">
+                <ng-container *ngFor="let item of arboles; let first = first">
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <img src="path-to-image" class="card-img-top" alt="Tree Image">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ item.nombre }}</h5>
+                                <p class="card-text">
+                                    <i class="pi pi-tag"></i> {{ item.epFloracion }}
+                                </p>
+                                <p class="card-text">
+                                    <span class="font-semibold">{{ '$' + item.nombreFam }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </ng-template>
+    </p-dataView>
+</div>

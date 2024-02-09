@@ -12,6 +12,7 @@ class Server {
         this.adminPath = '/api/admin'
         this.clientePath = '/api/cliente'
         this.familiaPath = '/api/familia'
+        this.arbolesPath = '/api/arboles'
 
         //Middlewares
         this.middlewares();
@@ -30,6 +31,7 @@ class Server {
         this.app.use(this.adminPath, require('../routes/adminRoutes'))
         this.app.use(this.clientePath,require('../routes/clienteRoutes'))
         this.app.use(this.familiaPath,require('../routes/familiaRoutes'))
+        this.app.use(this.arbolesPath,require('../routes/arbolesRoutes'))
     }
 
     listen() {
