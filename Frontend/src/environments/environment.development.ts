@@ -4,7 +4,8 @@ export const environment = {
     authEndpoint: '/auth',
     familiaEndpoint: '/familia',
     usuarioEndpoint: '/cliente',
-    arbolEndpoint: '/arboles'
+    arbolEndpoint: '/arboles',
+    adminEndPoint: '/admin'
 };
 
 export const authRoutes = {
@@ -20,6 +21,13 @@ export const familiaRoutes = {
 
 export const usuarioRoutes = {
     usuariobase: "/usuario",
+    addRol: "/addRol",
+    deleteRol: "/deleteRol"
+}
+
+export const adminRoutes = {
+    getRoles : "/getRoles",
+    getRolesUsuario : "/getRolesUsuario",
 }
 
 export const arbolesRoutes = {
@@ -27,5 +35,4 @@ export const arbolesRoutes = {
 }
 
    
-
 
