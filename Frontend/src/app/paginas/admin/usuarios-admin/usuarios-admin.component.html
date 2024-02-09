@@ -37,8 +37,8 @@
             <td class="centered-text">{{usuario.desactivado == 0 ? 'Activo' : 'Inactivo' }}</td>
             <td class="centered-text">
               <button class="btn btn-primary button-space" (click)="abrirEditar(usuario)">Editar</button>
-              <button class="btn btn-danger button-space"
-                      (click)="abrirEliminar(usuario)">Eliminar</button>
+              <button class="btn btn-success button-space"
+                      (click)="abrirRoles(usuario)">Roles</button>
             </td>
           </tr>
         </ng-template>
@@ -81,20 +81,26 @@
 </ng-template>
 
 
-<ng-template #eliminar let-modal>
+<ng-template #mRoles let-modal>
   <div class="modal-dialog modal-confirm">
     <div class="modal-content">
       <div class="modal-header flex-column">
-        <div class="icon-box">
-          <i class="material-icons">&#xE5CD;</i>
-        </div>
-        <h4 class="modal-title w-100">¿Estás seguro?</h4>
+        <h4 class="modal-title w-150">Modificando roles del usuario </h4>
       </div>
       <div class="modal-body">
-        <p>Deseas eliminar el usuario {{usuarioEliminar?.id}}</p>
+        @for (rol of roles; track rol.id){
+          <div class="form-group mb-2">
+            <p>{{ rol.nombre | uppercase }}
+             @if(tieneRol(rol, usuarioRoles)) {
+               <button class="btn btn-danger" (click)="removeRol(rol.id, usuarioSeleccionado.id)">Eliminar rol</button>
+             } @else {
+                <button class="btn btn-success" (click)="addRol(rol.id, usuarioSeleccionado.id)">Añadir rol</button>
+             }
+
+          </div>
+        }
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-danger" (click)="eliminarUsuario(usuarioEliminar?.id)" >Eliminar</button>
         <button type="button" class="btn btn-primary" (click)="modal.dismiss('Cancel click')">Cancelar</button>
       </div>
     </div>
@@ -104,19 +110,57 @@
 
 <ng-template #editar let-modalEditar>
   <div class="modal-body p-4 py-5 p-md-5">
-    <h3 class="text-center mb-3">Editar familia</h3>
-    <form class="signup-form">
+    <h3 class="text-center mb-3">Editar usuario</h3>
+    <form class="signup-form" (ngSubmit)="editarUsuario()">
       <div class="form-group mb-2">
-        <label for="name">Número de familia</label>
-        <input type="text" [readonly]="true" class="form-control mb-2" name="idTarea" required
+        <label for="name">Número de usuario</label>
+        <input type="text" [readonly]="true" class="form-control mb-2" name="idUsuario" required
                [ngModel]="usuarioSeleccionado?.id != null ? usuarioSeleccionado?.id : ''">
       </div>
 
       <div class="form-group mb-2">
-        <label for="email">Nombre de la familia</label>
-        <input type="text" class="form-control mb-2" name="descTarea" required
-               [ngModel]="usuarioSeleccionado?.nombre != null ? usuarioSeleccionado?.nombre : ''">
+        <label for="email">Nombre</label>
+        <input type="text" class="form-control mb-2" name="nombre" required
+               [(ngModel)]="usuarioSeleccionado.nombre">
       </div>
+
+      <div class="form-group mb-2">
+        <label for="ap1">Primer apellido</label>
+        <input type="text" class="form-control mb-2" name="ap1" required
+               [(ngModel)]="usuarioSeleccionado.ap1">
+      </div>
+
+      <div class="form-group mb-2">
+        <label for="ap2">Segundo apellido</label>
+        <input type="text" class="form-control mb-2" name="ap2" required
+               [(ngModel)]="usuarioSeleccionado.ap2">
+      </div>
+
+      <div class="form-group mb-2">
+        <label for="correo">Correo</label>
+        <input type="text" class="form-control mb-2" name="correo" required
+               [(ngModel)]="usuarioSeleccionado.email">
+      </div>
+
+<!--      <div class="form-group mb-2">-->
+<!--        <label for="contrasena">Contraseña</label>-->
+<!--        <input type="password" class="form-control mb-2" name="contrasena" required-->
+<!--               [ngModel]="usuarioSeleccionado?.passwd != null ? usuarioSeleccionado?.passwd : '' ">-->
+<!--      </div>-->
+
+<!--      <div class="form-group mb-2">-->
+<!--        <label for="foto">Foto</label>-->
+<!--        <input type="text" class="form-control mb-2" name="foto" required-->
+<!--               [ngModel]="usuarioSeleccionado?.foto != null ? usuarioSeleccionado?.foto : '' ">-->
+<!--      </div>-->
+
+          <div class="form-group mb-2">
+            <div class=" flex justify-content-center">
+              <p>Desactivado</p>
+              <p-inputSwitch class="input-switch" [(ngModel)]="usuarioSeleccionado.desactivado" [ngModelOptions]="{standalone : true}" ></p-inputSwitch>
+
+            </div>
+          </div>
 
       <div class="form-group mb-2">
         <button type="submit" class="form-control btn btn-primary">Editar</button>

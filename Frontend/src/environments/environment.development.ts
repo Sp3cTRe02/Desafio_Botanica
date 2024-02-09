@@ -3,7 +3,8 @@ export const environment = {
     baseUrl : 'http://localhost:9090/api',
     authEndpoint: '/auth',
     familiaEndpoint: '/familia',
-    usuarioEndpoint: '/cliente'
+    usuarioEndpoint: '/cliente',
+    adminEndPoint: '/admin'
 };
 
 export const authRoutes = {
@@ -19,8 +20,14 @@ export const familiaRoutes = {
 
 export const usuarioRoutes = {
     usuariobase: "/usuario",
+    addRol: "/addRol",
+    deleteRol: "/deleteRol"
 }
 
-   
+export const adminRoutes = {
+    getRoles : "/getRoles",
+    getRolesUsuario : "/getRolesUsuario",
+}
+
 
 
