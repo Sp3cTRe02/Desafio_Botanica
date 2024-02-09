@@ -39,7 +39,6 @@ body {
     &:active {
         background: var(--background-color_4) !important;
     }
-
 }
 
 .btn-danger {
@@ -65,8 +64,6 @@ body {
     &:hover {
         background: var(--background-color_4) !important;
     }
-
-    
 }
 
 //Tablas
@@ -75,7 +72,7 @@ body {
     color: var(--color_2);
 }
 
-:host ::ng-deep  .p-datatable-header {
+:host ::ng-deep .p-datatable-header {
     background-color: var(--background-color_2);
 }
 
@@ -155,7 +152,3 @@ body {
     display: inline-block;
     margin: 100px auto;
 }
-
-
-
-
