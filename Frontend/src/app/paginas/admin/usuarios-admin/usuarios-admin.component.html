@@ -21,7 +21,7 @@
         <ng-template pTemplate="caption">
           <div class="flex justify-content-end">
             <button class="btn btn-success button-space" (click)="abrirAnadir()" style="margin-left:  85%;">
-              <i class="fas fa-plus"></i> Añadir familia
+              <i class="fas fa-plus"></i> Añadir usuario
             </button>
           </div>
         </ng-template>
@@ -104,19 +104,57 @@
 
 <ng-template #editar let-modalEditar>
   <div class="modal-body p-4 py-5 p-md-5">
-    <h3 class="text-center mb-3">Editar familia</h3>
-    <form class="signup-form">
+    <h3 class="text-center mb-3">Editar usuario</h3>
+    <form class="signup-form" (ngSubmit)="editarUsuario()">
       <div class="form-group mb-2">
-        <label for="name">Número de familia</label>
-        <input type="text" [readonly]="true" class="form-control mb-2" name="idTarea" required
+        <label for="name">Número de usuario</label>
+        <input type="text" [readonly]="true" class="form-control mb-2" name="idUsuario" required
                [ngModel]="usuarioSeleccionado?.id != null ? usuarioSeleccionado?.id : ''">
       </div>
 
       <div class="form-group mb-2">
-        <label for="email">Nombre de la familia</label>
-        <input type="text" class="form-control mb-2" name="descTarea" required
-               [ngModel]="usuarioSeleccionado?.nombre != null ? usuarioSeleccionado?.nombre : ''">
+        <label for="email">Nombre</label>
+        <input type="text" class="form-control mb-2" name="nombre" required
+               [(ngModel)]="usuarioSeleccionado.nombre">
       </div>
+
+      <div class="form-group mb-2">
+        <label for="ap1">Primer apellido</label>
+        <input type="text" class="form-control mb-2" name="ap1" required
+               [(ngModel)]="usuarioSeleccionado.ap1">
+      </div>
+
+      <div class="form-group mb-2">
+        <label for="ap2">Segundo apellido</label>
+        <input type="text" class="form-control mb-2" name="ap2" required
+               [(ngModel)]="usuarioSeleccionado.ap2">
+      </div>
+
+      <div class="form-group mb-2">
+        <label for="correo">Correo</label>
+        <input type="text" class="form-control mb-2" name="correo" required
+               [(ngModel)]="usuarioSeleccionado.email">
+      </div>
+
+<!--      <div class="form-group mb-2">-->
+<!--        <label for="contrasena">Contraseña</label>-->
+<!--        <input type="password" class="form-control mb-2" name="contrasena" required-->
+<!--               [ngModel]="usuarioSeleccionado?.passwd != null ? usuarioSeleccionado?.passwd : '' ">-->
+<!--      </div>-->
+
+<!--      <div class="form-group mb-2">-->
+<!--        <label for="foto">Foto</label>-->
+<!--        <input type="text" class="form-control mb-2" name="foto" required-->
+<!--               [ngModel]="usuarioSeleccionado?.foto != null ? usuarioSeleccionado?.foto : '' ">-->
+<!--      </div>-->
+
+          <div class="form-group mb-2">
+            <div class=" flex justify-content-center">
+              <p>Desactivado</p>
+              <p-inputSwitch [(ngModel)]="usuarioSeleccionado.desactivado" [ngModelOptions]="{standalone : true}" ></p-inputSwitch>
+
+            </div>
+          </div>
 
       <div class="form-group mb-2">
         <button type="submit" class="form-control btn btn-primary">Editar</button>

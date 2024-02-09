@@ -25,6 +25,11 @@ export interface Usuario {
   updatedAt:   null;
 }
 
+export interface RolUsuario {
+  idRol: number;
+  idUsuario: number;
+}
+
 export interface UsuarioPost {
   nombre:       string;
   ap1:          string;

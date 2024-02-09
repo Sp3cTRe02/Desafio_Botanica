@@ -4,24 +4,27 @@ import {MessageService} from "primeng/api";
 import {CommonModule} from "@angular/common";
 import {Table, TableModule} from "primeng/table";
 import {FormsModule} from "@angular/forms";
-import {Usuario, UsuarioPost} from "../interface/admin.interface";
+import {Usuario, UsuarioPost, RolUsuario} from "../interface/admin.interface";
 import {UsuarioAdminService} from "../services/usuario-admin.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-
+import {InputSwitchModule} from "primeng/inputswitch";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @Component({
     selector: 'app-usuarios-admin',
     standalone: true,
     templateUrl: './usuarios-admin.component.html',
     styleUrl: './usuarios-admin.component.scss',
-    imports: [MenuComponent, CommonModule, TableModule, FormsModule],
+    imports: [MenuComponent, CommonModule, TableModule, FormsModule, InputSwitchModule, ReactiveFormsModule,],
     providers : [MessageService]
 })
+//JaimeRafael
 export class UsuariosAdminComponent {
 
   usuarios : Usuario[] = []
   usuarioSeleccionado : any
   usuarioEliminar : any
+  // usuarioEditar : any
 
   usuario : UsuarioPost = {
     nombre: '',
@@ -78,12 +81,24 @@ export class UsuariosAdminComponent {
     console.log(this.usuario)
     this.adminService.crearUsuario(this.usuario).subscribe( (response: any) => {
       if(response.status === "OK"){
-        window.alert("Usuario creado")
+        // window.alert("Usuario creado")
         window.location.reload()
         this.mosrarUsuarios()
       }
     })
   }
+
+  editarUsuario(){
+    console.log(this.usuarioSeleccionado)
+    this.adminService.modificarUsuario(this.usuarioSeleccionado.id, this.usuarioSeleccionado).subscribe( (response: any) => {
+      if(response.status === "OK"){
+        // window.alert("Usuario editado")
+        window.location.reload()
+        this.mosrarUsuarios()
+      }
+    })
+  }
+
 
 }
 

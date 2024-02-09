@@ -24,4 +24,9 @@ export class UsuarioAdminService {
   crearUsuario (usuario: UsuarioPost){
     return this.http.post<any>(environment.baseUrl+environment.usuarioEndpoint+usuarioRoutes.usuariobase, usuario)
   }
+
+  modificarUsuario(id: number, usuario: Usuario){
+    return this.http.put<any>(environment.baseUrl+environment.usuarioEndpoint+usuarioRoutes.usuariobase+"/"+id, usuario)
+
+  }
 }
