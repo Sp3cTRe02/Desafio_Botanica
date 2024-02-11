@@ -33,5 +33,5 @@ router.delete('/deleteRol', validatorRol, controlador.removeRol)
 
 //RUTAS ACCEDER AL PERFIL
 router.get('/perfil/:id', controladorPerfil.getUsuarioPorId); 
-
+router.post('/perfil/:id', controladorPerfil.updateUsuarioPorId);
 module.exports = router
