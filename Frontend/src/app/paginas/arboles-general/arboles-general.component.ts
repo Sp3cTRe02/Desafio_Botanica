@@ -1,76 +1,61 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MenuComponent } from "../../shared/menu/menu.component";
 import { ArbolesGeneralService } from './services/arboles-general.service';
-import { Arbol, ArbolData, ArbolRespuesta } from './interfaces/arboles-general.interface';
+import { Arbol } from './interfaces/arboles-general.interface';
 import { DataViewModule } from 'primeng/dataview';
 import { CommonModule } from '@angular/common';
 import { DropdownModule } from 'primeng/dropdown';
 import { PrimeNGConfig, SelectItem } from "primeng/api";
+import { RouterLink } from '@angular/router';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { FormsModule } from '@angular/forms';
+import { FamiliaAdminService } from '../admin/services/familia-admin.service';
+import { FamiliaAdmin } from '../admin/interface/admin.interface';
 
 @Component({
-    selector: 'app-arboles-general',
-    standalone: true,
-    templateUrl: './arboles-general.component.html',
-    styleUrl: './arboles-general.component.scss',
-    imports: [MenuComponent,CommonModule,DataViewModule,DropdownModule]
+  selector: 'app-arboles-general',
+  standalone: true,
+  templateUrl: './arboles-general.component.html',
+  styleUrl: './arboles-general.component.scss',
+  imports: [MenuComponent, CommonModule, DataViewModule, DropdownModule, RouterLink, MultiSelectModule, FormsModule]
 })
-export class ArbolesGeneralComponent  {
-    arboles: Arbol[] = []
-    layout: string = 'list'
-
-    sortOrder!: number;
-    sortField!: string;
-    searchText: string = '';
-
-    sortOptions: SelectItem[]
-    listCategory: SelectItem[]
+export class ArbolesGeneralComponent {
+  arboles: Arbol[] = []
+  listCategory: SelectItem[] = []
+  categoriaSeleccionada: SelectItem[] = []
+  familias: FamiliaAdmin[] = []
 
 
-    @ViewChild("dv") dataView: any
+  @ViewChild("dv") dataView: any
 
-    constructor(private arbolesGeneral: ArbolesGeneralService, private primengConfig: PrimeNGConfig) {
-        this.mostrarArbolesGeneral()
-
-        this.sortOptions = [
-            { label: "Price High to Low", value: "!price" },
-            { label: "Price Low to High", value: "price" }
-          ];
-      
-          this.listCategory = [
-            { label: "Accessories", value: "Accessories" },
-            { label: "Fitness", value: "Fitness" },
-            { label: "Clothing", value: "Clothing" },
-            { label: "Electronics", value: "Electronics" }
-          ];
-
-          this.primengConfig.ripple = true
-    }
+  constructor(private arbolesGeneral: ArbolesGeneralService, private primengConfig: PrimeNGConfig, private adminService: FamiliaAdminService) {
+    this.mostrarArbolesGeneral()
+    this.obtenerFamilias()
 
 
-    onSortChange(event: { value: any; }) {
-        let value = event.value;
-    
-        if (value.indexOf("!") === 0) {
-          this.sortOrder = -1;
-          this.sortField = value.substring(1, value.length);
-        } else {
-          this.sortOrder = 1;
-          this.sortField = value;
-        }
-      }
+
+    this.primengConfig.ripple = true
 
 
-      onSearchChange() {
-        this.dataView.filter(this.searchText, 'in');
-      }
+  }
 
-    mostrarArbolesGeneral() {
-        this.arbolesGeneral.getArbolesGeneral().subscribe((response: any) => {
-            this.arboles = response.data.arboles
+  obtenerFamilias() {
+    this.adminService.obtenerFamiliasAdmin().subscribe((response: any) => {
 
-            
-        })
-    }
+      this.familias = response.msg;
+      this.listCategory = this.familias.map(familia => {
+        return { label: familia.nombre, value: familia.nombre };
+      });
 
-    
+
+    });
+  }
+
+  mostrarArbolesGeneral() {
+    this.arbolesGeneral.getArbolesGeneral().subscribe((response: any) => {
+      this.arboles = response.data.arboles
+    })
+  }
+
+
 }

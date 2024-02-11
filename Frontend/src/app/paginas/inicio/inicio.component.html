@@ -1,17 +1,14 @@
 <app-menu></app-menu>
 <section data-bs-version="5.1" class="hero-section" id="header14-2y">
   <div class="container">
+    <button class="btn btn-primary button-space" (click)="abrirEditar()">Editar contenido</button>
     <div class="row">
       <div class="col-12 col-lg mt-5 py-5 mt-lg-0 pt-lg-0">
         <div class="text-wrapper">
           <h1 class="hero-title mb-4">
-            Explora la naturaleza
+            {{cabecera}}
           </h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos vero amet explicabo! Laboriosam
-            incidunt, eveniet, ut sunt repudiandae impedit animi necessitatibus consequatur commodi corporis dolorum,
-            tempore laudantium! Molestias, sunt tempora!
-          </p>
+          <div [innerHTML]="contenidoInicio"></div>
         </div>
       </div>
       <div class="col-12 col-lg-6">
@@ -22,6 +19,27 @@
     </div>
   </div>
 </section>
+
+
+<ng-template #editar let-modalEditar>
+  <div class="modal-body p-4 py-5 p-md-5">
+    <h3 class="text-center mb-3">Añadir contenido</h3>
+    <form class="edit-form">
+      <div class="form-group mb-2">
+        <label for="email">Cabecera</label>
+        <input type="text" class="form-control mb-2" name="cabecera" required [(ngModel)]="cabecera">
+      </div>
+
+      <div class="form-group mb-2">
+        <label for="name">Contenido</label>
+        <quill-editor [modules]="modulesQuill" (onEditorChanged)="onChangedEditor($event)"></quill-editor>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+
+
 
 <section data-bs-version="5.1" class="features3">
   <div class="container">

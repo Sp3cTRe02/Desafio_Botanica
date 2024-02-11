@@ -4,15 +4,22 @@ import { ArbolesAdminComponent } from './paginas/admin/arboles-admin/arboles-adm
 import { UsuariosAdminComponent } from './paginas/admin/usuarios-admin/usuarios-admin.component';
 import { FamiliaAdminComponent } from './paginas/admin/familia-admin/familia-admin.component';
 import { ArbolesGeneralComponent } from './paginas/arboles-general/arboles-general.component';
+import { ArbolGeneralComponent } from './paginas/arboles-general/arbol-general/arbol-general.component';
 
 
 export const routes: Routes = [
     { path: '', component: InicioComponent },
 
     {
-        path: 'familias',
+        path: 'arboles',
         component: ArbolesGeneralComponent
     },
+
+    {
+        path: 'arboles/:id',
+        component: ArbolGeneralComponent
+    },
+
 
     {
         path: 'familias-admin',

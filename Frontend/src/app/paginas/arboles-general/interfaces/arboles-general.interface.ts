@@ -1,4 +1,5 @@
 export interface Arbol{
+    id:number;
     nombre: string;
     epFloracion: string;
     nombreFam: string;

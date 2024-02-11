@@ -2,20 +2,20 @@ const { StatusCodes } = require('http-status-codes')
 const arbolesConexion = require('../database/arbolesConexion')
 
 
-class arbolesController{
-    static getArbolesGeneral = async(req,res) =>{
-        try{
+class arbolesController {
+    static getArbolesGeneral = async (req, res) => {
+        try {
             const arboles = await arbolesConexion.getArbolesGeneral()
 
             const response = {
-                sucess:true,
-                data:{
+                sucess: true,
+                data: {
                     arboles: arboles
                 }
             }
 
             res.status(StatusCodes.OK).json(response)
-        }catch(error){
+        } catch (error) {
             const response = {
                 success: false,
                 data: null,
@@ -25,6 +25,15 @@ class arbolesController{
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(response);
         }
     }
+
+
+    /*static getInformacionArbol = async (req,res) =>{
+        try{
+            const arbolInfo = await 
+        }catch(error){
+
+        }
+    } */
 }
 
 
