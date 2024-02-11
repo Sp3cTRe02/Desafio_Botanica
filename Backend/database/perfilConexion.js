@@ -9,6 +9,31 @@ const bd = new db()
  * @param {*} id
 
  */
+const actualizarUsuarioPorId = async (id, body) => {
+    bd.conectar();
+    try {
+        const usuarioActualizado = await models.Usuario.update(body, {
+            where: { id: id }
+        });
+        if (usuarioActualizado[0] === 0) {
+            console.log('Usuario no encontrado');
+            return 0;
+        } else {
+            console.log('Usuario actualizado con éxito');
+            return 1;
+        }
+    } catch (error) {
+        if (error instanceof Sequelize.ValidationError) {
+            console.error('Error de validación al actualizar el usuario por ID:', error);
+        } else {
+            console.error('Error al actualizar el usuario por ID:', error);
+        }
+        throw error;
+    } finally {
+        bd.desconectar();
+    }
+}
+
 const obtenerUsuarioPorId = async (id) => {
     bd.conectar()
     try {
@@ -26,8 +51,9 @@ const obtenerUsuarioPorId = async (id) => {
         bd.desconectar();
     }
 }
+
 module.exports = {
 
    obtenerUsuarioPorId,
-    
+    actualizarUsuarioPorId
 }
