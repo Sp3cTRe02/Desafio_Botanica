@@ -1,6 +1,7 @@
 const express = require('express');
 // const body_parser = require('body-parser');
 const cors = require('cors');
+const fileUpload = require('express-fileupload');
 
 //https://sequelize.org/docs/v6/getting-started/
 
@@ -12,6 +13,7 @@ class Server {
         this.adminPath = '/api/admin'
         this.clientePath = '/api/cliente'
         this.familiaPath = '/api/familia'
+        this.uploadPath = '/api/upload'
 
         //Middlewares
         this.middlewares();
@@ -23,6 +25,12 @@ class Server {
     middlewares() {
         this.app.use(cors());
         this.app.use(express.json());
+
+        this.app.use( fileUpload({
+            useTempFiles : true,
+            tempFileDir : '/tmp/',
+            createParentPath: true
+        }))
     }
 
     routes(){
@@ -30,6 +38,7 @@ class Server {
         this.app.use(this.adminPath, require('../routes/adminRoutes'))
         this.app.use(this.clientePath,require('../routes/clienteRoutes'))
         this.app.use(this.familiaPath,require('../routes/familiaRoutes'))
+        this.app.use(this.uploadPath,require('../routes/uploadRoutes'))
     }
 
     listen() {
