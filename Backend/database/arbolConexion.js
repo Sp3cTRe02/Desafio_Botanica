@@ -32,7 +32,7 @@ const updateArbol = async (body, id) => {
     let resultado = 0 
     bd.conectar()
     try{
-        const familia = await models.Familia.update(body, 
+        const arbol = await models.Arbol.update(body, 
             {where: 
                 {id: id}
             }
@@ -73,12 +73,13 @@ const deleteArboles = async (id) => {
     let resultado = 0 
     bd.conectar()
     try{
-        const familia = await models.Arbol.destroy(
+        const arbol = await models.Arbol.destroy(
             {where: 
                 {id: id}
             }
         )
         resultado = 1
+
     }catch (error){
         if (error instanceof Sequelize.ValidationError) {
             console.log('El arbol no cumple los requisitos')
