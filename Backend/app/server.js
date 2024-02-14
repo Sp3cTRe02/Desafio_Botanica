@@ -12,7 +12,7 @@ class Server {
         this.adminPath = '/api/admin'
         this.clientePath = '/api/cliente'
         this.familiaPath = '/api/familia'
-        this.arbolPath = 'api/arbol'
+        this.arbolPath = '/api/arbol'
 
         //Middlewares
         this.middlewares();

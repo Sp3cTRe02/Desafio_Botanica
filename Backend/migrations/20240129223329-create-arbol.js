@@ -32,6 +32,10 @@ module.exports = {
 
       descripcion:{
         type:Sequelize.STRING
+      }, 
+
+      desactivado:{
+        type:Sequelize.BOOLEAN
       }
     });
   },

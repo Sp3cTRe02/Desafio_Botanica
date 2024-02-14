@@ -8,7 +8,7 @@ const { StatusCodes } = require('http-status-codes')
  */
 
 const arbolPost = async (req = request, res = response) => {
-    Conexion.creatAarbol(req.body)
+    Conexion.createArbol(req.body)
         .then(msg => {
             console.log('Arbol creada correctamente');
             res.status(StatusCodes.CREATED).json({
@@ -82,7 +82,7 @@ const arbolesGet = (req = request, res = response) => {
 }
 
 const arbolDelete = async (req = request, res = response) => {
-    Conexion.deleteFamilias(req.params.id)
+    Conexion.deleteArboles(req.params.id)
         .then(resultado => {
             if (resultado === 1) {
                 res.status(StatusCodes.OK).json({
