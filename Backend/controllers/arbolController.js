@@ -45,19 +45,23 @@ const arbolPut = async (req = request, res = response) => {
         })
 }
 
-// const arbolGet = async (req = request, res = response) => {
-//     Conexion.getArbol()
-//         .then(arboles => {
-//             res.status(StatusCodes.OK).json({"msg":arboles})
-//         })
-//         .catch(error => {
-//             console.log(error);
-//             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-//                 'msg': 'Error en el servidor',
-//                 'status': 'ERROR'
-//             })
-//         })
-// }
+const arbolGet = async (req = request, res = response) => {
+    Conexion.getArbol(req.params.id)
+        .then(arbol => {
+            if (arbol) {
+                res.status(StatusCodes.OK).json({"msg": "Arbol encontrado", "arbol": arbol})
+            } else {
+                res.status(StatusCodes.NOT_FOUND).json({"msg": "Arbol no encontrado"})
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                'msg': 'Error en el servidor',
+                'status': 'ERROR'
+            })
+        })
+}
 
 const arbolesGet = (req = request, res = response) => {
     Conexion.getArboles()
