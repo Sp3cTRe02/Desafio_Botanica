@@ -81,6 +81,8 @@ const arbolesGet = (req = request, res = response) => {
         })
 }
 
+//  METODO PARA HACER UN DELETE FISICO->
+
 // const arbolDelete = async (req = request, res = response) => {
 //     Conexion.deleteArboles(req.params.id)
 //         .then(resultado => {
