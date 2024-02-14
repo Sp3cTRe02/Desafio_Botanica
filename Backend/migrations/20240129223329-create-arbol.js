@@ -34,9 +34,9 @@ module.exports = {
       }, 
 
       desactivado:{
-        type:Sequelize.INTEGER,
-      
-      }
+        type:Sequelize.BOOLEAN,
+        defaultValue: 0
+      },
     });
   },
   async down(queryInterface, Sequelize) {

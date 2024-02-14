@@ -81,29 +81,58 @@ const arbolesGet = (req = request, res = response) => {
         })
 }
 
-const arbolDelete = async (req = request, res = response) => {
-    Conexion.deleteArboles(req.params.id)
-        .then(resultado => {
-            if (resultado === 1) {
-                res.status(StatusCodes.OK).json({
-                    'msg': 'Arbol eliminado correctamente',
-                    'status': 'OK'
+// const arbolDelete = async (req = request, res = response) => {
+//     Conexion.deleteArboles(req.params.id)
+//         .then(resultado => {
+//             if (resultado === 1) {
+//                 res.status(StatusCodes.OK).json({
+//                     'msg': 'Arbol eliminado correctamente',
+//                     'status': 'OK'
+//                 })
+//             } else {
+//                 res.status(StatusCodes.NOT_FOUND).json({
+//                     'msg': 'Arbol no ha sido encontrado',
+//                     'status': 'ERROR'
+//                 })
+//             }
+//         })
+//         .catch(error => {
+//             console.log(error);
+//             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+//                 'msg': 'Error en el servidor',
+//                 'status': 'ERROR'
+//             })
+//         })
+        const arbolDelete = async (req = request, res = response) => {
+
+        
+            Conexion.deleteArboles(req.params.id)
+                .then(resultado => {
+                    console.log(resultado)
+                    
+                    if (resultado === 1) {
+                        res.status(StatusCodes.OK).json({
+                            'msg': 'Arbol eliminado correctamente',
+                            'status': 'OK'
+                        })
+                 
+                    } else {
+                        res.status(StatusCodes.NOT_FOUND).json({
+                            'msg': 'Arbol no encontrado',
+                            'status': 'ERROR'
+                        })
+                    }
                 })
-            } else {
-                res.status(StatusCodes.NOT_FOUND).json({
-                    'msg': 'Arbol no ha sido encontrado',
-                    'status': 'ERROR'
+                .catch(error => {
+                    console.log(error);
+                    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                        'msg': 'Error en el servidor',
+                        'status': 'ERROR'
+                    })
                 })
-            }
-        })
-        .catch(error => {
-            console.log(error);
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-                'msg': 'Error en el servidor',
-                'status': 'ERROR'
-            })
-        })
-}
+        }
+
+
 
 module.exports = {
 

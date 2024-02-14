@@ -70,27 +70,21 @@ const getArboles = async () =>{
 }
 
 const deleteArboles = async (id) => {
-    let resultado = 0 
+    let arbol = 0 
     bd.conectar()
     try{
-        const arbol = await models.Arbol.destroy(
-            {where: 
-                {id: id}
-            }
+         arbol = await models.Arbol.update(
+            { desactivado: 1 }, 
+            { where: { id: id } }
         )
-        resultado = 1
-
+        
     }catch (error){
-        if (error instanceof Sequelize.ValidationError) {
-            console.log('El arbol no cumple los requisitos')
-        }else{
-            console.log('Error desconocido')
-        }
+        console.log('Error al eliminar arbol')
         throw error
     }finally{
         bd.desconectar()
     }
-    return resultado
+    return arbol[0]
 }
 
 module.exports = {
