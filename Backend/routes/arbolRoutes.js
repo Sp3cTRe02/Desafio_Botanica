@@ -9,7 +9,7 @@ const validator = [
     validarCampos
 ]
 
-router.get('/', controlador.arbolGet)
+router.get('/:id', controlador.arbolGet)
 router.get('/',controlador.arbolesGet)
 router.post('/', validator, controlador.arbolPost)
 router.put('/:id', validator, controlador.arbolPut)
