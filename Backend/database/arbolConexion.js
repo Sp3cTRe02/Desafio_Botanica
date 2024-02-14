@@ -52,20 +52,15 @@ const updateArbol = async (body, id) => {
 }
 
 
-// const getArbol = async () => {
-//     bd.conectar()
-//     const arboles = await models.Arbol.findAll({
-//         attributes: ['nombre'],
-//         include: [{
-//             model: models.Arbol,
-//             as: 'Arbol',
-//             attributes: ['nombre', 'epFloracion', 'descripcion'],
-//             required: false
-//         }]
-//     })
-//     bd.desconectar()
-//     return arboles
-// }
+const getArbol = async (id) => {
+    bd.conectar()
+    const arbol = await models.Arbol.findOne({
+        where: { id: id },
+        attributes: ['nombre', 'epFloracion', 'descripcion']
+    })
+    bd.desconectar()
+    return arbol
+}
 
 const getArboles = async () =>{
     bd.conectar()
