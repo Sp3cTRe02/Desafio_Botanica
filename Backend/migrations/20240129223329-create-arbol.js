@@ -18,7 +18,6 @@ module.exports = {
           },
           key: 'id'
         },
-        primaryKey: true,
         allowNull: false,
       },
 
@@ -35,7 +34,8 @@ module.exports = {
       }, 
 
       desactivado:{
-        type:Sequelize.BOOLEAN
+        type:Sequelize.INTEGER,
+      
       }
     });
   },
