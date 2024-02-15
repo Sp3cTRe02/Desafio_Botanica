@@ -1,11 +1,20 @@
+h1 {
+    font-size: 50px;
+    margin-bottom: 20px;
+    color: var(--color_1);
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 35px;
+    margin-bottom: 20px;
+    color: var(--color_1);
+    font-weight: 600;
+}
+
+
 .hero-section {
     padding: 50px 0;
-    h1 {
-        font-size: 50px;
-        margin-bottom: 20px;
-        color: var(--color_1);
-        font-weight: 600;
-    }
     p {
         font-size: 1.2em;
         line-height: 1.6;
@@ -15,6 +24,7 @@
         margin-top: 50px;
     }
 }
+
 
 .image-wrapper {
     img {

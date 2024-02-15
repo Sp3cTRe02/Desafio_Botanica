@@ -73,7 +73,6 @@ class authController {
             await authConexion.registrarUsuario(req.body);
 
             const mensajeUsuarioRol = await this.crearUsuarioRol();
-            console.log(mensajeUsuarioRol)
 
 
             res.status(StatusCodes.CREATED).json({

@@ -5,6 +5,7 @@ import { UsuariosAdminComponent } from './paginas/admin/usuarios-admin/usuarios-
 import { FamiliaAdminComponent } from './paginas/admin/familia-admin/familia-admin.component';
 import { ArbolesGeneralComponent } from './paginas/arboles-general/arboles-general.component';
 import { ArbolGeneralComponent } from './paginas/arboles-general/arbol-general/arbol-general.component';
+import { NoticiasComponent } from './paginas/noticias/noticias.component';
 
 
 export const routes: Routes = [
@@ -14,6 +15,12 @@ export const routes: Routes = [
         path: 'arboles',
         component: ArbolesGeneralComponent
     },
+
+    {
+        path: 'noticias',
+        component: NoticiasComponent
+    },
+
 
     {
         path: 'arboles/:id',

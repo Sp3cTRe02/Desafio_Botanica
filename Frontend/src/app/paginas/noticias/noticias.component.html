@@ -1,0 +1,25 @@
+
+
+
+<div>
+    <h2>Crear Noticia</h2>
+    <form (submit)="enviarNoticia()">
+      <div>
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo" [(ngModel)]="nuevaNoticia.titulo" required>
+      </div>
+      <div>
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" name="descripcion" [(ngModel)]="nuevaNoticia.descripcion" required></textarea>
+      </div>
+      <div>
+        <button type="submit">Crear Noticia</button>
+      </div>
+    </form>
+  </div>
+  
+
+  <div *ngFor="let noticia of noticias">
+
+    {{ noticia }}
+</div>

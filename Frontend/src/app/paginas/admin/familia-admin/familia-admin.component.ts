@@ -44,7 +44,7 @@ export class FamiliaAdminComponent {
         this.adminService.obtenerFamiliasAdmin().subscribe((response: any) => {
             if (Array.isArray(response.msg)) {
                 this.familias = response.msg;
-                
+
             }
         })
     }
