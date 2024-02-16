@@ -3,6 +3,7 @@ const router = Router()
 const { check } = require('express-validator')
 const validarCampos = require('../middlewares/validarCampos')
 const controlador = require('../controllers/userController')
+const controladorPerfil = require('../controllers/perfilController')
 
 const validator = [
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
@@ -30,5 +31,7 @@ router.put('/usuario/:id', controlador.usuarioPut)
 router.put('/addRol', validatorRol, controlador.addRol)
 router.delete('/deleteRol', validatorRol, controlador.removeRol)
 
-
+//RUTAS ACCEDER AL PERFIL
+router.get('/perfil/:id', controladorPerfil.getUsuarioPorId); 
+router.post('/perfil/:id', controladorPerfil.updateUsuarioPorId);
 module.exports = router
