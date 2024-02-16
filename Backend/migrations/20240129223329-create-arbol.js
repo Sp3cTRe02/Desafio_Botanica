@@ -18,7 +18,6 @@ module.exports = {
           },
           key: 'id'
         },
-        primaryKey: true,
         allowNull: false,
       },
 
@@ -32,7 +31,12 @@ module.exports = {
 
       descripcion:{
         type:Sequelize.STRING
-      }
+      }, 
+
+      desactivado:{
+        type:Sequelize.BOOLEAN,
+        defaultValue: 0
+      },
     });
   },
   async down(queryInterface, Sequelize) {
