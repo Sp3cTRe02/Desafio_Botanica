@@ -5,7 +5,8 @@ export const environment = {
     familiaEndpoint: '/familia',
     usuarioEndpoint: '/cliente',
     adminEndPoint: '/admin',
-    arbolesEndPoint: '/arboles'
+    arbolesEndPoint: '/arbol',
+    
 };
 
 export const authRoutes = {
@@ -30,7 +31,7 @@ export const adminRoutes = {
     getRolesUsuario : "/getRolesUsuario",
 }
 export const arbolesRoutes = {
-    arbolesAdmin :  "/arboles-admin",
+    arbolesAdmin: "/",
     arbolesPost: "/",
     arbolesPut: "/"
 }

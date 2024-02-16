@@ -25,12 +25,20 @@ export class ArbolesAdminComponent {
     arbolEliminar: any
 
     arbol: crearArbolResponse = {
+        id: 5,
+        idFamilia: 3,
         nombre: '',
         epFloracion: '',
-        descripcion: ''
+        descripcion: '',
+        desactivado:false,
     }
 
     arbolPut: actualizarArbolResponse = {
+        id: 3,
+        idFamilia: 3,
+        epFloracion: '',
+        descripcion: '',
+        desactivado:false,
         nombre: '',
         estado: 3
     }
@@ -55,16 +63,20 @@ constructor(private adminService: ArbolesAdminService, private modalService: Ngb
     }
 
     anadirArboles() {
+        console.log(this.arbol)
         this.adminService.anadirArboles(this.arbol).subscribe((response: any) => {
             if (response.status = "OK") {
                 this.msg = 'Arbol registrado exitosamente'
                 this.mostrarExito(this.msg)
             }
+
         },
             (error) => {
                 let mensajesError = [];
-                for (let i = 0; i < error.error.errors.length; i++) {
-                    mensajesError.push(error.error.errors[i].msg);
+                if (error.error && error.error.errors) {
+                    for (let i = 0; i < error.error.errors.length; i++) {
+                        mensajesError.push(error.error.errors[i].msg);
+                    }
                 }
 
                 this.mostrarError(mensajesError)

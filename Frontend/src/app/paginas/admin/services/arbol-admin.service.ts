@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { arboles, crearArbolResponse, actualizarArbolResponse } from '../interface/arbol.interface';
+import { arboles, crearArbolResponse, actualizarArbolResponse,  } from '../interface/arbol.interface';
 import { environment, arbolesRoutes  } from '../../../../environments/environment.development';
 
 @Injectable({
@@ -16,9 +16,9 @@ export class ArbolesAdminService {
     return this.http.get<arboles[]>(environment.baseUrl+environment.arbolesEndPoint+arbolesRoutes.arbolesAdmin)
   }
 
-  anadirArboles(arbol:crearArbolResponse) {
-    return this.http.post<any>(environment.baseUrl+environment.arbolesEndPoint+arbolesRoutes.arbolesPost,arbol)
-  }
+  anadirArboles(arbol: crearArbolResponse) {
+    return this.http.post<any>(environment.baseUrl + environment.arbolesEndPoint + arbolesRoutes.arbolesPost, arbol);
+}
 
   editarArboles(idArbol:number, arbol: actualizarArbolResponse){
     return this.http.put<any>(environment.baseUrl+environment.arbolesEndPoint+arbolesRoutes.arbolesPut+idArbol,arbol)
