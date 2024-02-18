@@ -26,16 +26,12 @@ export class ArbolesGeneralComponent {
   familias: FamiliaAdmin[] = []
 
 
-  @ViewChild("dv") dataView: any
-
   constructor(private arbolesGeneral: ArbolesGeneralService, private primengConfig: PrimeNGConfig, private adminService: FamiliaAdminService) {
     this.mostrarArbolesGeneral()
     this.obtenerFamilias()
 
 
-
     this.primengConfig.ripple = true
-
 
   }
 

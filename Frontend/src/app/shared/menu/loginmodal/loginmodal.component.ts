@@ -43,7 +43,7 @@ export class LoginmodalComponent {
           this.mostrarExito(this.msg);
           this.limpiarCampos()
 
-         
+
         } else {
           this.msg = 'Usuario o contraseña incorrectos'
           this.mostrarError(this.msg)
@@ -63,12 +63,12 @@ export class LoginmodalComponent {
   }
 
 
-  limpiarCampos(){
+  limpiarCampos() {
     this.usuario = {
       email: '',
       passwd: ''
     }
-  
+
   }
 
 }

@@ -1,16 +1,32 @@
-.tree-container{
+.tree-container {
     margin-top: 150px;
 }
 
-.content{
+.content {
     padding: 20px;
 }
 
-.row-section{
+.row-section {
     margin-top: 50px;
 }
 
-.font-bold{
+.font-bold {
     font-weight: 600;
 }
 
+.map-container {
+    border-radius: 10px;
+    width: 85%;
+    height: 500px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+
+
+@media (max-width: 768px) {
+    .map-container {
+        height: 250px;
+    }
+}

@@ -6,6 +6,7 @@ import { FamiliaAdminComponent } from './paginas/admin/familia-admin/familia-adm
 import { ArbolesGeneralComponent } from './paginas/arboles-general/arboles-general.component';
 import { ArbolGeneralComponent } from './paginas/arboles-general/arbol-general/arbol-general.component';
 import { NoticiasComponent } from './paginas/noticias/noticias.component';
+import { NoticiaComponent } from './paginas/noticias/noticia/noticia.component';
 
 
 export const routes: Routes = [
@@ -16,15 +17,21 @@ export const routes: Routes = [
         component: ArbolesGeneralComponent
     },
 
+    
+    {
+        path: 'arboles/:id',
+        component: ArbolGeneralComponent
+    },
+
+
     {
         path: 'noticias',
         component: NoticiasComponent
     },
 
-
     {
-        path: 'arboles/:id',
-        component: ArbolGeneralComponent
+        path: 'noticias/:id',
+        component: NoticiaComponent
     },
 
 

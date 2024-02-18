@@ -15,5 +15,13 @@ export class ArbolesGeneralService {
     return this.http.get<ArbolRespuesta>(environment.baseUrl+environment.arbolEndpoint+arbolesRoutes.arbolesGeneral)
   }
 
+  getInformacionArbol(idArbol:number): Observable<ArbolRespuesta>{
+    return this.http.get<ArbolRespuesta>(environment.baseUrl + environment.arbolEndpoint + arbolesRoutes.informacionArbol+idArbol)
+  }
+
+  getUbicacionesArbol(idArbol:number): Observable<any>{
+    return this.http.get<any>(environment.baseUrl + environment.arbolEndpoint + arbolesRoutes.ubicacionesArbol+idArbol)
+  }
+
   
 }

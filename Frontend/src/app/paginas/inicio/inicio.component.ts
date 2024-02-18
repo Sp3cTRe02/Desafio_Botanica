@@ -5,7 +5,9 @@ import { QuillModule } from 'ngx-quill';
 import { FormsModule } from '@angular/forms';
 import { Table } from 'primeng/table';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import { NoticiasService } from '../noticias/services/noticias.service';
+import { ContenidoGet } from '../noticias/interfaces/noticias.interface';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
@@ -13,7 +15,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
     standalone: true,
     templateUrl: './inicio.component.html',
     styleUrl: './inicio.component.scss',
-    imports: [CommonModule, MenuComponent, FormsModule, QuillModule]
+    imports: [CommonModule, MenuComponent, FormsModule, QuillModule,RouterLink]
 })
 
 export class InicioComponent {
@@ -23,8 +25,11 @@ export class InicioComponent {
 
     @ViewChild('editar') editar: Table | undefined
 
-    constructor(private modalService: NgbModal) {
+    nuevaNoticia: any = {};
+    noticias: ContenidoGet[] = []
 
+    constructor(private noticiasService: NoticiasService,private modalService: NgbModal) {
+        this.obtenerUltimasNoticias()
     }
 
     public modulesQuill = {
@@ -51,4 +56,15 @@ export class InicioComponent {
     abrirEditar() {
         this.modalService.open(this.editar, { ariaLabelledBy: 'modal-basic-title' })
     }
+
+
+    obtenerUltimasNoticias(){
+        this.noticiasService.getUltimasNoticias().subscribe((response:any)=>{
+            if(response.success){
+                this.noticias = response.data.contenido
+                console.log(this.noticias)
+            }
+        })
+    }
+    
 }

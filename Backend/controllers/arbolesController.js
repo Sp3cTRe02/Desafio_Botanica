@@ -27,13 +27,61 @@ class arbolesController {
     }
 
 
-    /*static getInformacionArbol = async (req,res) =>{
-        try{
-            const arbolInfo = await 
-        }catch(error){
+    static getInformacionArbol = async (req,res) =>{
+        
+        try {
+            const id = req.params.id
+            const contenido = await arbolesConexion.getInformacionArbol(id)
 
+            const response = {
+                success: true,
+                data: {
+                    contenido
+                }
+            }
+
+            res.status(StatusCodes.OK).json(response)
+        } catch (error) {
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ 'msg': 'Error en el servidor al obtener el contenido.', 'sqlMessage': error })
         }
-    } */
+    }
+
+    static getUbicacionesArbol = async (req,res) =>{
+        try {
+            const id = req.params.id
+            const contenido = await arbolesConexion.getUbicacionesArbol(id)
+
+            const response = {
+                success: true,
+                data: {
+                    contenido
+                }
+            }
+
+            res.status(StatusCodes.OK).json(response)
+        } catch (error) {
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ 'msg': 'Error en el servidor al obtener el contenido.', 'sqlMessage': error })
+        }
+    }
+
+    static getFotosArbol = async (req,res) =>{
+        try {
+            const id = req.params.id
+            const contenido = await arbolesConexion.getFotosArbol(id)
+
+            const response = {
+                success: true,
+                data: {
+                    contenido
+                }
+            }
+
+            res.status(StatusCodes.OK).json(response)
+        } catch (error) {
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ 'msg': 'Error en el servidor al obtener el contenido.', 'sqlMessage': error })
+        }
+    }
+    
 }
 
 

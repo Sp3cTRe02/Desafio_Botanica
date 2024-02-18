@@ -32,10 +32,14 @@ export const adminRoutes = {
 }
 
 export const arbolesRoutes = {
-    arbolesGeneral: "/lista-arboles"
+    arbolesGeneral: "/lista-arboles",
+    informacionArbol: "/",
+    ubicacionesArbol: "/ubi/"
 }
 
 export const contenidoRoutes = {
-    contenidoPost: "/"
+    contenidoPost: "/",
+    contenidoGet: "/",
+    ultimasNoticiasGet: "/ultimas-noticias"
 }
 

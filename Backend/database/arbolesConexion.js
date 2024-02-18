@@ -18,11 +18,38 @@ class ArbolesConexion{
         }
     }
 
-    static getInformacionArbol = async () =>{
+    static getInformacionArbol = async (idArbol) =>{
         try{
-            
+            const resultado = await models.Arbol.findByPk(idArbol)
+            return resultado
         }catch(error){
+            throw error
+        }
+    }
 
+    static getUbicacionesArbol = async (idArbol) =>{
+        try{
+            const resultado = await models.Ubicacion.findAll({
+                where:{
+                    idArbol:idArbol
+                }
+            })
+            return resultado
+        }catch(error){
+            throw error
+        }
+    }
+
+    static getFotosArbol = async (idArbol) =>{
+        try{
+            const resultado = await models.Foto.findAll({
+                where:{
+                    idArbol:idArbol
+                }
+            })
+            return resultado
+        }catch(error){
+            throw error
         }
     }
     

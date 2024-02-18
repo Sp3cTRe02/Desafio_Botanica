@@ -73,7 +73,9 @@ export class FamiliaAdminComponent {
             if (response.status = "OK") {
                 this.msg = 'Familia editada correctamente';
                 this.mostrarExito(this.msg)
-                window.location.reload()
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000)
             }
         },
 

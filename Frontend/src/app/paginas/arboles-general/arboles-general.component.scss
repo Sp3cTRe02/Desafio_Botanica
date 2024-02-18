@@ -1,7 +1,16 @@
 .card {
-    margin-bottom: 20px;
-}
+    display: flex;
+    flex-direction: column;
+    color: var(--color_2);
+    border-radius: 10px;
+    border: none;
+    background-color: var(--background-color_8);
 
+    &:hover {
+        color: var(--color_1);
+        text-decoration: none;
+    }
+}
 .card-wrapper {
     margin-top: 115px;
     padding: 75px 150px;
@@ -30,13 +39,7 @@
 }
 
 a {
-    color: #007bff;
     text-decoration: none;
-}
-
-a:hover {
-    color: #0056b3;
-    text-decoration: underline;
 }
 
 .input {
@@ -60,7 +63,7 @@ a:hover {
 
 .input input[type="search"]:focus {
     outline: none;
-    border-color: #007bff;
+    border-color: var(--color_1)
 }
 
 @media (max-width: 1152px) {

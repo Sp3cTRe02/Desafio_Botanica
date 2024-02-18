@@ -48,7 +48,7 @@ $border-color_2: #0056b3;
 
 .nav-link {
     font-size: 1rem;
-    color: $color_1; // Asegúrate de definir la variable $color_1
+    color: $color_1;
     line-height: 70px;
     position: relative;
     margin-right: 10px;
@@ -83,7 +83,7 @@ $border-color_2: #0056b3;
     border: none;
     outline: none;
     cursor: pointer;
-    background-color: transparent; /* Fondo transparente */
+    background-color: transparent;
 }
 
 .btn-outline-primary {
@@ -96,10 +96,10 @@ $border-color_2: #0056b3;
 }
 
 .btn-primary {
-    background-color: $background-color_2;
+    background-color: var(--background-color_2);
     border-color: $border-color_1;
     &:hover {
-        background-color: $background-color_3;
+        background-color: var(--background-color_4);
         border-color: $border-color_2;
     }
 }

@@ -1,0 +1,12 @@
+@import url(../../arboles-general/arbol-general/arbol-general.component.scss);
+
+.news-container{
+    padding: 150px;
+}
+
+@media (max-width: 768px) {
+    .news-container {
+        margin-top: 75px;
+        padding: 50px; 
+    }
+}

@@ -24,6 +24,7 @@ body {
     --background-color_5: #f15e5e;
     --background-color_6: #ee3535;
     --background-color_7: #999;
+    --background-color_8: #dcf3f1;
 }
 
 //Botones
@@ -96,67 +97,5 @@ body {
     }
 }
 
-//Modal eliminación
-.modal-confirm {
-    color: var(--color_5);
-    width: 400px;
-    .modal-content {
-        padding: 20px;
-        border-radius: 5px;
-        border: none;
-        text-align: center;
-        font-size: 14px;
-    }
-    .modal-header {
-        border-bottom: none;
-        position: relative;
-    }
-    h4 {
-        text-align: center;
-        font-size: 26px;
-        margin: 30px 0 -10px;
-    }
-    .close {
-        position: absolute;
-        top: -5px;
-        right: -2px;
-    }
 
-    .modal-footer {
-        border: none;
-        text-align: center;
-        border-radius: 5px;
-        font-size: 13px;
-        padding: 10px 15px 25px;
-        a {
-            color: var(--color_3);
-        }
-    }
-    .icon-box {
-        width: 80px;
-        height: 80px;
-        margin: 0 auto;
-        border-radius: 50%;
-        z-index: 9;
-        text-align: center;
-        border: 3px solid #f15e5e;
-        i {
-            color: var(--color_8);
-            font-size: 46px;
-            display: inline-block;
-            margin-top: 13px;
-        }
-    }
-}
-.trigger-btn {
-    display: inline-block;
-    margin: 100px auto;
-}
 
-.p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
-  background: var(--background-color_4);
-}
-
-.p-inputswitch.p-inputswitch-checked:not(.p-disabled) .p-inputswitch-slider {
-  background: var(--background-color_2);
-}

@@ -14,10 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Contenido.init({
+    idUsuario: DataTypes.BIGINT,
     titulo: DataTypes.STRING,
+    resumenDesc: DataTypes.STRING,
     descripcion: DataTypes.STRING,
     imagen: DataTypes.STRING,
-    idUsuario: DataTypes.BIGINT
+ 
   }, {
     sequelize,
     timestamps: false,

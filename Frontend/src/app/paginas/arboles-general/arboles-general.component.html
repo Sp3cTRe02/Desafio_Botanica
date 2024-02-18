@@ -10,7 +10,7 @@
                     (input)="dv.filter($any($event.target).value, 'contains')">
 
                 <p-multiSelect [options]="listCategory" [(ngModel)]="categoriaSeleccionada"
-                    (onChange)="dv.filter($event.value)" defaultLabel="Selecciona una familia" optionLabel="label" 
+                    (onChange)="dv.filter($event.value)" defaultLabel="Selecciona una familia" optionLabel="label"
                     optionValue="value">
                 </p-multiSelect>
             </span>
@@ -19,7 +19,7 @@
                 <ng-container>
                     @for (item of arboles; track item.id){
                     <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="card mb-4">
+                        <a class="card mb-4 custom-link" [routerLink]="['/arboles', item.id]">
                             <img src="../../../assets/fondo.jpg" class="card-img-top" alt="Tree Image">
                             <div class="card-body text-center">
                                 <h5 class="card-title">{{ item.nombre }}</h5>
@@ -29,10 +29,8 @@
                                 <p class="card-text">
                                     <i class="pi pi-tag"></i> {{ item.epFloracion }}
                                 </p>
-
-                                <a [routerLink]="['/arboles', item.id]">Ver familia {{ item.id }}</a>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     }
 
