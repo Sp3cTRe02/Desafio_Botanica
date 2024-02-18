@@ -4,6 +4,8 @@ const { check } = require('express-validator')
 const validarCampos = require('../middlewares/validarCampos')
 const controlador = require('../controllers/userController')
 
+const { validarArchivoSubir } = require('../middlewares/validarArchivo')
+
 const validator = [
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
     check('ap1', 'El primer apellido es obligatorio').not().isEmpty(),
@@ -30,5 +32,6 @@ router.put('/usuario/:id', controlador.usuarioPut)
 router.put('/addRol', validatorRol, controlador.addRol)
 router.delete('/deleteRol', validatorRol, controlador.removeRol)
 
+router.put('/subirImagen/:id', validarArchivoSubir, controlador.subirImagenUsuario)
 
 module.exports = router

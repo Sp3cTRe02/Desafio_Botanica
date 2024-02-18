@@ -1,6 +1,8 @@
 const { response, request } = require('express')
 const Conexion = require('../database/userConexion')
 const { StatusCodes } = require('http-status-codes')
+const {subirArchivo} = require('../helpers/subir-archivo')
+require('dotenv').config()
 
 /**
  * @author @Jaime_Rafael
@@ -197,7 +199,36 @@ const removeRol = async (req = request, res = response) => {
         })
 }
 
+/**
+ * @author @Jaime_Rafael
+ * @param {*} req 
+ * @param {*} res 
+ */
+const subirImagenUsuario = async (req = request, res = response) => {
+    try{
+        const nombre = await subirArchivo(req.files, undefined, process.env.UPLOADS_DIR) 
+        const ruta = `${process.env.UPLOADS_PATH}${process.env.UPLOADS_DIR}/${nombre}`
+        const cod = await Conexion.subirImagenUsuario(ruta, req.params.id)
+        
+        if(cod !== 1){
+            throw new Error('Error al subir la imagen')
+        }
+        res.status(StatusCodes.OK).json({
+            'msg': 'Imagen subida correctamente',
+            'status': 'OK',
+            'ruta': ruta
+        })
+
+    }catch(error){
+        console.log(error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            'msg': 'Error en el servidor',
+            'status': 'ERROR'
+        })
+    }
+}
+
 module.exports = {
     usuarioPost,usuarioGet,usuarioDelete,usuarioPut, 
-    addRol, removeRol
+    addRol, removeRol, subirImagenUsuario
 }

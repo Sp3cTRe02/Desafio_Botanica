@@ -24,3 +24,7 @@ const subirArchivo = ( files, extensionesValidas = ['png', 'jpg', 'jpeg', 'gif']
         })
     })
 }
+
+module.exports = {
+    subirArchivo
+}
