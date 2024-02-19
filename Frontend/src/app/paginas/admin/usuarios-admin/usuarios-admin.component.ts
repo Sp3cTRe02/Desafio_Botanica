@@ -105,17 +105,6 @@ export class UsuariosAdminComponent implements OnInit{
     })
   }
 
-  // eliminarUsuario(id : number) {
-  //   console.log(this.usuarioEliminar.id)
-  //   this.adminService.desactivarUsuario(id).subscribe( (response: any) => {
-  //     if(response.status === "OK"){
-  //       window.alert("Usuario eliminado")
-  //       window.location.reload()
-  //       this.mosrarUsuarios()
-  //     }
-  //   })
-  // }
-
   crearUsuario(){
     console.log(this.usuario)
     this.adminService.crearUsuario(this.usuario).subscribe( (response: any) => {

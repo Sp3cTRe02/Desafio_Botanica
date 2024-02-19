@@ -32,6 +32,6 @@ router.put('/usuario/:id', controlador.usuarioPut)
 router.put('/addRol', validatorRol, controlador.addRol)
 router.delete('/deleteRol', validatorRol, controlador.removeRol)
 
-router.put('/subirImagen/:id', validarArchivoSubir, controlador.subirImagenUsuario)
+router.post('/subirImagen/', validarArchivoSubir, controlador.subirImagenUsuario)
 
 module.exports = router

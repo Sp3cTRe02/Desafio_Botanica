@@ -21,7 +21,8 @@ export const familiaRoutes = {
 export const usuarioRoutes = {
     usuariobase: "/usuario",
     addRol: "/addRol",
-    deleteRol: "/deleteRol"
+    deleteRol: "/deleteRol",
+    subirImagen : "/subirImagen/"
 }
 
 export const adminRoutes = {

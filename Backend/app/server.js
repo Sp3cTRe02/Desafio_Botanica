@@ -31,6 +31,8 @@ class Server {
             tempFileDir : '/tmp/',
             createParentPath: true
         }))
+
+        this.app.use(express.static('public'))
     }
 
     routes(){

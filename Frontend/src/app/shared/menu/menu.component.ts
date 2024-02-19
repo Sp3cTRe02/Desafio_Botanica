@@ -11,6 +11,7 @@ import { PasswordModule } from 'primeng/password';
 import { LoginmodalComponent } from "./loginmodal/loginmodal.component";
 import { RegistromodalComponent } from "./registromodal/registromodal.component";
 import { PerfildropdownComponent } from "./perfildropdown/perfildropdown.component";
+import {SubirImagenUsuariosComponent} from "../subir-imagen-usuarios/subir-imagen-usuarios.component";
 
 @Component({
     selector: 'app-menu',
@@ -18,9 +19,9 @@ import { PerfildropdownComponent } from "./perfildropdown/perfildropdown.compone
     providers: [MessageService],
     templateUrl: './menu.component.html',
     styleUrl: './menu.component.scss',
-    imports: [CommonModule, RouterOutlet,RouterModule, FormsModule, ReactiveFormsModule, MessagesModule, ToastModule, PasswordModule, LoginmodalComponent, RegistromodalComponent, PerfildropdownComponent]
+    imports: [CommonModule, RouterOutlet,RouterModule, FormsModule, ReactiveFormsModule, MessagesModule, ToastModule, PasswordModule, LoginmodalComponent, RegistromodalComponent, PerfildropdownComponent, SubirImagenUsuariosComponent]
 })
 export class MenuComponent {
- 
+
 
 }

@@ -1,0 +1,11 @@
+<div class="card flex justify-content-center">
+  <p-toast></p-toast>
+  <p-fileUpload
+    mode="basic"
+    chooseLabel="Subir imagen perfil"
+    name="archivo" [customUpload]="true"
+    (uploadHandler)="subirImagen($event)"
+    [maxFileSize]="1000000" accept="image/*"
+
+  ></p-fileUpload>
+</div>
