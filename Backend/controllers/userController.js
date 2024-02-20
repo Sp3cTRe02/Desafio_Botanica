@@ -210,10 +210,9 @@ const removeRol = async (req = request, res = response) => {
 const subirImagenUsuario = async (req = request, res = response) => {
     try{
         const rutaImg = await Conexion.getFoto(1)
-        console.log(rutaImg.dataValues.foto);
         if(rutaImg != null){
             const rutaAnterior = path.join(__dirname, rutaImg.dataValues.foto)
-            console.log(rutaAnterior);
+            
             if(fs.existsSync(rutaAnterior)){
                 fs.unlinkSync(rutaAnterior)
             }

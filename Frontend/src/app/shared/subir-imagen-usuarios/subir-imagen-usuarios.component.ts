@@ -32,7 +32,7 @@ export class SubirImagenUsuariosComponent {
       formData.append('archivo', event.files[0], event.files[0].name);
       this.uploadService.subirImagen(formData)
         .subscribe((response) => {
-          if (response?.success) {
+          if (response?.status == 'OK') {
             this.mostrarExito('Imagen subida correctamente');
           } else {
             this.mostrarError('Error al subir la imagen');

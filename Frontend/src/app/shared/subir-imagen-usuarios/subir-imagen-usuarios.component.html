@@ -5,7 +5,8 @@
     chooseLabel="Subir imagen perfil"
     name="archivo" [customUpload]="true"
     (uploadHandler)="subirImagen($event)"
-    [maxFileSize]="1000000" accept="image/*"
+    [maxFileSize]="500000" accept="image/*"
+    cancelLabel="Cancelar"
 
   ></p-fileUpload>
 </div>

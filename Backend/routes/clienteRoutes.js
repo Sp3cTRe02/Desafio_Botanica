@@ -28,10 +28,11 @@ router.get('/usuario', controlador.usuarioGet)
 router.delete('/usuario/:id', controlador.usuarioDelete)
 router.put('/usuario/:id', controlador.usuarioPut)
 
-// RUTAS MODIFICAR ROL CLIENTE
+// RUTAS MODIFICAR ROL CLIENTE (token)
 router.put('/addRol', validatorRol, controlador.addRol)
 router.delete('/deleteRol', validatorRol, controlador.removeRol)
 
+// RUTA PARA SUBIR IMAGEN (token)
 router.post('/subirImagen/', validarArchivoSubir, controlador.subirImagenUsuario)
 
 module.exports = router
