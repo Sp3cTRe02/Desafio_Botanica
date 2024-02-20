@@ -34,7 +34,7 @@ router.put('/usuario/:id', controlador.usuarioPut)
 
 // RUTAS MODIFICAR ROL CLIENTE (token)
 router.put('/addRol', [midsJWT.validarJWT,midAdmin.verificarAdmin,validatorRol], controlador.addRol)
-router.delete('/deleteRol', [midsJWT.validarJWT,midAdmin.verificarAdmin,validatorRol], controlador.removeRol)
+router.put('/deleteRol', [midsJWT.validarJWT,midAdmin.verificarAdmin,validatorRol], controlador.removeRol)
 
 
 // RUTA PARA SUBIR IMAGEN (token)

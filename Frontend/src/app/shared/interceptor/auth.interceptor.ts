@@ -1,5 +1,6 @@
 import { HttpInterceptorFn, HttpRequest, HttpHandler } from '@angular/common/http';
 
+//JaimeRafael
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   let clonPeticion = req
