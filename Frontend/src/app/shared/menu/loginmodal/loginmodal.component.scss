@@ -49,3 +49,12 @@
     margin-top: 15px;
     width: 100%;
 }
+
+a {
+    text-decoration: none;
+    color: var(--color_1);
+
+    &:hover {
+        font-weight: 600;
+    }
+}

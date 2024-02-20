@@ -18,10 +18,10 @@ class authController {
             if (usu) {
                 const roles = await this.obtenerRoles(usu.id);
 
-                const token = generarJWT(usu.id, roles.RolUsuario);
+                const token = generarJWT(usu.id, roles);
 
-                //const decodedPayload = jwt.decode(token, { complete: true });
-                //console.log('Decoded JWT payload:', decodedPayload.payload);
+                const decodedPayload = jwt.decode(token, { complete: true });
+                console.log('Decoded JWT payload:', decodedPayload.payload);
 
                 const response = {
                     success: true,
