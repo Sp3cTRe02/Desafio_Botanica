@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {environment, familiaRoutes, usuarioRoutes} from '../../../../environments/environment.development';
@@ -14,19 +14,23 @@ export class UsuarioAdminService {
   constructor(private http : HttpClient) { }
 
   obtenerUsuarios(): Observable<ResponseGetUsuarios>{
-    return this.http.get<ResponseGetUsuarios>(environment.baseUrl+environment.usuarioEndpoint+usuarioRoutes.usuariobase)
+    const headers = new HttpHeaders().set('auth', 'true')
+    return this.http.get<ResponseGetUsuarios>(environment.baseUrl+environment.usuarioEndpoint+usuarioRoutes.usuariobase, {headers})
   }
 
   desactivarUsuario(id: number){
-    return this.http.delete<any>(environment.baseUrl+environment.usuarioEndpoint+usuarioRoutes.usuariobase+"/"+id)
+    const headers = new HttpHeaders().set('auth', 'true')
+    return this.http.delete<any>(environment.baseUrl+environment.usuarioEndpoint+usuarioRoutes.usuariobase+"/"+id, {headers})
   }
 
   crearUsuario (usuario: UsuarioPost){
-    return this.http.post<any>(environment.baseUrl+environment.usuarioEndpoint+usuarioRoutes.usuariobase, usuario)
+    const headers = new HttpHeaders().set('auth', 'true')
+    return this.http.post<any>(environment.baseUrl+environment.usuarioEndpoint+usuarioRoutes.usuariobase, usuario, {headers})
   }
 
   modificarUsuario(id: number, usuario: Usuario){
-    return this.http.put<any>(environment.baseUrl+environment.usuarioEndpoint+usuarioRoutes.usuariobase+"/"+id, usuario)
+    const headers = new HttpHeaders().set('auth', 'true')
+    return this.http.put<any>(environment.baseUrl+environment.usuarioEndpoint+usuarioRoutes.usuariobase+"/"+id, usuario,  {headers})
 
   }
 }

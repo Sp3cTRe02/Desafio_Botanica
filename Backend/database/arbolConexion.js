@@ -63,9 +63,13 @@ const getArbol = async (id) => {
 }
 
 const getArboles = async () =>{
-    bd.conectar()
-    const arboles = await models.Arbol.findAll()
-    bd.desconectar()
+    let arboles = []
+    try{
+        arboles = await models.Arbol.findAll()
+    }catch (error){
+        console.log('Error al obtener arboles')
+        throw error
+    }
     return arboles
 }
 

@@ -12,7 +12,7 @@ const validarJWT = (req, res, next) => {
 
         const { uid, roles } = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
         req.idToken = uid;
-        req.roles = roles
+        req.roles = roles 
         next();
 
     } catch (error) {

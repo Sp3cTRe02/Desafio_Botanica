@@ -18,9 +18,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   Arbol.init({
     idFamilia: DataTypes.BIGINT,
+    nombre: DataTypes.STRING,
     epFloracion: DataTypes.STRING,
     descripcion: DataTypes.STRING,
-    nombre: DataTypes.STRING,
     desactivado: DataTypes.BOOLEAN
   }, {
     sequelize,

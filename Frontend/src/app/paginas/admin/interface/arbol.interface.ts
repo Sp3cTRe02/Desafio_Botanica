@@ -15,6 +15,14 @@ export interface crearArbolResponse {
   descripcion: string;
   desactivado: boolean;
 }
+export interface ArbolPost {
+  idFamilia: number;
+  nombre: string;
+  epFloracion: string;
+  descripcion: string;
+  desactivado: boolean;
+
+}
 // export interface obtenerArbolResponse {
 //   arboles: Arbol[] ;
 //   estado: number;

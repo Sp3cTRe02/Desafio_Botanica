@@ -77,7 +77,13 @@
                 <label for="email">Nombre del arbol</label>
                 <input type="text" class="form-control mb-2" name="descTarea" required
                     [(ngModel)]="arbol.nombre">
-
+                <label for="Familia">Familia</label>
+                <select (change)="actualizarFamilia($event)" name="idFamilia" id="">
+                    @for (familia of Familias; track familia.id) {
+                        <option value="{{familia.id}}">{{familia.nombre}}</option>
+                    }
+                </select>
+                <br>
                     <label for="email">Descripcion del arbol</label>
                 <input type="text" class="form-control mb-2" name="descTarea" required
                     [(ngModel)]="arbol.descripcion">

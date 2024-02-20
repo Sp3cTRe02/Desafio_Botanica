@@ -68,6 +68,7 @@ const arbolGet = async (req = request, res = response) => {
 }
 
 const arbolesGet = (req = request, res = response) => {
+    console.log('Obteniendo arboles');
     Conexion.getArboles()
         .then(arboles => {
             res.status(StatusCodes.OK).json({"msg":arboles})

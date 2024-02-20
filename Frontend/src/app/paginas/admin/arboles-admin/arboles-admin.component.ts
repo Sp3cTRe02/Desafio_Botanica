@@ -2,8 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { Table, TableModule } from 'primeng/table';
 import { MenuComponent } from '../../../shared/menu/menu.component';
-import { arboles, crearArbolResponse, actualizarArbolResponse } from '../interface/arbol.interface';
+import { arboles, crearArbolResponse, actualizarArbolResponse, ArbolPost} from '../interface/arbol.interface';
 import { ArbolesAdminService } from '../services/arbol-admin.service';
+import { FamiliaAdminService } from '../services/familia-admin.service';
+import { FamiliaAdmin } from '../interface/admin.interface';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
@@ -19,14 +21,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     imports: [CommonModule, MenuComponent, TableModule, FormsModule, ToastModule,InputSwitchModule,ReactiveFormsModule],
     providers: [MessageService]
 })
+//JaimeRafael select para las familias y corregir añadirFamilias
 export class ArbolesAdminComponent {
     arboles: arboles[] = []
     arbolSeccionado: any
     arbolEliminar: any
 
-    arbol: crearArbolResponse = {
-        id: 5,
-        idFamilia: 3,
+    arbol: ArbolPost = {
+        idFamilia: 0,
         nombre: '',
         epFloracion: '',
         descripcion: '',
@@ -42,6 +44,7 @@ export class ArbolesAdminComponent {
         nombre: '',
         estado: 3
     }
+    Familias : FamiliaAdmin[] = []
 
     msg: string = '';
 
@@ -50,9 +53,11 @@ export class ArbolesAdminComponent {
     @ViewChild('eliminar') eliminar: TemplateRef<any> | undefined
 
 constructor(private adminService: ArbolesAdminService, private modalService: NgbModal,
-    private msgService: MessageService) {
+    private msgService: MessageService, private familiaService : FamiliaAdminService) {
     this.mostrarArboles()
+    this.cargarFamilias()
     }
+
     mostrarArboles() {
     this.adminService.obtenerArbolesAdmin().subscribe((response: any) => {
         if (Array.isArray(response.msg)) {
@@ -60,6 +65,14 @@ constructor(private adminService: ArbolesAdminService, private modalService: Ngb
 
         }
     })
+    }
+
+    cargarFamilias(){
+        this.familiaService.obtenerFamilias().subscribe((response:any)=>{
+            if(Array.isArray(response.msg)){
+                this.Familias = response.msg
+            }
+        })
     }
 
     anadirArboles() {
@@ -82,7 +95,11 @@ constructor(private adminService: ArbolesAdminService, private modalService: Ngb
                 this.mostrarError(mensajesError)
             })
     }
-
+    actualizarFamilia(event : Event){
+        this.arbol.idFamilia = +(<HTMLSelectElement>event.target).value
+        console.log(this.arbol.idFamilia);
+        
+    }
     editarArbol(idArbol:number) {
         this.arbolPut.nombre = this.arbolSeccionado.nombre
         this.arbolPut.estado = this.arbolSeccionado.desactivado

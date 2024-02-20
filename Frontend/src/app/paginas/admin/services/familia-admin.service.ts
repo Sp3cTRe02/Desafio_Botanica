@@ -16,6 +16,9 @@ export class FamiliaAdminService {
     return this.http.get<FamiliaAdmin[]>(environment.baseUrl+environment.familiaEndpoint+familiaRoutes.familiaAdmin)
   }
 
+  obtenerFamilias(): Observable<FamiliaAdmin[]>{
+    return this.http.get<FamiliaAdmin[]>(environment.baseUrl+environment.familiaEndpoint+familiaRoutes.familias)
+  }
   anadirFamilias(familia:FamiliaPost) {
     return this.http.post<any>(environment.baseUrl+environment.familiaEndpoint+familiaRoutes.familiaPost,familia)
   }

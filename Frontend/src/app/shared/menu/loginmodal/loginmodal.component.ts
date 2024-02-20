@@ -36,9 +36,10 @@ export class LoginmodalComponent {
   login() {
     this.sharedService.login(this.usuario)
       .subscribe((response) => {
-
+          
         if (response?.success) {
           localStorage.setItem('usuario', JSON.stringify(response.data))
+          localStorage.setItem('token', response.data.token)
           this.msg = 'Login correcto'
           this.mostrarExito(this.msg);
           this.limpiarCampos()
