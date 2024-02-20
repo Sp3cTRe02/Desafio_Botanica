@@ -28,6 +28,12 @@ export const routes: Routes = [
         path: 'usuarios-admin',
         component: UsuariosAdminComponent,
     },
+    
+    {
+    path: 'arboles-admin',
+    component: ArbolesAdminComponent,
+},
+
 
     
 ];

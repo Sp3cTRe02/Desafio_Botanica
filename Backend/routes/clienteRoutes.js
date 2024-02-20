@@ -3,6 +3,7 @@ const router = Router()
 const { check } = require('express-validator')
 const validarCampos = require('../middlewares/validarCampos')
 const controlador = require('../controllers/userController')
+const controladorPerfil = require('../controllers/perfilController')
 
 const { validarArchivoSubir } = require('../middlewares/validarArchivo')
 
@@ -32,7 +33,12 @@ router.put('/usuario/:id', controlador.usuarioPut)
 router.put('/addRol', validatorRol, controlador.addRol)
 router.delete('/deleteRol', validatorRol, controlador.removeRol)
 
+
 // RUTA PARA SUBIR IMAGEN (token)
 router.post('/subirImagen/', validarArchivoSubir, controlador.subirImagenUsuario)
+
+//RUTAS ACCEDER AL PERFIL
+router.get('/perfil/:id', controladorPerfil.getUsuarioPorId); 
+router.post('/perfil/:id', controladorPerfil.updateUsuarioPorId);
 
 module.exports = router

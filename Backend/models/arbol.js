@@ -20,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     idFamilia: DataTypes.BIGINT,
     epFloracion: DataTypes.STRING,
     descripcion: DataTypes.STRING,
-    nombre: DataTypes.STRING
+    nombre: DataTypes.STRING,
+    desactivado: DataTypes.BOOLEAN
   }, {
     sequelize,
     timestamps: false,
