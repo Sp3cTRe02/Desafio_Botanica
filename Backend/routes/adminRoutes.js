@@ -1,6 +1,5 @@
 const { Router } = require('express')
 const router = Router()
-const { StatusCodes } = require('http-status-codes')
 const rolControlador = require('../controllers/adminController')
 
 // (token)

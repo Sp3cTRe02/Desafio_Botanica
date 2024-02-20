@@ -16,22 +16,17 @@ import { ReactiveFormsModule } from '@angular/forms';
     standalone: true,
     templateUrl: './familia-admin.component.html',
     styleUrl: './familia-admin.component.scss',
-    imports: [CommonModule, MenuComponent, TableModule, FormsModule, ToastModule,InputSwitchModule,ReactiveFormsModule],
+    imports: [CommonModule, MenuComponent, TableModule, FormsModule, ToastModule, InputSwitchModule, ReactiveFormsModule],
     providers: [MessageService]
 })
 
 export class FamiliaAdminComponent {
     familias: FamiliaAdmin[] = []
-    familiaSeccionada: any
+    familiaSeleccionada: any
     familiaEliminar: any
 
     familia: FamiliaPost = {
         nombre: ''
-    }
-
-    familiaPut: FamiliaPut = {
-        nombre: '',
-        estado: 3
     }
 
     msg: string = '';
@@ -59,6 +54,7 @@ export class FamiliaAdminComponent {
             if (response.status = "OK") {
                 this.msg = 'Familia registrada exitosamente'
                 this.mostrarExito(this.msg)
+                window.location.reload()
             }
         },
             (error) => {
@@ -71,35 +67,34 @@ export class FamiliaAdminComponent {
             })
     }
 
-    editarFamilia(idFamilia:number) {
-        this.familiaPut.nombre = this.familiaSeccionada.nombre
-        this.familiaPut.estado = this.familiaSeccionada.desactivado
-
-        console.log(this.familiaPut)
-
-        this.adminService.editarFamilias(idFamilia,this.familiaPut).subscribe((response:any)=>{
-            if(response.status="OK"){
+    editarFamilia() {
+        console.log(this.familiaSeleccionada)
+        this.adminService.editarFamilias(this.familiaSeleccionada.id, this.familiaSeleccionada).subscribe((response: any) => {
+            if (response.status = "OK") {
                 this.msg = 'Familia editada correctamente';
                 this.mostrarExito(this.msg)
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000)
             }
         },
 
-        (error) => {
-            console.log(error)
-            let mensajesError = [];
+            (error) => {
+                console.log(error)
+                let mensajesError = [];
                 for (let i = 0; i < error.error.errors.length; i++) {
                     mensajesError.push(error.error.errors[i].msg);
                 }
 
                 this.mostrarError(mensajesError)
-        }
-        
+            }
+
         )
     }
 
 
     abrirEditar(familia: FamiliaAdmin) {
-        this.familiaSeccionada = familia
+        this.familiaSeleccionada = familia
         this.modalService.open(this.editar, { ariaLabelledBy: 'modal-basic-title' })
     }
 

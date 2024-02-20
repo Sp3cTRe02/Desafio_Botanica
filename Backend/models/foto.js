@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     ruta: DataTypes.STRING
   }, {
     sequelize,
+    timestamps: false,
     tableName: 'fotos',
     modelName: 'Foto',
   });

@@ -1,6 +1,6 @@
 const db = require('../database/Conexion.js');
 const { Sequelize } = require('sequelize');
-const models = require('../models/index.js'); 
+const models = require('../models/index.js');
 const { QueryTypes } = require('sequelize');
 
 const bd = new db()
@@ -9,12 +9,12 @@ const bd = new db()
 const getRoles = async () => {
     let roles = []
     bd.conectar()
-    try{
+    try {
         roles = await models.sequelize.query('SELECT id, nombre FROM roles', { type: QueryTypes.SELECT });
-    }catch (error){
+    } catch (error) {
         console.log(error)
         throw error
-    }finally{
+    } finally {
         bd.desconectar()
         return roles
     }
@@ -23,12 +23,12 @@ const getRoles = async () => {
 const getRolesUsuario = async (id) => {
     let roles = []
     bd.conectar()
-    try{
-        roles = await models.sequelize.query('SELECT r.id, r.nombre FROM roles r, rolusuario ru WHERE r.id = ru.idRol AND ru.idUsuario = '+id, { type: QueryTypes.SELECT });
-    }catch (error){
+    try {
+        roles = await models.sequelize.query('SELECT r.id, r.nombre FROM roles r, rolusuario ru WHERE r.id = ru.idRol AND ru.idUsuario = ' + id, { type: QueryTypes.SELECT });
+    } catch (error) {
         console.log(error)
         throw error
-    }finally{
+    } finally {
         bd.desconectar()
         return roles
     }

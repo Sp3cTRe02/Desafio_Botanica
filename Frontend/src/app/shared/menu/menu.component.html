@@ -35,7 +35,11 @@
       <ul class="navbar-nav">
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/familias">Especies</a>
+          <a class="nav-link" routerLink="/arboles">Arboles</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/noticias">Noticias</a>
         </li>
 
         <li class="nav-item dropdown">
@@ -60,10 +64,6 @@
       <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#loginModal">
         <i class="fas fa-sign-in-alt"></i> Iniciar sesión
       </button>
-
-      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">
-        <i class="fas fa-user-plus"></i> Registro
-      </button>
       }
 
     </div>
@@ -76,5 +76,7 @@
 <app-loginmodal></app-loginmodal>
 <app-registromodal></app-registromodal>
 
+
+<p-toast></p-toast>
 
 <router-outlet></router-outlet>

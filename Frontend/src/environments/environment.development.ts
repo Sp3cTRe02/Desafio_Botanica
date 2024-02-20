@@ -5,8 +5,9 @@ export const environment = {
     familiaEndpoint: '/familia',
     usuarioEndpoint: '/cliente',
     adminEndPoint: '/admin',
+    arbolEndpoint: '/arboles',
     arbolesEndPoint: '/arbol',
-    
+    contenidoEndPoint: '/contenido'
 };
 
 export const authRoutes = {
@@ -31,11 +32,21 @@ export const adminRoutes = {
     getRoles : "/getRoles",
     getRolesUsuario : "/getRolesUsuario",
 }
-export const arbolesRoutes = {
+export const arbolRoutes = {
     arbolesAdmin: "/",
     arbolesPost: "/",
     arbolesPut: "/"
 }
 
+export const arbolesRoutes = {
+    arbolesGeneral: "/lista-arboles",
+    informacionArbol: "/",
+    ubicacionesArbol: "/ubi/"
+}
 
+export const contenidoRoutes = {
+    contenidoPost: "/",
+    contenidoGet: "/",
+    ultimasNoticiasGet: "/ultimas-noticias"
+}
 
