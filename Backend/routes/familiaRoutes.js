@@ -9,6 +9,7 @@ const validator = [
     validarCampos
 ]
 
+//(token)
 router.get('/', controlador.familiaGet)
 router.get('/familia-admin',controlador.familiaAdmin)
 router.post('/', validator, controlador.familiaPost)
