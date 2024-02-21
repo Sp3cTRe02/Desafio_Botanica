@@ -13,18 +13,18 @@ export class FamiliaAdminService {
 
 
   obtenerFamiliasAdmin(): Observable<FamiliaAdmin[]>{
-    return this.http.get<FamiliaAdmin[]>(environment.baseUrl+environment.familiaEndpoint+familiaRoutes.familiaAdmin)
+    return this.http.get<FamiliaAdmin[]>(environment.baseUrl+environment.familiaEndpoint+familiaRoutes.familiaAdmin, {params : {auth : true}})
   }
 
   obtenerFamilias(): Observable<FamiliaAdmin[]>{
-    return this.http.get<FamiliaAdmin[]>(environment.baseUrl+environment.familiaEndpoint+familiaRoutes.familias)
+    return this.http.get<FamiliaAdmin[]>(environment.baseUrl+environment.familiaEndpoint+familiaRoutes.familias, {params : {auth : true}})
   }
   anadirFamilias(familia:FamiliaPost) {
-    return this.http.post<any>(environment.baseUrl+environment.familiaEndpoint+familiaRoutes.familiaPost,familia)
+    return this.http.post<any>(environment.baseUrl+environment.familiaEndpoint+familiaRoutes.familiaPost,familia, {params : {auth : true}})
   }
 
   editarFamilias(idFamilia:number, familia: FamiliaPut){
-    return this.http.put<any>(environment.baseUrl+environment.familiaEndpoint+familiaRoutes.familiaPost+idFamilia,familia)
+    return this.http.put<any>(environment.baseUrl+environment.familiaEndpoint+familiaRoutes.familiaPost+idFamilia,familia, {params : {auth : true}})
   }
-  
+
 }

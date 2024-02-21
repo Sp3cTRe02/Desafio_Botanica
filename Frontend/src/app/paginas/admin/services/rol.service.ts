@@ -12,22 +12,18 @@ export class RolService {
 
 
   obtenerRoles(){
-    const headers = new HttpHeaders().set('auth', 'true')
-    return this.http.get<Rol[]>(environment.baseUrl+environment.adminEndPoint+adminRoutes.getRoles, {headers})
+    return this.http.get<Rol[]>(environment.baseUrl+environment.adminEndPoint+adminRoutes.getRoles, {params : {auth : true}})
   }
 
   obtenerRolesUsuario(id: number){
-    const headers = new HttpHeaders().set('auth', 'true')
-    return this.http.get<Rol[]>(environment.baseUrl+environment.adminEndPoint+adminRoutes.getRolesUsuario+"/"+id, {headers})
+    return this.http.get<Rol[]>(environment.baseUrl+environment.adminEndPoint+adminRoutes.getRolesUsuario+"/"+id, {params : {auth : true}})
   }
 
   addRolUsuario(usuarioRol : usuarioRol){
-    const headers = new HttpHeaders().set('auth', 'true')
-    return this.http.put(environment.baseUrl+environment.usuarioEndpoint+usuarioRoutes.addRol, usuarioRol, {headers})
+    return this.http.put(environment.baseUrl+environment.usuarioEndpoint+usuarioRoutes.addRol, usuarioRol, {params : {auth : true}})
   }
 
   deleteRolUsuario(usuarioRol : usuarioRol){
-    const headers = new HttpHeaders().set('auth', 'true')
-    return this.http.put(environment.baseUrl+environment.usuarioEndpoint+usuarioRoutes.deleteRol, usuarioRol, {headers})
+    return this.http.put(environment.baseUrl+environment.usuarioEndpoint+usuarioRoutes.deleteRol, usuarioRol, {params : {auth : true}})
   }
 }

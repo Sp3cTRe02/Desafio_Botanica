@@ -81,6 +81,9 @@ constructor(private adminService: ArbolesAdminService, private modalService: Ngb
             if (response.status = "OK") {
                 this.msg = 'Arbol registrado exitosamente'
                 this.mostrarExito(this.msg)
+              setTimeout(() => {
+                window.location.reload()
+              })
             }
 
         },
@@ -98,7 +101,7 @@ constructor(private adminService: ArbolesAdminService, private modalService: Ngb
     actualizarFamilia(event : Event){
         this.arbol.idFamilia = +(<HTMLSelectElement>event.target).value
         console.log(this.arbol.idFamilia);
-        
+
     }
     editarArbol(idArbol:number) {
         this.arbolPut.nombre = this.arbolSeccionado.nombre
@@ -122,7 +125,7 @@ constructor(private adminService: ArbolesAdminService, private modalService: Ngb
 
                 this.mostrarError(mensajesError)
         }
-        
+
         )
     }
 

@@ -14,7 +14,7 @@ const crearUser = async (ctos = 1, pass ) => {
             ap2 : fakerES.person.lastName(),
             email : faker.internet.email(), 
             passwd : pass,
-            foto : faker.lorem.word(),
+            foto : null,
             desactivado : false,
             // 123 : 123
         }

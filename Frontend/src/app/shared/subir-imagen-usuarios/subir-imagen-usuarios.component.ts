@@ -13,6 +13,8 @@ import {SubirImagenUsuariosService} from "../services/subir-imagen-usuarios.serv
 })
 export class SubirImagenUsuariosComponent {
 
+    archivoSubido : any[] = []
+
     constructor(private msgService: MessageService,
     private uploadService : SubirImagenUsuariosService) {}
 
@@ -30,6 +32,7 @@ export class SubirImagenUsuariosComponent {
       const formData = new FormData();
       const id = 1;
       formData.append('archivo', event.files[0], event.files[0].name);
+      this.archivoSubido.push(formData)
       this.uploadService.subirImagen(formData)
         .subscribe((response) => {
           if (response?.status == 'OK') {

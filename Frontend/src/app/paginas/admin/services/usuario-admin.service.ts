@@ -14,23 +14,19 @@ export class UsuarioAdminService {
   constructor(private http : HttpClient) { }
 
   obtenerUsuarios(): Observable<ResponseGetUsuarios>{
-    const headers = new HttpHeaders().set('auth', 'true')
-    return this.http.get<ResponseGetUsuarios>(environment.baseUrl+environment.usuarioEndpoint+usuarioRoutes.usuariobase, {headers})
+    return this.http.get<ResponseGetUsuarios>(environment.baseUrl+environment.usuarioEndpoint+usuarioRoutes.usuariobase, {params : {auth : true}})
   }
 
   desactivarUsuario(id: number){
-    const headers = new HttpHeaders().set('auth', 'true')
-    return this.http.delete<any>(environment.baseUrl+environment.usuarioEndpoint+usuarioRoutes.usuariobase+"/"+id, {headers})
+    return this.http.delete<any>(environment.baseUrl+environment.usuarioEndpoint+usuarioRoutes.usuariobase+"/"+id, {params : {auth : true}})
   }
 
   crearUsuario (usuario: UsuarioPost){
-    const headers = new HttpHeaders().set('auth', 'true')
-    return this.http.post<any>(environment.baseUrl+environment.usuarioEndpoint+usuarioRoutes.usuariobase, usuario, {headers})
+    return this.http.post<any>(environment.baseUrl+environment.usuarioEndpoint+usuarioRoutes.usuariobase, usuario, {params : {auth : true}})
   }
 
   modificarUsuario(id: number, usuario: Usuario){
-    const headers = new HttpHeaders().set('auth', 'true')
-    return this.http.put<any>(environment.baseUrl+environment.usuarioEndpoint+usuarioRoutes.usuariobase+"/"+id, usuario,  {headers})
+    return this.http.put<any>(environment.baseUrl+environment.usuarioEndpoint+usuarioRoutes.usuariobase+"/"+id, usuario, {params : {auth : true}})
 
   }
 }
