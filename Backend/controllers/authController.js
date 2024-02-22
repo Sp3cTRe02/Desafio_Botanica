@@ -15,14 +15,11 @@ class authController {
         try {
             const usu = await authConexion.getUsuarioLogin(email, passwd);
 
-            if (usu) {
+            if (usu) { 
                 const roles = await this.obtenerRoles(usu.id);
 
                 const token = generarJWT(usu.id, roles);
-
-                const decodedPayload = jwt.decode(token, { complete: true });
-                console.log('Decoded JWT payload:', decodedPayload.payload);
-
+                
                 const response = {
                     success: true,
                     data: {

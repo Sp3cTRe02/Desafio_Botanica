@@ -25,7 +25,7 @@ export class NoticiasService {
   }
 
   anadirContenido(contenido: ContenidoPost) {
-    return this.http.post<NoticiaPostRespuesta>(environment.baseUrl + environment.contenidoEndPoint + contenidoRoutes.contenidoPost, contenido)
+    return this.http.post<NoticiaPostRespuesta>(environment.baseUrl + environment.contenidoEndPoint + contenidoRoutes.contenidoPost, contenido, {params : {auth : true}})
   }
 
 

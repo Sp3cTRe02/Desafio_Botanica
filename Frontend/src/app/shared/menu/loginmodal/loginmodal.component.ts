@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { SharedService } from '../../services/shared.service';
+import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -30,15 +30,16 @@ export class LoginmodalComponent {
   msg: string | undefined = '';
 
 
-  constructor(public router: Router, private sharedService: SharedService,
+  constructor(public router: Router, private authService: AuthService,
     private msgService: MessageService) { }
 
   login() {
-    this.sharedService.login(this.usuario)
+    this.authService.login(this.usuario)
       .subscribe((response) => {
-
+          
         if (response?.success) {
           localStorage.setItem('usuario', JSON.stringify(response.data))
+          localStorage.setItem('token', response.data.token)
           this.msg = 'Login correcto'
           this.mostrarExito(this.msg);
           this.limpiarCampos()

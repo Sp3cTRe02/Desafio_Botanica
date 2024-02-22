@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
-import { SharedService } from '../../services/shared.service';
+import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserRegsitro } from '../../interfaces/auth.interface';
@@ -29,7 +29,7 @@ export class RegistromodalComponent {
   msg: string = '';
 
 
-  constructor(public router: Router, private sharedService: SharedService,
+  constructor(public router: Router, private authService: AuthService,
     private msgService: MessageService) { }
 
   mostrarExito(msg: string) {
@@ -43,7 +43,7 @@ export class RegistromodalComponent {
   }
 
   registrar() {
-    this.sharedService.registrar(this.usuario)
+    this.authService.registrar(this.usuario)
       .subscribe((response) => {
         if (response?.success) {
           alert('xd')

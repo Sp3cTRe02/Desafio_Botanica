@@ -27,8 +27,8 @@ class arbolesController {
     }
 
 
-    static getInformacionArbol = async (req,res) =>{
-        
+    static getInformacionArbol = async (req, res) => {
+
         try {
             const id = req.params.id
             const contenido = await arbolesConexion.getInformacionArbol(id)
@@ -46,7 +46,7 @@ class arbolesController {
         }
     }
 
-    static getUbicacionesArbol = async (req,res) =>{
+    static getUbicacionesArbol = async (req, res) => {
         try {
             const id = req.params.id
             const contenido = await arbolesConexion.getUbicacionesArbol(id)
@@ -64,7 +64,7 @@ class arbolesController {
         }
     }
 
-    static getFotosArbol = async (req,res) =>{
+    static getFotosArbol = async (req, res) => {
         try {
             const id = req.params.id
             const contenido = await arbolesConexion.getFotosArbol(id)
@@ -81,7 +81,7 @@ class arbolesController {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ 'msg': 'Error en el servidor al obtener el contenido.', 'sqlMessage': error })
         }
     }
-    
+
 }
 
 

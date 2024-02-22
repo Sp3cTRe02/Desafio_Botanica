@@ -4,6 +4,9 @@ const { check } = require('express-validator')
 const validarCampos = require('../middlewares/validarCampos')
 const controlador = require('../controllers/userController')
 const controladorPerfil = require('../controllers/perfilController')
+const midAdmin = require('../middlewares/validarAdmin')
+const midsJWT = require("../middlewares/validarJWT");
+
 
 const { validarArchivoSubir } = require('../middlewares/validarArchivo')
 
@@ -24,21 +27,21 @@ const validatorRol = [
 ]
 
 // RUTAS CRUD CLIENTE
-router.post('/usuario', validator, controlador.usuarioPost)
-router.get('/usuario', controlador.usuarioGet)
-router.delete('/usuario/:id', controlador.usuarioDelete)
+router.post('/usuario', [midsJWT.validarJWT,midAdmin.verificarAdmin,validator], controlador.usuarioPost)
+router.get('/usuario', [midsJWT.validarJWT,midAdmin.verificarAdmin], controlador.usuarioGet)
+router.delete('/usuario/:id', [midsJWT.validarJWT,midAdmin.verificarAdmin] ,controlador.usuarioDelete)
 router.put('/usuario/:id', controlador.usuarioPut)
 
 // RUTAS MODIFICAR ROL CLIENTE (token)
-router.put('/addRol', validatorRol, controlador.addRol)
-router.delete('/deleteRol', validatorRol, controlador.removeRol)
+router.put('/addRol', [midsJWT.validarJWT,midAdmin.verificarAdmin,validatorRol], controlador.addRol)
+router.put('/deleteRol', [midsJWT.validarJWT,midAdmin.verificarAdmin,validatorRol], controlador.removeRol)
 
 
 // RUTA PARA SUBIR IMAGEN (token)
-router.post('/subirImagen/', validarArchivoSubir, controlador.subirImagenUsuario)
+router.post('/subirImagen/', [midsJWT.validarJWT,validarArchivoSubir], controlador.subirImagenUsuario)
 
 //RUTAS ACCEDER AL PERFIL
-router.get('/perfil/:id', controladorPerfil.getUsuarioPorId); 
-router.post('/perfil/:id', controladorPerfil.updateUsuarioPorId);
+router.get('/perfil/:id', midsJWT.validarJWT,controladorPerfil.getUsuarioPorId); 
+router.post('/perfil/:id',midsJWT.validarJWT, controladorPerfil.updateUsuarioPorId);
 
 module.exports = router
