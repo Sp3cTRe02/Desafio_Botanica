@@ -10,35 +10,28 @@ import { catchError, of, tap } from 'rxjs';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) {
-    const loggedIn = localStorage.getItem('loggedIn');
-    if (loggedIn) {
-      this.loggedIn = JSON.parse(loggedIn);
-    } else {
-      this.loggedIn = false;
-    }
-  }
+  constructor(private http: HttpClient) {}
 
-  private loggedIn: boolean;
+  private loggedIn = localStorage.getItem('token') ? true : false;
 
   login(usuario: UserLogin) {
     return this.http.post<Auth>(environment.baseUrl + environment.authEndpoint + authRoutes.login, usuario).pipe(
-      tap(() => {
+      tap((auth: Auth) => {
+        localStorage.setItem('token', auth.data.token); // Almacenar el token en localStorage
         this.loggedIn = true;
-        localStorage.setItem('loggedIn', JSON.stringify(this.loggedIn))
       }),
       catchError(error => {
-        console.error('Error during login', error);
-        return of(undefined)
+        console.error('Error durante el login', error);
+        return of(undefined);
       })
     );
   }
 
   registrar(usuario: UserRegsitro) {
-    return this.http.post<Registro>(environment.baseUrl + environment.authEndpoint + authRoutes.registro, usuario)
+    return this.http.post<Registro>(environment.baseUrl + environment.authEndpoint + authRoutes.registro, usuario);
   }
 
   estaLoggeado(): boolean {
-    return this.loggedIn
+    return this.loggedIn;
   }
 }
