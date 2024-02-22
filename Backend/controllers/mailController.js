@@ -1,3 +1,6 @@
+/**
+ * @author @Ismael
+ */
 const nodemailer = require('nodemailer');
 
 let transporter = nodemailer.createTransport({
@@ -17,8 +20,8 @@ let transporter = nodemailer.createTransport({
 let mailOptions = {
     from: process.env.MAIL_USER,
     to: 'ismael22012004@gmail.com', //parametrizar con llamada a la base de datos con al gmail introducido y buscar su contraseña para mandarla
-    subject: 'Prueba de Nodemailer',
-    text: 'Esto es una prueba de Nodemailer',
+    subject: 'Nueva contraseña',
+    text: 'Esto es una prueba de Nodemailer', //contraseña nueva generada automaticamente y cambiada en la base de datos
 }
 
 const enviarCorreo = (req, res) => {
