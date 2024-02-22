@@ -18,10 +18,10 @@ class authController {
             if (usu) {
                 const roles = await this.obtenerRoles(usu.id);
 
-                const token = generarJWT(usu.id, roles.RolUsuario);
+                const token = generarJWT(usu.id, roles);
 
-                //const decodedPayload = jwt.decode(token, { complete: true });
-                //console.log('Decoded JWT payload:', decodedPayload.payload);
+                const decodedPayload = jwt.decode(token, { complete: true });
+                console.log('Decoded JWT payload:', decodedPayload.payload);
 
                 const response = {
                     success: true,
@@ -62,9 +62,9 @@ class authController {
     static obtenerRoles = async (idUsu) => {
         try {
             const roles = await authConexion.obtenerRoles(idUsu)
-            return roles;
+            return roles
         } catch (error) {
-            throw error;
+            throw error
         }
     }
 
@@ -73,7 +73,6 @@ class authController {
             await authConexion.registrarUsuario(req.body);
 
             const mensajeUsuarioRol = await this.crearUsuarioRol();
-            console.log(mensajeUsuarioRol)
 
 
             res.status(StatusCodes.CREATED).json({

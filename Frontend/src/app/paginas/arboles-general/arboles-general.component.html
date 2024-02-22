@@ -1,0 +1,41 @@
+<app-menu></app-menu>
+
+<div class="card-wrapper container-fluid">
+
+    <p-dataView #dv [value]="arboles" [rows]="8" [paginator]="true" filterBy="nombre,nombreFam">
+
+        <ng-template let-arboles pTemplate="list">
+            <span class="input">
+                <input type="search" pInputText placeholder="Buscar por nombre"
+                    (input)="dv.filter($any($event.target).value, 'contains')">
+
+                <p-multiSelect [options]="listCategory" [(ngModel)]="categoriaSeleccionada"
+                    (onChange)="dv.filter($event.value)" defaultLabel="Selecciona una familia" optionLabel="label"
+                    optionValue="value">
+                </p-multiSelect>
+            </span>
+
+            <div class="row">
+                <ng-container>
+                    @for (item of arboles; track item.id){
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <a class="card mb-4 custom-link" [routerLink]="['/arboles', item.id]">
+                            <img src="../../../assets/fondo.jpg" class="card-img-top" alt="Tree Image">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">{{ item.nombre }}</h5>
+                                <p class="card-text">
+                                    <span class="font-semibold">{{item.nombreFam }}</span>
+                                </p>
+                                <p class="card-text">
+                                    <i class="pi pi-tag"></i> {{ item.epFloracion }}
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    }
+
+                </ng-container>
+            </div>
+        </ng-template>
+    </p-dataView>
+</div>

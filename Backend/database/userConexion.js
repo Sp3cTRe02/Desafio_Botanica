@@ -187,9 +187,50 @@ const removeRol = async (idUsuario, idRol) => {
     return resultado
 }
 
+const subirImagenUsuario = async (ruta, id) => {
+    let resultado = 0
+    bd.conectar()
+    try {
+        const usuario = await models.Usuario.update(
+            { foto: ruta },
+            { where: { id: id } }
+        )
+        if (usuario[0] === 1) {
+            resultado = 1
+        }
+    } catch (error) {
+        console.log('Error al subir imagen')
+        throw error
+    } finally {
+        bd.desconectar()
+    }
+    return resultado
+
+}
+
+const getFoto = async(id) => {
+    let urlFoto = 0
+    bd.conectar()
+    try {
+        urlFoto = await models.Usuario.findOne({
+            where: {
+                id: id
+            },
+            attributes: ['foto']
+        })
+    } catch (error) {
+        console.log('Error al obtener la foto')
+        throw error
+    } finally {
+        bd.desconectar()
+    }
+    return urlFoto
+}
+
+
 module.exports = {
 
     createUsuario,getUsuarios,deleteUsuarios,/*getActivado*/updateUsuario,
-    addRol,removeRol
+    addRol,removeRol, subirImagenUsuario, getFoto
     
 }

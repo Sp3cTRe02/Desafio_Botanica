@@ -11,8 +11,7 @@ import {InputSwitchModule} from "primeng/inputswitch";
 import {ReactiveFormsModule} from "@angular/forms";
 import {Rol, usuarioRol} from "../interface/rol.interface";
 import {RolService} from "../services/rol.service";
-import {UpperCasePipe} from "@angular/common";
-import {isEmpty} from "rxjs";
+
 
 @Component({
     selector: 'app-usuarios-admin',
@@ -105,22 +104,10 @@ export class UsuariosAdminComponent implements OnInit{
     })
   }
 
-  // eliminarUsuario(id : number) {
-  //   console.log(this.usuarioEliminar.id)
-  //   this.adminService.desactivarUsuario(id).subscribe( (response: any) => {
-  //     if(response.status === "OK"){
-  //       window.alert("Usuario eliminado")
-  //       window.location.reload()
-  //       this.mosrarUsuarios()
-  //     }
-  //   })
-  // }
-
   crearUsuario(){
     console.log(this.usuario)
     this.adminService.crearUsuario(this.usuario).subscribe( (response: any) => {
       if(response.status === "OK"){
-        // window.alert("Usuario creado")
         window.location.reload()
         this.mosrarUsuarios()
       }
@@ -131,7 +118,6 @@ export class UsuariosAdminComponent implements OnInit{
     console.log(this.usuarioSeleccionado)
     this.adminService.modificarUsuario(this.usuarioSeleccionado.id, this.usuarioSeleccionado).subscribe( (response: any) => {
       if(response.status === "OK"){
-        // window.alert("Usuario editado")
         window.location.reload()
         this.mosrarUsuarios()
       }

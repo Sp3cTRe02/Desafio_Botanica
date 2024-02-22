@@ -1,6 +1,5 @@
-const Conexion = require('../database/Conexion')
 const models = require('../models/index.js')
-const { Sequelize } = require('sequelize')
+const { Sequelize, QueryTypes } = require('sequelize')
 const bcrypt = require('bcrypt')
 
 class AuthConexion {
@@ -31,16 +30,13 @@ class AuthConexion {
 
 
     static obtenerRoles = async (id) => {
-        const resultado = await models.Usuario.findOne({
-            where: { id: id },
-            attributes: [],
-            include: [{
-                model: models.RolUsuario,
-                as: 'RolUsuario',
-                attributes: ['idRol']
-            }]
-        });
-        return resultado
+        const resultado = await models.sequelize.query(`
+            SELECT DISTINCT r.nombre FROM roles r
+            JOIN rolusuario ru   
+                ON r.id=ru.idRol
+            WHERE ru.idUsuario = ${id}
+        `, {type:QueryTypes.SELECT})
+        return resultado;
     }
 
     static registrarUsuario = async (body) => {
