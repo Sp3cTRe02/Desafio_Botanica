@@ -23,4 +23,5 @@ router.post('/', [midsJWT.validarJWT,midAdmin.verificarAdmin,validator], conteni
 router.put('/:id', [midsJWT.validarJWT, midAdmin.verificarAdmin],contenido.modificarContenido)
 router.delete('/:id',[midsJWT.validarJWT, midAdmin.verificarAdmin],  contenido.eliminarContenido)
 
+
 module.exports = router

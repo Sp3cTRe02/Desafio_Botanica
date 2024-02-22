@@ -12,6 +12,7 @@ import { RegistromodalComponent } from "./registromodal/registromodal.component"
 import { PerfildropdownComponent } from "./perfildropdown/perfildropdown.component";
 import {SubirImagenUsuariosComponent} from "../subir-imagen-usuarios/subir-imagen-usuarios.component";
 import { WebSocketService } from '../../paginas/noticias/services/websocket.service';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -23,7 +24,8 @@ import { WebSocketService } from '../../paginas/noticias/services/websocket.serv
     imports: [CommonModule, RouterOutlet,RouterModule, FormsModule, ReactiveFormsModule, MessagesModule, ToastModule, PasswordModule, LoginmodalComponent, RegistromodalComponent, PerfildropdownComponent, SubirImagenUsuariosComponent]
 })
 export class MenuComponent {
-    constructor(private socketService: WebSocketService, private msgService: MessageService) {
+    constructor(private socketService: WebSocketService, private msgService: MessageService, 
+        public authService: AuthService) {
 
     }
     ngOnInit(): void {

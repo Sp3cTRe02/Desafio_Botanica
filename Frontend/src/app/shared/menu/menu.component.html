@@ -58,7 +58,7 @@
     <app-subir-imagen-usuarios></app-subir-imagen-usuarios>
     <div class="d-flex">
 
-      @if(!true){
+      @if(authService.estaLoggeado()){
       <app-perfildropdown></app-perfildropdown>
       } @else {
       <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#loginModal">
