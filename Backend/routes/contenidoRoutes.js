@@ -19,8 +19,8 @@ const validator = [
 router.get('/', contenido.getContenido)
 router.get('/ultimas-noticias', contenido.getUltimasNoticias)
 router.get('/:id', contenido.getInfoNoticia)
-router.post('/', [midsJWT.validarJWT,midAdmin.verificarAdmin,validator], contenido.crearContenido)
-router.put('/:id', [midsJWT.validarJWT, midAdmin.verificarAdmin],contenido.modificarContenido)
+router.post('/', [validator], contenido.crearContenido)
+router.put('/:id',contenido.modificarContenido)
 router.delete('/:id',[midsJWT.validarJWT, midAdmin.verificarAdmin],  contenido.eliminarContenido)
 
 

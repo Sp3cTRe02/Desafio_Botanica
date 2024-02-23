@@ -26,7 +26,7 @@ class contenidoController {
 
 
         } catch (error) {
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ 'msg': 'Error en el servidor al registrar contenido.', 'sqlMessage': error })
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: 'Error en el servidor al registrar contenido.', sqlMessage: error })
         }
     }
 
@@ -44,7 +44,7 @@ class contenidoController {
 
             res.status(StatusCodes.OK).json(response)
         } catch (error) {
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ 'msg': 'Error en el servidor al obtener el contenido.', 'sqlMessage': error })
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: 'Error en el servidor al obtener el contenido.', sqlMessage: error })
         }
     }
 
@@ -62,7 +62,7 @@ class contenidoController {
 
             res.status(StatusCodes.OK).json(response)
         } catch (error) {
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ 'msg': 'Error en el servidor al obtener el contenido.', 'sqlMessage': error })
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: 'Error en el servidor al obtener el contenido.', sqlMessage: error })
         }
     }
 
@@ -81,7 +81,7 @@ class contenidoController {
 
             res.status(StatusCodes.OK).json(response)
         } catch (error) {
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ 'msg': 'Error en el servidor al obtener el contenido.', 'sqlMessage': error })
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: 'Error en el servidor al obtener el contenido.', sqlMessage: error })
         }
     }
 
@@ -92,13 +92,13 @@ class contenidoController {
             const usuario = await contenidoConexion.modificarContenido(id, body)
 
             if (usuario == 0) {
-                return res.status(StatusCodes.NOT_FOUND).json({ 'msg': 'Contenido no encontrado' });
+                return res.status(StatusCodes.NOT_FOUND).json({ success: false, msg: 'Contenido no encontrado' });
             } else {
-                return res.status(StatusCodes.OK).json({ 'msg': 'Contenido modificado exitosamente' });
+                return res.status(StatusCodes.OK).json({ success: true, msg: 'Contenido modificado exitosamente' });
             }
         } catch (error) {
             console.error('Error al modificar el usuario:', error);
-            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ 'msg': 'Error en el servidor.' });
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: 'Error en el servidor.' });
         }
     }
 
@@ -109,20 +109,17 @@ class contenidoController {
             const respuesta = await contenidoConexion.eliminarContenido(id)
 
             if (respuesta == 0) {
-                return res.status(StatusCodes.NOT_FOUND).json({ 'msg': 'Contenido no encontrado' });
+                return res.status(StatusCodes.NOT_FOUND).json({ success: false, msg: 'Contenido no encontrado' });
             } else {
-                return res.status(StatusCodes.OK).json({ 'msg': 'Contenido eliminado exitosamente' });
+                return res.status(StatusCodes.OK).json({ success: true, msg: 'Contenido eliminado exitosamente' });
             }
 
         } catch (error) {
             console.error('Error al modificar el usuario:', error);
-            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ 'msg': 'Error en el servidor.' });
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: 'Error en el servidor.' });
         }
     }
-
-
-
-
 }
+
 
 module.exports = contenidoController

@@ -19,7 +19,7 @@ import { ToastModule } from 'primeng/toast';
     standalone: true,
     templateUrl: './noticias.component.html',
     styleUrl: './noticias.component.scss',
-    imports: [MenuComponent, CommonModule, FormsModule, QuillModule, DataViewModule, RouterLink,ToastModule],
+    imports: [MenuComponent, CommonModule, FormsModule, QuillModule, DataViewModule, RouterLink, ToastModule],
     providers: [WebSocketService, MessageService]
 })
 
@@ -103,6 +103,7 @@ export class NoticiasComponent implements OnInit {
 
     anadirContenido() {
         this.noticiasService.anadirContenido(this.noticia).subscribe((response: any) => {
+         
             if (response.success = true) {
                 this.msg = 'Noticia agregada correctamente'
                 this.mostrarExito(this.msg)

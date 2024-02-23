@@ -48,6 +48,7 @@ export const arbolesRoutes = {
 export const contenidoRoutes = {
     contenidoPost: "/",
     contenidoGet: "/",
+    contenidoPut: "/",
     ultimasNoticiasGet: "/ultimas-noticias"
 }
 

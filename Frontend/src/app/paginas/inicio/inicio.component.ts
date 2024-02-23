@@ -30,6 +30,7 @@ export class InicioComponent {
 
     constructor(private noticiasService: NoticiasService,private modalService: NgbModal) {
         this.obtenerUltimasNoticias()
+        window.scrollTo(0, 0)
     }
 
     public modulesQuill = {
