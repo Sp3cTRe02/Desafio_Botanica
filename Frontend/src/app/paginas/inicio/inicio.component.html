@@ -1,11 +1,13 @@
 <app-menu></app-menu>
 <section data-bs-version="5.1" class="hero-section" id="header14-2y">
   <div class="container container-intro">
-   
+
     <div class="row">
 
       <div class="col-12 col-lg mt-5 py-5 mt-lg-0 pt-lg-0">
+        @if(authService.esAdmin()){
         <button class="btn btn-primary button-space" (click)="abrirEditar()">Editar contenido</button>
+        }
         <div class="text-wrapper">
           <h1 class="hero-title mb-4">
             {{ noticias[0].titulo }}

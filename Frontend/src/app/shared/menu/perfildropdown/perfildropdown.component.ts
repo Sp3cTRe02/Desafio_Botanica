@@ -7,11 +7,16 @@ import { Component } from '@angular/core';
   templateUrl: './perfildropdown.component.html',
   styleUrl: './perfildropdown.component.scss'
 })
+
+/**
+ * @David_Trujillo
+ */
+
 export class PerfildropdownComponent {
   nombreUsuario: string | null = ''
 
   ngOnInit(): void {
-    const usuarioJSON = localStorage.getItem('usuario');
+    const usuarioJSON = sessionStorage.getItem('usuario');
     this.nombreUsuario = usuarioJSON ? JSON.parse(usuarioJSON).nombre : null;
   }
 

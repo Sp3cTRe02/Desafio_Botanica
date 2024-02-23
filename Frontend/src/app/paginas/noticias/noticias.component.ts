@@ -12,6 +12,7 @@ import { DataViewModule } from 'primeng/dataview';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { RouterLink } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
+import { AuthService } from '../../shared/services/auth.service';
 
 
 @Component({
@@ -22,6 +23,10 @@ import { ToastModule } from 'primeng/toast';
     imports: [MenuComponent, CommonModule, FormsModule, QuillModule, DataViewModule, RouterLink, ToastModule],
     providers: [WebSocketService, MessageService]
 })
+
+/**
+ * @David_Trujillo
+ */
 
 export class NoticiasComponent implements OnInit {
     noticias: ContenidoGet[] = []
@@ -45,7 +50,8 @@ export class NoticiasComponent implements OnInit {
 
 
     constructor(private noticiasService: NoticiasService, private socketService: WebSocketService,
-        private modalService: NgbModal, private primengConfig: PrimeNGConfig, private msgService: MessageService) {
+        private modalService: NgbModal, private primengConfig: PrimeNGConfig, 
+        private msgService: MessageService, public authService: AuthService) {
 
         this.obtenerContenido()
         this.primengConfig.ripple = true

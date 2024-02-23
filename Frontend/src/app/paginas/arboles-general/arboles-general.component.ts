@@ -19,6 +19,11 @@ import { FamiliaAdmin } from '../admin/interface/admin.interface';
   styleUrl: './arboles-general.component.scss',
   imports: [MenuComponent, CommonModule, DataViewModule, DropdownModule, RouterLink, MultiSelectModule, FormsModule]
 })
+
+/**
+ * @David_Trujillo
+ */
+
 export class ArbolesGeneralComponent {
   arboles: Arbol[] = []
   listCategory: SelectItem[] = []

@@ -1,6 +1,9 @@
 const models = require('../models/index.js')
 const { Sequelize } = require('sequelize')
 
+/**
+ * @David_Trujillo
+ */
 
 class contenidoConexion {
     static crearContenido = async (body) => {

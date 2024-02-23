@@ -1,7 +1,9 @@
 const { StatusCodes } = require('http-status-codes')
 const arbolesConexion = require('../database/arbolesConexion')
 
-
+/**
+ * @David_Trujillo
+ */
 class arbolesController {
     static getArbolesGeneral = async (req, res) => {
         try {

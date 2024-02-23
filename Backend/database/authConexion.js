@@ -2,6 +2,10 @@ const models = require('../models/index.js')
 const { Sequelize, QueryTypes } = require('sequelize')
 const bcrypt = require('bcrypt')
 
+/**
+ * @David_Trujillo
+ */
+
 class AuthConexion {
     static getUsuarioLogin = async (email, pass) => {
         let resultado = null

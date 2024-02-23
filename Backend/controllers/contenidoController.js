@@ -2,6 +2,10 @@ const contenidoConexion = require('../database/contenidoConexion')
 const { StatusCodes } = require('http-status-codes')
 const socketController = require('../controllers/websocketController')
 
+/**
+ * @David_Trujillo
+ */
+
 class contenidoController {
     static crearContenido = async (req, res) => {
         try {

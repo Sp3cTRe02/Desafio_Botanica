@@ -20,6 +20,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     providers: [MessageService]
 })
 
+/**
+ * @David_Trujillo
+ */
+
 export class FamiliaAdminComponent {
     familias: FamiliaAdmin[] = []
     familiaSeleccionada: any

@@ -8,6 +8,10 @@ import { contenidoRoutes, environment } from '../../../../environments/environme
   providedIn: 'root'
 })
 
+/**
+ * @David_Trujillo
+ */
+
 export class NoticiasService {
 
   constructor(private http: HttpClient) { }

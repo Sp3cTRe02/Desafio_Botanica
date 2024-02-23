@@ -1,3 +1,7 @@
+/**
+ * @David_Trujillo
+ */
+
 const socketController = (socket) => {
     console.log(`Cliente ${socket.id} conectado en ${process.env.WEBSOCKETPORT}`)
 

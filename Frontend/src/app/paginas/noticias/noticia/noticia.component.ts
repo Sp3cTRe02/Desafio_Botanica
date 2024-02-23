@@ -10,6 +10,7 @@ import { QuillModule } from 'ngx-quill';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { FormControl } from '@angular/forms';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
     selector: 'app-noticia',
@@ -19,6 +20,11 @@ import { FormControl } from '@angular/forms';
     imports: [MenuComponent, CommonModule, FormsModule, QuillModule, ToastModule],
     providers: [MessageService]
 })
+
+/**
+ * @David_Trujillo
+ */
+
 export class NoticiaComponent implements OnInit{
     noticia: ContenidoGet = {
         id: 0,
@@ -56,7 +62,7 @@ export class NoticiaComponent implements OnInit{
     contenidoControl = new FormControl()
 
     constructor(private noticiasService: NoticiasService, private route: ActivatedRoute, private router: Router,
-        private msgService: MessageService) {
+        private msgService: MessageService,public authService: AuthService) {
         this.router.events.pipe(
             filter((event: any) => event instanceof NavigationEnd)
         ).subscribe(() => {
