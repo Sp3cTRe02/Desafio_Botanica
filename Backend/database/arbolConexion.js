@@ -91,11 +91,36 @@ const deleteArboles = async (id) => {
     return arbol[0]
 }
 
+const addUbicacionArbol = async  (ubicacion, idArbol) => {
+    let resultado = 0 
+    bd.conectar()
+    try{
+        const nuevaUbicacion = await models.Ubicacion.create({
+            latitud: ubicacion.latitud,
+            longitud: ubicacion.longitud,
+            ciudad: ubicacion.ciudad,
+            idArbol: idArbol
+        })
+        resultado = 1
+    }catch (error){
+        if (error instanceof Sequelize.ValidationError) {
+            console.log('La ubicacion no cumple los requisitos')
+        }else{
+            console.log('Error desconocido')
+        }
+        throw error
+    }finally{
+        bd.desconectar()
+    }
+    return resultado
+}
+
 module.exports = {
   
     createArbol,
     updateArbol,
     getArbol,
     getArboles,
-    deleteArboles
+    deleteArboles,
+    addUbicacionArbol
 }

@@ -4,13 +4,14 @@ import { ActivatedRoute } from '@angular/router';
 import { GalleriaModule } from 'primeng/galleria';
 import { Map, Marker, NavigationControl, Popup } from 'mapbox-gl';
 import { ArbolesGeneralService } from '../services/arboles-general.service';
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-arbol-general',
   standalone: true,
   templateUrl: './arbol-general.component.html',
   styleUrl: './arbol-general.component.scss',
-  imports: [MenuComponent, GalleriaModule]
+  imports: [MenuComponent, GalleriaModule, RouterLink]
 })
 
 /**
@@ -19,14 +20,15 @@ import { ArbolesGeneralService } from '../services/arboles-general.service';
 
 export class ArbolGeneralComponent {
   responsiveOptions: any[] | undefined;
+  arbolId: number = 0;
 
   @ViewChild('mapDiv') mapDivElement!: ElementRef
   ubicaciones: any[] = []
 
   constructor(private route: ActivatedRoute, private arbolService: ArbolesGeneralService) {
     this.route.params.subscribe(params => {
-      const arbolId = params['id'];
-      this.obtenerUbicacionesArbol(arbolId)
+      this.arbolId = params['id'];
+      this.obtenerUbicacionesArbol(this.arbolId)
     });
   }
   obtenerUbicacionesArbol(idArbol: number): void {

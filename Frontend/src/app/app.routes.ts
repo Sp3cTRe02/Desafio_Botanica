@@ -9,6 +9,7 @@ import { NoticiasComponent } from './paginas/noticias/noticias.component';
 import { NoticiaComponent } from './paginas/noticias/noticia/noticia.component';
 import { roleGuard } from './shared/guards/role.guard';
 import { NotFoundComponent } from './shared/notFound/not-found/not-found.component';
+import {AddUbicacionComponent} from "./paginas/arboles-general/add-ubicacion/add-ubicacion.component";
 
 
 export const routes: Routes = [
@@ -25,6 +26,10 @@ export const routes: Routes = [
         component: ArbolGeneralComponent
     },
 
+    {
+      path: 'ubicacion/:id',
+      component: AddUbicacionComponent
+    },
 
     {
         path: 'noticias',
@@ -55,7 +60,7 @@ export const routes: Routes = [
         canActivate: [roleGuard]
     },
 
-    { path: '**', component: NotFoundComponent } 
+    { path: '**', component: NotFoundComponent }
 
 ];
 
