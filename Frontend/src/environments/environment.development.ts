@@ -7,7 +7,8 @@ export const environment = {
     adminEndPoint: '/admin',
     arbolEndpoint: '/arboles',
     arbolesEndPoint: '/arbol',
-    contenidoEndPoint: '/contenido'
+    contenidoEndPoint: '/contenido',
+    mapBoxToken: 'pk.eyJ1IjoiZGF2aXRydTYwIiwiYSI6ImNsc3JucXNhazA1cnEyaW1sZngxa2pqNHIifQ.vslWBUZtPTf7cgGyqDQpvg'
 };
 
 export const authRoutes = {
@@ -36,7 +37,8 @@ export const adminRoutes = {
 export const arbolRoutes = {
     arbolesAdmin: "/",
     arbolesPost: "/",
-    arbolesPut: "/"
+    arbolesPut: "/",
+    addUbicacion: "/ubicacion",
 }
 
 export const arbolesRoutes = {
