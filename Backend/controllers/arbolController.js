@@ -136,6 +136,35 @@ const arbolesGet = (req = request, res = response) => {
         }
 
 
+const addUbicacion = async (req = request, res = response) => {
+    const ubicacion = {
+        latitud: req.body.latitud,
+        longitud: req.body.longitud,
+        ciudad: req.body.ciudad
+    }
+    Conexion.addUbicacionArbol(ubicacion, req.params.id)
+        .then(resultado => {
+            if (resultado === 1) {
+                res.status(StatusCodes.OK).json({
+                    'msg': 'Ubicacion añadida correctamente',
+                    'status': 'OK'
+                })
+            } else {
+                res.status(StatusCodes.NOT_FOUND).json({
+                    'msg': 'Arbol no ha sido encontrado',
+                    'status': 'ERROR'
+                })
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                'msg': 'Error en el servidor',
+                'status': 'ERROR'
+            })
+        })
+}
+
 
 module.exports = {
 
@@ -143,6 +172,7 @@ module.exports = {
     arbolPut,
     arbolesGet,
     arbolGet,
-    arbolDelete
+    arbolDelete,
+    addUbicacion
     
 }

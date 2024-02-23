@@ -13,3 +13,9 @@ export interface ArbolRespuesta{
     sucesss: boolean
     datos: ArbolData
 }
+
+export interface Ubicacion{
+    latitud: number;
+    longitud: number;
+    ciudad: string;
+}
