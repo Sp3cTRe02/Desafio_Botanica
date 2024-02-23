@@ -13,9 +13,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     clonPeticion = req.clone({
       headers : req.headers.set('x-token', token)
     })
-  } else {
-    //en este paso como no tenemos el param auth pues no deberiamos meter el token en la cabecera
-    console.log(param)
   }
 
   return next(clonPeticion);
