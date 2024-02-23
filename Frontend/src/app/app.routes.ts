@@ -8,6 +8,7 @@ import { ArbolGeneralComponent } from './paginas/arboles-general/arbol-general/a
 import { NoticiasComponent } from './paginas/noticias/noticias.component';
 import { NoticiaComponent } from './paginas/noticias/noticia/noticia.component';
 import { roleGuard } from './shared/guards/role.guard';
+import { NotFoundComponent } from './shared/notFound/not-found/not-found.component';
 
 
 export const routes: Routes = [
@@ -53,6 +54,8 @@ export const routes: Routes = [
         component: UsuariosAdminComponent,
         canActivate: [roleGuard]
     },
+
+    { path: '**', component: NotFoundComponent } 
 
 ];
 
