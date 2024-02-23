@@ -8,6 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NoticiasService } from '../noticias/services/noticias.service';
 import { ContenidoGet } from '../noticias/interfaces/noticias.interface';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../shared/services/auth.service';
 
 
 @Component({
@@ -15,8 +16,13 @@ import { RouterLink } from '@angular/router';
     standalone: true,
     templateUrl: './inicio.component.html',
     styleUrl: './inicio.component.scss',
-    imports: [CommonModule, MenuComponent, FormsModule, QuillModule,RouterLink]
+    imports: [CommonModule, MenuComponent, FormsModule, 
+        QuillModule,RouterLink, ]
 })
+
+/**
+ * @David_Trujillo
+ */
 
 export class InicioComponent {
 
@@ -28,8 +34,10 @@ export class InicioComponent {
     nuevaNoticia: any = {};
     noticias: ContenidoGet[] = []
 
-    constructor(private noticiasService: NoticiasService,private modalService: NgbModal) {
+    constructor(private noticiasService: NoticiasService,private modalService: NgbModal,
+        public authService: AuthService) {
         this.obtenerUltimasNoticias()
+        window.scrollTo(-2, 0)
     }
 
     public modulesQuill = {

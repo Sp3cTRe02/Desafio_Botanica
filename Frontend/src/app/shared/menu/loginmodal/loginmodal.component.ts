@@ -17,6 +17,11 @@ import { PasswordModule } from 'primeng/password';
   templateUrl: './loginmodal.component.html',
   styleUrl: './loginmodal.component.scss'
 })
+
+/**
+ * @David_Trujillo
+ */
+
 export class LoginmodalComponent {
 
   @ViewChild('loginForm') loginForm!: ElementRef
@@ -38,8 +43,8 @@ export class LoginmodalComponent {
       .subscribe((response) => {
           
         if (response?.success) {
-          localStorage.setItem('usuario', JSON.stringify(response.data))
-          localStorage.setItem('token', response.data.token)
+          sessionStorage.setItem('usuario', JSON.stringify(response.data))
+          sessionStorage.setItem('token', response.data.token)
           this.msg = 'Login correcto'
           this.mostrarExito(this.msg);
           this.limpiarCampos()

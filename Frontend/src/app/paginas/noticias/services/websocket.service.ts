@@ -5,6 +5,11 @@ import io from 'socket.io-client';
 @Injectable({
   providedIn: 'root'
 })
+
+/**
+ * @David_Trujillo
+ */
+
 export class WebSocketService {
   private socket
   

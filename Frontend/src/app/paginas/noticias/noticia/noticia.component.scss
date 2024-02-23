@@ -4,9 +4,24 @@
     padding: 150px;
 }
 
+.btn-width{
+    width: 120px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+.margin-top{
+    margin-top: 35px;
+}
+
+.form-group{
+    margin-top: 10px;
+}
+
 @media (max-width: 768px) {
+
     .news-container {
-        margin-top: 75px;
+        margin-top: 95px;
         padding: 50px; 
     }
 }

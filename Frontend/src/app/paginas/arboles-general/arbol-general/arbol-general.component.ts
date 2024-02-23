@@ -12,6 +12,11 @@ import { ArbolesGeneralService } from '../services/arboles-general.service';
   styleUrl: './arbol-general.component.scss',
   imports: [MenuComponent, GalleriaModule]
 })
+
+/**
+ * @David_Trujillo
+ */
+
 export class ArbolGeneralComponent {
   responsiveOptions: any[] | undefined;
 

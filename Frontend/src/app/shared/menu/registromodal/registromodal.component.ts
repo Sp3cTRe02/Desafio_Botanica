@@ -16,6 +16,11 @@ import { UserRegsitro } from '../../interfaces/auth.interface';
   templateUrl: './registromodal.component.html',
   styleUrl: './registromodal.component.scss'
 })
+
+/**
+ * @David_Trujillo
+ */
+
 export class RegistromodalComponent {
   usuario: UserRegsitro = {
     nombre: '',

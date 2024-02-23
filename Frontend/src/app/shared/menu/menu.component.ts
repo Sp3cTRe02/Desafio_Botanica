@@ -21,8 +21,14 @@ import { AuthService } from '../services/auth.service';
     providers: [MessageService],
     templateUrl: './menu.component.html',
     styleUrl: './menu.component.scss',
-    imports: [CommonModule, RouterOutlet,RouterModule, FormsModule, ReactiveFormsModule, MessagesModule, ToastModule, PasswordModule, LoginmodalComponent, RegistromodalComponent, PerfildropdownComponent, SubirImagenUsuariosComponent]
+    imports: [CommonModule, RouterOutlet,RouterModule, FormsModule, ReactiveFormsModule, MessagesModule, ToastModule, PasswordModule, 
+        LoginmodalComponent, RegistromodalComponent, PerfildropdownComponent, SubirImagenUsuariosComponent]
 })
+
+/**
+ * @David_Trujillo
+ */
+
 export class MenuComponent {
     constructor(private socketService: WebSocketService, private msgService: MessageService, 
         public authService: AuthService) {
@@ -32,6 +38,7 @@ export class MenuComponent {
         this.socketService.recibirNoticia().subscribe((contenido) => {
             let msg = 'Nueva noticia publicada'
             this.mostrarExito(msg);
+
         })
     }
 

@@ -31,7 +31,7 @@ module.exports = {
       },
 
       descripcion: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT('medium')
       },
       imagen: {
         type: Sequelize.STRING

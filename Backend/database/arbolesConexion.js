@@ -1,6 +1,10 @@
 const models = require('../models/index.js')
 const { Sequelize } = require('sequelize')
 
+/**
+ * @David_Trujillo
+ */
+
 class ArbolesConexion{
     static getArbolesGeneral = async () => {
         try {

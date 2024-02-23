@@ -13,11 +13,18 @@ h2 {
     font-weight: 600;
 }
 
-.container {
-    margin-top: 150px;
+.container-intro {
+    margin-top: 200px;
+
+    .btn {
+        width: 150px;
+        margin-bottom: 10px;
+    }
 }
 
-
+.container-news {
+    margin-top: 95px;
+}
 
 .image-wrapper {
     img {
@@ -53,9 +60,31 @@ h2 {
 }
 
 @media (max-width: 767px) {
+    .container-intro {
+        margin-top: 50px;
+
+        .btn {
+            width: 150px;
+            margin-bottom: 10px;
+        }
+    }
+
     .element-wrapper {
         margin-top: 10px;
     }
 }
 
+@media (max-width: 967px) {
+    .container-intro {
+        margin-top: 50px;
 
+        .btn {
+            width: 150px;
+            margin-bottom: 10px;
+        }
+    }
+
+    .element-wrapper {
+        margin-top: 10px;
+    }
+}

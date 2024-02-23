@@ -5,8 +5,11 @@
 
   <p-dataView #dv [value]="noticias" [rows]="8" [paginator]="true">
     <ng-template let-arboles pTemplate="list">
-      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarContenido">Agregar
+      @if(authService.esAdmin()){
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarContenido">Agregar
         contenido</button>
+      }
+
       <div class="row">
         <h1 class="font-bold mb-3">Noticias</h1>
         <ng-container>

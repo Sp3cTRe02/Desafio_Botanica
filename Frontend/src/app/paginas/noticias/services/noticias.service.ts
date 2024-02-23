@@ -1,12 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ContenidoGet, ContenidoPost, NoticiaPostRespuesta } from '../interfaces/noticias.interface';
+import { ContenidoGet, ContenidoPost, ContenidoPut, NoticiaPostRespuesta } from '../interfaces/noticias.interface';
 import { Observable } from 'rxjs';
 import { contenidoRoutes, environment } from '../../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
+
+/**
+ * @David_Trujillo
+ */
 
 export class NoticiasService {
 
@@ -25,9 +29,10 @@ export class NoticiasService {
   }
 
   anadirContenido(contenido: ContenidoPost) {
-    return this.http.post<NoticiaPostRespuesta>(environment.baseUrl + environment.contenidoEndPoint + contenidoRoutes.contenidoPost, contenido, {params : {auth : true}})
+    return this.http.post<NoticiaPostRespuesta>(environment.baseUrl + environment.contenidoEndPoint + contenidoRoutes.contenidoPost, contenido)
   }
 
-
-
+  modificarContenido(idNoticia:number,contenido:ContenidoPut){
+    return this.http.put<NoticiaPostRespuesta>(environment.baseUrl + environment.contenidoEndPoint + contenidoRoutes.contenidoPut+idNoticia, contenido)
+  }
 }

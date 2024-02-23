@@ -7,6 +7,8 @@ import { ArbolesGeneralComponent } from './paginas/arboles-general/arboles-gener
 import { ArbolGeneralComponent } from './paginas/arboles-general/arbol-general/arbol-general.component';
 import { NoticiasComponent } from './paginas/noticias/noticias.component';
 import { NoticiaComponent } from './paginas/noticias/noticia/noticia.component';
+import { roleGuard } from './shared/guards/role.guard';
+import { NotFoundComponent } from './shared/notFound/not-found/not-found.component';
 
 
 export const routes: Routes = [
@@ -14,10 +16,10 @@ export const routes: Routes = [
 
     {
         path: 'arboles',
-        component: ArbolesGeneralComponent
+        component: ArbolesGeneralComponent,
     },
 
-    
+
     {
         path: 'arboles/:id',
         component: ArbolGeneralComponent
@@ -38,25 +40,23 @@ export const routes: Routes = [
     {
         path: 'familias-admin',
         component: FamiliaAdminComponent,
+        canActivate: [roleGuard]
     },
 
     {
         path: 'arboles-admin',
         component: ArbolesAdminComponent,
+        canActivate: [roleGuard]
     },
 
     {
         path: 'usuarios-admin',
         component: UsuariosAdminComponent,
+        canActivate: [roleGuard]
     },
-    
-    {
-    path: 'arboles-admin',
-    component: ArbolesAdminComponent,
-},
 
+    { path: '**', component: NotFoundComponent } 
 
-    
 ];
 
 
