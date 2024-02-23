@@ -16,7 +16,6 @@ const verificarAdmin = (req, res, next) => {
         }
 
 
-
         next();
     } catch (error) {
         console.error('Error al validar el token:', error);
