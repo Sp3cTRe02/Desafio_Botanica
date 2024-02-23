@@ -4,11 +4,12 @@
     <button class="btn btn-primary button-space" (click)="abrirEditar()">Editar contenido</button>
     <div class="row">
       <div class="col-12 col-lg mt-5 py-5 mt-lg-0 pt-lg-0">
+      
         <div class="text-wrapper">
           <h1 class="hero-title mb-4">
-            {{cabecera}}
+            {{ noticias[0].titulo }}
           </h1>
-          <div [innerHTML]="contenidoInicio"></div>
+          <div [innerHTML]="noticias[0].descripcion"></div>
         </div>
       </div>
       <div class="col-12 col-lg-6">
