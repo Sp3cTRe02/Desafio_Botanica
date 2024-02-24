@@ -13,6 +13,7 @@ import {Ubicacion} from "../interfaces/arboles-general.interface";
   templateUrl: './add-ubicacion.component.html',
   styleUrl: './add-ubicacion.component.scss'
 })
+//JaimeRafael
 export class AddUbicacionComponent implements AfterViewInit{
 
   arbolId: number = 0;
