@@ -5,6 +5,7 @@ import { GalleriaModule } from 'primeng/galleria';
 import { Map, Marker, NavigationControl, Popup } from 'mapbox-gl';
 import { ArbolesGeneralService } from '../services/arboles-general.service';
 import {RouterLink} from "@angular/router";
+import {AuthService} from "../../../shared/services/auth.service";
 
 @Component({
   selector: 'app-arbol-general',
@@ -25,7 +26,8 @@ export class ArbolGeneralComponent {
   @ViewChild('mapDiv') mapDivElement!: ElementRef
   ubicaciones: any[] = []
 
-  constructor(private route: ActivatedRoute, private arbolService: ArbolesGeneralService) {
+  constructor(private route: ActivatedRoute, private arbolService: ArbolesGeneralService,
+              public authService : AuthService) {
     this.route.params.subscribe(params => {
       this.arbolId = params['id'];
       this.obtenerUbicacionesArbol(this.arbolId)

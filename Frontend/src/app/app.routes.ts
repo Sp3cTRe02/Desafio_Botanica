@@ -10,6 +10,7 @@ import { NoticiaComponent } from './paginas/noticias/noticia/noticia.component';
 import { roleGuard } from './shared/guards/role.guard';
 import { NotFoundComponent } from './shared/notFound/not-found/not-found.component';
 import {AddUbicacionComponent} from "./paginas/arboles-general/add-ubicacion/add-ubicacion.component";
+import {loggedGuard} from "./shared/guards/logged.guard";
 
 
 export const routes: Routes = [
@@ -28,7 +29,8 @@ export const routes: Routes = [
 
     {
       path: 'ubicacion/:id',
-      component: AddUbicacionComponent
+      component: AddUbicacionComponent,
+      canActivate: [loggedGuard]
     },
 
     {
