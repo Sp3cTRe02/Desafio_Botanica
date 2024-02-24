@@ -100,14 +100,15 @@ export class NoticiaComponent implements OnInit{
         this.noticiaEditar.titulo = this.noticia.titulo
         this.noticiaEditar.resumenDesc = this.noticia.resumenDesc
         this.noticiaEditar.descripcion = this.noticia.descripcion
-
+    
         this.noticiasService.modificarContenido(this.noticiaId, this.noticiaEditar).subscribe((response: any) => {
-            console.log(response.success)
-            if (response.success = true) {
-                console.log('pasa')
+            if (response.success) {
                 this.msg = 'Noticia modificada correctamente'
                 this.mostrarExito(this.msg)
-                window.location.reload()
+    
+                setTimeout(() => {
+                    window.location.reload()
+                }, 1200)
             }
         })
     }

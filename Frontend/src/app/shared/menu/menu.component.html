@@ -43,22 +43,21 @@
         </li>
 
         @if(authService.esAdmin()){
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="administracionDropdown" role="button"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              Administración
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="administracionDropdown">
-              <li><a class="dropdown-item" routerLink="/familias-admin">Familias</a></li>
-              <li><a class="dropdown-item" routerLink="/arboles-admin">Árboles</a></li>
-              <li><a class="dropdown-item" routerLink="/usuarios-admin">Usuarios</a></li>
-            </ul>
-          </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="administracionDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Administración
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="administracionDropdown">
+            <li><a class="dropdown-item" routerLink="/familias-admin">Familias</a></li>
+            <li><a class="dropdown-item" routerLink="/arboles-admin">Árboles</a></li>
+            <li><a class="dropdown-item" routerLink="/usuarios-admin">Usuarios</a></li>
+          </ul>
+        </li>
         }
-        
+
       </ul>
     </div>
-    <app-subir-imagen-usuarios></app-subir-imagen-usuarios>
     <div class="d-flex">
 
       @if(authService.estaLoggeado()){
