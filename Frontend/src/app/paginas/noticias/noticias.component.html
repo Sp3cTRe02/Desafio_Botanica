@@ -6,7 +6,7 @@
   <p-dataView #dv [value]="noticias" [rows]="8" [paginator]="true">
     <ng-template let-arboles pTemplate="list">
       @if(authService.esAdmin()){
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarContenido">Agregar
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarContenido">Agregar
         contenido</button>
       }
 
@@ -40,7 +40,7 @@
       <div class="modal-body p-4 py-5 p-md-5 wide-content">
         <p-toast></p-toast>
         <h3 class="text-center mb-3">Añadir contenido</h3>
-        <form (submit)="enviarNoticia()">
+        <form>
           <div class="form-group mb-2">
             <label for="email">Titulo</label>
             <input type="text" class="form-control mb-2" name="cabecera" required [(ngModel)]="noticia.titulo">
@@ -51,6 +51,15 @@
             <input type="text" class="form-control mb-2" name="cabecera" required [(ngModel)]="noticia.resumenDesc">
           </div>
 
+          
+          <div class="form-group mb-2">
+            <label for="email">Resumen del contenido</label>
+            <p-fileUpload #fileUpload mode="advanced" chooseLabel="Seleccionar imagen" name="archivo" [customUpload]="true"
+              (uploadHandler)="anadirContenido($event)" [maxFileSize]="5000000" accept="image/*" cancelLabel="Cancelar"
+              [showCancelButton]="true" uploadLabel="Subir imagen" [showUploadButton]="false">
+            </p-fileUpload>
+          </div>
+
 
           <div class="form-group mb-2" style="max-height: 300px; overflow-y: auto;">
             <label for="name">Contenido</label>
@@ -58,7 +67,7 @@
           </div>
 
           <div class="form-group mb-2">
-            <button type="submit" class="form-control btn btn-primary">Añadir</button>
+            <button type="button" class="form-control btn btn-primary" (click)="fileUpload.upload()">Añadir</button>
           </div>
         </form>
       </div>

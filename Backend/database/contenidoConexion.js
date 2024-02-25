@@ -7,16 +7,16 @@ const { Sequelize } = require('sequelize')
 
 class contenidoConexion {
     static crearContenido = async (body) => {
-        let resultado = 0
-
+        let resultado = 0;
+    
         try {
-            await models.Contenido.create(body)
-            resultado = 1
+            await models.Contenido.create(body);
+            resultado = 1;
         } catch (error) {
-            throw error
+            throw error;
         }
-
-        return resultado
+    
+        return resultado;
     }
 
     static getContenido = async () => {
@@ -56,9 +56,23 @@ class contenidoConexion {
         }
     }
 
+    static getFoto = async (id) => {
+        let urlFoto = 0
+
+        try {
+            urlFoto = await models.Contenido.findOne({
+                where: {
+                    id: id
+                },
+                attributes: ['imagen']
+            })
+        } catch (error) {
+            console.log('Error al obtener la foto')
+            throw error
+        }
+        return urlFoto
+    }
     
-
-
     static modificarContenido = async (idContenido, body) => {
         let resultado = 0
         try {
@@ -93,6 +107,24 @@ class contenidoConexion {
             resultado = 0
             console.error('Error al eliminar usuario:', error)
         }
+    }
+
+    static subirImagenNoticia = async (ruta,id) =>{
+        let resultado = 0
+        try {
+            const noticia = await models.Contenido.update(
+                {imagen:ruta},
+                {where: {id:id}}
+            )
+
+            if (noticia[0] === 1) {
+                resultado = 1
+            }
+        }catch(error){
+            console.log('Error al subir imagen')
+            throw error
+        }
+        return resultado
     }
 }
 
