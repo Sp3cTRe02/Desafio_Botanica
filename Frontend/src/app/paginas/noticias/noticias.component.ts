@@ -58,7 +58,6 @@ export class NoticiasComponent implements OnInit {
 
     }
 
-
     public modulesQuill = {
         toolbar: [
             ['bold', 'italic', 'underline', 'strike'],

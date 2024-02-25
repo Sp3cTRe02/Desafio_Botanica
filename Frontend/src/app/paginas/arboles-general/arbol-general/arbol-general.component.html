@@ -65,17 +65,33 @@
                   </div>
                 </p-dialog>
               }
-                <p-galleria [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '640px' }"
-                    [numVisible]="5">
-                    <ng-template pTemplate="item" let-item>
-                        <img src="../../../assets/fondo.jpg" style="width: 100%;" />
-                    </ng-template>
-                    <ng-template pTemplate="thumbnail" let-item>
-                        <div class="grid grid-nogutter justify-content-center">
-                            <img src="../../../assets/fondo.jpg" />
+
+              <!-- @for (ruta of rutas; track ruta.id){
+                <div class="grid grid-nogutter justify-content-center">
+                    <img [src]="ruta.thumbnailImageSrc" class="img-fluid rounded" alt="Tree Image">
+                </div>
+              } -->
+
+              <div class="card d-flex">
+                <p-dataView #dv [value]="items" [rows]="2" [paginator]="true">
+                  <ng-template let-arboles pTemplate="list">
+
+                    <div class="row">
+                      <ng-container>
+                        <div class="card-container">
+                          @for (item of items; track item.id){
+                            <img [src]="item.thumbnailImageSrc" class="card-img-top" alt="Tree Image">
+
+                          }
                         </div>
-                    </ng-template>
-                </p-galleria>
+                      </ng-container>
+                    </div>
+                  </ng-template>
+                </p-dataView>
+              </div>
+
+
+
             </div>
         </div>
     </div>
