@@ -80,6 +80,8 @@ export class NoticiaComponent implements OnInit{
     obtenerInfoNoticia(idNoticia: number) {
         this.noticiasService.getInfoNoticia(idNoticia).subscribe((response: any) => {
             this.noticia = response.data.contenido
+            console.log(this.noticia.imagen)
+            
         })
     }
 
@@ -88,7 +90,6 @@ export class NoticiaComponent implements OnInit{
             this.contenidoControl.setValue(event.html);
         }
 
-        console.log(this.noticia.descripcion)
 
     }
 

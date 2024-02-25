@@ -32,6 +32,8 @@ class contenidoConexion {
 
     }
 
+
+
     static getUltimasNoticias = async () => {
         let resultado = null
 
@@ -56,7 +58,7 @@ class contenidoConexion {
         }
     }
 
-    static getFoto = async (id) => {
+    static getImagen = async (id) => {
         let urlFoto = 0
 
         try {

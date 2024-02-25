@@ -2,6 +2,8 @@ const contenidoConexion = require('../database/contenidoConexion')
 const { StatusCodes } = require('http-status-codes')
 const socketController = require('../controllers/websocketController')
 const { subirArchivoNoticia } = require('../helpers/subir-archivo-noticia')
+const path = require('path');
+const fs = require('fs');
 
 /**
  * @David_Trujillo
@@ -11,7 +13,7 @@ class contenidoController {
     static async subirImagen(req, res) {
         try {
             const nombre = await subirArchivoNoticia(req.files, undefined, process.env.UPLOADS_DIR);
-            const ruta = `${process.env.UPLOADS_PATH}${process.env.UPLOADS_DIR}/${nombre}`;
+            const ruta = `${nombre}`;
             console.log("Imagen subida exitosamente en:", ruta);
 
             return ruta
@@ -97,11 +99,17 @@ class contenidoController {
         }
     }
 
+
     static getInfoNoticia = async (req, res) => {
 
         try {
             const id = req.params.id
             const contenido = await contenidoConexion.getInfoNoticia(id)
+
+            //Se hace una petición get correspondiente a mostrarImagen()
+            const imagen = process.env.URL_PETICION + process.env.PORT + "/api/contenido/upload/" + id
+
+            contenido.imagen=imagen
 
             const response = {
                 success: true,
@@ -113,6 +121,28 @@ class contenidoController {
             res.status(StatusCodes.OK).json(response)
         } catch (error) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: 'Error en el servidor al obtener el contenido.', sqlMessage: error })
+        }
+    }
+
+    //Construcción de la imagen 
+    static mostrarImagen = async (req, res = response) => {
+        try {
+            const imagen = await contenidoConexion.getImagen(req.params.id);
+            console.log(imagen.dataValues.imagen)
+    
+            if (imagen) {
+                const pathImagen = path.join(__dirname, '../uploads', 'imgs', imagen.dataValues.imagen);
+                console.log(pathImagen);
+    
+                if (fs.existsSync(pathImagen)) {
+                    return res.sendFile(pathImagen);
+                }
+            }
+        
+            res.status(StatusCodes.NOT_FOUND).json({ error: "No se ha encontrado la imagen" });
+        } catch (error) {
+            console.error('Error al mostrar la imagen:', error);
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Error interno del servidor" });
         }
     }
 

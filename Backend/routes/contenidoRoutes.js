@@ -20,8 +20,8 @@ const validator = [
 router.get('/', contenido.getContenido)
 router.get('/ultimas-noticias', contenido.getUltimasNoticias)
 router.get('/:id', contenido.getInfoNoticia)
+router.get('/upload/:id',contenido.mostrarImagen)
 router.post('/', [midsJWT.validarJWT,validator], contenido.crearContenido)
-//router.post('/imagen-noticia',[midsJWT.validarJWT,validarArchivoSubir], contenido.subirImagen)
 router.put('/:id',contenido.modificarContenido)
 router.delete('/:id',[midsJWT.validarJWT, midAdmin.verificarAdmin],  contenido.eliminarContenido)
 
