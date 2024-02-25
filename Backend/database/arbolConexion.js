@@ -147,6 +147,27 @@ const subirImagenArbol = async (idArbol, ruta) => {
 
 }
 
+const getRutaImagenes = async (idArbol) => {
+    let resultado = 0 
+    bd.conectar()
+    try{
+        const imagenes = await models.Foto.findAll({
+            where: { idArbol: idArbol }
+        })
+        resultado = imagenes
+    }catch (error){
+        if (error instanceof Sequelize.ValidationError) {
+            console.log('La imagen no cumple los requisitos')
+        }else{
+            console.log('Error desconocido')
+        }
+        throw error
+    }finally{
+        bd.desconectar()
+    }
+    return resultado
+}
+
 module.exports = {
   
     createArbol,
@@ -155,5 +176,6 @@ module.exports = {
     getArboles,
     deleteArboles,
     addUbicacionArbol,
-    subirImagenArbol
+    subirImagenArbol,
+    getRutaImagenes
 }

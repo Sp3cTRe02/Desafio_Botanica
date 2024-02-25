@@ -42,6 +42,29 @@
         <div class="col-lg-12">
             <div class="card-body">
                 <h1 class="font-bold mb-3">Galería</h1>
+              @if (authService.estaLoggeado()){
+                <p>¿Tienes fotos de este árbol? ¡Añadelas <button  (click)="mostrarAddImagen()" class="btn btn-primary">aquí!</button> </p>
+                <p-dialog header="Añadir imagen" [(visible)]="addImagen" [modal]="true" [closable]="true"
+                    [responsive]="true" [style]="{width: '50vw'}">
+                    <p>Sube una imagen para este árbol</p>
+                  <div class="card flex justify-content-center">
+                    <p-toast></p-toast>
+                    <p-fileUpload
+                      mode="advanced"
+                      chooseLabel="Seleccionar imagen"
+                      name="archivo" [customUpload]="true"
+                      (uploadHandler)="subirImagenArbol($event)"
+                      [maxFileSize]="5000000" accept="image/*"
+                      cancelLabel="Cancelar"
+                      [showCancelButton]="true"
+                      uploadLabel="Subir imagen"
+                      [showUploadButton]="true"
+                    >
+
+                    </p-fileUpload>
+                  </div>
+                </p-dialog>
+              }
                 <p-galleria [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '640px' }"
                     [numVisible]="5">
                     <ng-template pTemplate="item" let-item>

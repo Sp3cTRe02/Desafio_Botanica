@@ -39,6 +39,8 @@ export const arbolRoutes = {
     arbolesPost: "/",
     arbolesPut: "/",
     addUbicacion: "/ubicacion",
+    subirFotoArbol: "/imagen",
+    galeriaArbol: "/galeria"
 }
 
 export const arbolesRoutes = {
