@@ -27,6 +27,7 @@ router.delete('/:id', [midsJWT.validarJWT, midAdmin.verificarAdmin], controlador
 
 // rutas para pantalla de arbol(añadir ubicaciones e imagenes)
 router.post('/ubicacion/:id', [midsJWT.validarJWT, midCliente.verificarCliente, validatorUbicacion], controlador.addUbicacion)
+router.post('/imagen/:id', [midsJWT.validarJWT, midCliente.verificarCliente], controlador.subirImagen)
 
 
 module.exports = router

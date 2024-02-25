@@ -3,7 +3,6 @@ const Conexion = require('../database/userConexion')
 const { StatusCodes } = require('http-status-codes')
 const {subirArchivo} = require('../helpers/subir-archivo')
 const fs = require('fs')
-const { log } = require('console')
 const path = require('path')
 require('dotenv').config()
 

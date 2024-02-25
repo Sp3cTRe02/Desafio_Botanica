@@ -1,7 +1,9 @@
 const { response, request } = require('express')
 const Conexion = require('../database/arbolConexion')
 const { StatusCodes } = require('http-status-codes')
-
+const {subirArchivo} = require('../helpers/subir-archivo')
+const fs = require('fs')
+require('dotenv').config()
 
 /**
  * @author @Ismael
@@ -165,6 +167,32 @@ const addUbicacion = async (req = request, res = response) => {
         })
 }
 
+const subirImagen = async (req = request, res = response) => {
+    try{
+        const nombre = await subirArchivo(req.files, undefined, process.env.UPLOADS_DIR_TREE)
+        const ruta = `${process.env.UPLOADS_PATH}/${process.env.UPLOADS_DIR_TREE}/${nombre}`
+    
+        const cod = await Conexion.subirImagenArbol(req.params.id, ruta)
+    
+        if (cod === 1) {
+            res.status(StatusCodes.OK).json({
+                'msg': 'Imagen subida correctamente',
+                'status': 'OK'
+            })
+        } else {
+            res.status(StatusCodes.NOT_FOUND).json({
+                'msg': 'Error al subir la imagen',
+                'status': 'ERROR'
+            })
+        }
+    }catch(error){
+        console.log(error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            'msg': 'Error en el servidor',
+            'status': 'ERROR'
+        })
+    }
+}
 
 module.exports = {
 
@@ -173,6 +201,7 @@ module.exports = {
     arbolesGet,
     arbolGet,
     arbolDelete,
-    addUbicacion
+    addUbicacion,
+    subirImagen
     
 }
