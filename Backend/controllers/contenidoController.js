@@ -67,6 +67,12 @@ class contenidoController {
         try {
 
             const contenido = await contenidoConexion.getContenido()
+            for(let i=0 ; i<contenido.length; i++){
+                const id = contenido[i].dataValues.id
+                const imagen = process.env.URL_PETICION + process.env.PORT + "/api/contenido/upload/" + id
+                contenido[i].dataValues.imagen = imagen
+            }
+
 
             const response = {
                 success: true,
@@ -85,6 +91,11 @@ class contenidoController {
         try {
 
             const contenido = await contenidoConexion.getUltimasNoticias()
+            for(let i=0 ; i<contenido.length; i++){
+                const id = contenido[i].dataValues.id
+                const imagen = process.env.URL_PETICION + process.env.PORT + "/api/contenido/upload/" + id
+                contenido[i].dataValues.imagen = imagen
+            }
 
             const response = {
                 success: true,
