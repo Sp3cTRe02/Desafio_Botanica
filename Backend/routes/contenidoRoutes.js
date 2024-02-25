@@ -5,6 +5,7 @@ const { check } = require('express-validator')
 const validarCampos = require('../middlewares/validarCampos')
 const midAdmin = require('../middlewares/validarAdmin')
 const midsJWT = require("../middlewares/validarJWT");
+const { validarArchivoSubir } = require('../middlewares/validarArchivo')
 
 const validator = [
     check('titulo', 'El título es obligatorio').not().isEmpty(),
@@ -19,9 +20,11 @@ const validator = [
 router.get('/', contenido.getContenido)
 router.get('/ultimas-noticias', contenido.getUltimasNoticias)
 router.get('/:id', contenido.getInfoNoticia)
-router.post('/', [validator], contenido.crearContenido)
+router.get('/upload/:id',contenido.mostrarImagen)
+router.post('/', [midsJWT.validarJWT,validator], contenido.crearContenido)
 router.put('/:id',contenido.modificarContenido)
 router.delete('/:id',[midsJWT.validarJWT, midAdmin.verificarAdmin],  contenido.eliminarContenido)
+
 
 
 module.exports = router

@@ -6,9 +6,11 @@ import { FormsModule } from '@angular/forms';
 import { Table } from 'primeng/table';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NoticiasService } from '../noticias/services/noticias.service';
-import { ContenidoGet } from '../noticias/interfaces/noticias.interface';
+import { ContenidoGet, ContenidoPut } from '../noticias/interfaces/noticias.interface';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 
 @Component({
@@ -16,8 +18,9 @@ import { AuthService } from '../../shared/services/auth.service';
     standalone: true,
     templateUrl: './inicio.component.html',
     styleUrl: './inicio.component.scss',
-    imports: [CommonModule, MenuComponent, FormsModule, 
-        QuillModule,RouterLink, ]
+    imports: [CommonModule, MenuComponent, FormsModule,
+        QuillModule, RouterLink,ToastModule],
+    providers: [MessageService]
 })
 
 /**
@@ -32,12 +35,22 @@ export class InicioComponent {
     @ViewChild('editar') editar: Table | undefined
 
     nuevaNoticia: any = {};
-    noticias: ContenidoGet[] = []
+    noticias: ContenidoGet[] = [];
+    noticia: ContenidoGet[] = [];
 
-    constructor(private noticiasService: NoticiasService,private modalService: NgbModal,
-        public authService: AuthService) {
-        this.obtenerUltimasNoticias()
-        window.scrollTo(-2, 0)
+    noticiaEditar: ContenidoPut = {
+        titulo: '',
+        resumenDesc: '',
+        descripcion: ''
+    }
+
+    msg: string = '';
+
+    constructor(private noticiasService: NoticiasService, private modalService: NgbModal,
+        public authService: AuthService, private msgService: MessageService) {
+        this.obtenerUltimasNoticias();
+        this.obtenerContenido();
+        window.scrollTo(-2, 0);
     }
 
     public modulesQuill = {
@@ -66,13 +79,49 @@ export class InicioComponent {
     }
 
 
-    obtenerUltimasNoticias(){
-        this.noticiasService.getUltimasNoticias().subscribe((response:any)=>{
-            if(response.success){
+    obtenerUltimasNoticias() {
+        this.noticiasService.getUltimasNoticias().subscribe((response: any) => {
+            if (response.success) {
                 this.noticias = response.data.contenido
-                console.log(this.noticias)
             }
         })
     }
-    
+
+
+    obtenerContenido() {
+        this.noticiasService.getContenido().subscribe((response: any) => {
+            if (response.success && response.data.contenido.length > 0) {
+                const indiceNoticia = 0;
+                this.noticia = [response.data.contenido[indiceNoticia]];
+            }
+        });
+    }
+
+    modificarContenido() {
+        if (!this.noticia[0]) {
+            console.error('No se puede modificar la noticia porque no está definida.');
+            return;
+        }
+
+        this.noticiaEditar.titulo = this.noticia[0].titulo;
+        this.noticiaEditar.resumenDesc = this.noticia[0].resumenDesc;
+        this.noticiaEditar.descripcion = this.noticia[0].descripcion;
+
+        const noticiaId = this.noticia[0].id;
+
+        this.noticiasService.modificarContenido(noticiaId, this.noticiaEditar).subscribe((response: any) => {
+            if (response.success) {
+                this.msg = 'Contenido modificado correctamente'
+                this.mostrarExito(this.msg)
+
+                setTimeout(() => {
+                    window.location.reload()
+                }, 1200)
+            }
+        })
+    }
+
+    mostrarExito(msg: string) {
+        this.msgService.add({ severity: 'success', summary: 'Éxito', detail: msg });
+    }
 }

@@ -13,6 +13,7 @@ import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { RouterLink } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
 import { AuthService } from '../../shared/services/auth.service';
+import { FileUploadModule } from "primeng/fileupload";
 
 
 @Component({
@@ -20,7 +21,7 @@ import { AuthService } from '../../shared/services/auth.service';
     standalone: true,
     templateUrl: './noticias.component.html',
     styleUrl: './noticias.component.scss',
-    imports: [MenuComponent, CommonModule, FormsModule, QuillModule, DataViewModule, RouterLink, ToastModule],
+    imports: [MenuComponent, CommonModule, FormsModule, QuillModule, DataViewModule, RouterLink, ToastModule, FileUploadModule],
     providers: [WebSocketService, MessageService]
 })
 
@@ -44,13 +45,14 @@ export class NoticiasComponent implements OnInit {
     }
 
     msg: string = '';
+    archivoSubido: any[] = []
 
 
     @ViewChild('agregar') agregar: Table | undefined
 
 
     constructor(private noticiasService: NoticiasService, private socketService: WebSocketService,
-        private modalService: NgbModal, private primengConfig: PrimeNGConfig, 
+        private modalService: NgbModal, private primengConfig: PrimeNGConfig,
         private msgService: MessageService, public authService: AuthService) {
 
         this.obtenerContenido()
@@ -95,35 +97,43 @@ export class NoticiasComponent implements OnInit {
 
     }
 
-    enviarNoticia(): void {
+    enviarNoticia(event:any): void {
         this.socketService.enviarNoticia(this.noticia);
-        this.anadirContenido()
+        this.anadirContenido(event)
     }
 
 
     obtenerContenido() {
         this.noticiasService.getContenido().subscribe((response: any) => {
-            this.noticias = response.data.contenido
+            this.noticias = response.data.contenido.slice(1)
+            console.log(this.noticias)
         })
     }
 
-    anadirContenido() {
-        this.noticiasService.anadirContenido(this.noticia).subscribe((response: any) => {
-         
-            if (response.success = true) {
+    anadirContenido(event:any) {
+        const formData = new FormData();
+        formData.append('archivo', event.files[0], event.files[0].name);
+        this.archivoSubido.push(formData);
+    
+        formData.forEach((value, key) => {
+            console.log(key, value);
+        });
+
+        formData.append('titulo', this.noticia.titulo);
+        formData.append('resumenDesc', this.noticia.resumenDesc);
+        formData.append('descripcion', this.noticia.descripcion);
+        formData.append('archivo', event.files[0], event.files[0].name);
+
+
+        this.noticiasService.anadirContenido(formData).subscribe((response: any) => {
+            if (response.success == true) {
                 this.msg = 'Noticia agregada correctamente'
                 this.mostrarExito(this.msg)
             }
-        },
-            (error) => {
-                let mensajesError = [];
-                for (let i = 0; i < error.error.errors.length; i++) {
-                    mensajesError.push(error.error.errors[i].msg);
-                }
-
-                this.mostrarError(mensajesError)
-            })
+        })
     }
+
+    
 
     mostrarExito(msg: string) {
         this.msgService.add({ severity: 'success', summary: 'Éxito', detail: msg });

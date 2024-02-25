@@ -28,9 +28,14 @@ export class NoticiasService {
     return this.http.get<ContenidoGet>(environment.baseUrl + environment.contenidoEndPoint + contenidoRoutes.contenidoGet+idNoticia)
   }
 
-  anadirContenido(contenido: ContenidoPost) {
-    return this.http.post<NoticiaPostRespuesta>(environment.baseUrl + environment.contenidoEndPoint + contenidoRoutes.contenidoPost, contenido)
-  }
+  anadirContenido(formData: FormData) {
+    return this.http.post<NoticiaPostRespuesta>(
+        environment.baseUrl + environment.contenidoEndPoint + contenidoRoutes.contenidoPost,
+        formData,
+        { params: { auth: 'true' } }
+    );
+}
+
 
   modificarContenido(idNoticia:number,contenido:ContenidoPut){
     return this.http.put<NoticiaPostRespuesta>(environment.baseUrl + environment.contenidoEndPoint + contenidoRoutes.contenidoPut+idNoticia, contenido)

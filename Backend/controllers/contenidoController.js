@@ -1,18 +1,47 @@
 const contenidoConexion = require('../database/contenidoConexion')
 const { StatusCodes } = require('http-status-codes')
 const socketController = require('../controllers/websocketController')
+const { subirArchivoNoticia } = require('../helpers/subir-archivo-noticia')
+const path = require('path');
+const fs = require('fs');
 
 /**
  * @David_Trujillo
  */
 
 class contenidoController {
-    static crearContenido = async (req, res) => {
+    static async subirImagen(req, res) {
         try {
-            const resultado = await contenidoConexion.crearContenido(req.body)
-            socketController(req)
+            const nombre = await subirArchivoNoticia(req.files, undefined, process.env.UPLOADS_DIR);
+            const ruta = `${nombre}`;
+            console.log("Imagen subida exitosamente en:", ruta);
+
+            return ruta
+
+
+        } catch (error) {
+            console.error("Error al subir la imagen:", error);
+            throw error;
+        }
+    }
+
+    static async crearContenido(req, res) {
+        try {
+            let id = req.idToken
+
+            const rutaImagen = await contenidoController.subirImagen(req, res)
+
+            const contenido = {
+                ...req.body,
+                idUsuario: id,
+                imagen: rutaImagen
+            }
+
+            const resultado = await contenidoConexion.crearContenido(contenido);
+            socketController(req);
 
             if (resultado == 1) {
+                console.log("Contenido registrado correctamente");
                 res.status(StatusCodes.CREATED).json({
                     success: true,
                     data: {
@@ -20,6 +49,7 @@ class contenidoController {
                     }
                 });
             } else {
+                console.log("No se pudo registrar el contenido correctamente");
                 res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
                     success: false,
                     data: {
@@ -27,9 +57,8 @@ class contenidoController {
                     }
                 })
             }
-
-
         } catch (error) {
+            console.error("Error en el servidor al registrar contenido:", error);
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: 'Error en el servidor al registrar contenido.', sqlMessage: error })
         }
     }
@@ -38,6 +67,12 @@ class contenidoController {
         try {
 
             const contenido = await contenidoConexion.getContenido()
+            for(let i=0 ; i<contenido.length; i++){
+                const id = contenido[i].dataValues.id
+                const imagen = process.env.URL_PETICION + process.env.PORT + "/api/contenido/upload/" + id
+                contenido[i].dataValues.imagen = imagen
+            }
+
 
             const response = {
                 success: true,
@@ -52,10 +87,15 @@ class contenidoController {
         }
     }
 
-    static getUltimasNoticias = async (req,res) =>{
+    static getUltimasNoticias = async (req, res) => {
         try {
 
             const contenido = await contenidoConexion.getUltimasNoticias()
+            for(let i=0 ; i<contenido.length; i++){
+                const id = contenido[i].dataValues.id
+                const imagen = process.env.URL_PETICION + process.env.PORT + "/api/contenido/upload/" + id
+                contenido[i].dataValues.imagen = imagen
+            }
 
             const response = {
                 success: true,
@@ -70,12 +110,18 @@ class contenidoController {
         }
     }
 
-    static getInfoNoticia = async (req,res) =>{
+
+    static getInfoNoticia = async (req, res) => {
 
         try {
             const id = req.params.id
             const contenido = await contenidoConexion.getInfoNoticia(id)
 
+            //Se hace una petición get correspondiente a mostrarImagen()
+            const imagen = process.env.URL_PETICION + process.env.PORT + "/api/contenido/upload/" + id
+
+            contenido.imagen=imagen
+
             const response = {
                 success: true,
                 data: {
@@ -86,6 +132,28 @@ class contenidoController {
             res.status(StatusCodes.OK).json(response)
         } catch (error) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: 'Error en el servidor al obtener el contenido.', sqlMessage: error })
+        }
+    }
+
+    //Construcción de la imagen 
+    static mostrarImagen = async (req, res = response) => {
+        try {
+            const imagen = await contenidoConexion.getImagen(req.params.id);
+            console.log(imagen.dataValues.imagen)
+    
+            if (imagen) {
+                const pathImagen = path.join(__dirname, '../uploads', 'imgs', imagen.dataValues.imagen);
+                console.log(pathImagen);
+    
+                if (fs.existsSync(pathImagen)) {
+                    return res.sendFile(pathImagen);
+                }
+            }
+        
+            res.status(StatusCodes.NOT_FOUND).json({ error: "No se ha encontrado la imagen" });
+        } catch (error) {
+            console.error('Error al mostrar la imagen:', error);
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Error interno del servidor" });
         }
     }
 
@@ -123,6 +191,8 @@ class contenidoController {
             return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: 'Error en el servidor.' });
         }
     }
+
+
 }
 
 

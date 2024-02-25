@@ -80,6 +80,8 @@ export class NoticiaComponent implements OnInit{
     obtenerInfoNoticia(idNoticia: number) {
         this.noticiasService.getInfoNoticia(idNoticia).subscribe((response: any) => {
             this.noticia = response.data.contenido
+            console.log(this.noticia.imagen)
+            
         })
     }
 
@@ -88,7 +90,6 @@ export class NoticiaComponent implements OnInit{
             this.contenidoControl.setValue(event.html);
         }
 
-        console.log(this.noticia.descripcion)
 
     }
 
@@ -100,14 +101,15 @@ export class NoticiaComponent implements OnInit{
         this.noticiaEditar.titulo = this.noticia.titulo
         this.noticiaEditar.resumenDesc = this.noticia.resumenDesc
         this.noticiaEditar.descripcion = this.noticia.descripcion
-
+    
         this.noticiasService.modificarContenido(this.noticiaId, this.noticiaEditar).subscribe((response: any) => {
-            console.log(response.success)
-            if (response.success = true) {
-                console.log('pasa')
+            if (response.success) {
                 this.msg = 'Noticia modificada correctamente'
                 this.mostrarExito(this.msg)
-                window.location.reload()
+    
+                setTimeout(() => {
+                    window.location.reload()
+                }, 1200)
             }
         })
     }

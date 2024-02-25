@@ -212,6 +212,7 @@ const subirImagenUsuario = async (req = request, res = response) => {
     try{
         
         const rutaImg = await Conexion.getFoto(id)
+
         console.log(rutaImg.dataValues.foto);
         if(rutaImg.dataValues.foto != null){
             console.log('no es nulo');
