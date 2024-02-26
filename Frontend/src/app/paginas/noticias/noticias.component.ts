@@ -29,6 +29,9 @@ import { FileUploadModule } from "primeng/fileupload";
  * @David_Trujillo
  */
 
+// Jaime ha solucionado bug de WebSocket
+
+
 export class NoticiasComponent implements OnInit {
     noticias: ContenidoGet[] = []
 
