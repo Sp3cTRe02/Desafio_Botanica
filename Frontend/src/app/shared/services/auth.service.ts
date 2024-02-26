@@ -55,4 +55,18 @@ export class AuthService {
     return false
   }
 
+  esCliente(): boolean {
+    const token = sessionStorage.getItem('token');
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      const roles = decodedToken.roles
+      for (let i = 0; i < roles.length; i++) {
+        if (roles[i].nombre === 'cliente') {
+          return true
+        }
+      }
+    }
+    return false
+  }
+
 }
