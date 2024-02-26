@@ -11,6 +11,9 @@ import {SubirImagenUsuariosService} from "../services/subir-imagen-usuarios.serv
   templateUrl: './subir-imagen-usuarios.component.html',
   styleUrl: './subir-imagen-usuarios.component.scss'
 })
+/**
+ * @Jaime_Rafael
+ */
 export class SubirImagenUsuariosComponent {
 
     archivoSubido : any[] = []

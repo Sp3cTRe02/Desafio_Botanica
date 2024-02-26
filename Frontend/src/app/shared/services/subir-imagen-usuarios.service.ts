@@ -6,6 +6,7 @@ import {catchError} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
+//JaimeRafael
 export class SubirImagenUsuariosService {
 
   constructor(private http: HttpClient) { }

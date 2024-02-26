@@ -84,22 +84,16 @@ export class ArbolGeneralComponent implements OnInit{
   obtenerRutasArbol(idArbol: number): void {
     this.arbolService.getRutasArbol(idArbol).subscribe((response: any) => {
       let id = 1
-      response.rutas
-      console.log(response.rutas)
-      response.rutas.forEach(() => {
-        let urlBase = environment.baseUrl
-        let urlArbol = environment.arbolesEndPoint
-        let galeria = arbolRoutes.galeriaArbol
-        let ruta = {
-          previewImageSrc : urlBase + urlArbol + galeria +  "/" + response.rutas[id-1],
-          thumbnailImageSrc : urlBase + urlArbol + galeria +  "/" + response.rutas[id-1],
-          alt : 'Arbol',
-          title : 'Arbol ' + id,
-          id : id
+      console.log(response.data.imagenes)
+      response.data.imagenes.forEach(() => {
+        let foto = {
+          id: id,
+          url: response.data.imagenes[id-1]
         }
-        id ++
-        this.fotos.push(ruta)
+        this.fotos.push(foto)
+        id++
       })
+      this.fotos = response.data.imagenes
       console.log(this.fotos)
     });
   }

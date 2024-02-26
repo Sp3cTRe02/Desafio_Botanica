@@ -195,27 +195,36 @@ const subirImagen = async (req = request, res = response) => {
 }
 
 const getImagenes = async (req = request, res = response) => {
-   try{
-    const rutas = await Conexion.getRutaImagenes(req.params.id)
-    let rutasArray = []
-    rutas.forEach(ruta => {
-        rutasArray.push(ruta.dataValues.ruta)
-    })
-    console.log(rutasArray.length);
-    res.status(StatusCodes.OK).json({
-        'msg': 'Imagenes encontradas',
-        'status': 'OK',
-        'rutas': rutasArray
-    })
+    try{
+        const rutas = await Conexion.getRutaImagenes(req.params.id)
+        let rutasArray = []
+        let imagenes = []
+        rutas.forEach(ruta => {
+            const id = ruta.dataValues.id
+            const imagen = process.env.URL_PETICION + process.env.PORT + "/api/arbol/galeria/" + ruta.dataValues.ruta
+            const foto = {
+                id,
+                imagen
+            }
+                imagenes.push(foto)
+        })
+        const response = {
+            success: true,
+            data : {
+                imagenes
+            }
+        }
+        console.log(rutasArray.length);
+        res.status(StatusCodes.OK).json(response)
 
-    
-   }catch(error){
-    console.log(error);
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-        'msg': 'Error en el servidor',
-        'status': 'ERROR'
-    })
-   }
+        
+    }catch(error){
+        console.log(error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            'msg': 'Error en el servidor',
+            'status': 'ERROR'
+        })
+    }
     
 }
 

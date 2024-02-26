@@ -12,6 +12,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 
 /**
  * @David_Trujillo
+ * @Jaime_Rafael
  */
 
 export class AuthService {

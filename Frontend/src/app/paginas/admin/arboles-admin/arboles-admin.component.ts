@@ -21,7 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     imports: [CommonModule, MenuComponent, TableModule, FormsModule, ToastModule,InputSwitchModule,ReactiveFormsModule],
     providers: [MessageService]
 })
-//JaimeRafael select para las familias y corregir añadirFamilias
+//Ismael
+//JaimeRafael 
 export class ArbolesAdminComponent {
     arboles: arboles[] = []
     arbolSeccionado: any
