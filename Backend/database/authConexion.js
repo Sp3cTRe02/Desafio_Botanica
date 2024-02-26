@@ -15,7 +15,7 @@ class AuthConexion {
                 where: { email: email },
                 attributes: ['id', 'nombre', 'passwd']
             })
-
+            
 
             if (resultado && (await bcrypt.compare(pass, resultado.passwd))) {
                 console.log("Acceso permitido")

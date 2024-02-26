@@ -33,7 +33,7 @@
               }
 
                 <div #mapDiv class="map-container"></div>
-                <!-- Ajusta el ancho y alto según tus preferencias -->
+
             </div>
         </div>
     </div>
@@ -42,18 +42,85 @@
         <div class="col-lg-12">
             <div class="card-body">
                 <h1 class="font-bold mb-3">Galería</h1>
-                <p-galleria [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '640px' }"
-                    [numVisible]="5">
-                    <ng-template pTemplate="item" let-item>
-                        <img src="../../../assets/fondo.jpg" style="width: 100%;" />
-                    </ng-template>
-                    <ng-template pTemplate="thumbnail" let-item>
-                        <div class="grid grid-nogutter justify-content-center">
-                            <img src="../../../assets/fondo.jpg" />
-                        </div>
-                    </ng-template>
-                </p-galleria>
+              @if (authService.estaLoggeado()){
+                <p>¿Tienes fotos de este árbol? ¡Añadelas <button  (click)="mostrarAddImagen()" class="btn btn-primary">aquí!</button> </p>
+                <p-dialog header="Añadir imagen" [(visible)]="addImagen" [modal]="true" [closable]="true"
+                    [responsive]="true" [style]="{width: '50vw'}">
+                    <p>Sube una imagen para este árbol</p>
+                  <div class="flex justify-content-center">
+                    <p-toast></p-toast>
+                    <p-fileUpload
+                      mode="advanced"
+                      chooseLabel="Seleccionar imagen"
+                      name="archivo" [customUpload]="true"
+                      (uploadHandler)="subirImagenArbol($event)"
+                      [maxFileSize]="5000000" accept="image/*"
+                      cancelLabel="Cancelar"
+                      [showCancelButton]="true"
+                      uploadLabel="Subir imagen"
+                      [showUploadButton]="true"
+                    >
+
+                    </p-fileUpload>
+                  </div>
+                </p-dialog>
+              }
+
+              <!-- @for (ruta of rutas; track ruta.id){
+                <div class="grid grid-nogutter justify-content-center">
+                    <img [src]="ruta.thumbnailImageSrc" class="img-fluid rounded" alt="Tree Image">
+                </div>
+              } -->
+
+
+
+
+
             </div>
         </div>
+
+        <!-- <div class="card-wrapper container-fluid">
+          <p-dataView #dv [value]="items" [rows]="6" [paginator]="true">
+              <ng-template let-arboles pTemplate="list">
+                  <div class="row">
+                      <ng-container *ngFor="let item of items; let i = index">
+                          <div class="col-lg-3 col-md-4 col-sm-6">
+                              <div class="card">
+                                  <img [src]="item.thumbnailImageSrc" class="card-img-top" alt="Tree Image">
+                                  <div class="card-body"></div>
+                              </div>
+                          </div>
+                      </ng-container>
+                  </div>
+              </ng-template>
+          </p-dataView>
+      </div> -->
+
+        <div class="card-wrapper container-fluid">
+          <p-dataView #dv [value]="fotos" [rows]="2" [paginator]="true" >
+            <ng-template let-otro pTemplate="list">
+
+              <div class="row">
+
+                <ng-container>
+                  @for (item of fotos; track item.id){
+                  <div class="col-lg-3 col-md-4 col-sm-6">
+                      <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="card ">
+                          <img src="{{item.thumbnailImageSrc}}" class="card-img-top" alt="Tree Image">
+                          <div class="card-body">
+                          </div>
+                        </div>
+                      </div>
+
+                  </div>
+                }
+                </ng-container>
+
+              </div>
+            </ng-template>
+          </p-dataView>
+        </div>
+
     </div>
 </div>

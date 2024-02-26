@@ -1,7 +1,10 @@
 const { response, request } = require('express')
 const Conexion = require('../database/arbolConexion')
 const { StatusCodes } = require('http-status-codes')
-
+const {subirArchivo} = require('../helpers/subir-archivo')
+const fs = require('fs')
+const path = require('path')
+require('dotenv').config()
 
 /**
  * @author @Ismael
@@ -165,6 +168,78 @@ const addUbicacion = async (req = request, res = response) => {
         })
 }
 
+const subirImagen = async (req = request, res = response) => {
+    try{
+        const nombre = await subirArchivo(req.files, undefined, process.env.UPLOADS_DIR_TREE)
+    
+        const cod = await Conexion.subirImagenArbol(req.params.id, nombre)
+    
+        if (cod === 1) {
+            res.status(StatusCodes.OK).json({
+                'msg': 'Imagen subida correctamente',
+                'status': 'OK'
+            })
+        } else {
+            res.status(StatusCodes.NOT_FOUND).json({
+                'msg': 'Error al subir la imagen',
+                'status': 'ERROR'
+            })
+        }
+    }catch(error){
+        console.log(error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            'msg': 'Error en el servidor',
+            'status': 'ERROR'
+        })
+    }
+}
+
+const getImagenes = async (req = request, res = response) => {
+   try{
+    const rutas = await Conexion.getRutaImagenes(req.params.id)
+    let rutasArray = []
+    rutas.forEach(ruta => {
+        rutasArray.push(ruta.dataValues.ruta)
+    })
+    console.log(rutasArray.length);
+    res.status(StatusCodes.OK).json({
+        'msg': 'Imagenes encontradas',
+        'status': 'OK',
+        'rutas': rutasArray
+    })
+
+    
+   }catch(error){
+    console.log(error);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        'msg': 'Error en el servidor',
+        'status': 'ERROR'
+    })
+   }
+    
+}
+
+const cargarImagenArbol = async (req = request, res = response) => {
+    const nombre = req.params.nombre
+    const ruta = path.join(__dirname, process.env.UPLOADS_PATH, process.env.UPLOADS_DIR_TREE, nombre)
+    console.log(ruta);
+    try {
+        if (fs.existsSync(ruta)) {
+            res.sendFile(ruta)
+        } else {
+            res.status(StatusCodes.NOT_FOUND).json({
+                'msg': 'Imagen no encontrada',
+                'status': 'ERROR'
+            })
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            'msg': 'Error en el servidor',
+            'status': 'ERROR'
+        })
+    }
+}
 
 module.exports = {
 
@@ -173,6 +248,9 @@ module.exports = {
     arbolesGet,
     arbolGet,
     arbolDelete,
-    addUbicacion
+    addUbicacion,
+    subirImagen,
+    getImagenes,
+    cargarImagenArbol
     
 }

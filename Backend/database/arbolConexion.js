@@ -2,6 +2,7 @@ const db = require('../database/Conexion.js');
 const { Sequelize } = require('sequelize');
 const models = require('../models/index.js'); 
 const { QueryTypes } = require('sequelize');
+const { th } = require('@faker-js/faker');
 
 const bd = new db()
 
@@ -115,6 +116,58 @@ const addUbicacionArbol = async  (ubicacion, idArbol) => {
     return resultado
 }
 
+const subirImagenArbol = async (idArbol, ruta) => {
+    let resultado = 0 
+    bd.conectar()
+    try{
+        console.log(idArbol);
+        const arbol = await models.Arbol.findOne({
+            where: { id: idArbol }
+        })
+        if (!arbol){
+            console.log('El arbol no existe')
+            throw new Error('El arbol no existe')
+        }
+        const nuevaImagen = await models.Foto.create({
+            ruta: ruta,
+            idArbol: idArbol
+        })
+        resultado = 1
+    }catch (error){
+        if (error instanceof Sequelize.ValidationError) {
+            console.log('La imagen no cumple los requisitos')
+        }else{
+            console.log('Error desconocido')
+        }
+        throw error
+    }finally{
+        bd.desconectar()
+    }
+    return resultado
+
+}
+
+const getRutaImagenes = async (idArbol) => {
+    let resultado = 0 
+    bd.conectar()
+    try{
+        const imagenes = await models.Foto.findAll({
+            where: { idArbol: idArbol }
+        })
+        resultado = imagenes
+    }catch (error){
+        if (error instanceof Sequelize.ValidationError) {
+            console.log('La imagen no cumple los requisitos')
+        }else{
+            console.log('Error desconocido')
+        }
+        throw error
+    }finally{
+        bd.desconectar()
+    }
+    return resultado
+}
+
 module.exports = {
   
     createArbol,
@@ -122,5 +175,7 @@ module.exports = {
     getArbol,
     getArboles,
     deleteArboles,
-    addUbicacionArbol
+    addUbicacionArbol,
+    subirImagenArbol,
+    getRutaImagenes
 }

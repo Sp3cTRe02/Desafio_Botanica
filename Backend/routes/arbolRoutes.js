@@ -1,11 +1,13 @@
 const { Router } = require('express')
 const router = Router()
+const path = require('path');
 const { check } = require('express-validator')
 const validarCampos = require('../middlewares/validarCampos')
 const controlador = require('../controllers/arbolController')
 const midAdmin = require('../middlewares/validarAdmin')
 const midsJWT = require("../middlewares/validarJWT");
 const midCliente = require('../middlewares/validarCliente')
+const { ro } = require('@faker-js/faker')
 
 const validator = [
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
@@ -27,6 +29,9 @@ router.delete('/:id', [midsJWT.validarJWT, midAdmin.verificarAdmin], controlador
 
 // rutas para pantalla de arbol(añadir ubicaciones e imagenes)
 router.post('/ubicacion/:id', [midsJWT.validarJWT, midCliente.verificarCliente, validatorUbicacion], controlador.addUbicacion)
+router.post('/imagen/:id', [midsJWT.validarJWT, midCliente.verificarCliente], controlador.subirImagen)
+router.get('/imagen/:id', controlador.getImagenes)
+router.get('/galeria/:nombre', controlador.cargarImagenArbol)
 
 
 module.exports = router

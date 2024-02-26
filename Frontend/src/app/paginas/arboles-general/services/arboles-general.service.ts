@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ArbolRespuesta } from '../interfaces/arboles-general.interface';
-import { arbolesRoutes, environment } from '../../../../environments/environment.development';
+import { arbolesRoutes, environment, arbolRoutes } from '../../../../environments/environment.development';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 
 /**
  * @David_Trujillo
+ * JaimeRafael
  */
 
 export class ArbolesGeneralService {
@@ -28,5 +29,16 @@ export class ArbolesGeneralService {
     return this.http.get<any>(environment.baseUrl + environment.arbolEndpoint + arbolesRoutes.ubicacionesArbol+idArbol)
   }
 
-  
+  subirImagenArbol(archivo: FormData, idArbol: number){
+    return this.http.post<any>(environment.baseUrl+environment.arbolesEndPoint+arbolRoutes.subirFotoArbol+'/'+idArbol, archivo, {params : {auth : true}})
+  }
+
+  getRutasArbol(idArbol:number): Observable<any>{
+    return this.http.get<any>(environment.baseUrl + environment.arbolesEndPoint + arbolRoutes.subirFotoArbol+'/'+idArbol)
+  }
+
+  getImagenArbol(nombreImagen : string): Observable<any>{
+    return this.http.get<any>(environment.baseUrl + environment.arbolesEndPoint+ arbolRoutes.galeriaArbol+ '/'+nombreImagen)
+  }
+
 }

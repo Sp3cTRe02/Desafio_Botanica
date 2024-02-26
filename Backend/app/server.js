@@ -50,8 +50,9 @@ class Server {
             createParentPath: true
         }))
 
-        this.app.use(express.static('public'))
+        this.app.use(express.static('/uploads'))
     }
+
 
     routes() {
         this.app.use(this.usuariosPath, require('../routes/authRoutes'));

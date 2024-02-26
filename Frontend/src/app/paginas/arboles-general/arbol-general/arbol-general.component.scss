@@ -23,6 +23,20 @@
     overflow: hidden;
 }
 
+.card{
+    display: flex;
+    flex-direction: column;
+    color: var(--color_2);
+    border: none;
+   
+}
+
+.card img {
+    width: 250px;
+    height: 200px;
+    object-fit: cover;
+}
+
 
 
 @media (max-width: 768px) {
@@ -30,3 +44,4 @@
         height: 250px;
     }
 }
+

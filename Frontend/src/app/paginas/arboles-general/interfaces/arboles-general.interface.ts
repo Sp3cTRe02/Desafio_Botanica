@@ -19,3 +19,8 @@ export interface Ubicacion{
     longitud: number;
     ciudad: string;
 }
+export interface ResponseRutas {
+  msg:    string;
+  status: string;
+  rutas:  string[];
+}
