@@ -53,6 +53,7 @@ export const routes: Routes = [
     {
     path: 'arboles-admin',
     component: ArbolesAdminComponent,
+    
 },
 
 
