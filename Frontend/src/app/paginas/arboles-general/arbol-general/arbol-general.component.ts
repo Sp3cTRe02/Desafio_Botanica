@@ -35,7 +35,7 @@ export class ArbolGeneralComponent implements OnInit{
   responsiveOptions: any[] | undefined;
   arbolId: number = 0;
   addImagen: boolean = false;
-  items: any[] = []
+  fotos: any[] = []
 
 
   @ViewChild('mapDiv') mapDivElement!: ElementRef
@@ -66,14 +66,14 @@ export class ArbolGeneralComponent implements OnInit{
       this.arbolId = params['id'];
       this.obtenerUbicacionesArbol(this.arbolId)
 
-      this.items.forEach(ruta => {
+      this.fotos.forEach(ruta => {
         console.log(this.obtenerImagenArbol(ruta))
       })
       });
 
   }
 
-  
+
   obtenerUbicacionesArbol(idArbol: number): void {
     this.arbolService.getUbicacionesArbol(idArbol).subscribe((response: any) => {
       this.ubicaciones = response.data.contenido;
@@ -98,9 +98,9 @@ export class ArbolGeneralComponent implements OnInit{
           id : id
         }
         id ++
-        this.items.push(ruta)
+        this.fotos.push(ruta)
       })
-      console.log(this.items)
+      console.log(this.fotos)
     });
   }
 

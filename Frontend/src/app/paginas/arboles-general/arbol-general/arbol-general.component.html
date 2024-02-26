@@ -33,7 +33,7 @@
               }
 
                 <div #mapDiv class="map-container"></div>
-                <!-- Ajusta el ancho y alto según tus preferencias -->
+
             </div>
         </div>
     </div>
@@ -47,7 +47,7 @@
                 <p-dialog header="Añadir imagen" [(visible)]="addImagen" [modal]="true" [closable]="true"
                     [responsive]="true" [style]="{width: '50vw'}">
                     <p>Sube una imagen para este árbol</p>
-                  <div class="card flex justify-content-center">
+                  <div class="flex justify-content-center">
                     <p-toast></p-toast>
                     <p-fileUpload
                       mode="advanced"
@@ -72,31 +72,55 @@
                 </div>
               } -->
 
-             
+
 
 
 
             </div>
         </div>
 
+        <!-- <div class="card-wrapper container-fluid">
+          <p-dataView #dv [value]="items" [rows]="6" [paginator]="true">
+              <ng-template let-arboles pTemplate="list">
+                  <div class="row">
+                      <ng-container *ngFor="let item of items; let i = index">
+                          <div class="col-lg-3 col-md-4 col-sm-6">
+                              <div class="card">
+                                  <img [src]="item.thumbnailImageSrc" class="card-img-top" alt="Tree Image">
+                                  <div class="card-body"></div>
+                              </div>
+                          </div>
+                      </ng-container>
+                  </div>
+              </ng-template>
+          </p-dataView>
+      </div> -->
+
         <div class="card-wrapper container-fluid">
-          <p-dataView #dv [value]="items" [rows]="2" [paginator]="true">
-            <ng-template let-arboles pTemplate="list">
+          <p-dataView #dv [value]="fotos" [rows]="2" [paginator]="true" >
+            <ng-template let-otro pTemplate="list">
 
               <div class="row">
-                <ng-container>
-                  <div class="col-lg-3 col-md-4 col-sm-6">
-                    @for (item of items; track item.id){
-                      <div class="col-md-6"> 
-                        <img [src]="item.thumbnailImageSrc" class="card-img-top" alt="Tree Image">
-                    </div>
 
-                    }
+                <ng-container>
+                  @for (item of fotos; track item.id){
+                  <div class="col-lg-3 col-md-4 col-sm-6">
+                      <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="card ">
+                          <img src="{{item.thumbnailImageSrc}}" class="card-img-top" alt="Tree Image">
+                          <div class="card-body">
+                          </div>
+                        </div>
+                      </div>
+
                   </div>
+                }
                 </ng-container>
+
               </div>
             </ng-template>
           </p-dataView>
         </div>
+
     </div>
 </div>
