@@ -18,8 +18,8 @@ export class ArbolesAdminService {
     return this.http.get<arboles[]>(environment.baseUrl+environment.arbolesEndPoint+arbolRoutes.arbolesAdmin, {params : {auth : true}})
   }
 
-  anadirArboles(arbol: ArbolPost) {
-    return this.http.post<any>(environment.baseUrl + environment.arbolesEndPoint + arbolRoutes.arbolesPost, arbol, {params : {auth : true}});
+  anadirArboles(formData: FormData){
+    return this.http.post<any>(environment.baseUrl + environment.arbolesEndPoint + arbolRoutes.arbolesPost, formData, {params : {auth : true}});
 }
 
   editarArboles(idArbol:number, arbol: actualizarArbolResponse){

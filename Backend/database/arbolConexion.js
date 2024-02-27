@@ -168,6 +168,9 @@ const getRutaImagenes = async (idArbol) => {
     return resultado
 }
 
+
+
+
 module.exports = {
   
     createArbol,

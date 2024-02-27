@@ -5,7 +5,6 @@
             <p-table #dt1 [value]="arboles" dataKey="id" [paginator]="true" [rows]="5" [showCurrentPageReport]="true">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th class="centered-text">Numero de arbol</th>
                         <th class="centered-text">Nombre del arbol</th>
                         <th class="centered-text">Estado</th>
                         <th class="centered-text">Acciones</th>
@@ -22,7 +21,6 @@
 
                 <ng-template pTemplate="body" let-arbol>
                     <tr>
-                        <td class="centered-text">{{arbol.id}}</td>
                         <td class="centered-text">{{arbol.nombre}}</td>
                         <td class="centered-text">{{arbol.desactivado == 0 ? 'Activo' : 'Inactivo' }}</td>
                         <td class="centered-text">
@@ -38,26 +36,46 @@
 <ng-template #editar let-modalEditar>
     <div class="modal-body p-4 py-5 p-md-5">
         <h3 class="text-center mb-3">Editar arbol</h3>
-        <form class="signup-form">
+        <form class="signup-form" (ngSubmit)="actualizarFamilia(arbolSeccionado)">
                    <p-toast></p-toast>
             <div class="form-group mb-2">
-                <label for="name">Número del arbol</label>
+                <label>Número del arbol</label>
                 <input type="text" [readonly]="true" class="form-control mb-2" name="idTarea" required
                     [(ngModel)]="arbolSeccionado.id">
             </div>
 
             <div class="form-group mb-2">
-                <label for="email">Nombre del arbol</label>
+                <label >Nombre del arbol</label>
                 <input type="text" class="form-control mb-2" name="descTarea" required
                     [(ngModel)]="arbolSeccionado.nombre">
             </div>
+            <label>Familia</label>
+              <select (change)="actualizarFamilia($event)" name="idFamilia" >
+                @for (familia of Familias; track familia.id) {
+                  @if (familia.id == arbolSeccionado.idFamilia) {
+                    <option value="{{familia.id}}" selected>{{familia.nombre}}</option>
+                  } @else {
+                    <option value="{{familia.id}}">{{familia.nombre}}</option>
+                  }
+                }
+
+              </select>
+            <br>
+            <div class="form-group mb-2">
+                <label >Descripcion del arbol</label>
+                <textarea class="form-control mb-2" name="descTarea" rows="5" required [(ngModel)]="arbolSeccionado.descripcion"></textarea>
+            </div>
 
             <div class="form-group mb-2">
-                <label for="estadoFamilia">Estado</label>
+                <label >Época de floración del árbol</label>
+                <p-calendar [(ngModel)]="fechaArbol" view="month" dateFormat="MM" [ngModelOptions]="{standalone: true}" ></p-calendar>
+            </div>
+            <div class="form-group mb-2">
+                <label >Estado</label>
                 <div class="flex justify-content-center">
-                    <p-inputSwitch formControlName="checked"></p-inputSwitch>
+                  <p-inputSwitch class="input-switch" [(ngModel)]="arbolSeccionado.desactivado" [ngModelOptions]="{standalone : true}" ></p-inputSwitch>
                 </div>
-                
+
             </div>
 
             <div class="form-group mb-2">
@@ -71,26 +89,40 @@
 <ng-template #anadir let-modalEditar>
     <div class="modal-body p-4 py-5 p-md-5">
         <h3 class="text-center mb-3">Añadir arbol</h3>
-        <form (ngSubmit)="anadirArboles()" class="signup-form">
+        <form (ngSubmit)="anadirArboles($event)" class="signup-form">
             <p-toast></p-toast>
             <div class="form-group mb-2">
-                <label for="email">Nombre del arbol</label>
+              <div class="form-group mb-2">
+                <label >Imagen principal</label>
+                <p-fileUpload #fileUpload mode="advanced" chooseLabel="Seleccionar imagen" name="archivo" [customUpload]="true"
+                              (uploadHandler)="anadirArboles($event)"
+                              [maxFileSize]="5000000" accept="image/*" cancelLabel="Cancelar"
+                              [showCancelButton]="true" uploadLabel="Subir imagen" [showUploadButton]="false">
+                </p-fileUpload>
+              </div>
+                <label>Nombre del arbol</label>
                 <input type="text" class="form-control mb-2" name="descTarea" required
                     [(ngModel)]="arbol.nombre">
-                <label for="Familia">Familia</label>
+                <label >Familia</label>
                 <select (change)="actualizarFamilia($event)" name="idFamilia" id="">
                     @for (familia of Familias; track familia.id) {
                         <option value="{{familia.id}}">{{familia.nombre}}</option>
                     }
                 </select>
-                <br>
-                    <label for="email">Descripcion del arbol</label>
-                <input type="text" class="form-control mb-2" name="descTarea" required
-                    [(ngModel)]="arbol.descripcion">
 
-                    <label for="email">epoca de floracion del arbol</label>
-                <input type="text" class="form-control mb-2" name="descTarea" required
-                    [(ngModel)]="arbol.epFloracion">
+                <div class="form-group mb-2">
+                  <label >Descripción del arbol</label>
+                  <textarea class="form-control mb-2" name="descTarea" rows="3" required [(ngModel)]="arbol.descripcion"></textarea>
+                </div>
+
+                <div class="flex justify-content-center">
+                  <label >Época de floración del árbol</label>
+                  <p-calendar [(ngModel)]="fecha" view="month" dateFormat="MM" [ngModelOptions]="{standalone: true}" ></p-calendar>
+
+                </div>
+
+
+
             </div>
 
             <div class="form-group mb-2">

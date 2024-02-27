@@ -113,10 +113,11 @@ export class NoticiasComponent implements OnInit {
     }
 
     anadirContenido(event:any) {
+
         const formData = new FormData();
         formData.append('archivo', event.files[0], event.files[0].name);
         this.archivoSubido.push(formData);
-    
+
         formData.forEach((value, key) => {
             console.log(key, value);
         });
@@ -135,7 +136,7 @@ export class NoticiasComponent implements OnInit {
         })
     }
 
-    
+
 
     mostrarExito(msg: string) {
         this.msgService.add({ severity: 'success', summary: 'Éxito', detail: msg });

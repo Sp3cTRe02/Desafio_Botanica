@@ -7,25 +7,43 @@ const path = require('path')
 require('dotenv').config()
 
 /**
- * @author @Ismael
+ * @author @Ismael @Jaime_Rafael
  */
 
+const subirImagenPrincipal = async(req = request, res = response) => {
+    try {
+        const nombre = await subirArchivo(req.files, undefined, process.env.UPLOADS_DIR_TREE)
+        const ruta = `${nombre}`
+        console.log("Imagen subida exitosamente en:", ruta);
+
+        return ruta
+
+    } catch (error) {
+        console.error("Error al subir la imagen:", error);
+        throw error;
+        
+    }
+}
 const arbolPost = async (req = request, res = response) => {
-    Conexion.createArbol(req.body)
-        .then(msg => {
-            console.log('Arbol creada correctamente');
-            res.status(StatusCodes.CREATED).json({
-                'msg': 'Arbol creado correctamente',
-                'status': 'OK'
-            })
+    try {
+        const rutaImagen = await subirImagenPrincipal(req, res)
+
+        const arbol = {
+            ...req.body,
+            foto: rutaImagen
+        }
+        const resultado = await Conexion.crearArbol(arbol)
+        res.status(StatusCodes.CREATED).json({
+            'msg': 'Arbol creado correctamente',
+            'status': 'OK'
         })
-        .catch(err => {
-            console.log(err);
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-                'msg': 'Error en el servidor',
-                'status': 'ERROR'
-            })
+
+    } catch (error) {
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            'msg': 'Error en el servidor',
+            'status': 'ERROR'
         })
+    }
 }
 
 const arbolPut = async (req = request, res = response) => {
