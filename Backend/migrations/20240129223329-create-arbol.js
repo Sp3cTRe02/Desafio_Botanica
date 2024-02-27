@@ -33,6 +33,11 @@ module.exports = {
         type:Sequelize.STRING
       }, 
 
+      foto:{
+        type:Sequelize.STRING,
+        defaultValue: null
+      },
+
       desactivado:{
         type:Sequelize.BOOLEAN,
         defaultValue: 0

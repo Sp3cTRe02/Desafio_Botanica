@@ -1,9 +1,11 @@
 export interface arboles{
     id: number;
     idFamilia: number;
+    nombreFamilia : string;
     nombre: string;
     epFloracion: string;
     descripcion: string;
+    foto: string;
     desactivado: boolean;
 
 }
@@ -20,6 +22,7 @@ export interface ArbolPost {
   nombre: string;
   epFloracion: string;
   descripcion: string;
+  foto: string;
   desactivado: boolean;
 
 }
@@ -38,6 +41,7 @@ export interface Arbol {
   nombre: string;
   epFloracion: string;
   descripcion: string;
+  foto: string;
   desactivado: boolean;
 
 }
