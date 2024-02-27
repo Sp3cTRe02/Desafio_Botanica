@@ -29,7 +29,7 @@ const createArbol = async (body) => {
     return resultado
 }
 
-const updateArbol = async (body, id) => {
+const updateArbol = async (id, body) => {
     let resultado = 0 
     bd.conectar()
     try{
@@ -38,6 +38,7 @@ const updateArbol = async (body, id) => {
                 {id: id}
             }
         )
+        console.log(id);
         resultado = 1
     }catch (error){
         if (error instanceof Sequelize.ValidationError) {
@@ -168,11 +169,30 @@ const getRutaImagenes = async (idArbol) => {
     return resultado
 }
 
+const getFoto = async (id) => {
+    let urlFoto = 0
+    bd.conectar()
+    try {
+        urlFoto = await models.Foto.findOne({
+            where: {
+                id: id
+            },
+            attributes: ['ruta']
+        })
+    } catch (error) {
+        console.log('Error al obtener la foto')
+        throw error
+    }finally{
+        bd.desconectar()
+    }
+
+    return urlFoto
+}
 
 
 
 module.exports = {
-  
+
     createArbol,
     updateArbol,
     getArbol,
@@ -180,5 +200,6 @@ module.exports = {
     deleteArboles,
     addUbicacionArbol,
     subirImagenArbol,
-    getRutaImagenes
+    getRutaImagenes,
+    getFoto
 }

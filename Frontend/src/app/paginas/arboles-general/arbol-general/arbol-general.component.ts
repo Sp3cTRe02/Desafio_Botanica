@@ -142,7 +142,5 @@ export class ArbolGeneralComponent implements OnInit{
     })
   }
 
-  // protected readonly environment = environment;
-  // protected readonly arbolRoutes = arbolRoutes;
 }
 

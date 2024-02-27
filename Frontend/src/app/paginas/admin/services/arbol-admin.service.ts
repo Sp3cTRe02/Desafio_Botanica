@@ -22,8 +22,8 @@ export class ArbolesAdminService {
     return this.http.post<any>(environment.baseUrl + environment.arbolesEndPoint + arbolRoutes.arbolesPost, formData, {params : {auth : true}});
 }
 
-  editarArboles(idArbol:number, arbol: actualizarArbolResponse){
-    return this.http.put<any>(environment.baseUrl+environment.arbolesEndPoint+arbolRoutes.arbolesPut+idArbol,arbol, {params : {auth : true}})
+  editarArboles(idArbol:number, formData: FormData){
+    return this.http.put<any>(environment.baseUrl+environment.arbolesEndPoint+arbolRoutes.arbolesPut+idArbol,formData, {params : {auth : true}})
   }
 
 }
