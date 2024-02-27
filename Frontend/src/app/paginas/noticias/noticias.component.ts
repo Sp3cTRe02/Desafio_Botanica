@@ -99,11 +99,6 @@ export class NoticiasComponent implements OnInit {
 
     }
 
-    enviarNoticia(event:any): void {
-        this.socketService.enviarNoticia(this.noticia);
-        this.anadirContenido(event)
-    }
-
 
     obtenerContenido() {
         this.noticiasService.getContenido().subscribe((response: any) => {
@@ -134,8 +129,10 @@ export class NoticiasComponent implements OnInit {
                 this.mostrarExito(this.msg)
             }
         })
-    }
 
+
+        this.socketService.enviarNoticia(this.noticia);
+    }
 
 
     mostrarExito(msg: string) {
