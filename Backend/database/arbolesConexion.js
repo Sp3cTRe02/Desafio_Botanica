@@ -3,15 +3,17 @@ const { Sequelize } = require('sequelize')
 
 /**
  * @David_Trujillo
+ * @Jaime_Rafael para getArbolesGeneral(para las fotos)
  */
 
 class ArbolesConexion{
     static getArbolesGeneral = async () => {
         try {
             const resultado = await models.sequelize.query(
-                `SELECT arb.id, arb.nombre, arb.epFloracion, fam.nombre AS nombreFam 
+                `SELECT arb.id, arb.nombre, arb.epFloracion, arb.foto ,fam.nombre AS nombreFam 
                 FROM arboles arb 
-                JOIN familias fam ON arb.idFamilia = fam.id`,
+                JOIN familias fam ON arb.idFamilia = fam.id
+                ORDER BY arb.id`,
                 { type: Sequelize.QueryTypes.SELECT }
             );
     

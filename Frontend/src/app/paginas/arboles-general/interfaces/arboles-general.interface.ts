@@ -3,6 +3,7 @@ export interface Arbol{
     nombre: string;
     epFloracion: string;
     nombreFam: string;
+    foto: string;
 }
 
 export interface ArbolData{
