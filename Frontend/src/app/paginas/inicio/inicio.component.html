@@ -10,9 +10,9 @@
         }
         <div class="text-wrapper">
           <h1 class="hero-title mb-4">
-            {{ noticia[0].titulo }}
+            {{contenidoInicio.titulo}}
           </h1>
-          <div [innerHTML]="noticia[0].descripcion"></div>
+          <div [innerHTML]="contenidoInicio.descripcion"></div>
         </div>
       </div>
       <div class="col-12 col-lg-6">
@@ -29,16 +29,16 @@
   <p-toast></p-toast>
   <div class="modal-body p-4 py-5 p-md-5">
     <h3 class="text-center mb-3">Añadir contenido</h3>
-    <form class="edit-form" (ngSubmit)="modificarContenido()">
+    <form class="edit-form" (ngSubmit)="modificarContenidoInicio()">
       <div class="form-group mb-2">
         <label for="email">Cabecera</label>
-        <input type="text" class="form-control mb-2" name="cabecera" required [(ngModel)]="noticia[0].titulo">
+        <input type="text" class="form-control mb-2" name="cabecera" required [(ngModel)]="contenidoInicio.titulo">
       </div>
 
       <div class="form-group mb-2">
         <label for="name">Contenido</label>
         <quill-editor [modules]="modulesQuill" (onEditorChanged)="onChangedEditor($event)" 
-        [(ngModel)]="noticia[0].descripcion" name="descripcion"></quill-editor>
+        [(ngModel)]="contenidoInicio.descripcion" name="descripcion"></quill-editor>
       </div>
 
        <div class="form-group mb-2">

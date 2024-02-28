@@ -11,13 +11,16 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { FormControl } from '@angular/forms';
 import { AuthService } from '../../../shared/services/auth.service';
+import { FileUploadModule } from "primeng/fileupload";
+
 
 @Component({
     selector: 'app-noticia',
     standalone: true,
     templateUrl: './noticia.component.html',
     styleUrl: './noticia.component.scss',
-    imports: [MenuComponent, CommonModule, FormsModule, QuillModule, ToastModule],
+    imports: [MenuComponent, CommonModule, FormsModule, QuillModule, ToastModule,
+    FileUploadModule],
     providers: [MessageService]
 })
 
@@ -97,19 +100,31 @@ export class NoticiaComponent implements OnInit{
         this.modoEdicion = !this.modoEdicion;
     }
 
-    modificarContenido() {
+    modificarContenido(event:any) {
+        console.log(event.files[0].name)
+        const formData = new FormData()
         this.noticiaEditar.titulo = this.noticia.titulo
         this.noticiaEditar.resumenDesc = this.noticia.resumenDesc
         this.noticiaEditar.descripcion = this.noticia.descripcion
+
+        if(event.files[0] == null){
+            formData.append('archivo', 'null')
+        }else {
+           formData.append('archivo', event.files[0], event.files[0].name);
+        }
+
+        formData.append('titulo',this.noticiaEditar.titulo)
+        formData.append('resumenDesc',this.noticiaEditar.resumenDesc)
+        formData.append('descripcion',this.noticiaEditar.descripcion)
+        formData.append('archivo', event.files[0], event.files[0].name)
+
     
-        this.noticiasService.modificarContenido(this.noticiaId, this.noticiaEditar).subscribe((response: any) => {
+        this.noticiasService.modificarContenido(this.noticiaId, formData).subscribe((response: any) => {
             if (response.success) {
                 this.msg = 'Noticia modificada correctamente'
                 this.mostrarExito(this.msg)
     
-                setTimeout(() => {
-                    window.location.reload()
-                }, 1200)
+                
             }
         })
     }

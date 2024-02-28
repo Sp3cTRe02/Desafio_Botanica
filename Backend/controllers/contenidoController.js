@@ -12,7 +12,7 @@ const fs = require('fs');
 class contenidoController {
     static async subirImagen(req, res) {
         try {
-            const nombre = await subirArchivoNoticia(req.files, undefined, process.env.UPLOADS_DIR);
+            const nombre = await subirArchivoNoticia(req.files, undefined, process.env.UPLOADS_DIR_CONTENT);
             const ruta = `${nombre}`;
             console.log("Imagen subida exitosamente en:", ruta);
 
@@ -142,7 +142,7 @@ class contenidoController {
             console.log(imagen.dataValues.imagen)
     
             if (imagen) {
-                const pathImagen = path.join(__dirname, '../uploads', 'imgs', imagen.dataValues.imagen);
+                const pathImagen = path.join(__dirname, '../uploads', 'imgs/content', imagen.dataValues.imagen);
                 console.log(pathImagen);
     
                 if (fs.existsSync(pathImagen)) {
@@ -161,6 +161,8 @@ class contenidoController {
         try {
             const id = req.params.id
             const body = req.body
+
+            console.log(body)
             const usuario = await contenidoConexion.modificarContenido(id, body)
 
             if (usuario == 0) {
@@ -191,6 +193,44 @@ class contenidoController {
             return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: 'Error en el servidor.' });
         }
     }
+
+
+    static getInfoInicio = async (req,res) => {
+        try {
+
+            const contenido = await contenidoConexion.getInfoInicio()
+
+            const response = {
+                success: true,
+                data: {
+                    contenido
+                }
+            }
+
+            res.status(StatusCodes.OK).json(response)
+        } catch (error) {
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: 'Error en el servidor al obtener el conte.', sqlMessage: error })
+        }
+    }
+
+
+    static modificarContenidoInicio = async (req, res) => {
+        try {
+            const id = req.params.id
+            const body = req.body
+            const usuario = await contenidoConexion.modificarContenidoInicio(id, body)
+
+            if (usuario == 0) {
+                return res.status(StatusCodes.NOT_FOUND).json({ success: false, msg: 'Contenido no encontrado' });
+            } else {
+                return res.status(StatusCodes.OK).json({ success: true, msg: 'Contenido modificado exitosamente' });
+            }
+        } catch (error) {
+            console.error('Error al modificar el usuario:', error);
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: 'Error en el servidor.' });
+        }
+    }
+
 
 
 }

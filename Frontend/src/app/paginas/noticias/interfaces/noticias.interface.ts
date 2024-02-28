@@ -24,6 +24,18 @@ export interface ContenidoPut{
     descripcion: string,
 }
 
+export interface InicioGet{
+    id:number,
+    titulo:string,
+    descripcion:string,
+    imagen:string
+}
+
+export interface InicioPut{
+    titulo: string,
+    descripcion: string,
+}
+
 export interface NoticiaPostRespuesta{
     sucess:boolean;
     data: {

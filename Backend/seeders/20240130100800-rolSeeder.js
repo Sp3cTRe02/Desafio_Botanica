@@ -14,6 +14,12 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+
+      {
+        nombre: 'organizador',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ], {});
   },
 

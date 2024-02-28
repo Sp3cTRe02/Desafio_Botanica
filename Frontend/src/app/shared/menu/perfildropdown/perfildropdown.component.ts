@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-perfildropdown',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './perfildropdown.component.html',
   styleUrl: './perfildropdown.component.scss'
 })

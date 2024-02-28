@@ -53,6 +53,8 @@ export const contenidoRoutes = {
     contenidoPost: "/",
     contenidoGet: "/",
     contenidoPut: "/",
-    ultimasNoticiasGet: "/ultimas-noticias"
+    ultimasNoticiasGet: "/ultimas-noticias",
+    infoInicio: "/inicio",
+    inicioPut: "/inicio/"
 }
 

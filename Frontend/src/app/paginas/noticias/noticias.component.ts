@@ -102,7 +102,7 @@ export class NoticiasComponent implements OnInit {
 
     obtenerContenido() {
         this.noticiasService.getContenido().subscribe((response: any) => {
-            this.noticias = response.data.contenido.slice(1)
+            this.noticias = response.data.contenido
             console.log(this.noticias)
         })
     }
@@ -110,8 +110,7 @@ export class NoticiasComponent implements OnInit {
     anadirContenido(event:any) {
         const formData = new FormData();
         formData.append('archivo', event.files[0], event.files[0].name);
-        this.archivoSubido.push(formData);
-    
+
         formData.forEach((value, key) => {
             console.log(key, value);
         });

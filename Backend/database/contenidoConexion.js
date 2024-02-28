@@ -23,7 +23,9 @@ class contenidoConexion {
         let resultado = null
 
         try {
-            resultado = await models.Contenido.findAll()
+            resultado = await models.Contenido.findAll({
+                order: [['id', 'DESC']]
+            })
         } catch (error) {
             throw error
         }
@@ -31,8 +33,6 @@ class contenidoConexion {
         return resultado
 
     }
-
-
 
     static getUltimasNoticias = async () => {
         let resultado = null
@@ -78,6 +78,7 @@ class contenidoConexion {
     static modificarContenido = async (idContenido, body) => {
         let resultado = 0
         try {
+            
             const usuario = await models.Contenido.findByPk(idContenido)
 
             if (!usuario) {
@@ -92,6 +93,7 @@ class contenidoConexion {
             console.error('Error al modificar usuario:', error)
         }
     }
+
 
     static eliminarContenido = async (idContenido) => {
         let resultado = 0
@@ -127,6 +129,33 @@ class contenidoConexion {
             throw error
         }
         return resultado
+    }
+
+    static getInfoInicio = async () =>{
+        try {
+            const resultado = await models.ContenidoAuxiliar.findByPk(1);
+            return resultado;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    static modificarContenidoInicio = async (idContenido, body) => {
+        let resultado = 0
+        try {
+            const usuario = await models.ContenidoAuxiliar.findByPk(idContenido)
+
+            if (!usuario) {
+                resultado = 0
+            } else {
+                await usuario.update(body)
+                resultado = 1
+            }
+
+        } catch (error) {
+            resultado = 0
+            console.error('Error al modificar usuario:', error)
+        }
     }
 }
 

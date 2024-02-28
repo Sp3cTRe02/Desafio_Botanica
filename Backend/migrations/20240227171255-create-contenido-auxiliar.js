@@ -12,9 +12,6 @@ module.exports = {
       titulo: {
         type: Sequelize.STRING
       },
-      lastName: {
-        type: Sequelize.STRING
-      },
       descripcion: {
         type: Sequelize.TEXT('medium')
       },

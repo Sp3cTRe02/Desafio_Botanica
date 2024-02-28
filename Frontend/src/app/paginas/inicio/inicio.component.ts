@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Table } from 'primeng/table';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NoticiasService } from '../noticias/services/noticias.service';
-import { ContenidoGet, ContenidoPut } from '../noticias/interfaces/noticias.interface';
+import { ContenidoGet, ContenidoPut, InicioGet, InicioPut } from '../noticias/interfaces/noticias.interface';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
 import { MessageService } from 'primeng/api';
@@ -19,7 +19,7 @@ import { ToastModule } from 'primeng/toast';
     templateUrl: './inicio.component.html',
     styleUrl: './inicio.component.scss',
     imports: [CommonModule, MenuComponent, FormsModule,
-        QuillModule, RouterLink,ToastModule],
+        QuillModule, RouterLink, ToastModule],
     providers: [MessageService]
 })
 
@@ -29,18 +29,20 @@ import { ToastModule } from 'primeng/toast';
 
 export class InicioComponent {
 
-    cabecera: any = ''
-    public contenidoInicio: any;
+    cont: any = ''
 
     @ViewChild('editar') editar: Table | undefined
 
-    nuevaNoticia: any = {};
     noticias: ContenidoGet[] = [];
-    noticia: ContenidoGet[] = [];
-
-    noticiaEditar: ContenidoPut = {
+    contenidoInicio: InicioGet = {
+        id: 0,
         titulo: '',
-        resumenDesc: '',
+        descripcion: '',
+        imagen: ''
+    }
+
+    inicioEditar: InicioPut = {
+        titulo: '',
         descripcion: ''
     }
 
@@ -70,7 +72,7 @@ export class InicioComponent {
 
     onChangedEditor(event: any): void {
         if (event.html) {
-            this.contenidoInicio = event.html;
+            this.cont = event.html;
         }
     }
 
@@ -89,27 +91,21 @@ export class InicioComponent {
 
 
     obtenerContenido() {
-        this.noticiasService.getContenido().subscribe((response: any) => {
-            if (response.success && response.data.contenido.length > 0) {
-                const indiceNoticia = 0;
-                this.noticia = [response.data.contenido[indiceNoticia]];
-            }
+        this.noticiasService.getContenidoInicio().subscribe((response: any) => {
+            this.contenidoInicio = response.data.contenido
+    
         });
     }
 
-    modificarContenido() {
-        if (!this.noticia[0]) {
-            console.error('No se puede modificar la noticia porque no está definida.');
-            return;
-        }
+    modificarContenidoInicio() {
+    
+        this.inicioEditar.titulo = this.contenidoInicio.titulo;
+        this.inicioEditar.descripcion = this.contenidoInicio.descripcion;
 
-        this.noticiaEditar.titulo = this.noticia[0].titulo;
-        this.noticiaEditar.resumenDesc = this.noticia[0].resumenDesc;
-        this.noticiaEditar.descripcion = this.noticia[0].descripcion;
+        const noticiaId = this.contenidoInicio.id;
 
-        const noticiaId = this.noticia[0].id;
 
-        this.noticiasService.modificarContenido(noticiaId, this.noticiaEditar).subscribe((response: any) => {
+        this.noticiasService.modificarContenidoInicio(noticiaId, this.inicioEditar).subscribe((response: any) => {
             if (response.success) {
                 this.msg = 'Contenido modificado correctamente'
                 this.mostrarExito(this.msg)
