@@ -67,8 +67,7 @@ export class AddUbicacionComponent implements AfterViewInit{
       this.mapBoxService.getCiudadMapBox(coord.lat, coord.lng).subscribe((response: any) => {
         let ubicacion = response.features[0].place_name
         let sitio = ubicacion.split(',')
-        let ciudadPostal = sitio[1]
-        let ciudad = this.extraerCiudad(ciudadPostal)
+        let ciudad = this.extraerCiudad(sitio[1])
         this.ubicacion.ciudad = ciudad
         console.log(this.ubicacion)
       })
