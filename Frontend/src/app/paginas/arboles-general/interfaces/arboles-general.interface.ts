@@ -6,6 +6,15 @@ export interface Arbol{
     foto: string;
 }
 
+export interface ArbolInfo{
+  id:number;
+  nombre: string;
+  epFloracion: string;
+  descripcion: string;
+  nombreFam: string;
+  foto: string;
+}
+
 export interface ArbolData{
     arboles: Arbol[]
 }

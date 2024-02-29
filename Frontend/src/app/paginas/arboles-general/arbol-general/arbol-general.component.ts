@@ -15,6 +15,7 @@ import {environment, arbolRoutes} from "../../../../environments/environment.dev
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DataViewModule } from 'primeng/dataview';
+import {Arbol, ArbolInfo} from "../interfaces/arboles-general.interface";
 
 @Component({
   selector: 'app-arbol-general',
@@ -34,6 +35,14 @@ import { DataViewModule } from 'primeng/dataview';
 export class ArbolGeneralComponent implements OnInit{
   responsiveOptions: any[] | undefined;
   arbolId: number = 0;
+  arbol: ArbolInfo ={
+    id: 0,
+    nombre: '',
+    epFloracion: '',
+    descripcion: '',
+    nombreFam: '',
+    foto: ''
+  }
   addImagen: boolean = false;
   fotos: any[] = []
 
@@ -43,6 +52,7 @@ export class ArbolGeneralComponent implements OnInit{
 
   ngOnInit() {
     this.obtenerRutasArbol(this.arbolId)
+    this.obtenerDatosArbol(this.arbolId)
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -66,9 +76,7 @@ export class ArbolGeneralComponent implements OnInit{
       this.arbolId = params['id'];
       this.obtenerUbicacionesArbol(this.arbolId)
 
-      this.fotos.forEach(ruta => {
-        console.log(this.obtenerImagenArbol(ruta))
-      })
+
       });
 
   }
@@ -81,10 +89,16 @@ export class ArbolGeneralComponent implements OnInit{
     });
   }
 
+  obtenerDatosArbol(idArbol:number){
+    this.arbolService.getInformacionArbol(idArbol).subscribe((response: any) => {
+      this.arbol = response.arbol.contenido[0]
+      console.log(this.arbol)
+    })
+  }
+
   obtenerRutasArbol(idArbol: number): void {
     this.arbolService.getRutasArbol(idArbol).subscribe((response: any) => {
       let id = 1
-      console.log(response.data.imagenes)
       response.data.imagenes.forEach(() => {
         let foto = {
           id: id,
@@ -94,7 +108,6 @@ export class ArbolGeneralComponent implements OnInit{
         id++
       })
       this.fotos = response.data.imagenes
-      console.log(this.fotos)
     });
   }
 

@@ -26,7 +26,13 @@ class ArbolesConexion{
 
     static getInformacionArbol = async (idArbol) =>{
         try{
-            const resultado = await models.Arbol.findByPk(idArbol)
+            const resultado = await models.sequelize.query(
+                `SELECT arb.id, arb.nombre, arb.epFloracion, arb.descripcion, arb.foto, fam.nombre AS nombreFam 
+                FROM arboles arb 
+                JOIN familias fam ON arb.idFamilia = fam.id
+                WHERE arb.id = ${idArbol}`,
+                { type: Sequelize.QueryTypes.SELECT }
+            )
             return resultado
         }catch(error){
             throw error

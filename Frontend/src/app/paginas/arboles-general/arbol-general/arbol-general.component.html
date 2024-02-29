@@ -1,21 +1,24 @@
 <app-menu></app-menu>
 
+
 <div class="tree-container container">
   <div class="row p-4">
     <div class="col-lg-6 col-md-12">
-      <img src="../../../assets/fondo.jpg" class="img-fluid rounded" alt="Tree Image">
+      @if (arbol.foto != null){
+        <img [src]="arbol.foto" class="img-fluid rounded" alt="Tree Image">
+      }@else{
+        <img src="assets/fondo.jpg" class="img-fluid rounded" alt="Tree Image">
+      }
     </div>
     <div class="content col-lg-6 col-md-12 mt-4 mt-lg-0">
       <div class="card-body">
-        <h2 class="tree-title font-bold mb-3">Arbol de prueba</h2>
-        <p class="font-semibold mb-2">Familia: Fam</p>
-        <p class="mb-2"><i class="pi pi-tag"></i> Época de floración: Floracion</p>
+        <h2 class="tree-title font-bold mb-3">{{arbol.nombre}}</h2>
+        <p class="font-semibold mb-2">Familia: {{ arbol.nombreFam }}</p>
+        <p class="mb-2"><i class="pi pi-tag"></i> Época de floración: {{ arbol.epFloracion }}</p>
       </div>
       <div class="card-body mt-3">
         <h3 class="font-bold mb-3">Descripción</h3>
-        <p class="mb-2">Aquí puedes agregar información adicional sobre el árbol seleccionado, como su
-          descripción,
-          características especiales, etc.</p>
+        <p class="mb-2">{{arbol.descripcion}}</p>
         <p class="mb-2">También podrías mostrar más detalles específicos del árbol, según tus necesidades.</p>
       </div>
     </div>
