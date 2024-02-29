@@ -8,6 +8,7 @@ export const environment = {
     arbolEndpoint: '/arboles',
     arbolesEndPoint: '/arbol',
     contenidoEndPoint: '/contenido',
+    eventosEndPoint: '/eventos',
     mapBoxToken: 'pk.eyJ1IjoiZGF2aXRydTYwIiwiYSI6ImNsc3JucXNhazA1cnEyaW1sZngxa2pqNHIifQ.vslWBUZtPTf7cgGyqDQpvg'
 };
 
@@ -58,3 +59,8 @@ export const contenidoRoutes = {
     inicioPut: "/inicio/"
 }
 
+
+export const eventosRoutes = {
+    eventoGet:"/",
+    organizador: "/organizador/",
+}

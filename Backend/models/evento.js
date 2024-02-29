@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     latitud: DataTypes.STRING,
     longitud: DataTypes.STRING,
     ubicacion: DataTypes.STRING,
+    imagen: DataTypes.STRING
   }, {
     sequelize,
     timestamps: false,

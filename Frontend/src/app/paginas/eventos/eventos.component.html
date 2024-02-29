@@ -1,0 +1,27 @@
+<app-menu></app-menu>
+
+<div class="card-wrapper container-fluid">
+
+    <p-dataView #dv [value]="eventos" [rows]="8" [paginator]="true">
+        <ng-template let-eventos pTemplate="list">
+
+            <div class="row">
+                <h1 class="font-bold mb-3">Eventos</h1>
+                <ng-container>
+                    <div class="card-container">
+                        @for (item of eventos; track item.id){
+                        <a class="card mb-4" [routerLink]="[item.id]">
+                            <img [src]="item.imagen" class="card-img-top" alt="Tree Image">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">{{ item.nombre }}</h5>
+                                <p class="card-text">{{ item.ubicacion }}</p>
+                            </div>
+                        </a>
+                        }
+                    </div>
+                </ng-container>
+            </div>
+        </ng-template>
+    </p-dataView>
+
+</div>

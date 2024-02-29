@@ -83,7 +83,7 @@ export class NoticiaComponent implements OnInit{
     obtenerInfoNoticia(idNoticia: number) {
         this.noticiasService.getInfoNoticia(idNoticia).subscribe((response: any) => {
             this.noticia = response.data.contenido
-            console.log(this.noticia.imagen)
+            console.log(this.noticia)
             
         })
     }
@@ -101,11 +101,7 @@ export class NoticiaComponent implements OnInit{
     }
 
     modificarContenido(event:any) {
-        console.log(event.files[0].name)
         const formData = new FormData()
-        this.noticiaEditar.titulo = this.noticia.titulo
-        this.noticiaEditar.resumenDesc = this.noticia.resumenDesc
-        this.noticiaEditar.descripcion = this.noticia.descripcion
 
         if(event.files[0] == null){
             formData.append('archivo', 'null')
@@ -113,10 +109,15 @@ export class NoticiaComponent implements OnInit{
            formData.append('archivo', event.files[0], event.files[0].name);
         }
 
+
+        this.noticiaEditar.titulo = this.noticia.titulo
+        this.noticiaEditar.resumenDesc = this.noticia.resumenDesc
+        this.noticiaEditar.descripcion = this.noticia.descripcion
+
+
         formData.append('titulo',this.noticiaEditar.titulo)
         formData.append('resumenDesc',this.noticiaEditar.resumenDesc)
         formData.append('descripcion',this.noticiaEditar.descripcion)
-        formData.append('archivo', event.files[0], event.files[0].name)
 
     
         this.noticiasService.modificarContenido(this.noticiaId, formData).subscribe((response: any) => {

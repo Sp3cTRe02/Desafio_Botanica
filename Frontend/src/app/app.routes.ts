@@ -12,6 +12,8 @@ import { NotFoundComponent } from './shared/notFound/not-found/not-found.compone
 import {AddUbicacionComponent} from "./paginas/arboles-general/add-ubicacion/add-ubicacion.component";
 import {loggedGuard} from "./shared/guards/logged.guard";
 import { PerfilComponent } from './shared/menu/perfil/perfil.component';
+import { EventosComponent } from './paginas/eventos/eventos.component';
+import { EventoComponent } from './paginas/eventos/evento/evento.component';
 
 
 export const routes: Routes = [
@@ -69,7 +71,15 @@ export const routes: Routes = [
         canActivate: [roleGuard]
     },
 
+    {
+        path: 'eventos',
+        component: EventosComponent,
+    },
 
+    {
+        path: 'eventos/:id',
+        component: EventoComponent
+    },
 
 
     { path: '**', component: NotFoundComponent }

@@ -1,0 +1,43 @@
+<app-menu></app-menu>
+<div class="event-container container">
+    <div class="row p-4">
+        <div class="col-lg-7 col-md-12 col-sm-12 col-info">
+            <div class="col-lg-12">
+                <h1 class="font-bold mb-3">{{ evento.nombre }}</h1>
+            </div>
+
+            <div class="col-lg-12 mt-4 mx-auto">
+                <img [src]="evento.imagen" class="img-fluid rounded" alt="Tree Image">
+            </div>
+
+            
+            <div class="col-lg-12 mt-4">
+                <div class="card card-madeby">
+                    <div class="card-body">
+                        <h5 class="card-title text-bold">Organizado por</h5>
+                        <p>{{organizador.nombre}} {{organizador.ap1}} {{organizador.ap2}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 mt-4 col-desc">
+                <h2 class="font-bold mb-3">Descripción</h2>
+                <div class="card-body">
+                    <p class="mb-2" [innerHTML]="evento.descripcion"></p>
+                </div>
+            </div>
+
+            
+        </div>
+
+        <div class="col-lg-5 col-md-12 col-sm-12 mt-4 text-center text-bold"> 
+            <div class="card card-event">
+                <div class="card-body">
+                    <h3 class="card-title text-bold">Plazas libres</h3>
+                    <h4 class="card-text">50</h4>
+                    <button class="btn btn-primary">Participar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

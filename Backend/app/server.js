@@ -19,6 +19,7 @@ class Server {
 
         this.arbolesPath = '/api/arboles'
         this.contenidoPath = '/api/contenido'
+        this.eventosPath = '/api/eventos'
 
         this.serverExpresss = require('http').createServer(this.app)
         this.serverWebSocket = require('http').createServer(this.app)
@@ -65,6 +66,8 @@ class Server {
 
         this.app.use(this.arbolesPath, require('../routes/arbolesRoutes'))
         this.app.use(this.contenidoPath, require('../routes/contenidoRoutes'))
+
+        this.app.use(this.eventosPath,require('../routes/eventosRoutes'))
 
     }
 
