@@ -373,6 +373,37 @@ const getTopCiudadesArbol = async (req = request, res = response) => {
 
 }
 
+const getRuta = async (req = request, res = response) => {
+    try {
+        const radio = req.body.radio
+        const latitud = req.body.latitud
+        const longitud = req.body.longitud
+        const ubicacionesDentro = []
+        const ubicaciones = await Conexion.getUbicaciones()
+
+        for(let i = 0; i < ubicaciones.length; i++){
+            const lat = ubicaciones[i].dataValues.latitud
+            const long = ubicaciones[i].dataValues.longitud
+            const distancia = Math.sqrt((lat - latitud) ** 2 + (long - longitud) ** 2) // formula de distancia entre dos puntos 
+            if (distancia <= radio) {
+                ubicacionesDentro.push(ubicaciones[i])
+            }
+        }
+
+        res.status(StatusCodes.OK).json({
+            'msg': 'Ubicaciones encontradas',
+            'ubicaciones': ubicacionesDentro
+        })
+
+    }catch(error){
+        console.log(error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            'msg': 'Error en el servidor',
+            'status': 'ERROR'
+        })
+    }
+}
+
 
 module.exports = {
 
@@ -385,6 +416,7 @@ module.exports = {
     subirImagen,
     getImagenes,
     cargarImagenArbol,
-    getTopCiudadesArbol
+    getTopCiudadesArbol,
+    getRuta
     
 }

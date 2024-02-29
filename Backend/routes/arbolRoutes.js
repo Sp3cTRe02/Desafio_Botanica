@@ -34,6 +34,7 @@ router.get('/imagen/:id', controlador.getImagenes)
 router.get('/galeria/:nombre', controlador.cargarImagenArbol)
 
 router.get('/ciudades/:id', controlador.getTopCiudadesArbol)
+router.get('/ruta' , controlador.getRuta)
 
 
 module.exports = router
