@@ -11,6 +11,7 @@ import { roleGuard } from './shared/guards/role.guard';
 import { NotFoundComponent } from './shared/notFound/not-found/not-found.component';
 import {AddUbicacionComponent} from "./paginas/arboles-general/add-ubicacion/add-ubicacion.component";
 import {loggedGuard} from "./shared/guards/logged.guard";
+import {RutasComponent} from "./paginas/rutas/rutas/rutas.component";
 
 
 export const routes: Routes = [
@@ -25,6 +26,11 @@ export const routes: Routes = [
     {
         path: 'arboles/:id',
         component: ArbolGeneralComponent
+    },
+
+    {
+      path : 'ruta',
+      component: RutasComponent
     },
 
     {

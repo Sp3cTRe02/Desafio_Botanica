@@ -216,6 +216,16 @@ const getTopUbicacionesArbol = async (idArbol) => {
     return resultado
 }
 
+const getUbicaciones = async() => {
+    let ubicaciones = []
+    try{
+        ubicaciones = await models.Ubicacion.findAll()
+    }catch (error){
+        console.log('Error al obtener ubicaciones')
+        throw error
+    }
+    return ubicaciones
+}
 
 
 module.exports = {
@@ -229,5 +239,6 @@ module.exports = {
     subirImagenArbol,
     getRutaImagenes,
     getFoto,
-    getTopUbicacionesArbol
+    getTopUbicacionesArbol,
+    getUbicaciones
 }
