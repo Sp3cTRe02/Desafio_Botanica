@@ -41,4 +41,7 @@ export class ArbolesGeneralService {
     return this.http.get<any>(environment.baseUrl + environment.arbolesEndPoint+ arbolRoutes.galeriaArbol+ '/'+nombreImagen)
   }
 
+  getTopCiudadesArbol(idArbol: number): Observable<any>{
+    return this.http.get<any>(environment.baseUrl + environment.arbolesEndPoint + arbolRoutes.topCiudadesArbol+'/'+idArbol)
+  }
 }

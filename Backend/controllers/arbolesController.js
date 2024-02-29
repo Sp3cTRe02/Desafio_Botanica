@@ -42,10 +42,15 @@ class arbolesController {
         try {
             const id = req.params.id
             const contenido = await arbolesConexion.getInformacionArbol(id)
+            if(contenido[0].foto != null){
+                contenido[0].foto = process.env.URL_PETICION + process.env.PORT + "/api/arbol/galeria/" + contenido[0].foto
+            }else{
+                contenido[0].foto = null
+            }
 
             const response = {
                 success: true,
-                data: {
+                arbol: {
                     contenido
                 }
             }
