@@ -33,5 +33,7 @@ router.post('/imagen/:id', [midsJWT.validarJWT, midCliente.verificarCliente], co
 router.get('/imagen/:id', controlador.getImagenes)
 router.get('/galeria/:nombre', controlador.cargarImagenArbol)
 
+router.get('/ciudades/:id', controlador.getTopCiudadesArbol)
+
 
 module.exports = router

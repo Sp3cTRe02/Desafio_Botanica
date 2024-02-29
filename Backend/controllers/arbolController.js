@@ -350,6 +350,30 @@ const cargarImagenArbol = async (req = request, res = response) => {
     }
 }
 
+const getTopCiudadesArbol = async (req = request, res = response) => {
+    try {
+        const id = req.params.id
+        let ubicaciones = await Conexion.getTopUbicacionesArbol(id)
+        ubicaciones = ubicaciones[0]
+        const response = {
+            success: true,
+            ciudades: {
+                ubicaciones
+            }
+        }
+
+        res.status(StatusCodes.OK).json(response)
+    } catch (error) {
+        console.log(error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            'msg': 'Error en el servidor',
+            'status': 'ERROR'
+        })
+    }
+
+}
+
+
 module.exports = {
 
     arbolPost,
@@ -360,6 +384,7 @@ module.exports = {
     addUbicacion,
     subirImagen,
     getImagenes,
-    cargarImagenArbol
+    cargarImagenArbol,
+    getTopCiudadesArbol
     
 }

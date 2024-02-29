@@ -15,7 +15,7 @@ import {environment, arbolRoutes} from "../../../../environments/environment.dev
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DataViewModule } from 'primeng/dataview';
-import {Arbol, ArbolInfo} from "../interfaces/arboles-general.interface";
+import {Arbol, ArbolInfo, ubicaciones} from "../interfaces/arboles-general.interface";
 
 @Component({
   selector: 'app-arbol-general',
@@ -45,6 +45,7 @@ export class ArbolGeneralComponent implements OnInit{
   }
   addImagen: boolean = false;
   fotos: any[] = []
+  ciudades : ubicaciones[] = []
 
 
   @ViewChild('mapDiv') mapDivElement!: ElementRef
@@ -53,6 +54,7 @@ export class ArbolGeneralComponent implements OnInit{
   ngOnInit() {
     this.obtenerRutasArbol(this.arbolId)
     this.obtenerDatosArbol(this.arbolId)
+    this.obtenerTopCiudadesArbol(this.arbolId)
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -95,6 +97,15 @@ export class ArbolGeneralComponent implements OnInit{
       console.log(this.arbol)
     })
   }
+
+  obtenerTopCiudadesArbol(idArbol: number): void {
+    this.arbolService.getTopCiudadesArbol(idArbol).subscribe((response: any) => {
+      this.ciudades = response.ciudades.ubicaciones;
+      console.log(this.ciudades.length)
+    });
+
+  }
+
 
   obtenerRutasArbol(idArbol: number): void {
     this.arbolService.getRutasArbol(idArbol).subscribe((response: any) => {

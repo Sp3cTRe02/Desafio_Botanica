@@ -34,3 +34,8 @@ export interface ResponseRutas {
   status: string;
   rutas:  string[];
 }
+
+export interface ubicaciones {
+  ciudad: string;
+  cantidad: number;
+}
