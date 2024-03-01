@@ -13,6 +13,7 @@ class ArbolesConexion{
                 `SELECT arb.id, arb.nombre, arb.epFloracion, arb.foto ,fam.nombre AS nombreFam 
                 FROM arboles arb 
                 JOIN familias fam ON arb.idFamilia = fam.id
+                WHERE arb.desactivado = 0
                 ORDER BY arb.id`,
                 { type: Sequelize.QueryTypes.SELECT }
             );

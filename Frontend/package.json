@@ -26,6 +26,7 @@
     "bootstrap": "^5.3.2",
     "jquery": "^3.7.1",
     "mapbox-gl": "^3.1.2",
+    "mapbox-gl-draw-circle": "^1.1.2",
     "ngx-quill": "^25.0.3",
     "primeng": "^17.5.0",
     "quill": "^2.0.0-dev.4",

@@ -177,7 +177,7 @@ constructor(private adminService: ArbolesAdminService, private modalService: Ngb
     }
     actualizarFamilia(event : Event){
         this.arbol.idFamilia = +(<HTMLSelectElement>event.target).value
-        console.log(this.arbol.idFamilia);
+
     }
     editarArbol(idArbol:number, event: any){
         this.arbol = this.arbolSeccionado

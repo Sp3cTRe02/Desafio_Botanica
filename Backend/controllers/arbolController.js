@@ -4,6 +4,7 @@ const { StatusCodes } = require('http-status-codes')
 const {subirArchivo} = require('../helpers/subir-archivo')
 const fs = require('fs')
 const path = require('path')
+const { kMaxLength } = require('buffer')
 require('dotenv').config()
 
 /**
@@ -384,7 +385,7 @@ const getRuta = async (req = request, res = response) => {
         for(let i = 0; i < ubicaciones.length; i++){
             const lat = ubicaciones[i].dataValues.latitud
             const long = ubicaciones[i].dataValues.longitud
-            const distancia = Math.sqrt((lat - latitud) ** 2 + (long - longitud) ** 2) // formula de distancia entre dos puntos 
+            const distancia = calcularDistaciaEntreDosPuntos(latitud, longitud, lat, long) 
             if (distancia <= radio) {
                 ubicacionesDentro.push(ubicaciones[i])
             }
@@ -404,6 +405,15 @@ const getRuta = async (req = request, res = response) => {
     }
 }
 
+const calcularDistaciaEntreDosPuntos = (lat1, lon1, lat2, lon2) => {
+    let theta = lon1 - lon2
+    let distancia = 60 * 1.1515 * (180/Math.PI) * Math.acos(Math.sin(lat1 *( Math.PI/180))
+    * Math.sin(lat2 * (Math.PI/180)) + Math.cos(lat1 * (Math.PI/180)) * 
+    Math.cos(lat2 * (Math.PI/180)) * Math.cos(theta * (Math.PI/180)))
+
+    return Math.round(distancia * 1.609344, 2)
+
+}
 
 module.exports = {
 
