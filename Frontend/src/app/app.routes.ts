@@ -29,7 +29,7 @@ export const routes: Routes = [
     },
 
     {
-      path : 'ruta',
+      path : 'rutas',
       component: RutasComponent
     },
 

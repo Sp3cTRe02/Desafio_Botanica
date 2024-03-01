@@ -94,14 +94,12 @@ export class ArbolGeneralComponent implements OnInit{
   obtenerDatosArbol(idArbol:number){
     this.arbolService.getInformacionArbol(idArbol).subscribe((response: any) => {
       this.arbol = response.arbol.contenido[0]
-      console.log(this.arbol)
     })
   }
 
   obtenerTopCiudadesArbol(idArbol: number): void {
     this.arbolService.getTopCiudadesArbol(idArbol).subscribe((response: any) => {
       this.ciudades = response.ciudades.ubicaciones;
-      console.log(this.ciudades.length)
     });
 
   }

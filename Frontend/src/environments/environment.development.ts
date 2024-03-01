@@ -41,7 +41,8 @@ export const arbolRoutes = {
     addUbicacion: "/ubicacion",
     subirFotoArbol: "/imagen",
     galeriaArbol: "/galeria",
-    topCiudadesArbol: "/ciudades"
+    topCiudadesArbol: "/ciudades",
+    rutasArbol: "/ruta",
 }
 
 export const arbolesRoutes = {
