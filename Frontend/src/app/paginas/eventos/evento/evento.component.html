@@ -34,8 +34,8 @@
             <div class="card card-event">
                 <div class="card-body">
                     <h3 class="card-title text-bold">Plazas libres</h3>
-                    <h4 class="card-text">50</h4>
-                    <button class="btn btn-primary">Participar</button>
+                    <h4 class="card-text">{{plazasRestantes}}</h4>
+                    <button class="btn btn-primary" (click)="descargarPDF()">Participar</button>
                 </div>
             </div>
         </div>

@@ -4,6 +4,7 @@ import { EventoGet } from '../interfaces/eventos.interface';
 import { EventosService } from '../services/eventos.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-evento',
@@ -32,6 +33,8 @@ export class EventoComponent {
         ap2: ""
     }
 
+    plazasRestantes: number = 0
+
     constructor(private eventosService: EventosService, private route: ActivatedRoute,
         private router: Router) {
         this.router.events.pipe(
@@ -39,8 +42,9 @@ export class EventoComponent {
         ).subscribe(() => {
             window.scrollTo(0, 0);
             this.eventoId = this.route.snapshot.params['id'];
-            this.obtenerInfoEvento(this.eventoId);
+            this.obtenerInfoEvento(this.eventoId)
             this.obtenerOrganizador(this.eventoId)
+            this.obtenerPlazas(this.eventoId)
         })
 
     }
@@ -60,4 +64,30 @@ export class EventoComponent {
 
         })
     }
+
+    obtenerPlazas(idEvento: number) {
+        this.eventosService.getPlazasRestantes(idEvento).subscribe((response: any) => {
+            this.plazasRestantes = response.data.plazasRestantes
+
+        })
+    }
+
+    descargarPDF() {
+        this.eventosService.descargarPDF().subscribe((response: HttpResponse<Blob>) => {
+            const contentDisposition = response.headers.get('content-disposition');
+            let matches = null;
+            if (contentDisposition) {
+                matches = /filename="?([^"\\]+)"?/.exec(contentDisposition);
+            }
+            const nombreArchivo = matches && matches.length > 1 ? matches[1] : 'detalles-del-ticket.pdf';
+
+            const blob = response.body as Blob;
+            const enlaceDescarga = document.createElement('a');
+            enlaceDescarga.download = nombreArchivo;
+            enlaceDescarga.href = window.URL.createObjectURL(blob);
+            enlaceDescarga.click();
+        });
+    }
+
+
 }

@@ -115,12 +115,13 @@ $border-color_2: #0056b3;
             height: 50px;
         }
     }
+
+    .dropdown-menu {
+        left: 18.5% !important;
+        transform: translateX(-50%); 
+    }
 }
 
 
 
 
-.dropdown-menu {
-    left: 18.5% !important;
-    transform: translateX(-50%); /* Centra el menú desplegable horizontalmente */
-}

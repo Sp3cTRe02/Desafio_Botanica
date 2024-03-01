@@ -44,8 +44,35 @@ class eventosConexion {
             SELECT nombre,ap1,ap2 FROM usuarios usu
             JOIN organizadoreventos oe
                 ON usu.id = oe.idUsuario
-            WHERE oe.idEvento = ${idEvento}`,{type:QueryTypes.SELECT})
+            WHERE oe.idEvento = ${idEvento}`, { type: QueryTypes.SELECT })
             return resultado
+        } catch (error) {
+            throw error
+        }
+    }
+
+    static getPlazasOcupadas = async (idEvento) => {
+        try {
+
+            const count = await models.ParticipaEvento.count({
+                where: { idEvento: idEvento }
+            })
+
+            return count
+
+        } catch (error) {
+            throw error
+        }
+    }
+
+    static getTotalPlazas = async (idEvento) => {
+        try {
+            const total = await models.Evento.findOne({
+                where: { id: idEvento },
+                attributes: ['cantidadMax']
+            })
+
+            return total
         } catch (error) {
             throw error
         }

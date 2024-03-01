@@ -1,5 +1,7 @@
 const { StatusCodes } = require('http-status-codes')
 const arbolesConexion = require('../database/arbolesConexion')
+const QRCode = require('qrcode');
+const PDFDocument = require('pdfkit');
 
 /**
  * @David_Trujillo

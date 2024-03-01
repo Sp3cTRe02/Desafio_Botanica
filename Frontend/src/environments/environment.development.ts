@@ -63,4 +63,6 @@ export const contenidoRoutes = {
 export const eventosRoutes = {
     eventoGet:"/",
     organizador: "/organizador/",
+    plazas: "/plazas/",
+    pdf: "/pdf/descargar-pdf"
 }
