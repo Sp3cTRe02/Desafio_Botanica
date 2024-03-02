@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-perfildropdown',
@@ -16,6 +17,10 @@ import { RouterLink } from '@angular/router';
 export class PerfildropdownComponent {
   nombreUsuario: string | null = ''
 
+  constructor(public authService: AuthService){
+
+  }
+
   ngOnInit(): void {
     const usuarioJSON = sessionStorage.getItem('usuario');
     this.nombreUsuario = usuarioJSON ? JSON.parse(usuarioJSON).nombre : null;
@@ -24,4 +29,5 @@ export class PerfildropdownComponent {
   obtenerInicial(nombre: string | null): string {
     return nombre ? nombre.charAt(0).toUpperCase() : '';
   }
+  
 }

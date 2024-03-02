@@ -15,6 +15,10 @@ export class EventosService {
     return this.http.get<EventoGet>(environment.baseUrl + environment.eventosEndPoint + eventosRoutes.eventoGet)
   }
 
+  getMisEventos(): Observable<any>{
+    return this.http.get<any>(environment.baseUrl + environment.eventosEndPoint + eventosRoutes.misEventos, {params : {auth : true}})
+  }
+
   getInfoEvento(idEvento: number) {
     return this.http.get<EventoGet>(environment.baseUrl + environment.eventosEndPoint + eventosRoutes.eventoGet + idEvento)
   }
@@ -30,8 +34,13 @@ export class EventosService {
   descargarPDF(): Observable<HttpResponse<Blob>> {
     return this.http.get('http://localhost:9090/api/eventos/pdf/descargar-pdf', {
       responseType: 'blob',
-      observe: 'response' // Permite observar toda la respuesta, incluyendo los encabezados
+      observe: 'response' 
     });
   }
+
+  modificarEvento(idEvento:number,formData:FormData){
+    return this.http.put<any>(environment.baseUrl + environment.eventosEndPoint + eventosRoutes.eventoPut+idEvento, formData,  { params: { auth: 'true' } })
+  }
+
 
 }

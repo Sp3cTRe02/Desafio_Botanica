@@ -171,11 +171,9 @@ class contenidoController {
                 }
     
             } else {
-                const imagen = await contenidoConexion.getImagen(req.params.id);
+                const imagen = await contenidoConexion.getImagen(id);
     
                 if (imagen.dataValues.imagen != null) {
- 
-                    console.log('pasa')
                     await this.eliminarImagenAnterior(imagen);
     
                     const nombre = await subirArchivoNoticiaPost(req.files, undefined, process.env.UPLOADS_DIR_CONTENT);

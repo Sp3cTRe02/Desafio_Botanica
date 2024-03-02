@@ -42,6 +42,13 @@ export class AuthService {
     return this.loggedIn;
   }
 
+  logOut():boolean{
+    sessionStorage.removeItem('token')
+    window.location.reload()
+    return true
+  
+  }
+
   esAdmin(): boolean {
     const token = sessionStorage.getItem('token');
     if (token) {
@@ -49,6 +56,20 @@ export class AuthService {
       const roles = decodedToken.roles
       for (let i = 0; i < roles.length; i++) {
         if (roles[i].nombre === 'admin') {
+          return true
+        }
+      }
+    }
+    return false
+  }
+
+  esOrganizador():boolean{
+    const token = sessionStorage.getItem('token');
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      const roles = decodedToken.roles
+      for (let i = 0; i < roles.length; i++) {
+        if (roles[i].nombre === 'organizador') {
           return true
         }
       }

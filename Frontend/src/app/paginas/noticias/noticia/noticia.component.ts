@@ -124,7 +124,10 @@ export class NoticiaComponent implements OnInit{
             if (response.success) {
                 this.msg = 'Noticia modificada correctamente'
                 this.mostrarExito(this.msg)
-    
+                
+                setTimeout(() => {
+                    window.location.reload()
+                }, 1000)
                 
             }
         })

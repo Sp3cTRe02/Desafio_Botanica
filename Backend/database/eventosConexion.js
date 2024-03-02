@@ -94,6 +94,45 @@ class eventosConexion {
 
         return urlFoto
     }
+
+    static getMisEventos = async (idUsuario) => {
+        let resultado = null
+
+        try {
+            resultado = await models.sequelize.query(`
+            SELECT ev.id,ev.nombre,ev.descripcion,ev.imagen,ev.ubicacion FROM eventos ev 
+            JOIN organizadoreventos oe
+                ON ev.id = oe.idEvento
+            WHERE oe.idUsuario = ${idUsuario}`, { type: QueryTypes.SELECT }
+
+            )
+        } catch (error) {
+            throw error
+        }
+
+        return resultado
+    }
+
+    static modificarEvento = async (idEvento,body) =>{
+        let resultado = 0
+        try {
+            
+            const evento = await models.Evento.findByPk(idEvento)
+
+            if (!evento) {
+                resultado = 0
+            } else {
+                await evento.update(body)
+                resultado = 1
+            }
+
+        } catch (error) {
+            resultado = 0
+            console.error('Error al modificar contenido:', error)
+        }
+        return resultado;
+    }
+
 }
 
 module.exports = eventosConexion

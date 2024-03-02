@@ -18,6 +18,7 @@ import { RouterLink } from '@angular/router';
 export class EventosComponent {
     eventos:EventoGet[] = []
 
+
     constructor(private eventosService:EventosService){
         this.obtenerEventos()
     }
@@ -27,4 +28,6 @@ export class EventosComponent {
             this.eventos = response.data.eventos
         })
     }
+
+
 }

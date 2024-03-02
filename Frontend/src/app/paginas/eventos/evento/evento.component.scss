@@ -2,7 +2,7 @@
 @import url(../../noticias/noticia/noticia.component.scss);
 .event-container {
     padding: 150px;
-    max-width: 1400px;
+    max-width: 1500px;
     margin: 0 auto;
 }
 
@@ -20,6 +20,10 @@
             border: solid;
         }
     }
+}
+
+input{
+    max-width: 500px;
 }
 
 .card {

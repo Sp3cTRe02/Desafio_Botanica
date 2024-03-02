@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
 import { MenuComponent } from "../../../shared/menu/menu.component";
-import { EventoGet } from '../interfaces/eventos.interface';
+import { EventoGet, EventoPut } from '../interfaces/eventos.interface';
 import { EventosService } from '../services/eventos.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { FileUploadModule } from "primeng/fileupload";
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 import { HttpResponse } from '@angular/common/http';
 
 @Component({
@@ -11,7 +16,8 @@ import { HttpResponse } from '@angular/common/http';
     standalone: true,
     templateUrl: './evento.component.html',
     styleUrl: './evento.component.scss',
-    imports: [MenuComponent]
+    imports: [CommonModule,MenuComponent,FormsModule,FileUploadModule,ToastModule],
+    providers: [MessageService]
 })
 export class EventoComponent {
     evento: EventoGet = {
@@ -33,10 +39,17 @@ export class EventoComponent {
         ap2: ""
     }
 
+    eventoEditar: EventoPut = {
+        nombre: '',
+        descripcion: ''
+    }
+
     plazasRestantes: number = 0
+    modoEdicion: boolean = false
+    msg: string = '';
 
     constructor(private eventosService: EventosService, private route: ActivatedRoute,
-        private router: Router) {
+        private router: Router,private msgService: MessageService) {
         this.router.events.pipe(
             filter((event: any) => event instanceof NavigationEnd)
         ).subscribe(() => {
@@ -72,6 +85,39 @@ export class EventoComponent {
         })
     }
 
+    alternarModoEdicion() {
+        this.modoEdicion = !this.modoEdicion;
+    }
+
+    modificarEvento(event:any){
+        const formData = new FormData()
+        if(event.files[0] == null){
+            formData.append('archivo', 'null')
+        }else {
+           formData.append('archivo', event.files[0], event.files[0].name);
+        }
+
+        this.eventoEditar.nombre=this.evento.nombre
+        this.eventoEditar.descripcion= this.evento.descripcion
+
+        formData.append('nombre',this.eventoEditar.nombre)
+        formData.append('descripcion',this.eventoEditar.descripcion)
+
+        this.eventosService.modificarEvento(this.eventoId,formData).subscribe((response:any)=>{
+            if (response.success) {
+                this.msg = 'Evento modificado correctamente'
+                this.mostrarExito(this.msg)
+                
+                setTimeout(() => {
+                    window.location.reload()
+                }, 1000)
+                
+            }
+        })
+    }
+
+
+
     descargarPDF() {
         this.eventosService.descargarPDF().subscribe((response: HttpResponse<Blob>) => {
             const contentDisposition = response.headers.get('content-disposition');
@@ -89,5 +135,8 @@ export class EventoComponent {
         });
     }
 
+    mostrarExito(msg: string) {
+        this.msgService.add({ severity: 'success', summary: 'Éxito', detail: msg });
+    }
 
 }

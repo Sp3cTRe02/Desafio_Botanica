@@ -79,37 +79,39 @@ class contenidoConexion {
         let resultado = 0
         try {
             
-            const usuario = await models.Contenido.findByPk(idContenido)
+            const contenido = await models.Contenido.findByPk(idContenido)
 
-            if (!usuario) {
+            if (!contenido) {
                 resultado = 0
             } else {
-                await usuario.update(body)
+                await contenido.update(body)
                 resultado = 1
             }
 
         } catch (error) {
             resultado = 0
-            console.error('Error al modificar usuario:', error)
+            console.error('Error al modificar contenido:', error)
         }
+
+        return resultado
     }
 
 
     static eliminarContenido = async (idContenido) => {
         let resultado = 0
         try {
-            const usuario = await models.Contenido.findByPk(idContenido)
+            const contenido = await models.Contenido.findByPk(idContenido)
 
-            if (!usuario) {
+            if (!contenido) {
                 resultado = 0
             } else {
-                await usuario.destroy()
+                await contenido.destroy()
                 resultado = 1
             }
 
         } catch (error) {
             resultado = 0
-            console.error('Error al eliminar usuario:', error)
+            console.error('Error al eliminar contenido:', error)
         }
     }
 
@@ -143,18 +145,18 @@ class contenidoConexion {
     static modificarContenidoInicio = async (idContenido, body) => {
         let resultado = 0
         try {
-            const usuario = await models.ContenidoAuxiliar.findByPk(idContenido)
+            const contenido = await models.ContenidoAuxiliar.findByPk(idContenido)
 
-            if (!usuario) {
+            if (!contenido) {
                 resultado = 0
             } else {
-                await usuario.update(body)
+                await contenido.update(body)
                 resultado = 1
             }
 
         } catch (error) {
             resultado = 0
-            console.error('Error al modificar usuario:', error)
+            console.error('Error al modificar contenido:', error)
         }
     }
 }

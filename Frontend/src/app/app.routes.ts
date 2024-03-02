@@ -14,6 +14,7 @@ import {loggedGuard} from "./shared/guards/logged.guard";
 import { PerfilComponent } from './shared/menu/perfil/perfil.component';
 import { EventosComponent } from './paginas/eventos/eventos.component';
 import { EventoComponent } from './paginas/eventos/evento/evento.component';
+import { MisEventosComponent } from './paginas/eventos/mis-eventos/mis-eventos.component';
 
 
 export const routes: Routes = [
@@ -68,7 +69,6 @@ export const routes: Routes = [
     {
         path: 'perfil',
         component: PerfilComponent,
-        canActivate: [roleGuard]
     },
 
     {
@@ -79,6 +79,11 @@ export const routes: Routes = [
     {
         path: 'eventos/:id',
         component: EventoComponent
+    },
+
+    {
+        path: 'mis-eventos',
+        component: MisEventosComponent
     },
 
 

@@ -9,3 +9,8 @@ export interface EventoGet{
     ubicacion:number;
     imagen:string | null
 }
+
+export interface EventoPut{
+    nombre:string;
+    descripcion:string;
+}
