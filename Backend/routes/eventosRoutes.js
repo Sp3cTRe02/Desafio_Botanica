@@ -10,8 +10,8 @@ router.get('/organizador/:id',evento.getOrganizador)
 router.get('/plazas/:id',evento.getPlazasRestantes)
 router.get('/ev/mis-eventos',[midsJWT.validarJWT],evento.getMisEventos)
 router.get('/pdf/descargar-pdf',evento.descargarPDF)
-
 router.put('/:id', evento.modificarEvento)
+router.post('/participar/:id', [midsJWT.validarJWT], evento.participarEvento)
 
 
 module.exports = router

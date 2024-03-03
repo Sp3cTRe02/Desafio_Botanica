@@ -133,6 +133,40 @@ class eventosConexion {
         return resultado;
     }
 
+    static participarEvento = async(body)=>{
+        let resultado = 0;
+    
+        try {
+            await models.ParticipaEvento.create(body);
+            resultado = 1;
+        } catch (error) {
+            throw error;
+        }
+    
+        return resultado;
+
+    }
+    static getDetallesEntradas = async () => {
+        let resultado = null;
+    
+        try {
+            resultado = await models.sequelize.query(`
+                SELECT *
+                FROM participaeventos
+                WHERE DATE(fechaParticipacion) = CURDATE()
+                AND fechaParticipacion = (
+                    SELECT MAX(fechaParticipacion) 
+                    FROM participaeventos
+                    WHERE DATE(fechaParticipacion) = CURDATE()
+                )
+            `);
+        } catch (error) {
+            throw error
+        }
+    
+        return resultado;
+    }
+
 }
 
 module.exports = eventosConexion

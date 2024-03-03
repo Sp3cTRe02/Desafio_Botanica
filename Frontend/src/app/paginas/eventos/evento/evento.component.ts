@@ -1,22 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { MenuComponent } from "../../../shared/menu/menu.component";
-import { EventoGet, EventoPut } from '../interfaces/eventos.interface';
+import { EventoGet, EventoPost, EventoPut } from '../interfaces/eventos.interface';
 import { EventosService } from '../services/eventos.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule } from '@angular/forms';
 import { FileUploadModule } from "primeng/fileupload";
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { HttpResponse } from '@angular/common/http';
+import { QuillModule } from 'ngx-quill';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Table } from 'primeng/table';
 
 @Component({
     selector: 'app-evento',
     standalone: true,
     templateUrl: './evento.component.html',
     styleUrl: './evento.component.scss',
-    imports: [CommonModule,MenuComponent,FormsModule,FileUploadModule,ToastModule],
+    imports: [CommonModule, MenuComponent, FormsModule, FileUploadModule,
+        ToastModule, QuillModule],
     providers: [MessageService]
 })
 export class EventoComponent {
@@ -44,12 +48,36 @@ export class EventoComponent {
         descripcion: ''
     }
 
+    eventoPost:EventoPost = {
+        cantidadEntradas: 0
+    }
+
     plazasRestantes: number = 0
     modoEdicion: boolean = false
     msg: string = '';
+    eventoControl = new FormControl()
+    misEventos: any[] = []
+
+    public modulesQuill = {
+        toolbar: [
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ font: [] }],
+            [{ color: [] }, { background: [] }],
+            [{ size: ['small', false, 'large', 'huge'] }],
+            [{ header: [1, 2, 3, 4, 5, 6, false] }],
+            [{ align: [] }],
+            ['blockquote', 'code-block'],
+            [{ list: 'ordered' }, { list: 'bullet' }],
+            ['link', 'image', 'video'],
+            ['clean'],
+        ]
+    }
+
+    editar: boolean = true
+    @ViewChild('participar') modalParticipar: Table | undefined
 
     constructor(private eventosService: EventosService, private route: ActivatedRoute,
-        private router: Router,private msgService: MessageService) {
+        private router: Router, private msgService: MessageService,private modalService: NgbModal) {
         this.router.events.pipe(
             filter((event: any) => event instanceof NavigationEnd)
         ).subscribe(() => {
@@ -58,6 +86,7 @@ export class EventoComponent {
             this.obtenerInfoEvento(this.eventoId)
             this.obtenerOrganizador(this.eventoId)
             this.obtenerPlazas(this.eventoId)
+            this.puedeEditar()
         })
 
     }
@@ -89,34 +118,40 @@ export class EventoComponent {
         this.modoEdicion = !this.modoEdicion;
     }
 
-    modificarEvento(event:any){
+    modificarEvento(event: any) {
         const formData = new FormData()
-        if(event.files[0] == null){
+        if (event.files[0] == null) {
             formData.append('archivo', 'null')
-        }else {
-           formData.append('archivo', event.files[0], event.files[0].name);
+        } else {
+            formData.append('archivo', event.files[0], event.files[0].name);
         }
 
-        this.eventoEditar.nombre=this.evento.nombre
-        this.eventoEditar.descripcion= this.evento.descripcion
+        this.eventoEditar.nombre = this.evento.nombre
+        this.eventoEditar.descripcion = this.evento.descripcion
 
-        formData.append('nombre',this.eventoEditar.nombre)
-        formData.append('descripcion',this.eventoEditar.descripcion)
+        formData.append('nombre', this.eventoEditar.nombre)
+        formData.append('descripcion', this.eventoEditar.descripcion)
 
-        this.eventosService.modificarEvento(this.eventoId,formData).subscribe((response:any)=>{
+        this.eventosService.modificarEvento(this.eventoId, formData).subscribe((response: any) => {
             if (response.success) {
                 this.msg = 'Evento modificado correctamente'
                 this.mostrarExito(this.msg)
-                
+
                 setTimeout(() => {
                     window.location.reload()
                 }, 1000)
-                
+
             }
         })
     }
 
+    onChangedEditor(event: any): void {
+        if (event.html) {
+            this.eventoControl.setValue(event.html);
+        }
 
+
+    }
 
     descargarPDF() {
         this.eventosService.descargarPDF().subscribe((response: HttpResponse<Blob>) => {
@@ -138,5 +173,41 @@ export class EventoComponent {
     mostrarExito(msg: string) {
         this.msgService.add({ severity: 'success', summary: 'Éxito', detail: msg });
     }
+
+
+    puedeEditar() {
+        this.eventosService.getMisEventos().subscribe((response: any) => {
+            const misEventos = response.data.eventos;
+
+            this.editar = false;
+
+            for (let i = 0; i < misEventos.length; i++) {
+                if (misEventos[i].id == this.eventoId) {
+                    if (!this.editar) {
+                        this.editar = true;
+                    }
+                }
+            }
+        });
+
+    }
+
+    participarEvento() {
+        this.eventosService.participarEvento(this.eventoId,this.eventoPost).subscribe((response: any) => {
+            if (response.success) {
+                this.msg = 'Inscripción realizada con éxito'
+                this.mostrarExito(this.msg)
+
+                /*setTimeout(() => {
+                    window.location.reload()
+                }, 1000)*/
+
+            }
+        })
+    }
+
+   
+
+    
 
 }

@@ -14,3 +14,7 @@ export interface EventoPut{
     nombre:string;
     descripcion:string;
 }
+
+export interface EventoPost{
+    cantidadEntradas:number
+}

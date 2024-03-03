@@ -31,10 +31,9 @@
                     </div>
         
                     <div class="col-lg-12 mt-4 col-desc">
-                        <h2 class="font-bold mb-3">Descripción</h2>
-                        <div class="card-body">
-                            <p class="mb-2" [innerHTML]="evento.descripcion"></p>
-                        </div>
+                        <label for="name">Descripción</label> <br>
+                        <quill-editor [modules]="modulesQuill" (onEditorChanged)="onChangedEditor($event)"
+                            [(ngModel)]="evento.descripcion" name="descripcion"></quill-editor>
                     </div>
         
                     
@@ -44,18 +43,30 @@
                         <div class="card-body">
                             <h3 class="card-title text-bold">Plazas libres</h3>
                             <h4 class="card-text">{{plazasRestantes}}</h4>
-                            <button class="btn btn-primary" (click)="descargarPDF()">Participar</button>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#participar">Participar</button>
                         </div>
                     </div>
                 </div>
     
         </div>
     </div>
+
+    <ng-template #participar let-modalParticipar>
+        <div class="modal-body p-4 py-5 p-md-5"> 
+            <h3 class="text-center mb-3">Editar familia</h3>
+        </div> 
+    </ng-template>
+
+
 } @else {
     <div class="event-container container">
         <div class="row p-4">
             <div class="col-lg-7 col-md-12 col-sm-12 col-info">
-                <button class="btn btn-primary btn-width" (click)="alternarModoEdicion()">Editar</button>
+    
+                @if(editar){
+                    <button class="btn btn-primary btn-width" (click)="alternarModoEdicion()">Editar</button>
+                }
+                
                 <div class="col-lg-12">
                     <h1 class="font-bold mb-3">{{ evento.nombre }}</h1>
                 </div>
@@ -81,7 +92,7 @@
                     </div>
                 </div>
     
-                
+    
             </div>
     
             <div class="col-lg-5 col-md-12 col-sm-12 mt-4 text-center text-bold"> 
@@ -89,10 +100,44 @@
                     <div class="card-body">
                         <h3 class="card-title text-bold">Plazas libres</h3>
                         <h4 class="card-text">{{plazasRestantes}}</h4>
-                        <button class="btn btn-primary" (click)="descargarPDF()">Participar</button>
+                        <!-- Botón para abrir el modal -->
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#participarModal">Participar</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+    <!-- Modal para participar -->
+    <div class="modal fade" id="participarModal" tabindex="-1" role="dialog" aria-labelledby="participarModalLabel" aria-hidden="true">
+        <p-toast></p-toast>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body p-4 py-5 p-md-5 wide-content"> 
+                    <h3 class="text-center mb-3">Selecciona la cantidad de billetes</h3>
+                    <form>
+                        <div class="form-group mb-2">
+                            <label for="cantidadBilletes">Cantidad de billetes:</label>
+                            <input type="number" class="form-control" id="cantidadBilletes" name="cantidadBilletes" min="1" value="1" [(ngModel)]="eventoPost.cantidadEntradas">
+                        </div>
+                        <div class="form-group mb-2"> 
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#descargarModal" (click)="participarEvento()">Aceptar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="descargarModal" tabindex="-1" role="dialog" aria-labelledby="descargarModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body p-4 py-5 p-md-5 wide-content"> 
+                    <h3 class="text-center mb-3">Descargar PDF</h3>
+                    <button type="button" class="btn btn-primary" (click)="descargarPDF()">Descargar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 }

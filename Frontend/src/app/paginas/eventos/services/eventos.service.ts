@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { EventoGet } from './../interfaces/eventos.interface';
+import { EventoGet, EventoPost } from './../interfaces/eventos.interface';
 import { contenidoRoutes, environment, eventosRoutes } from '../../../../environments/environment.development';
 
 @Injectable({
@@ -40,6 +40,10 @@ export class EventosService {
 
   modificarEvento(idEvento:number,formData:FormData){
     return this.http.put<any>(environment.baseUrl + environment.eventosEndPoint + eventosRoutes.eventoPut+idEvento, formData,  { params: { auth: 'true' } })
+  }
+
+  participarEvento(idEvento:number,eventoPost:EventoPost){
+    return this.http.post<any>(environment.baseUrl + environment.eventosEndPoint + eventosRoutes.participar+idEvento,eventoPost,  { params: { auth: 'true' } })
   }
 
 

@@ -5,7 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const QRCode = require('qrcode')
 const PDFDocument = require('pdfkit')
-const {subirArchivoEventoPost} = require('../helpers/subir-archivo-evento')
+const {subirArchivoEventoPost} = require('../helpers/subir-archivo-evento');
 
 
 class eventoController {
@@ -165,10 +165,7 @@ class eventoController {
 
             tickets.forEach((ticket, index) => {
                 doc.fontSize(20).text(`Detalles del billete ${index + 1}:`, { align: 'center' });
-                doc.fontSize(14).text(`Número de billete: ${ticket.ticketNumber}`);
-                doc.text(`Salida: ${ticket.departure}`);
-                doc.text(`Destino: ${ticket.destination}`);
-                doc.text(`Fecha: ${ticket.date}`);
+                doc.text(`Fecha: ${ticket.fechaParticipacion}`);
 
                 doc.moveDown();
                 doc.fontSize(20).text(`Código QR del billete ${index + 1}:`, { align: 'center' });
@@ -186,39 +183,26 @@ class eventoController {
 
     static descargarPDF = async (req, res) => {
         try {
-            const tickets = [
-                {
-                    ticketNumber: "ABC456",
-                    departure: "New York",
-                    destination: "Los Angeles",
-                    date: "2024-03-01",
-
-                },
-                {
-                    ticketNumber: "DEF456",
-                    departure: "Los Angeles",
-                    destination: "San Francisco",
-                    date: "2024-03-02",
-
-                }
-            ];
-
-            const qrImages = await Promise.all(tickets.map((ticket) => this.generarQR(ticket, { size: 300 })));
-
-            const pdfBuffer = await this.generarPDF(tickets, qrImages);
-
+            const tickets = await eventoConexion.getDetallesEntradas();
+            const detallesTickets = tickets[0]; 
+            console.log(detallesTickets);
+    
+            const qrImages = await Promise.all(detallesTickets.map((ticket) => this.generarQR(ticket, { size: 300 })));
+    
+            const pdfBuffer = await this.generarPDF(detallesTickets, qrImages);
+    
             res.setHeader('Content-Type', 'application/pdf');
             res.setHeader('Content-Disposition', 'attachment; filename=ticket-details.pdf');
             const pdfStream = new Readable();
             pdfStream.push(pdfBuffer);
             pdfStream.push(null);
             pdfStream.pipe(res);
-
+    
         } catch (err) {
             console.error("Error:", err);
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Error al generar el PDF");
         }
-    };
+    }
 
     static getMisEventos  = async (req, res) => {
         try {
@@ -251,7 +235,6 @@ class eventoController {
             const id = req.params.id
 
             if(req.files == null){
-                console.log('pasa por aqui 1')
                 const resultado = await this.modificarContenidoSinImagen(req, id);
 
                 if (resultado == 0) {
@@ -263,7 +246,6 @@ class eventoController {
                 const imagen = await eventoConexion.getImagen(id)
 
                 if(imagen.dataValues.imagen !=null){
-                    console.log('pasa por aqui 2')
                     await this.eliminarImagenAnterior(imagen)
                     const nombre = await subirArchivoEventoPost(req.files, undefined, process.env.UPLOADS_DIR_EVENT);
                     const ruta = `${nombre}`
@@ -273,7 +255,6 @@ class eventoController {
 
                     return this.enviarRespuesta(resultado, res)
                 } else{
-                    console.log('pasa por aqui 3')
                     const nombre = await subirArchivoEventoPost(req.files, undefined, process.env.UPLOADS_DIR_EVENT)
                     const ruta = `${nombre}`
 
@@ -312,6 +293,75 @@ class eventoController {
             return res.status(StatusCodes.OK).json({ success: true, msg: 'Evento modificado exitosamente' });
         }
     }
+
+    static participarEvento = async (req, res) => {
+        try {
+            const idUsuario = req.idToken;
+            const idEvento = req.params.id;
+    
+            const plazasTotales = await eventoConexion.getTotalPlazas(idEvento);
+            const plazasOcupadas = await eventoConexion.getPlazasOcupadas(idEvento);
+            const plazasRestantes = plazasTotales.dataValues.cantidadMax - plazasOcupadas;
+    
+            if (plazasRestantes <= 0) {
+                return res.status(StatusCodes.BAD_REQUEST).json({
+                    success: false,
+                    data: {
+                        msg: 'No quedan plazas disponibles para este evento.'
+                    }
+                });
+            }
+    
+            if (plazasOcupadas >= plazasTotales.dataValues.cantidadMax) {
+                return res.status(StatusCodes.BAD_REQUEST).json({
+                    success: false,
+                    data: {
+                        msg: 'Se alcanzó el límite de participantes para este evento.'
+                    }
+                });
+            }
+    
+            const cantidadEntradas = req.body.cantidadEntradas;
+    
+            const inserciones = [];
+    
+            for (let i = 0; i < cantidadEntradas; i++) {
+
+                const fechaActual = new Date()
+                fechaActual.setHours(fechaActual.getHours() + 1)
+
+                const contenido = {
+                    ...req.body,
+                    idUsuario: idUsuario,
+                    idEvento: idEvento,
+                    fechaParticipacion:fechaActual
+
+                };
+                inserciones.push(eventoConexion.participarEvento(contenido));
+            }
+    
+            // Espera a que todas las inserciones se completen
+            await Promise.all(inserciones);
+    
+
+            console.log("Contenido registrado correctamente");
+            return res.status(StatusCodes.CREATED).json({
+                success: true,
+                data: {
+                    msg: 'Registrado correctamente',
+                }
+            });
+    
+        } catch (error) {
+            console.error("Error en el servidor al registrar contenido:", error);
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                success: false,
+                msg: 'Error en el servidor al registrar contenido.',
+                sqlMessage: error
+            });
+        }
+    };
+    
 
 }
 

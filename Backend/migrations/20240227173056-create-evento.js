@@ -14,7 +14,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       descripcion: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT('medium')
       },
       fechaInicio: {
         allowNull: false,
