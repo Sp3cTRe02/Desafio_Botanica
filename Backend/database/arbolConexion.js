@@ -189,6 +189,43 @@ const getFoto = async (id) => {
     return urlFoto
 }
 
+const getTopUbicacionesArbol = async (idArbol) => {
+    let resultado = 0 
+    bd.conectar()
+    try{
+        const ubicaciones = await models.sequelize.query(
+            `select ub.ciudad , count(ub.ciudad) as cantidad
+            from ubicaciones ub
+            join arboles arb on ub.idArbol = arb.id
+            where arb.id = ${idArbol} 
+            group by ub.ciudad
+            order by cantidad desc limit 3`
+        )
+        resultado = ubicaciones
+
+
+    }catch (error){
+        if (error instanceof Sequelize.ValidationError) {
+            console.log('error')
+        }else{
+            console.log('Error desconocido')
+        }
+        throw error
+    }
+    bd.desconectar()
+    return resultado
+}
+
+const getUbicaciones = async() => {
+    let ubicaciones = []
+    try{
+        ubicaciones = await models.Ubicacion.findAll()
+    }catch (error){
+        console.log('Error al obtener ubicaciones')
+        throw error
+    }
+    return ubicaciones
+}
 
 
 module.exports = {
@@ -201,5 +238,7 @@ module.exports = {
     addUbicacionArbol,
     subirImagenArbol,
     getRutaImagenes,
-    getFoto
+    getFoto,
+    getTopUbicacionesArbol,
+    getUbicaciones
 }

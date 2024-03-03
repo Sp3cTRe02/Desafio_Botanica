@@ -3,19 +3,23 @@ const Conexion = require('../database/perfilConexion')
 const { StatusCodes } = require('http-status-codes')
 
 /**
- * @author @Ismael
+ * @author @Ismael , @Jaime_Rafael
  * @param {*} req 
  * @param {*} res 
  */
 const getUsuarioPorId = async (req = request, res= response) => {
   try {
     
-    const { id } = req.params;
-    const usuario = await Conexion.obtenerUsuarioPorId(id);
+    const id = req.idToken
+    let usuario = await Conexion.obtenerUsuarioPorId(id);
     
     if (!usuario) {
       return res.status(StatusCodes.NOT_FOUND).json({ message: 'Usuario no encontrado' });
+    }else{
+      const imagen = process.env.URL_PETICION + process.env.PORT + '/api/cliente/fotoPerfil/' + usuario.foto;
+      usuario.foto =  imagen;
     }
+
     return res.status(StatusCodes.OK).json(usuario);
   } catch (error) {
     console.error('Error al obtener el perfil:', error);
@@ -25,14 +29,26 @@ const getUsuarioPorId = async (req = request, res= response) => {
 
 const updateUsuarioPorId = async (req = request, res = response) => {
   try {
-    const { id } = req.params;
+    const id = req.idToken;
     const { body } = req;
     const usuario = await Conexion.actualizarUsuarioPorId(id, body);
 
+   
     if (usuario === 0) {
-      return res.status(StatusCodes.NOT_FOUND).json({ message: 'Usuario no encontrado' });
+      const response = {
+        success: false,
+        data: null,
+        message: 'Usuario no encontrado'
+      }
+      return res.status(StatusCodes.NOT_FOUND).json(response);
     } else {
-      return res.status(StatusCodes.OK).json({ message: 'Usuario actualizado con éxito' });
+      const response = {
+        success: true,
+        data: {
+          usuario
+        }
+      }
+      return res.status(StatusCodes.OK).json(response);
     }
   } catch (error) {
     console.error('Error al actualizar el usuario:', error);

@@ -3,15 +3,18 @@ const { Sequelize } = require('sequelize')
 
 /**
  * @David_Trujillo
+ * @Jaime_Rafael para getArbolesGeneral(para las fotos)
  */
 
 class ArbolesConexion{
     static getArbolesGeneral = async () => {
         try {
             const resultado = await models.sequelize.query(
-                `SELECT arb.id, arb.nombre, arb.epFloracion, fam.nombre AS nombreFam 
+                `SELECT arb.id, arb.nombre, arb.epFloracion, arb.foto ,fam.nombre AS nombreFam 
                 FROM arboles arb 
-                JOIN familias fam ON arb.idFamilia = fam.id`,
+                JOIN familias fam ON arb.idFamilia = fam.id
+                WHERE arb.desactivado = 0
+                ORDER BY arb.id`,
                 { type: Sequelize.QueryTypes.SELECT }
             );
     
@@ -24,7 +27,13 @@ class ArbolesConexion{
 
     static getInformacionArbol = async (idArbol) =>{
         try{
-            const resultado = await models.Arbol.findByPk(idArbol)
+            const resultado = await models.sequelize.query(
+                `SELECT arb.id, arb.nombre, arb.epFloracion, arb.descripcion, arb.foto, fam.nombre AS nombreFam 
+                FROM arboles arb 
+                JOIN familias fam ON arb.idFamilia = fam.id
+                WHERE arb.id = ${idArbol}`,
+                { type: Sequelize.QueryTypes.SELECT }
+            )
             return resultado
         }catch(error){
             throw error

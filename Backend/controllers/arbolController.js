@@ -4,6 +4,7 @@ const { StatusCodes } = require('http-status-codes')
 const {subirArchivo} = require('../helpers/subir-archivo')
 const fs = require('fs')
 const path = require('path')
+const { kMaxLength } = require('buffer')
 require('dotenv').config()
 
 /**
@@ -350,6 +351,70 @@ const cargarImagenArbol = async (req = request, res = response) => {
     }
 }
 
+const getTopCiudadesArbol = async (req = request, res = response) => {
+    try {
+        const id = req.params.id
+        let ubicaciones = await Conexion.getTopUbicacionesArbol(id)
+        ubicaciones = ubicaciones[0]
+        const response = {
+            success: true,
+            ciudades: {
+                ubicaciones
+            }
+        }
+
+        res.status(StatusCodes.OK).json(response)
+    } catch (error) {
+        console.log(error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            'msg': 'Error en el servidor',
+            'status': 'ERROR'
+        })
+    }
+
+}
+
+const getRuta = async (req = request, res = response) => {
+    try {
+        const radio = req.body.radio
+        const latitud = req.body.latitud
+        const longitud = req.body.longitud
+        const ubicacionesDentro = []
+        const ubicaciones = await Conexion.getUbicaciones()
+
+        for(let i = 0; i < ubicaciones.length; i++){
+            const lat = ubicaciones[i].dataValues.latitud
+            const long = ubicaciones[i].dataValues.longitud
+            const distancia = calcularDistaciaEntreDosPuntos(latitud, longitud, lat, long) 
+            if (distancia <= radio) {
+                ubicacionesDentro.push(ubicaciones[i])
+            }
+        }
+
+        res.status(StatusCodes.OK).json({
+            'msg': 'Ubicaciones encontradas',
+            'ubicaciones': ubicacionesDentro
+        })
+
+    }catch(error){
+        console.log(error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            'msg': 'Error en el servidor',
+            'status': 'ERROR'
+        })
+    }
+}
+
+const calcularDistaciaEntreDosPuntos = (lat1, lon1, lat2, lon2) => {
+    let theta = lon1 - lon2
+    let distancia = 60 * 1.1515 * (180/Math.PI) * Math.acos(Math.sin(lat1 *( Math.PI/180))
+    * Math.sin(lat2 * (Math.PI/180)) + Math.cos(lat1 * (Math.PI/180)) * 
+    Math.cos(lat2 * (Math.PI/180)) * Math.cos(theta * (Math.PI/180)))
+
+    return Math.round(distancia * 1.609344, 2)
+
+}
+
 module.exports = {
 
     arbolPost,
@@ -360,6 +425,8 @@ module.exports = {
     addUbicacion,
     subirImagen,
     getImagenes,
-    cargarImagenArbol
+    cargarImagenArbol,
+    getTopCiudadesArbol,
+    getRuta
     
 }

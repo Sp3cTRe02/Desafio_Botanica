@@ -222,7 +222,7 @@ const subirImagenUsuario = async (req = request, res = response) => {
             }
 
             const nombre = await subirArchivo(req.files, undefined, process.env.UPLOADS_DIR) 
-            const ruta = `${process.env.UPLOADS_PATH}${process.env.UPLOADS_DIR}/${nombre}`
+            const ruta = `${nombre}`
             const cod = await Conexion.subirImagenUsuario(ruta, 1)
         
             if(cod !== 1){
@@ -262,7 +262,29 @@ const subirImagenUsuario = async (req = request, res = response) => {
     }
 }
 
+const getFotoPerfil = async (req = request, res = response) => {
+    const nombre = req.params.nombre
+    const ruta = path.join(__dirname, process.env.UPLOADS_PATH, process.env.UPLOADS_DIR, nombre)
+    try{
+        if(fs.existsSync(ruta)){
+            res.sendFile(ruta)
+        }else{
+            res.status(StatusCodes.NOT_FOUND).json({
+                'msg': 'Imagen no encontrada',
+                'status': 'ERROR'
+            })
+        }
+    }catch(error){
+        console.log(error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            'msg': 'Error en el servidor',
+            'status': 'ERROR',
+            'error': error
+        })
+    }
+}
+
 module.exports = {
     usuarioPost,usuarioGet,usuarioDelete,usuarioPut, 
-    addRol, removeRol, subirImagenUsuario
+    addRol, removeRol, subirImagenUsuario, getFotoPerfil                                            
 }

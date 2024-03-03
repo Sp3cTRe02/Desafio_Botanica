@@ -28,7 +28,9 @@ export const usuarioRoutes = {
     usuariobase: "/usuario",
     addRol: "/addRol",
     deleteRol: "/deleteRol",
-    subirImagen : "/subirImagen/"
+    subirImagen : "/subirImagen/",
+    getPerfil : "/perfil",
+    updatePerfil : "/perfil",
 }
 
 export const adminRoutes = {
@@ -41,7 +43,9 @@ export const arbolRoutes = {
     arbolesPut: "/",
     addUbicacion: "/ubicacion",
     subirFotoArbol: "/imagen",
-    galeriaArbol: "/galeria"
+    galeriaArbol: "/galeria",
+    topCiudadesArbol: "/ciudades",
+    rutasArbol: "/ruta",
 }
 
 export const arbolesRoutes = {
