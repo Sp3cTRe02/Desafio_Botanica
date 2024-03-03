@@ -165,7 +165,15 @@ class eventoController {
 
             tickets.forEach((ticket, index) => {
                 doc.fontSize(20).text(`Detalles del billete ${index + 1}:`, { align: 'center' });
-                doc.text(`Fecha: ${ticket.fechaParticipacion}`);
+                doc.text(`Fecha de emisión: ${ticket.fechaParticipacion}`);
+                doc.text(`Nombre del evento: ${ticket.nombreEvento}`);
+                doc.text(`Fecha del evento: ${ticket.fechaInicio}`);
+                doc.text(`Ubicación: ${ticket.ubicacion}`);
+                doc.text(`Nombre: ${ticket.nombre}`);
+                doc.text(`Primer apellido: ${ticket.ap1}`);
+                doc.text(`Segundo apellido: ${ticket.ap2}`);
+
+                
 
                 doc.moveDown();
                 doc.fontSize(20).text(`Código QR del billete ${index + 1}:`, { align: 'center' });

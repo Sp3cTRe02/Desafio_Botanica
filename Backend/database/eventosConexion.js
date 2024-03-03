@@ -151,21 +151,26 @@ class eventosConexion {
     
         try {
             resultado = await models.sequelize.query(`
-                SELECT *
-                FROM participaeventos
-                WHERE DATE(fechaParticipacion) = CURDATE()
-                AND fechaParticipacion = (
+                SELECT pe.fechaParticipacion, u.nombre, u.ap1, u.ap2,
+                e.nombre AS nombreEvento, e.fechaInicio, e.ubicacion
+                FROM participaeventos pe
+                JOIN usuarios u ON pe.idUsuario = u.id
+                JOIN eventos e ON pe.idEvento = e.id
+                WHERE DATE(pe.fechaParticipacion) = CURDATE()
+                AND pe.fechaParticipacion = (
                     SELECT MAX(fechaParticipacion) 
                     FROM participaeventos
                     WHERE DATE(fechaParticipacion) = CURDATE()
                 )
             `);
         } catch (error) {
-            throw error
+            throw error;
         }
     
         return resultado;
+
     }
+    
 
 }
 
