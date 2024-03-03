@@ -236,7 +236,7 @@ const subirImagenUsuario = async (req = request, res = response) => {
         else {
             console.log('es nulo');
             const nombre = await subirArchivo(req.files, undefined, process.env.UPLOADS_DIR) 
-            const ruta = `${process.env.UPLOADS_PATH}${process.env.UPLOADS_DIR}/${nombre}`
+            const ruta = `${nombre}`
             const cod = await Conexion.subirImagenUsuario(ruta, id)
         
             if(cod !== 1){
