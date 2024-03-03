@@ -43,7 +43,9 @@ export const arbolRoutes = {
     arbolesPut: "/",
     addUbicacion: "/ubicacion",
     subirFotoArbol: "/imagen",
-    galeriaArbol: "/galeria"
+    galeriaArbol: "/galeria",
+    topCiudadesArbol: "/ciudades",
+    rutasArbol: "/ruta",
 }
 
 export const arbolesRoutes = {

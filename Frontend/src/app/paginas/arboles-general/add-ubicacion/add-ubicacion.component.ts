@@ -40,7 +40,6 @@ export class AddUbicacionComponent implements AfterViewInit{
   }
 
   ngAfterViewInit(): void {
-    console.log(this.mapDivElement)
     this.iniciarMapa()
   }
   iniciarMapa() {
@@ -69,7 +68,6 @@ export class AddUbicacionComponent implements AfterViewInit{
         let sitio = ubicacion.split(',')
         let ciudad = this.extraerCiudad(sitio[1])
         this.ubicacion.ciudad = ciudad
-        console.log(this.ubicacion)
       })
     })
   }

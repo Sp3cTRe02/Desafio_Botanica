@@ -5,12 +5,20 @@ const PDFDocument = require('pdfkit');
 
 /**
  * @David_Trujillo
+ * @Jaime_Rafael para getArbolesGeneral(para las fotos)
  */
 class arbolesController {
     static getArbolesGeneral = async (req, res) => {
         try {
             const arboles = await arbolesConexion.getArbolesGeneral()
 
+            for (let i = 0; i < arboles.length; i++) {
+                if (arboles[i].foto != null) {
+                    arboles[i].foto = process.env.URL_PETICION + process.env.PORT + "/api/arbol/galeria/" + arboles[i].foto
+                }else {
+                    arboles[i].foto = null
+                }
+            }
             const response = {
                 sucess: true,
                 data: {
@@ -36,10 +44,15 @@ class arbolesController {
         try {
             const id = req.params.id
             const contenido = await arbolesConexion.getInformacionArbol(id)
+            if(contenido[0].foto != null){
+                contenido[0].foto = process.env.URL_PETICION + process.env.PORT + "/api/arbol/galeria/" + contenido[0].foto
+            }else{
+                contenido[0].foto = null
+            }
 
             const response = {
                 success: true,
-                data: {
+                arbol: {
                     contenido
                 }
             }

@@ -20,7 +20,11 @@
                     @for (item of arboles; track item.id){
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <a class="card mb-4 custom-link" [routerLink]="['/arboles', item.id]">
-                            <img src="../../../assets/fondo.jpg" class="card-img-top" alt="Tree Image">
+                            @if(item.foto != null){
+                                <img src="{{ item.foto }}" class="card-img-top" alt="Tree Image">
+                            } @else{
+                              <img src="../../../assets/fondo.jpg" class="card-img-top" alt="Tree Image">
+                            }
                             <div class="card-body text-center">
                                 <h5 class="card-title">{{ item.nombre }}</h5>
                                 <p class="card-text">

@@ -15,6 +15,8 @@ import { PerfilComponent } from './shared/menu/perfil/perfil.component';
 import { EventosComponent } from './paginas/eventos/eventos.component';
 import { EventoComponent } from './paginas/eventos/evento/evento.component';
 import { MisEventosComponent } from './paginas/eventos/mis-eventos/mis-eventos.component';
+import {RutasComponent} from "./paginas/rutas/rutas/rutas.component";
+
 
 
 export const routes: Routes = [
@@ -29,6 +31,11 @@ export const routes: Routes = [
     {
         path: 'arboles/:id',
         component: ArbolGeneralComponent
+    },
+
+    {
+      path : 'rutas',
+      component: RutasComponent
     },
 
     {
