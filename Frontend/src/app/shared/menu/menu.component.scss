@@ -79,6 +79,8 @@ $border-color_2: #0056b3;
     transition: 0.1s ease-in-out;
 }
 
+
+
 .navbar-toggler {
     border: none;
     outline: none;
@@ -113,5 +115,13 @@ $border-color_2: #0056b3;
             height: 50px;
         }
     }
+
+    .dropdown-menu {
+        left: 18.5% !important;
+        transform: translateX(-50%); 
+    }
 }
+
+
+
 

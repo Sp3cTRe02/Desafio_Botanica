@@ -1,0 +1,69 @@
+@import url(../../arboles-general/arbol-general/arbol-general.component.scss);
+@import url(../../noticias/noticia/noticia.component.scss);
+.event-container {
+    padding: 150px;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+
+    img {
+        width: 500px;
+        height: 375px;
+        object-fit: cover;
+
+        .card {
+            margin-top: 50px;
+            border: solid;
+        }
+    }
+}
+
+input{
+    max-width: 500px;
+}
+
+.card {
+    margin-top: 50px;
+    background-color: var(--background-color_8);
+}
+
+.card-madeby,
+.card-event {
+    max-width: 500px;
+    margin-top: 50px;
+    padding: 20px;
+}
+
+.card-event {
+    display: flex;
+    .card-text {
+        text-align: center;
+    }
+
+    .btn{
+        margin-top: 15px;
+    }
+}
+
+.col-desc {
+    max-width: 500px;
+}
+
+.text-bold {
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .event-container {
+        margin-top: 95px;
+        padding: 50px;
+    }
+
+    .card {
+        margin-top: 0;
+    }
+}

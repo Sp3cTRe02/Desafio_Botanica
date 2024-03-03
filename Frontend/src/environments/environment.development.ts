@@ -8,6 +8,7 @@ export const environment = {
     arbolEndpoint: '/arboles',
     arbolesEndPoint: '/arbol',
     contenidoEndPoint: '/contenido',
+    eventosEndPoint: '/eventos',
     mapBoxToken: 'pk.eyJ1IjoiZGF2aXRydTYwIiwiYSI6ImNsc3JucXNhazA1cnEyaW1sZngxa2pqNHIifQ.vslWBUZtPTf7cgGyqDQpvg'
 };
 
@@ -27,7 +28,9 @@ export const usuarioRoutes = {
     usuariobase: "/usuario",
     addRol: "/addRol",
     deleteRol: "/deleteRol",
-    subirImagen : "/subirImagen/"
+    subirImagen : "/subirImagen/",
+    getPerfil : "/perfil",
+    updatePerfil : "/perfil",
 }
 
 export const adminRoutes = {
@@ -55,6 +58,17 @@ export const contenidoRoutes = {
     contenidoPost: "/",
     contenidoGet: "/",
     contenidoPut: "/",
-    ultimasNoticiasGet: "/ultimas-noticias"
+    ultimasNoticiasGet: "/ultimas-noticias",
+    infoInicio: "/inicio",
+    inicioPut: "/inicio/"
 }
 
+
+export const eventosRoutes = {
+    eventoGet:"/",
+    eventoPut:"/",
+    misEventos:"/ev/mis-eventos",
+    organizador: "/organizador/",
+    plazas: "/plazas/",
+    pdf: "/pdf/descargar-pdf"
+}

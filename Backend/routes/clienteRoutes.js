@@ -41,7 +41,8 @@ router.put('/deleteRol', [midsJWT.validarJWT,midAdmin.verificarAdmin,validatorRo
 router.post('/subirImagen/', [midsJWT.validarJWT,validarArchivoSubir], controlador.subirImagenUsuario)
 
 //RUTAS ACCEDER AL PERFIL
-router.get('/perfil/:id', midsJWT.validarJWT,controladorPerfil.getUsuarioPorId); 
-router.post('/perfil/:id',midsJWT.validarJWT, controladorPerfil.updateUsuarioPorId);
+router.get('/perfil', midsJWT.validarJWT,controladorPerfil.getUsuarioPorId); 
+router.post('/perfil',midsJWT.validarJWT, controladorPerfil.updateUsuarioPorId);
+router.get('/fotoPerfil/:nombre', controlador.getFotoPerfil);
 
 module.exports = router

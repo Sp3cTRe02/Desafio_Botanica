@@ -11,7 +11,12 @@ import { roleGuard } from './shared/guards/role.guard';
 import { NotFoundComponent } from './shared/notFound/not-found/not-found.component';
 import {AddUbicacionComponent} from "./paginas/arboles-general/add-ubicacion/add-ubicacion.component";
 import {loggedGuard} from "./shared/guards/logged.guard";
+import { PerfilComponent } from './shared/menu/perfil/perfil.component';
+import { EventosComponent } from './paginas/eventos/eventos.component';
+import { EventoComponent } from './paginas/eventos/evento/evento.component';
+import { MisEventosComponent } from './paginas/eventos/mis-eventos/mis-eventos.component';
 import {RutasComponent} from "./paginas/rutas/rutas/rutas.component";
+
 
 
 export const routes: Routes = [
@@ -67,6 +72,28 @@ export const routes: Routes = [
         component: UsuariosAdminComponent,
         canActivate: [roleGuard]
     },
+
+    {
+        path: 'perfil',
+        component: PerfilComponent,
+        canActivate: [loggedGuard]
+    },
+
+    {
+        path: 'eventos',
+        component: EventosComponent,
+    },
+
+    {
+        path: 'eventos/:id',
+        component: EventoComponent
+    },
+
+    {
+        path: 'mis-eventos',
+        component: MisEventosComponent
+    },
+
 
     { path: '**', component: NotFoundComponent }
 

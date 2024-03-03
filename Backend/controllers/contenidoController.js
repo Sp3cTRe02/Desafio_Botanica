@@ -1,7 +1,7 @@
 const contenidoConexion = require('../database/contenidoConexion')
 const { StatusCodes } = require('http-status-codes')
 const socketController = require('../controllers/websocketController')
-const { subirArchivoNoticia } = require('../helpers/subir-archivo-noticia')
+const { subirArchivoNoticia , subirArchivoNoticiaPost} = require('../helpers/subir-archivo-noticia')
 const path = require('path');
 const fs = require('fs');
 
@@ -12,7 +12,7 @@ const fs = require('fs');
 class contenidoController {
     static async subirImagen(req, res) {
         try {
-            const nombre = await subirArchivoNoticia(req.files, undefined, process.env.UPLOADS_DIR);
+            const nombre = await subirArchivoNoticia(req.files, undefined, process.env.UPLOADS_DIR_CONTENT);
             const ruta = `${nombre}`;
             console.log("Imagen subida exitosamente en:", ruta);
 
@@ -67,7 +67,7 @@ class contenidoController {
         try {
 
             const contenido = await contenidoConexion.getContenido()
-            for(let i=0 ; i<contenido.length; i++){
+            for (let i = 0; i < contenido.length; i++) {
                 const id = contenido[i].dataValues.id
                 const imagen = process.env.URL_PETICION + process.env.PORT + "/api/contenido/upload/" + id
                 contenido[i].dataValues.imagen = imagen
@@ -91,7 +91,7 @@ class contenidoController {
         try {
 
             const contenido = await contenidoConexion.getUltimasNoticias()
-            for(let i=0 ; i<contenido.length; i++){
+            for (let i = 0; i < contenido.length; i++) {
                 const id = contenido[i].dataValues.id
                 const imagen = process.env.URL_PETICION + process.env.PORT + "/api/contenido/upload/" + id
                 contenido[i].dataValues.imagen = imagen
@@ -120,7 +120,7 @@ class contenidoController {
             //Se hace una petición get correspondiente a mostrarImagen()
             const imagen = process.env.URL_PETICION + process.env.PORT + "/api/contenido/upload/" + id
 
-            contenido.imagen=imagen
+            contenido.imagen = imagen
 
             const response = {
                 success: true,
@@ -140,16 +140,16 @@ class contenidoController {
         try {
             const imagen = await contenidoConexion.getImagen(req.params.id);
             console.log(imagen.dataValues.imagen)
-    
+
             if (imagen) {
-                const pathImagen = path.join(__dirname, '../uploads', 'imgs', imagen.dataValues.imagen);
+                const pathImagen = path.join(__dirname, '../uploads', 'imgs/content', imagen.dataValues.imagen);
                 console.log(pathImagen);
-    
+
                 if (fs.existsSync(pathImagen)) {
                     return res.sendFile(pathImagen);
                 }
             }
-        
+
             res.status(StatusCodes.NOT_FOUND).json({ error: "No se ha encontrado la imagen" });
         } catch (error) {
             console.error('Error al mostrar la imagen:', error);
@@ -159,18 +159,67 @@ class contenidoController {
 
     static modificarContenido = async (req, res) => {
         try {
-            const id = req.params.id
-            const body = req.body
-            const usuario = await contenidoConexion.modificarContenido(id, body)
-
-            if (usuario == 0) {
-                return res.status(StatusCodes.NOT_FOUND).json({ success: false, msg: 'Contenido no encontrado' });
+            const id = req.params.id;
+    
+            if (req.files == null) {
+                const resultado = await this.modificarContenidoSinImagen(req, id);
+    
+                if (resultado == 0) {
+                    return res.status(StatusCodes.NOT_FOUND).json({ success: false, msg: 'Contenido no encontrado' });
+                } else {
+                    return res.status(StatusCodes.OK).json({ success: true, msg: 'Contenido modificado exitosamente' });
+                }
+    
             } else {
-                return res.status(StatusCodes.OK).json({ success: true, msg: 'Contenido modificado exitosamente' });
+                const imagen = await contenidoConexion.getImagen(id);
+    
+                if (imagen.dataValues.imagen != null) {
+                    await this.eliminarImagenAnterior(imagen);
+    
+                    const nombre = await subirArchivoNoticiaPost(req.files, undefined, process.env.UPLOADS_DIR_CONTENT);
+                    const ruta = `${nombre}`;
+    
+                    const resultado = await this.modificarContenidoConImagen(req, id, ruta);
+    
+                    return this.enviarRespuesta(resultado, res);
+                } else {
+                    const nombre = await subirArchivoNoticiaPost(req.files, undefined, process.env.UPLOADS_DIR_CONTENT);
+                    const ruta = `${nombre}`;
+    
+                    const resultado = await this.modificarContenidoConImagen(req, id, ruta);
+    
+                    return this.enviarRespuesta(resultado, res);
+                }
             }
+    
         } catch (error) {
             console.error('Error al modificar el usuario:', error);
             return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: 'Error en el servidor.' });
+        }
+    }
+    
+    static modificarContenidoSinImagen = async (req, id) => {
+        const noticia = { ...req.body };
+        return await contenidoConexion.modificarContenido(id, noticia);
+    }
+    
+    static eliminarImagenAnterior = async (imagen) => {
+        const rutaAnterior = path.join(__dirname, process.env.UPLOADS_PATH, process.env.UPLOADS_DIR_CONTENT, imagen.dataValues.imagen);
+        if (fs.existsSync(rutaAnterior)) {
+            fs.unlinkSync(rutaAnterior);
+        }
+    }
+    
+    static modificarContenidoConImagen = async (req, id, ruta) => {
+        const noticia = { ...req.body, imagen: ruta };
+        return await contenidoConexion.modificarContenido(id, noticia);
+    }
+    
+    static enviarRespuesta = (resultado, res) => {
+        if (resultado == 0) {
+            return res.status(StatusCodes.NOT_FOUND).json({ success: false, msg: 'Contenido no encontrado' });
+        } else {
+            return res.status(StatusCodes.OK).json({ success: true, msg: 'Contenido modificado exitosamente' });
         }
     }
 
@@ -191,6 +240,44 @@ class contenidoController {
             return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: 'Error en el servidor.' });
         }
     }
+
+
+    static getInfoInicio = async (req, res) => {
+        try {
+
+            const contenido = await contenidoConexion.getInfoInicio()
+
+            const response = {
+                success: true,
+                data: {
+                    contenido
+                }
+            }
+
+            res.status(StatusCodes.OK).json(response)
+        } catch (error) {
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: 'Error en el servidor al obtener el conte.', sqlMessage: error })
+        }
+    }
+
+
+    static modificarContenidoInicio = async (req, res) => {
+        try {
+            const id = req.params.id
+            const body = req.body
+            const usuario = await contenidoConexion.modificarContenidoInicio(id, body)
+
+            if (usuario == 0) {
+                return res.status(StatusCodes.NOT_FOUND).json({ success: false, msg: 'Contenido no encontrado' });
+            } else {
+                return res.status(StatusCodes.OK).json({ success: true, msg: 'Contenido modificado exitosamente' });
+            }
+        } catch (error) {
+            console.error('Error al modificar el usuario:', error);
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: 'Error en el servidor.' });
+        }
+    }
+
 
 
 }

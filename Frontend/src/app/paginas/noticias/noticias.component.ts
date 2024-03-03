@@ -102,7 +102,7 @@ export class NoticiasComponent implements OnInit {
 
     obtenerContenido() {
         this.noticiasService.getContenido().subscribe((response: any) => {
-            this.noticias = response.data.contenido.slice(1)
+            this.noticias = response.data.contenido
             console.log(this.noticias)
         })
     }

@@ -17,13 +17,20 @@ const validator = [
     validarCampos
 ]
 
+//Inicio
+router.get('/inicio',contenido.getInfoInicio)
+router.put('/inicio/:id',contenido.modificarContenidoInicio)
+
+//Noticias
 router.get('/', contenido.getContenido)
 router.get('/ultimas-noticias', contenido.getUltimasNoticias)
 router.get('/:id', contenido.getInfoNoticia)
 router.get('/upload/:id',contenido.mostrarImagen)
 router.post('/', [midsJWT.validarJWT,validator], contenido.crearContenido)
-router.put('/:id',contenido.modificarContenido)
+router.put('/:id', [midsJWT.validarJWT],contenido.modificarContenido)
 router.delete('/:id',[midsJWT.validarJWT, midAdmin.verificarAdmin],  contenido.eliminarContenido)
+
+
 
 
 

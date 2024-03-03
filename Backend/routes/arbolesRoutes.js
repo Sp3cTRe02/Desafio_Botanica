@@ -7,4 +7,5 @@ router.get('/:id',arboles.getInformacionArbol)
 router.get('/ubi/:id',arboles.getUbicacionesArbol)
 router.get('/fotos/:id',arboles.getFotosArbol)
 
+
 module.exports = router

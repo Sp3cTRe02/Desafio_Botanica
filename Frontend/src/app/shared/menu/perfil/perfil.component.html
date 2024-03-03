@@ -1,0 +1,49 @@
+<app-menu></app-menu>
+
+<p-toast></p-toast>
+<div class="container profile-container">
+  <div class="col-4 user-image">
+    <h2>Foto de perfil</h2>
+    @if (usuario.foto === null){
+      <button class="btn btn-outline-primary me-2 avatar" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+        {{ obtenerInicial(usuario.nombre) }}
+      </button>
+
+    } @else {
+      <img src="{{usuario.foto}}" alt="Foto de perfil" class="img-fluid avatar">
+    }
+
+    <br>
+    <app-subir-imagen-usuarios></app-subir-imagen-usuarios>
+  </div>
+
+  <div class="col-8 user-data">
+    <h2>Datos del usuario</h2>
+    <form class="formulario-datos">
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="name">Nombre</label>
+          <input type="text" class="form-control" id="name" placeholder="Nombre" [(ngModel)]="usuario.nombre" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group col-md-12">
+          <label for="ap1">1er Apellido</label>
+          <input type="text" class="form-control" id="ap1" placeholder="1er Apellido" [(ngModel)]="usuario.ap1" [ngModelOptions]="{standalone: true}">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="ap2">2do Apellido</label>
+          <input type="text" class="form-control" id="ap2" placeholder="2do Apellido" [(ngModel)]="usuario.ap2" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group col-md-12">
+          <label for="email">Correo</label>
+          <input type="email" class="form-control" id="email" placeholder="Correo" [readonly]="true" [(ngModel)]="usuario.email" [ngModelOptions]="{standalone: true}">
+        </div>
+      </div>
+      <br>
+      <button type="submit" class="btn btn-primary" (click)="actualizarPerfil()">Actualizar</button>
+    </form>
+
+  </div>
+</div>
