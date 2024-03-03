@@ -311,39 +311,37 @@ class eventoController {
             const plazasOcupadas = await eventoConexion.getPlazasOcupadas(idEvento);
             const plazasRestantes = plazasTotales.dataValues.cantidadMax - plazasOcupadas;
     
-            if (plazasRestantes <= 0) {
-                return res.status(StatusCodes.BAD_REQUEST).json({
-                    success: false,
-                    data: {
-                        msg: 'No quedan plazas disponibles para este evento.'
-                    }
-                });
-            }
-    
-            if (plazasOcupadas >= plazasTotales.dataValues.cantidadMax) {
-                return res.status(StatusCodes.BAD_REQUEST).json({
-                    success: false,
-                    data: {
-                        msg: 'Se alcanzó el límite de participantes para este evento.'
-                    }
-                });
-            }
-    
             const cantidadEntradas = req.body.cantidadEntradas;
+
+            if (cantidadEntradas <= 0) {
+                return res.status(StatusCodes.BAD_REQUEST).json({
+                    success: false,
+                    data: {
+                        msg: 'El número de entradas debe ser mayor que 0.'
+                    }
+                });
+            }
+    
+            if (plazasRestantes <= 0 || cantidadEntradas > plazasRestantes) {
+                return res.status(StatusCodes.BAD_REQUEST).json({
+                    success: false,
+                    data: {
+                        msg: 'No quedan suficientes plazas disponibles para este evento.'
+                    }
+                });
+            }
     
             const inserciones = [];
     
             for (let i = 0; i < cantidadEntradas; i++) {
-
                 const fechaActual = new Date()
                 fechaActual.setHours(fechaActual.getHours() + 1)
-
+    
                 const contenido = {
                     ...req.body,
                     idUsuario: idUsuario,
                     idEvento: idEvento,
-                    fechaParticipacion:fechaActual
-
+                    fechaParticipacion: fechaActual
                 };
                 inserciones.push(eventoConexion.participarEvento(contenido));
             }
@@ -351,7 +349,6 @@ class eventoController {
             // Espera a que todas las inserciones se completen
             await Promise.all(inserciones);
     
-
             console.log("Contenido registrado correctamente");
             return res.status(StatusCodes.CREATED).json({
                 success: true,

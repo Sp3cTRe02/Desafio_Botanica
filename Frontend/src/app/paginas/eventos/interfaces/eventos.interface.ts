@@ -16,5 +16,5 @@ export interface EventoPut{
 }
 
 export interface EventoPost{
-    cantidadEntradas:number
+    cantidadEntradas:number | null
 }

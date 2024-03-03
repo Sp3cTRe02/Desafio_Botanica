@@ -13,6 +13,7 @@ import { HttpResponse } from '@angular/common/http';
 import { QuillModule } from 'ngx-quill';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Table } from 'primeng/table';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
     selector: 'app-evento',
@@ -48,7 +49,7 @@ export class EventoComponent {
         descripcion: ''
     }
 
-    eventoPost:EventoPost = {
+    eventoPost: EventoPost = {
         cantidadEntradas: 0
     }
 
@@ -75,9 +76,11 @@ export class EventoComponent {
 
     editar: boolean = true
     @ViewChild('participar') modalParticipar: Table | undefined
+    participa: boolean = false
+    
 
     constructor(private eventosService: EventosService, private route: ActivatedRoute,
-        private router: Router, private msgService: MessageService,private modalService: NgbModal) {
+        private router: Router, private msgService: MessageService, public authService:AuthService) {
         this.router.events.pipe(
             filter((event: any) => event instanceof NavigationEnd)
         ).subscribe(() => {
@@ -193,21 +196,27 @@ export class EventoComponent {
     }
 
     participarEvento() {
-        this.eventosService.participarEvento(this.eventoId,this.eventoPost).subscribe((response: any) => {
+        this.eventosService.participarEvento(this.eventoId, this.eventoPost).subscribe((response: any) => {
             if (response.success) {
                 this.msg = 'Inscripción realizada con éxito'
+                this.participa=true
                 this.mostrarExito(this.msg)
-
-                /*setTimeout(() => {
-                    window.location.reload()
-                }, 1000)*/
+                this.eventoPost.cantidadEntradas=null
 
             }
-        })
+        },
+            (error) => {
+                this.mostrarError(error.error.data.msg)
+                this.eventoPost.cantidadEntradas=null
+            })
     }
 
-   
+    mostrarError(msg:string) {
+        console.log(msg)
+        this.msgService.add({ severity: 'error', summary: 'Error', detail: msg });
+    }
 
-    
+
+
 
 }
