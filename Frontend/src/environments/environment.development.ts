@@ -28,7 +28,9 @@ export const usuarioRoutes = {
     usuariobase: "/usuario",
     addRol: "/addRol",
     deleteRol: "/deleteRol",
-    subirImagen : "/subirImagen/"
+    subirImagen : "/subirImagen/",
+    getPerfil : "/perfil",
+    updatePerfil : "/perfil",
 }
 
 export const adminRoutes = {

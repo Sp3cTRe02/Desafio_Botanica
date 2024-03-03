@@ -1,0 +1,26 @@
+.profile-container{
+  margin-top: 150px;
+  display: flex;
+}
+
+.formulario-datos{
+  margin-left: 50px;
+  width: 50%;
+}
+.avatar{
+  width: 200px;
+  height: 200px;
+  border: double 4px #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius : 100%;
+}
+
+.user-image {
+  border: solid 1px #000;
+}
+
+.user-data{
+  border: solid 1px #000;
+}

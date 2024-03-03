@@ -40,6 +40,9 @@ export class SubirImagenUsuariosComponent {
         .subscribe((response) => {
           if (response?.status == 'OK') {
             this.mostrarExito('Imagen subida correctamente');
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000)
           } else {
             this.mostrarError('Error al subir la imagen');
           }
