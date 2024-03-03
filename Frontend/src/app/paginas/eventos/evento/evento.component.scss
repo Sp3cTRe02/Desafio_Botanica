@@ -57,6 +57,11 @@ input{
     font-weight: 600;
 }
 
+.modal-download{
+    border: none;
+    width: 100%;
+}
+
 @media (max-width: 768px) {
     .event-container {
         margin-top: 95px;

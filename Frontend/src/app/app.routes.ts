@@ -16,6 +16,7 @@ import { EventosComponent } from './paginas/eventos/eventos.component';
 import { EventoComponent } from './paginas/eventos/evento/evento.component';
 import { MisEventosComponent } from './paginas/eventos/mis-eventos/mis-eventos.component';
 import {RutasComponent} from "./paginas/rutas/rutas/rutas.component";
+import { AddEventoComponent } from './paginas/eventos/add-evento/add-evento.component';
 
 
 
@@ -94,6 +95,10 @@ export const routes: Routes = [
         component: MisEventosComponent
     },
 
+    {
+        path: 'crear-evento',
+        component: AddEventoComponent
+    },
 
     { path: '**', component: NotFoundComponent }
 

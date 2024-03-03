@@ -11,6 +11,7 @@ router.get('/plazas/:id',evento.getPlazasRestantes)
 router.get('/ev/mis-eventos',[midsJWT.validarJWT],evento.getMisEventos)
 router.get('/pdf/descargar-pdf',evento.descargarPDF)
 router.put('/:id', evento.modificarEvento)
+router.post('/',[midsJWT.validarJWT],evento.crearEvento)
 router.post('/participar/:id', [midsJWT.validarJWT], evento.participarEvento)
 
 

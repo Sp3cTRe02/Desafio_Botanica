@@ -18,3 +18,16 @@ export interface EventoPut{
 export interface EventoPost{
     cantidadEntradas:number | null
 }
+
+export interface EventoAdd{
+    idUsuario:number;
+    nombre:string;
+    descripcion:string;
+    fechaInicio:string;
+    cantidadMax:number;
+    latitud:string;
+    longitud:string;
+    ubicacion:string;
+    imagen:string
+
+}

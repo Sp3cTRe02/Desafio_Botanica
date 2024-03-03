@@ -1,0 +1,34 @@
+.container-event{
+    margin-top: 150px;
+    max-width: 1200px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 35px;
+    margin-bottom: 20px;
+    color: var(--color_1);
+    font-weight: 600;
+  }
+
+  .map-container {
+    border-radius: 10px;
+    width: 85%;
+    height: 500px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .form-group{
+    margin-top: 10px;
+  }
+  
+
+  @media (max-width: 768px){
+    .container-event {
+      padding-right: 25px;
+      padding-left: 25px;
+    }
+  
+  }

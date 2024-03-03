@@ -128,16 +128,14 @@
         </div>
     </div>
 
-    @if (participa){
-        <div class="modal fade" id="descargarModal" tabindex="-1" role="dialog" aria-labelledby="descargarModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-body p-4 py-5 p-md-5 wide-content"> 
-                        <h3 class="text-center mb-3">Descargar PDF</h3>
-                        <button type="button" class="btn btn-primary" (click)="descargarPDF()">Descargar</button>
-                    </div>
+    <ng-template #miModal let-modalEditar>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-download">
+                <div class="modal-body p-4 py-5 p-md-5 wide-content">
+                    <h3 class="text-center mb-3">Descargar PDF</h3>
+                    <button type="button" class="btn btn-primary" (click)="descargarPDF()">Descargar</button>
                 </div>
             </div>
         </div>
-    }
+    </ng-template>
 }

@@ -41,13 +41,14 @@ class eventosConexion {
     static getOrganizador = async (idEvento) => {
         try {
             const resultado = await models.sequelize.query(`
-            SELECT nombre,ap1,ap2 FROM usuarios usu
-            JOIN organizadoreventos oe
-                ON usu.id = oe.idUsuario
-            WHERE oe.idEvento = ${idEvento}`, { type: QueryTypes.SELECT })
-            return resultado
+                SELECT usu.nombre, usu.ap1, usu.ap2 FROM usuarios usu
+                JOIN eventos ev ON usu.id = ev.idUsuario
+                WHERE ev.id = ${idEvento}`, { 
+                    type: QueryTypes.SELECT 
+                });
+            return resultado;
         } catch (error) {
-            throw error
+            throw error;
         }
     }
 
@@ -101,9 +102,7 @@ class eventosConexion {
         try {
             resultado = await models.sequelize.query(`
             SELECT ev.id,ev.nombre,ev.descripcion,ev.imagen,ev.ubicacion FROM eventos ev 
-            JOIN organizadoreventos oe
-                ON ev.id = oe.idEvento
-            WHERE oe.idUsuario = ${idUsuario}`, { type: QueryTypes.SELECT }
+            WHERE ev.idUsuario = ${idUsuario}`, { type: QueryTypes.SELECT }
 
             )
         } catch (error) {

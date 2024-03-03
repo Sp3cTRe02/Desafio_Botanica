@@ -5,12 +5,37 @@ const path = require('path');
 const fs = require('fs');
 const QRCode = require('qrcode')
 const PDFDocument = require('pdfkit')
-const {subirArchivoEventoPost} = require('../helpers/subir-archivo-evento');
+const {subirArchivoEvento,subirArchivoEventoPost} = require('../helpers/subir-archivo-evento');
 
 
 class eventoController {
+
+    static async subirImagen(req, res) {
+        try {
+            const nombre = await subirArchivoEvento(req.files, undefined, process.env.UPLOADS_DIR_CONTENT);
+            const ruta = `${nombre}`;
+            console.log("Imagen subida exitosamente en:", ruta);
+
+            return ruta
+
+
+        } catch (error) {
+            console.error("Error al subir la imagen:", error);
+            throw error;
+        }
+    }
+
+
     static crearEvento = async (req, res) => {
         try {
+            let id = req.idToken
+            const rutaImagen = await eventoController.subirImagen(req, res)
+
+            const contenido = {
+                ...req.body,
+                idUsuario: id,
+                imagen: rutaImagen
+            }
 
         } catch (error) {
 
@@ -193,7 +218,6 @@ class eventoController {
         try {
             const tickets = await eventoConexion.getDetallesEntradas();
             const detallesTickets = tickets[0]; 
-            console.log(detallesTickets);
     
             const qrImages = await Promise.all(detallesTickets.map((ticket) => this.generarQR(ticket, { size: 300 })));
     

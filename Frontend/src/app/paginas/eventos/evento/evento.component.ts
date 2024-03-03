@@ -75,12 +75,13 @@ export class EventoComponent {
     }
 
     editar: boolean = true
-    @ViewChild('participar') modalParticipar: Table | undefined
+    @ViewChild('miModal') miModal: TemplateRef<any> | undefined;
     participa: boolean = false
-    
+
 
     constructor(private eventosService: EventosService, private route: ActivatedRoute,
-        private router: Router, private msgService: MessageService, public authService:AuthService) {
+        private router: Router, private msgService: MessageService, public authService: AuthService,
+        private modalService: NgbModal) {
         this.router.events.pipe(
             filter((event: any) => event instanceof NavigationEnd)
         ).subscribe(() => {
@@ -170,6 +171,8 @@ export class EventoComponent {
             enlaceDescarga.download = nombreArchivo;
             enlaceDescarga.href = window.URL.createObjectURL(blob);
             enlaceDescarga.click();
+            this.modalService.dismissAll()
+            window.location.reload()
         });
     }
 
@@ -198,20 +201,27 @@ export class EventoComponent {
     participarEvento() {
         this.eventosService.participarEvento(this.eventoId, this.eventoPost).subscribe((response: any) => {
             if (response.success) {
-                this.msg = 'Inscripción realizada con éxito'
-                this.participa=true
-                this.mostrarExito(this.msg)
-                this.eventoPost.cantidadEntradas=null
-
+                this.msg = 'Inscripción realizada con éxito';
+                this.mostrarExito(this.msg);
+                this.eventoPost.cantidadEntradas = null;
+                this.participa = true;
+                this.showModal()
+            }else{
+                
             }
-        },
-            (error) => {
-                this.mostrarError(error.error.data.msg)
-                this.eventoPost.cantidadEntradas=null
-            })
+        }, (error) => {
+            this.participa=true
+            this.mostrarError(error.error.data.msg);
+            this.eventoPost.cantidadEntradas = null;
+        });
+
     }
 
-    mostrarError(msg:string) {
+    showModal() {
+        this.modalService.open(this.miModal, { ariaLabelledBy: 'modal-basic-title' })
+    }
+
+    mostrarError(msg: string) {
         console.log(msg)
         this.msgService.add({ severity: 'error', summary: 'Error', detail: msg });
     }
