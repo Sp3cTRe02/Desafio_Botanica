@@ -93,23 +93,25 @@
 
 
         <div class="col-lg-5 col-md-12 col-sm-12 mt-4 text-center">
-            @if(!esMiEvento){
             <div class="card card-event">
                 <div class="card-body">
                     <h3 class="card-title text-bold">Plazas libres</h3>
                     <h4 class="card-text">{{plazasRestantes}}</h4>
 
-                    @if(authService.estaLoggeado()){
+                    @if(authService.estaLoggeado() && !esMiEvento){
                     <button class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#participarModal">Participar</button>
-                    } @else {
+                    } @else if (esMiEvento) {
+
+                    }
+                    @else {
                     <button class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#loginModal">Participar</button>
                     }
 
                 </div>
             </div>
-            }
+
 
             <div class="card card-loc">
                 <div class="card-body">
