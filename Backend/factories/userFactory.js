@@ -21,7 +21,7 @@ const crearUser = async (ctos = 1, pass) => {
         foto: null,
         desactivado: false,
     }
-        
+    users.push(admin)
     for (let i = 0; i < ctos; i++) {
         // log
         const pass = await bcrypt.hash('user123', 10)

@@ -1,5 +1,6 @@
 'use strict';
 const fotFactory = require('../factories/fotoFactory');
+
 /**
  * @Jaime_Rafael
  */

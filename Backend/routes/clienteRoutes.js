@@ -34,7 +34,7 @@ const validatorRol = [
 router.post('/usuario', [midsJWT.validarJWT,midAdmin.verificarAdmin,validator], controlador.usuarioPost)
 router.get('/usuario', [midsJWT.validarJWT,midAdmin.verificarAdmin], controlador.usuarioGet)
 router.delete('/usuario/:id', [midsJWT.validarJWT,midAdmin.verificarAdmin] ,controlador.usuarioDelete)
-router.put('/usuario/:id', controlador.usuarioPut)
+router.put('/usuario/:id', [midsJWT.validarJWT,midAdmin.verificarAdmin], controlador.usuarioPut)
 
 // RUTAS MODIFICAR ROL CLIENTE (token)
 router.put('/addRol', [midsJWT.validarJWT,midAdmin.verificarAdmin,validatorRol], controlador.addRol)
