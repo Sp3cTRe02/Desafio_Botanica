@@ -1,5 +1,10 @@
 const { faker, fakerES } = require('@faker-js/faker');
 
+/**
+ * @David_Trujillo
+ */
+
+
 const crearEvento = async (ctos = 1) => {
     let eventos = [];
     const usuarios = [1,2,3]

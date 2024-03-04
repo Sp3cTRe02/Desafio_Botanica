@@ -1,4 +1,9 @@
 'use strict';
+/**
+ * @David_Trujillo
+ */
+
+
 const eventoFactory = require('../factories/eventoFactory')
 
 /** @type {import('sequelize-cli').Migration} */

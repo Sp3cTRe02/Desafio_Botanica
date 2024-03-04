@@ -1,5 +1,10 @@
 const { faker} = require('@faker-js/faker')
 
+/**
+ * @David_Trujillo
+ */
+
+
 const crearNoticia = async (ctos = 1) => {
     let noticias = [];
     for (let i = 0; i < ctos; i++) {

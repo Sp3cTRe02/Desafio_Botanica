@@ -1,6 +1,11 @@
 const { QueryTypes } = require('sequelize')
 const models = require('../models/index.js')
 
+/**
+ * @David_Trujillo
+ */
+
+
 class eventosConexion {
     static crearEvento = async (body) => {
         let resultado = 0

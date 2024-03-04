@@ -2,6 +2,11 @@ const path = require('path')
 const { v4: uuidv4 } = require('uuid')
 require('dotenv').config()
 
+/**
+ * @David_Trujillo
+ */
+
+
 const subirArchivoNoticia = ( files, extensionesValidas = ['png', 'jpg', 'jpeg', 'gif'], carpeta = '' ) => {
     return new Promise((resolve, reject) => {
         const { archivo } = files

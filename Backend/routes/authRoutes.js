@@ -4,6 +4,11 @@ const auth = require('../controllers/authController')
 const { check } = require('express-validator')
 const validarCampos = require('../middlewares/validarCampos')
 
+/**
+ * @David_Trujillo
+ */
+
+
 const validator = [
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
     check('ap1', 'El primer apellido es obligatorio').not().isEmpty(),

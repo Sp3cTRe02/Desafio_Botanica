@@ -7,6 +7,9 @@ const QRCode = require('qrcode')
 const PDFDocument = require('pdfkit')
 const {subirArchivoEvento,subirArchivoEventoPost} = require('../helpers/subir-archivo-evento');
 
+/**
+ * @David_Trujillo
+ */
 
 class eventoController {
 

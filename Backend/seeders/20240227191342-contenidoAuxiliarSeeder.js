@@ -1,4 +1,8 @@
 'use strict';
+/**
+ * @David_Trujillo
+ */
+
 
 const contenidoAuxiliarFactory = require('../factories/contenidoAuxiliarFactory')
 

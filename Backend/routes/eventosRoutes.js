@@ -3,6 +3,11 @@ const router = Router()
 const evento = require('../controllers/eventosController')
 const midsJWT = require("../middlewares/validarJWT");
 
+/**
+ * @David_Trujillo
+ */
+
+
 router.get('/',evento.getEventos)
 router.get('/:id', evento.getInfoEvento)
 router.get('/upload/:id',evento.mostrarImagen)

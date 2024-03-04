@@ -7,6 +7,11 @@ const midAdmin = require('../middlewares/validarAdmin')
 const midsJWT = require("../middlewares/validarJWT");
 const { validarArchivoSubir } = require('../middlewares/validarArchivo')
 
+/**
+ * @David_Trujillo
+ */
+
+
 const validator = [
     check('titulo', 'El título es obligatorio').not().isEmpty(),
     check('resumenDesc')
@@ -29,9 +34,6 @@ router.get('/upload/:id',contenido.mostrarImagen)
 router.post('/', [midsJWT.validarJWT,validator], contenido.crearContenido)
 router.put('/:id', [midsJWT.validarJWT],contenido.modificarContenido)
 router.delete('/:id',[midsJWT.validarJWT, midAdmin.verificarAdmin],  contenido.eliminarContenido)
-
-
-
 
 
 module.exports = router

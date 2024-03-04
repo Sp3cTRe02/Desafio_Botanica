@@ -1,3 +1,8 @@
+/**
+ * @David_Trujillo
+ */
+
+
 const organizadorEvento = async (ctos = 1) => {
     let eventosOrganizador = [];
     const usuarios = [1,2,3]

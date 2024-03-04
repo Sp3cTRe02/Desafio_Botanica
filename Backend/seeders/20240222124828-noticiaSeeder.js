@@ -1,4 +1,10 @@
 'use strict';
+
+/**
+ * @David_Trujillo
+ */
+
+
 const noticiaFactory = require('../factories/noticiaFactory')
 
 /** @type {import('sequelize-cli').Migration} */
