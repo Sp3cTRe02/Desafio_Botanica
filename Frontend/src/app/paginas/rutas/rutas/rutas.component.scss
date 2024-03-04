@@ -2,10 +2,31 @@
   margin-top: 150px;
 }
 
+h1 {
+  font-size: 35px;
+  margin-bottom: 20px;
+  color: var(--color_1);
+  font-weight: 600;
+}
+
+.row{
+  padding: 20px;
+}
+
+.row-btn{
+  margin-left: 5px;
+    .btn.input{
+      width: 200px;
+      max-width: 300px;
+      margin-bottom: 10px;
+    }
+}
+
+
 .input {
   display: flex;
   justify-content: space-between;
-  max-width: 14vw;
+
 }
 
 .mapa-container{
@@ -19,4 +40,14 @@
   margin: 0 auto;
   position: relative;
   overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .row-btn{
+    margin-left: 0;
+      .btn.input{
+        width: 200px;
+      }
+  }
+  
 }
