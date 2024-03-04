@@ -16,6 +16,9 @@ export class ModalComponent {
   }
 
   enviarEmail() {
-    
+    let body={
+      email:this.emailForm.value.email
+    };
   }
+  
 }  

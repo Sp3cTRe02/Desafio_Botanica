@@ -228,6 +228,8 @@ const getFoto = async(id) => {
 }
 
 
+//CONST PARA COGER EL EMAIL CON EL EMAIL
+
 module.exports = {
 
     createUsuario,getUsuarios,deleteUsuarios,/*getActivado*/updateUsuario,

@@ -3,20 +3,23 @@
  */
 
 const transporter = require('../database/mailConexion');
+const usuariosConexion = require('../database/userConexion');
 
-// let transporter = nodemailer.createTransport({
-//     service: 'gmail',
-//     auth: {
 
-//     type: 'OAuth2',
-//     user: process.env.MAIL_USER,
-//     pass: process.env.MAIL_PASSWORD,
-//     clientId: process.env.MAIL_CLIENT_ID,
-//     clientSecret: process.env.MAIL_CLIENT_SECRET,
-//     refreshToken: process.env.MAIL_REFRESH_TOKEN,
-//     accessToken: process.env.MAIL_ACCESS_TOKEN
-//     }
-// });
+
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+
+    type: 'OAuth2',
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASSWORD,
+    clientId: process.env.MAIL_CLIENT_ID,
+    clientSecret: process.env.MAIL_CLIENT_SECRET,
+    refreshToken: process.env.MAIL_REFRESH_TOKEN,
+    accessToken: process.env.MAIL_ACCESS_TOKEN
+    }
+});
 
 // let mailOptions = {
 //     from: process.env.MAIL_USER,
@@ -42,9 +45,20 @@ const transporter = require('../database/mailConexion');
 
 
 
+
+
+const recuperarPassword = async (req, res) => {
+
+    let email = req.body.email
+    let conx = new usuariosConexion()
+    let usuario = await conx 
+    
+}
+
+
 const mandarEmailRecuperacion = async (email, contraseña) => {
     const mailOptions = {
-        from: 'ismael22012004@gmail.com',
+        from: process.env.MAIL_USER,
         to: email,
         subject: 'Recuperación de Contraseña',
         text: `Hola, tu contraseña es: ${contraseña}`
@@ -59,7 +73,7 @@ const mandarEmailRecuperacion = async (email, contraseña) => {
 };
 
 module.exports = {
-    mandarEmailRecuperacion,/*enviarCorreo*/
+    mandarEmailRecuperacion,enviarCorreo
 };
 
 
