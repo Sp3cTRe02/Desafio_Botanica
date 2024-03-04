@@ -12,7 +12,6 @@ import { ToastModule } from 'primeng/toast';
 import { HttpResponse } from '@angular/common/http';
 import { QuillModule } from 'ngx-quill';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Table } from 'primeng/table';
 import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
@@ -46,7 +45,8 @@ export class EventoComponent {
 
     eventoEditar: EventoPut = {
         nombre: '',
-        descripcion: ''
+        descripcion: '',
+        cantidadMax: 0
     }
 
     eventoPost: EventoPost = {
@@ -75,6 +75,7 @@ export class EventoComponent {
     }
 
     editar: boolean = true
+    esMiEvento : boolean = true
     @ViewChild('miModal') miModal: TemplateRef<any> | undefined;
     participa: boolean = false
 
@@ -107,14 +108,12 @@ export class EventoComponent {
             this.organizador.nombre = data.nombre;
             this.organizador.ap1 = data.ap1;
             this.organizador.ap2 = data.ap2
-
         })
     }
 
     obtenerPlazas(idEvento: number) {
         this.eventosService.getPlazasRestantes(idEvento).subscribe((response: any) => {
             this.plazasRestantes = response.data.plazasRestantes
-
         })
     }
 
@@ -132,9 +131,11 @@ export class EventoComponent {
 
         this.eventoEditar.nombre = this.evento.nombre
         this.eventoEditar.descripcion = this.evento.descripcion
+        this.eventoEditar.cantidadMax = this.evento.cantidadMax
 
         formData.append('nombre', this.eventoEditar.nombre)
         formData.append('descripcion', this.eventoEditar.descripcion)
+        formData.append('cantidadMax',this.eventoEditar.cantidadMax.toString())
 
         this.eventosService.modificarEvento(this.eventoId, formData).subscribe((response: any) => {
             if (response.success) {
@@ -186,11 +187,14 @@ export class EventoComponent {
             const misEventos = response.data.eventos;
 
             this.editar = false;
+            this.esMiEvento = false
 
             for (let i = 0; i < misEventos.length; i++) {
                 if (misEventos[i].id == this.eventoId) {
                     if (!this.editar) {
                         this.editar = true;
+                        this.esMiEvento=true
+
                     }
                 }
             }
@@ -225,8 +229,5 @@ export class EventoComponent {
         console.log(msg)
         this.msgService.add({ severity: 'error', summary: 'Error', detail: msg });
     }
-
-
-
 
 }

@@ -13,6 +13,7 @@ export interface EventoGet{
 export interface EventoPut{
     nombre:string;
     descripcion:string;
+    cantidadMax:number;
 }
 
 export interface EventoPost{
@@ -30,4 +31,11 @@ export interface EventoAdd{
     ubicacion:string;
     imagen:string
 
+}
+
+export interface EventoPostRespuesta{
+    sucess:boolean;
+    data: {
+        msg: string;
+    }
 }

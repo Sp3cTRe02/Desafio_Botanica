@@ -9,13 +9,16 @@ import { FileUploadModule } from "primeng/fileupload";
 import mapboxgl, { Map, Marker } from 'mapbox-gl';
 import { Ubicacion } from '../../arboles-general/interfaces/arboles-general.interface';
 import { UbicacionService } from '../../arboles-general/services/ubicacion.service';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-add-evento',
   standalone: true,
   templateUrl: './add-evento.component.html',
   styleUrl: './add-evento.component.scss',
-  imports: [CommonModule, FormsModule, MenuComponent, CalendarModule, FileUploadModule]
+  imports: [CommonModule, FormsModule, MenuComponent, CalendarModule, FileUploadModule,ToastModule],
+  providers: [MessageService]
 })
 
 export class AddEventoComponent {
@@ -29,10 +32,11 @@ export class AddEventoComponent {
     latitud: '',
     longitud: '',
     ubicacion: '',
-    imagen: ''
+    imagen: '',
+
   }
 
-  date: Date[] | undefined;
+  date: Date;
   marcadorActual?: mapboxgl.Marker
   @ViewChild('mapaDiv') mapDivElement!: ElementRef
 
@@ -46,7 +50,11 @@ export class AddEventoComponent {
     ciudad: this.ciudad
   }
 
-  constructor(private eventoService: EventosService, private mapBoxService : UbicacionService) { }
+  msg: string = '';
+  constructor(private eventoService: EventosService, private mapBoxService: UbicacionService,
+    private msgService: MessageService) {
+    this.date = new Date()
+  }
 
   ngAfterViewInit(): void {
     this.iniciarMapa()
@@ -58,26 +66,25 @@ export class AddEventoComponent {
       center: [-4.1092017, 38.6928523], //long, lat
       zoom: 15
     })
-  
+
     map.on('click', (e) => {
       if (this.marcadorActual) {
         this.marcadorActual.remove()
       }
-  
+
       const coord = e.lngLat
       this.ubicacion.longitud = coord.lng
       this.ubicacion.latitud = coord.lat
-  
+
       this.marcadorActual = new Marker({ color: 'green' })
         .setLngLat([coord.lng, coord.lat])
         .addTo(map)
-  
 
-  
+
+
       this.mapBoxService.getCiudadMapBox(coord.lat, coord.lng).subscribe((response: any) => {
         let ubicacion = response.features[0].place_name
         this.ubicacion.ciudad = ubicacion
-        console.log(this.ubicacion.ciudad)
       })
     })
   }
@@ -85,8 +92,50 @@ export class AddEventoComponent {
 
 
   agregarEvento(event: any) {
-    const formData = new FormData();
-    formData.append('archivo', event.files[0], event.files[0].name);
+    const formData = new FormData()
+    formData.append('archivo', event.files[0], event.files[0].name)
+
+    this.evento.ubicacion = this.ubicacion.ciudad
+
+    const dia = this.date.getDate();
+    const mes = this.date.getMonth() + 1;
+    const año = this.date.getFullYear() % 100;
+    const horas = this.date.getHours();
+    const minutos = this.date.getMinutes();
+
+
+    const fechaFormateada = `${this.zeroPad(dia)}/${this.zeroPad(mes)}/${this.zeroPad(año)} ${this.zeroPad(horas)}:${this.zeroPad(minutos)}`;
+
+    this.evento.fechaInicio = fechaFormateada;
+
+    console.log(this.evento.fechaInicio);
+
+    formData.append('nombre', this.evento.nombre)
+    formData.append('descripcion', this.evento.descripcion)
+    formData.append('fechaInicio', this.evento.fechaInicio?.toString() ?? '')
+    formData.append('cantidadMax', this.evento.cantidadMax.toString())
+    formData.append('ubicacion', this.evento.ubicacion)
+
+
+    this.eventoService.anadirEvento(formData).subscribe((response: any) => {
+      if (response.success == true) {
+        this.msg = 'Evento agregado correctamente'
+        this.mostrarExito(this.msg)
+
+        setTimeout(() => {
+          window.location.reload()
+        }, 1200);
+      }
+    })
+
+  }
+
+  zeroPad(numero: number): string {
+    return numero < 10 ? `0${numero}` : `${numero}`;
+  }
+
+  mostrarExito(msg: string) {
+    this.msgService.add({ severity: 'success', summary: 'Éxito', detail: msg });
 
   }
 }

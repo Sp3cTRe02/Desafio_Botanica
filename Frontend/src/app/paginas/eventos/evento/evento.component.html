@@ -1,141 +1,162 @@
 <app-menu></app-menu>
 
 @if(modoEdicion){
-    <div class="event-container container">
-        <p-toast></p-toast>
-        <div class="row p-4">
-                <div class="col-lg-7 col-md-12 col-sm-12 col-info">
-                    <button class="btn btn-primary btn-width" (click)="alternarModoEdicion()">Modo visualización</button>
-                    <button type="button" class="btn btn-primary btn-width" (click)="fileUpload.upload()" >Guardar cambios</button>
-                    <div class="col-lg-12">
-                        <label for="email">Nombre del evento</label>
-                        <input type="text" class="form-control mb-2" name="nombre" required [(ngModel)]="evento.nombre">
-                    </div>
-        
-                    <div class="col-lg-12 mt-4 mx-auto">
-                        <label for="email">Imagen de la noticia</label>
-                        <p-fileUpload #fileUpload mode="advanced"   chooseLabel="Seleccionar imagen" name="archivo" [customUpload]="true"
-                          (uploadHandler)="modificarEvento($event)" [maxFileSize]="5000000" accept="image/*" cancelLabel="Cancelar"
-                          [showCancelButton]="true" uploadLabel="Subir imagen" [showUploadButton]="false" >
-                        </p-fileUpload>
-                    </div>
-        
-                    
-                    <div class="col-lg-12 mt-4">
-                        <div class="card card-madeby">
-                            <div class="card-body">
-                                <h5 class="card-title text-bold">Organizado por</h5>
-                                <p>{{organizador.nombre}} {{organizador.ap1}} {{organizador.ap2}}</p>
-                            </div>
-                        </div>
-                    </div>
-        
-                    <div class="col-lg-12 mt-4 col-desc">
-                        <label for="name">Descripción</label> <br>
-                        <quill-editor [modules]="modulesQuill" (onEditorChanged)="onChangedEditor($event)"
-                            [(ngModel)]="evento.descripcion" name="descripcion"></quill-editor>
-                    </div>
-        
-                    
-                </div>
-                <div class="col-lg-5 col-md-12 col-sm-12 mt-4 text-center text-bold"> 
-                    <div class="card card-event">
-                        <div class="card-body">
-                            <h3 class="card-title text-bold">Plazas libres</h3>
-                            <h4 class="card-text">{{plazasRestantes}}</h4>
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#participar">Participar</button>
-                        </div>
+<div class="event-container container">
+    <p-toast></p-toast>
+    <div class="row p-4">
+        <div class="col-lg-7 col-md-12 col-sm-12 col-info">
+            <button class="btn btn-primary btn-width" (click)="alternarModoEdicion()">Modo visualización</button>
+            <button type="button" class="btn btn-primary btn-width" (click)="fileUpload.upload()">Guardar
+                cambios</button>
+            <div class="col-lg-12">
+                <label for="email">Nombre del evento</label>
+                <input type="text" class="form-control mb-2" name="nombre" required [(ngModel)]="evento.nombre">
+            </div>
+
+            <div class="col-lg-12 mt-4 mx-auto">
+                <label for="email">Imagen de la noticia</label>
+                <p-fileUpload #fileUpload mode="advanced" chooseLabel="Seleccionar imagen" name="archivo"
+                    [customUpload]="true" (uploadHandler)="modificarEvento($event)" [maxFileSize]="5000000"
+                    accept="image/*" cancelLabel="Cancelar" [showCancelButton]="true" uploadLabel="Subir imagen"
+                    [showUploadButton]="false">
+                </p-fileUpload>
+            </div>
+
+
+            <div class="col-lg-12 mt-4">
+                <div class="card card-madeby">
+                    <div class="card-body">
+                        <h5 class="card-title text-bold">Organizado por</h5>
+                        <p>{{organizador.nombre}} {{organizador.ap1}} {{organizador.ap2}}</p>
                     </div>
                 </div>
-    
+            </div>
+
+            <div class="col-lg-12 mt-4 col-desc">
+                <label for="name">Descripción</label> <br>
+                <quill-editor [modules]="modulesQuill" (onEditorChanged)="onChangedEditor($event)"
+                    [(ngModel)]="evento.descripcion" name="descripcion"></quill-editor>
+            </div>
+
+
         </div>
+        <div class="col-lg-5 col-md-12 col-sm-12 mt-4 text-center text-bold">
+            <div class="card card-event">
+                <div class="card-body">
+                    <h3 class="card-title text-bold">Cantidad máxima</h3>
+                    <input type="text" class="form-control mb-2" name="nombre" required
+                        [(ngModel)]="evento.cantidadMax">
+                </div>
+            </div>
+        </div>
+
     </div>
+</div>
 
 
 } @else {
-    <div class="event-container container">
-        <div class="row p-4">
-            <div class="col-lg-7 col-md-12 col-sm-12 col-info">
-    
-                @if(editar && authService.estaLoggeado()){
-                    <button class="btn btn-primary btn-width" (click)="alternarModoEdicion()">Editar</button>
-                }
-                
-                <div class="col-lg-12">
-                    <h1 class="font-bold mb-3">{{ evento.nombre }}</h1>
-                </div>
-    
-                <div class="col-lg-12 mt-4 mx-auto">
-                    <img [src]="evento.imagen" class="img-fluid rounded" alt="Tree Image">
-                </div>
-    
-                
-                <div class="col-lg-12 mt-4">
-                    <div class="card card-madeby">
-                        <div class="card-body">
-                            <h5 class="card-title text-bold">Organizado por</h5>
-                            <p>{{organizador.nombre}} {{organizador.ap1}} {{organizador.ap2}}</p>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="col-lg-12 mt-4 col-desc">
-                    <h2 class="font-bold mb-3">Descripción</h2>
-                    <div class="card-body">
-                        <p class="mb-2" [innerHTML]="evento.descripcion"></p>
-                    </div>
-                </div>
-    
-    
-            </div>
-    
-            <div class="col-lg-5 col-md-12 col-sm-12 mt-4 text-center text-bold"> 
-                <div class="card card-event">
-                    <div class="card-body">
-                        <h3 class="card-title text-bold">Plazas libres</h3>
-                        <h4 class="card-text">{{plazasRestantes}}</h4>
-                       
-                        @if(authService.estaLoggeado()){
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#participarModal">Participar</button>
-                        } @else {
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Participar</button>
-                        }
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Modal para participar -->
-    <p-toast></p-toast>
-    <div class="modal fade" id="participarModal" tabindex="-1" role="dialog" aria-labelledby="participarModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body p-4 py-5 p-md-5 wide-content"> 
-                    <h3 class="text-center mb-3">Selecciona la cantidad de billetes</h3>
-                    <form>
-                        <div class="form-group mb-2">
-                            <label for="cantidadBilletes">Cantidad de billetes:</label>
-                            <input type="number" class="form-control" id="cantidadBilletes" name="cantidadBilletes" min="1" value="1" [(ngModel)]="eventoPost.cantidadEntradas">
-                        </div>
-                        <div class="form-group mb-2"> 
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#descargarModal" (click)="participarEvento()">Aceptar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="event-container container">
+    <div class="row p-4">
+        <div class="col-lg-7 col-md-12 col-sm-12 col-info">
 
-    <ng-template #miModal let-modalEditar>
-        <div class="modal-dialog" role="document">
-            <div class="modal-content modal-download">
-                <div class="modal-body p-4 py-5 p-md-5 wide-content">
-                    <h3 class="text-center mb-3">Descargar PDF</h3>
-                    <button type="button" class="btn btn-primary" (click)="descargarPDF()">Descargar</button>
+            @if(editar && authService.estaLoggeado()){
+            <button class="btn btn-primary btn-width" (click)="alternarModoEdicion()">Editar</button>
+            }
+
+            <div class="col-lg-12">
+                <h1 class="font-bold mb-3">{{ evento.nombre }}</h1>
+            </div>
+
+            <div class="col-lg-12 mt-4 mx-auto">
+                <img [src]="evento.imagen" class="img-fluid rounded" alt="Tree Image">
+            </div>
+
+
+            <div class="col-lg-12 mt-4">
+                <div class="card card-madeby">
+                    <div class="card-body">
+                        <h5 class="card-title text-bold">Organizado por</h5>
+                        <p>{{organizador.nombre}} {{organizador.ap1}} {{organizador.ap2}}</p>
+                    </div>
                 </div>
             </div>
+
+            <div class="col-lg-12 mt-4 col-desc">
+                <h2 class="font-bold mb-3">Descripción</h2>
+                <div class="card-body">
+                    <p class="mb-2" [innerHTML]="evento.descripcion"></p>
+                </div>
+            </div>
+
+
         </div>
-    </ng-template>
+
+
+        <div class="col-lg-5 col-md-12 col-sm-12 mt-4 text-center">
+            @if(!esMiEvento){
+            <div class="card card-event">
+                <div class="card-body">
+                    <h3 class="card-title text-bold">Plazas libres</h3>
+                    <h4 class="card-text">{{plazasRestantes}}</h4>
+
+                    @if(authService.estaLoggeado()){
+                    <button class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#participarModal">Participar</button>
+                    } @else {
+                    <button class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#loginModal">Participar</button>
+                    }
+
+                </div>
+            </div>
+            }
+
+            <div class="card card-loc">
+                <div class="card-body">
+                    <h5 class="card-title text-bold">Ubicación</h5>
+                    <p>{{evento.ubicacion}}</p>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal para participar -->
+<p-toast></p-toast>
+<div class="modal fade" id="participarModal" tabindex="-1" role="dialog" aria-labelledby="participarModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-4 py-5 p-md-5 wide-content">
+                <h3 class="text-center mb-3">Selecciona la cantidad de billetes</h3>
+                <form>
+                    <div class="form-group mb-2">
+                        <label for="cantidadBilletes">Cantidad de billetes:</label>
+                        <input type="number" class="form-control" id="cantidadBilletes" name="cantidadBilletes" min="1"
+                            value="1" [(ngModel)]="eventoPost.cantidadEntradas">
+                    </div>
+                    <div class="form-group mb-2">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#descargarModal" (click)="participarEvento()">Aceptar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #miModal let-modalEditar>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-download">
+            <div class="modal-body p-4 py-5 p-md-5 wide-content">
+                <h3 class="text-center mb-3">Descargar PDF</h3>
+                <button type="button" class="btn btn-primary" (click)="descargarPDF()">Descargar</button>
+            </div>
+        </div>
+    </div>
+</ng-template>
 }

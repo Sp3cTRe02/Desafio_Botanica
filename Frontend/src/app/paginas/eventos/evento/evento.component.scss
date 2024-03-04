@@ -32,7 +32,7 @@ input{
 }
 
 .card-madeby,
-.card-event {
+.card-event,.card-loc {
     max-width: 500px;
     margin-top: 50px;
     padding: 20px;
@@ -70,5 +70,9 @@ input{
 
     .card {
         margin-top: 0;
+    }
+
+    .card-loc{
+        margin-top: 20px;
     }
 }

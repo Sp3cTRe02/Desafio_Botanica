@@ -12,7 +12,7 @@ class eventoController {
 
     static async subirImagen(req, res) {
         try {
-            const nombre = await subirArchivoEvento(req.files, undefined, process.env.UPLOADS_DIR_CONTENT);
+            const nombre = await subirArchivoEvento(req.files, undefined, process.env.UPLOADS_DIR_EVENT);
             const ruta = `${nombre}`;
             console.log("Imagen subida exitosamente en:", ruta);
 
@@ -30,18 +30,37 @@ class eventoController {
         try {
             let id = req.idToken
             const rutaImagen = await eventoController.subirImagen(req, res)
-
+    
             const contenido = {
                 ...req.body,
                 idUsuario: id,
                 imagen: rutaImagen
             }
-
+    
+            const resultado = await eventoConexion.crearEvento(contenido)
+        
+    
+            if (resultado == 1) {
+                console.log('pasa')
+                res.status(StatusCodes.CREATED).json({
+                    success: true,
+                    data: {
+                        msg: 'Evento registrado correctamente',
+                    }
+                });
+            } else {
+                res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                    success: false,
+                    data: {
+                        msg: 'No se pudo registrar el evento correctamente',
+                    }
+                })
+            }
         } catch (error) {
-
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: 'Error en el servidor al registrar el evento.', sqlMessage: error })
         }
-
     }
+    
 
     static getEventos = async (req, res) => {
         try {

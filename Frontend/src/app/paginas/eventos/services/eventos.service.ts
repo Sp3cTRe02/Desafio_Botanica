@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { EventoGet, EventoPost } from './../interfaces/eventos.interface';
+import { EventoGet, EventoPost, EventoPostRespuesta } from './../interfaces/eventos.interface';
 import { contenidoRoutes, environment, eventosRoutes } from '../../../../environments/environment.development';
 
 @Injectable({
@@ -10,6 +10,10 @@ import { contenidoRoutes, environment, eventosRoutes } from '../../../../environ
 export class EventosService {
 
   constructor(private http: HttpClient) { }
+
+  anadirEvento(formData:FormData){
+    return this.http.post<EventoPostRespuesta>(environment.baseUrl+environment.eventosEndPoint+eventosRoutes.eventoPost,formData, { params: { auth: 'true' } })
+  }
 
   getEventos(): Observable<EventoGet> {
     return this.http.get<EventoGet>(environment.baseUrl + environment.eventosEndPoint + eventosRoutes.eventoGet)

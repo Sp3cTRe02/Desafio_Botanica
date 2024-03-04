@@ -134,7 +134,6 @@ export class NoticiasComponent implements OnInit {
         this.socketService.enviarNoticia(this.noticia);
     }
 
-
     mostrarExito(msg: string) {
         this.msgService.add({ severity: 'success', summary: 'Éxito', detail: msg });
     }
