@@ -11,7 +11,9 @@ const validator = [
     validarCampos
 ]
 
-//(token⭕)
+/**
+ * @Jaime_Rafael
+ */
 // [midsJWT.validarJWT,midAdmin.verificarAdmin],
 router.get('/',  controlador.familiaGet)
 router.get('/familia-admin',controlador.familiaAdmin)

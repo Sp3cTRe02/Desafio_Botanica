@@ -5,7 +5,7 @@ const { Sequelize } = require('sequelize');
 const bd = new db()
 
 /**
- * @author @Ismael
+ * @author @Ismael @Jaime_Rafael
  * @param {*} id
 
  */

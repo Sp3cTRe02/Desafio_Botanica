@@ -2,6 +2,12 @@ const { response, request } = require('express')
 const Conexion = require('../database/rolConexion')
 const { StatusCodes } = require('http-status-codes')
 
+/**
+ * Controllador hecho por @Jaime_Rafael
+ * @param {*} req 
+ * @param {*} res 
+ */
+
 const consultarRoles = async (req = request, res = response) => {
     Conexion.getRoles()
         .then(roles => {

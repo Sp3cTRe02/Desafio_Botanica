@@ -1,8 +1,27 @@
 const bcrypt = require('bcrypt');
 const { faker, fakerES } = require('@faker-js/faker');
 
+
+/**
+ * Factoria hecha por @Jaime_Rafael
+ * @param {*} ctos 
+ * @param {*} pass 
+ * @returns 
+ */
 const crearUser = async (ctos = 1, pass) => {
+
     let users = []
+    const adminPass = await bcrypt.hash('admin123', 10)
+    let admin = {
+        nombre: 'admin',
+        ap1: 'admin',
+        ap2: 'admin',
+        email: 'admin@admin.com',
+        passwd: adminPass,
+        foto: null,
+        desactivado: false,
+    }
+        
     for (let i = 0; i < ctos; i++) {
         // log
         const pass = await bcrypt.hash('user123', 10)

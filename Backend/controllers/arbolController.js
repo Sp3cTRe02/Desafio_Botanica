@@ -8,7 +8,7 @@ const { kMaxLength } = require('buffer')
 require('dotenv').config()
 
 /**
- * @author @Ismael @Jaime_Rafael
+ * @author Controlador hecho por @Jaime_Rafael
  */
 
 const subirImagenPrincipal = async(req = request, res = response) => {
@@ -186,6 +186,12 @@ const arbolesGet = async (req = request, res = response) => {
     }
 }
 
+/**
+ * @author @Ismael
+ * @param {*} req 
+ * @param {*} res 
+ */
+
 //  METODO PARA HACER UN DELETE FISICO->
 
 // const arbolDelete = async (req = request, res = response) => {
@@ -210,6 +216,12 @@ const arbolesGet = async (req = request, res = response) => {
 //                 'status': 'ERROR'
 //             })
 //         })
+/**
+ * @author @Ismael
+ * @param {*} req 
+ * @param {*} res 
+ */
+
         const arbolDelete = async (req = request, res = response) => {
 
         

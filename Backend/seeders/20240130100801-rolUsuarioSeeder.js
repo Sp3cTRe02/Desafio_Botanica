@@ -1,6 +1,8 @@
 'use strict';
 const rolUsuarioFactory = require('../factories/rolUsuarioFactory');
-
+/**
+ * @Jaime_Rafael
+ */
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {

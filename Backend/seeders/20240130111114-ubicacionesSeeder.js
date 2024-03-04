@@ -1,6 +1,8 @@
 'use strict';
 const ubFactory = require('../factories/ubicacionesFactory');
-
+/**
+ * @Jaime_Rafael
+ */
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {

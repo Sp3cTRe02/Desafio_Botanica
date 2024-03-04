@@ -2,6 +2,11 @@ const bcrypt = require('bcrypt');
 const { faker, fakerES } = require('@faker-js/faker');
 
 
+/**
+ * Factoria hecho por @Jaime_Rafael
+ * @param {*} req 
+ * @param {*} res 
+ */
 
 const crearArbol = async (ctos = 1) => {
     const familias = [1,2,3]

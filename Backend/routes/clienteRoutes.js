@@ -26,6 +26,10 @@ const validatorRol = [
     validarCampos
 ]
 
+/**
+ * @Jaime_Rafael
+ */
+
 // RUTAS CRUD CLIENTE
 router.post('/usuario', [midsJWT.validarJWT,midAdmin.verificarAdmin,validator], controlador.usuarioPost)
 router.get('/usuario', [midsJWT.validarJWT,midAdmin.verificarAdmin], controlador.usuarioGet)

@@ -1,6 +1,12 @@
 const bcrypt = require('bcrypt');
 const { faker, fakerES } = require('@faker-js/faker');
 
+/**
+ * Factoria hecho por @Jaime_Rafael
+ * @param {*} req 
+ * @param {*} res 
+ */
+
 const crearFamilia = async (ctos = 1) => {
     let familias = []
     for (let i = 0; i < ctos; i++) {

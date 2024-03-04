@@ -7,7 +7,7 @@ const { th } = require('@faker-js/faker');
 const bd = new db()
 
 /**
- * @author @Ismael
+ * @author @Ismael , @Jaime_Rafael
  */
 
 const createArbol = async (body) => {

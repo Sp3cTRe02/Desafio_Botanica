@@ -5,6 +5,12 @@ const { QueryTypes } = require('sequelize');
 
 const bd = new db()
 
+/**
+ * Conexion hecho por @Jaime_Rafael
+ * @param {*} req 
+ * @param {*} res 
+ */
+
 
 const getRoles = async () => {
     let roles = []

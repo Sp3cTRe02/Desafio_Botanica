@@ -6,6 +6,7 @@ import {usuarioRoutes} from "../../../../environments/environment.development";
 @Injectable({
   providedIn: 'root'
 })
+//JaimeRafael
 export class RolService {
 
   constructor(private  http : HttpClient) { }

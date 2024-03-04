@@ -7,12 +7,12 @@ const bcrypt = require('bcrypt');
 
 const bd = new db()
 
-
 /**
- * @Jaime_Rafael
- * @param {*} body 
- * @returns 
+ * Controlador hecho por @Jaime_Rafael
+ * @param {*} req 
+ * @param {*} res 
  */
+
 const createUsuario = async (body) => {
     let resultado = 0 
     bd.conectar()

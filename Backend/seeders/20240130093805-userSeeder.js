@@ -1,5 +1,8 @@
 'use strict';
 const usFactory = require('../factories/userFactory');
+/**
+ * @Jaime_Rafael
+ */
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {

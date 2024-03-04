@@ -1,6 +1,13 @@
 const jwt = require('jsonwebtoken');
 const { StatusCodes } = require('http-status-codes');
 
+/**
+ * @Jaime_Rafael
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
+
 const verificarCliente = (req, res, next) => {
     const token = req.header('x-token')
 

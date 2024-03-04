@@ -2,6 +2,12 @@ const { response, request } = require('express')
 const Conexion = require('../database/familiaConexion')
 const { StatusCodes } = require('http-status-codes')
 
+/**
+ * Controlador hecho por @Jaime_Rafael
+ * @param {*} req 
+ * @param {*} res 
+ */
+
 
 const familiaPost = async (req = request, res = response) => {
     Conexion.createFamilia(req.body)

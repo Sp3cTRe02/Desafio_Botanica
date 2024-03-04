@@ -14,6 +14,7 @@ import {ToastModule} from "primeng/toast";
   imports: [MenuComponent, SubirImagenUsuariosComponent, PaginatorModule, ToastModule],
   providers: [MessageService]
 })
+//JaimeRafael
 export class PerfilComponent implements OnInit{
 
   usuario : any = {}

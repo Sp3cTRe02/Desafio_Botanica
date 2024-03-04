@@ -21,6 +21,9 @@ const validatorUbicacion = [
     validarCampos
 ]
 
+/**
+ * @Jaime_Rafael
+ */
 // router.get('/:id', controlador.arbolGet)
 router.get('/', [midsJWT.validarJWT, midAdmin.verificarAdmin] ,controlador.arbolesGet)
 router.post('/', [midsJWT.validarJWT, midAdmin.verificarAdmin, validator], controlador.arbolPost)

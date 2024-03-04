@@ -7,10 +7,11 @@ const path = require('path')
 require('dotenv').config()
 
 /**
- * @author @Jaime_Rafael
+ * Controlador hecho por @Jaime_Rafael
  * @param {*} req 
  * @param {*} res 
  */
+
 const usuarioPost = async (req = request, res = response) => {
 
     Conexion.createUsuario(req.body)

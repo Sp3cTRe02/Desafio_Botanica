@@ -1,6 +1,8 @@
 'use strict';
 const fotFactory = require('../factories/fotoFactory');
-
+/**
+ * @Jaime_Rafael
+ */
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
