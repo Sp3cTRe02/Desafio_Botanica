@@ -4,11 +4,16 @@
 <div class="card-wrapper container rutas-container">
 
   <div class="row">
-    <h1 class="font-bold mb-3 ">Genera una ruta</h1>
-
-    <p>¿Cuál es la distancia máxima en la que quieres encontrar arboles?</p>
+   
 
     <div class="container">
+
+      <div class="row">
+        <h1 class="font-bold mb-3 ">Genera una ruta</h1>
+        <p>¿Cuál es la distancia máxima en la que quieres encontrar arboles?</p>
+      </div>
+
+     
       <div class="row">
         <div class="col-sm-4">
           <label for="distancia">
@@ -24,13 +29,15 @@
 
 
     @if(!customUbication){
-      <input type="button" class="btn btn-primary input" value="Usar ubicación actual" (click)="obtenerUbicacionUsuario()">
-      <input type="button" class="btn btn-primary input" value="Marcar una ubicación" (click)="obtenerRuta()">
+      <div class="row row-btn"> 
+        <input type="button" class="btn btn-primary input" value="Usar ubicación actual" (click)="obtenerUbicacionUsuario()">
+        <input type="button" class="btn btn-primary input" value="Marcar una ubicación" (click)="obtenerRuta()">
+      </div>
+     
     }
 
 
     <div class="mapa-container">
-
       <div class="row row-section p-4">
         <div class="col-lg-12">
           <div class="card-body">

@@ -46,6 +46,7 @@ export class PerfilComponent implements OnInit{
     this.perfilService.updatePerfil(usuarioActualizado).subscribe((response : any) => {
       if (response.success == true){
         this.mostrarExito()
+        sessionStorage.setItem('usuario', JSON.stringify(usuarioActualizado))
         setTimeout(() => {
           window.location.reload()
         }, 2000)

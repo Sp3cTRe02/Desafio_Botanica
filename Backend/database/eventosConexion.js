@@ -41,13 +41,14 @@ class eventosConexion {
     static getOrganizador = async (idEvento) => {
         try {
             const resultado = await models.sequelize.query(`
-            SELECT nombre,ap1,ap2 FROM usuarios usu
-            JOIN organizadoreventos oe
-                ON usu.id = oe.idUsuario
-            WHERE oe.idEvento = ${idEvento}`, { type: QueryTypes.SELECT })
-            return resultado
+                SELECT usu.nombre, usu.ap1, usu.ap2 FROM usuarios usu
+                JOIN eventos ev ON usu.id = ev.idUsuario
+                WHERE ev.id = ${idEvento}`, { 
+                    type: QueryTypes.SELECT 
+                });
+            return resultado;
         } catch (error) {
-            throw error
+            throw error;
         }
     }
 
@@ -101,9 +102,7 @@ class eventosConexion {
         try {
             resultado = await models.sequelize.query(`
             SELECT ev.id,ev.nombre,ev.descripcion,ev.imagen,ev.ubicacion FROM eventos ev 
-            JOIN organizadoreventos oe
-                ON ev.id = oe.idEvento
-            WHERE oe.idUsuario = ${idUsuario}`, { type: QueryTypes.SELECT }
+            WHERE ev.idUsuario = ${idUsuario}`, { type: QueryTypes.SELECT }
 
             )
         } catch (error) {
@@ -132,6 +131,45 @@ class eventosConexion {
         }
         return resultado;
     }
+
+    static participarEvento = async(body)=>{
+        let resultado = 0;
+    
+        try {
+            await models.ParticipaEvento.create(body);
+            resultado = 1;
+        } catch (error) {
+            throw error;
+        }
+    
+        return resultado;
+
+    }
+    static getDetallesEntradas = async () => {
+        let resultado = null;
+    
+        try {
+            resultado = await models.sequelize.query(`
+                SELECT pe.fechaParticipacion, u.nombre, u.ap1, u.ap2,
+                e.nombre AS nombreEvento, e.fechaInicio, e.ubicacion
+                FROM participaeventos pe
+                JOIN usuarios u ON pe.idUsuario = u.id
+                JOIN eventos e ON pe.idEvento = e.id
+                WHERE DATE(pe.fechaParticipacion) = CURDATE()
+                AND pe.fechaParticipacion = (
+                    SELECT MAX(fechaParticipacion) 
+                    FROM participaeventos
+                    WHERE DATE(fechaParticipacion) = CURDATE()
+                )
+            `);
+        } catch (error) {
+            throw error;
+        }
+    
+        return resultado;
+
+    }
+    
 
 }
 

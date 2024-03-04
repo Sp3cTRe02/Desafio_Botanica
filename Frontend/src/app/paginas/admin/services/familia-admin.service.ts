@@ -18,7 +18,7 @@ export class FamiliaAdminService {
 
 
   obtenerFamiliasAdmin(): Observable<FamiliaAdmin[]>{
-    return this.http.get<FamiliaAdmin[]>(environment.baseUrl+environment.familiaEndpoint+familiaRoutes.familiaAdmin, {params : {auth : true}})
+    return this.http.get<FamiliaAdmin[]>(environment.baseUrl+environment.familiaEndpoint+familiaRoutes.familiaAdmin)
   }
 
   obtenerFamilias(): Observable<FamiliaAdmin[]>{

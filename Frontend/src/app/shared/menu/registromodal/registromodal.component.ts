@@ -51,7 +51,6 @@ export class RegistromodalComponent {
     this.authService.registrar(this.usuario)
       .subscribe((response) => {
         if (response?.success) {
-          alert('xd')
           this.msg = 'Usuario registrado exitosamente'
           this.mostrarExito(this.msg);
           this.limpiarCampos()

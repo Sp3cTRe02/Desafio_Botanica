@@ -10,11 +10,23 @@ module.exports = {
         type: Sequelize.BIGINT
       },
 
+      idUsuario: {
+        type: Sequelize.BIGINT,
+        references: {
+          model: {
+            tableName: 'usuarios'
+          },
+          key: 'id'
+        },
+        primaryKey: true,
+        allowNull: false,
+      },
+
       nombre: {
         type: Sequelize.STRING
       },
       descripcion: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT('medium')
       },
       fechaInicio: {
         allowNull: false,
@@ -34,6 +46,11 @@ module.exports = {
         allowNull: false,
       },
       ubicacion:{
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+
+      imagen:{
         type: Sequelize.STRING,
         allowNull: false,
       }

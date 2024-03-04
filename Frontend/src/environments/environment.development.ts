@@ -66,7 +66,9 @@ export const contenidoRoutes = {
 
 export const eventosRoutes = {
     eventoGet:"/",
+    eventoPost:"/",
     eventoPut:"/",
+    participar:  "/participar/",
     misEventos:"/ev/mis-eventos",
     organizador: "/organizador/",
     plazas: "/plazas/",

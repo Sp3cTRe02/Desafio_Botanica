@@ -210,12 +210,10 @@ const removeRol = async (req = request, res = response) => {
 const subirImagenUsuario = async (req = request, res = response) => {
     let id = req.idToken
     try{
-        
         const rutaImg = await Conexion.getFoto(id)
 
         console.log(rutaImg.dataValues.foto);
         if(rutaImg.dataValues.foto != null){
-            console.log('no es nulo');
             const rutaAnterior = path.join(__dirname, rutaImg.dataValues.foto)
             
             if(fs.existsSync(rutaAnterior)){
@@ -224,7 +222,7 @@ const subirImagenUsuario = async (req = request, res = response) => {
 
             const nombre = await subirArchivo(req.files, undefined, process.env.UPLOADS_DIR) 
             const ruta = `${nombre}`
-            const cod = await Conexion.subirImagenUsuario(ruta, 1)
+            const cod = await Conexion.subirImagenUsuario(ruta, id)
         
             if(cod !== 1){
                 throw new Error('Error al subir la imagen')
@@ -239,7 +237,7 @@ const subirImagenUsuario = async (req = request, res = response) => {
         else {
             console.log('es nulo');
             const nombre = await subirArchivo(req.files, undefined, process.env.UPLOADS_DIR) 
-            const ruta = `${process.env.UPLOADS_PATH}${process.env.UPLOADS_DIR}/${nombre}`
+            const ruta = `${nombre}`
             const cod = await Conexion.subirImagenUsuario(ruta, id)
         
             if(cod !== 1){
@@ -265,8 +263,10 @@ const subirImagenUsuario = async (req = request, res = response) => {
 
 const getFotoPerfil = async (req = request, res = response) => {
     const nombre = req.params.nombre
-    const ruta = path.join(__dirname, process.env.UPLOADS_PATH, process.env.UPLOADS_DIR, nombre)
+
+  
     try{
+        const ruta = path.join(__dirname, process.env.UPLOADS_PATH, process.env.UPLOADS_DIR, nombre)
         if(fs.existsSync(ruta)){
             res.sendFile(ruta)
         }else{

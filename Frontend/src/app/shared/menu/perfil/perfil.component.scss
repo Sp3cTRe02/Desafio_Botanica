@@ -1,26 +1,68 @@
+h1 {
+  font-size: 35px;
+  margin-bottom: 20px;
+  color: var(--color_1);
+  font-weight: 600;
+}
+
+
 .profile-container{
   margin-top: 150px;
-  display: flex;
+
 }
+
+.col-md-6{
+  max-width: 657px;
+
+  img{
+    margin: 0 auto;
+  }
+
+  form{
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
 
 .formulario-datos{
   margin-left: 50px;
-  width: 50%;
 }
+
 .avatar{
   width: 200px;
   height: 200px;
-  border: double 4px #000;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius : 100%;
+  object-fit: cover;
 }
 
-.user-image {
-  border: solid 1px #000;
+label{
+  margin-top: 10px;
 }
 
-.user-data{
-  border: solid 1px #000;
+input{
+  margin-top: 2px;
+}
+
+
+@media (max-width: 767px) {
+  .col-md-6 {
+    padding: 20px;
+  }
+
+  .user-data {
+    margin-top: 15px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .col-md-6 {
+    width: 50%;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
 }

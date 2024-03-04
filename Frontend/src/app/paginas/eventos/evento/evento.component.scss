@@ -1,4 +1,4 @@
-@import url(../../arboles-general/arbol-general/arbol-general.component.scss);
+
 @import url(../../noticias/noticia/noticia.component.scss);
 .event-container {
     padding: 150px;
@@ -32,7 +32,7 @@ input{
 }
 
 .card-madeby,
-.card-event {
+.card-event,.card-loc {
     max-width: 500px;
     margin-top: 50px;
     padding: 20px;
@@ -57,6 +57,13 @@ input{
     font-weight: 600;
 }
 
+.modal-download{
+    border: none;
+    width: 100%;
+}
+
+
+
 @media (max-width: 768px) {
     .event-container {
         margin-top: 95px;
@@ -65,5 +72,9 @@ input{
 
     .card {
         margin-top: 0;
+    }
+
+    .card-loc{
+        margin-top: 20px;
     }
 }
