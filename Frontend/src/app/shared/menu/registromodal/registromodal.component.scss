@@ -44,3 +44,14 @@ a {
         font-weight: 600;
     }
 }
+
+.input-group-text {
+    position: absolute;
+    top: 50%;
+    right: 0.2rem;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 100;
+}

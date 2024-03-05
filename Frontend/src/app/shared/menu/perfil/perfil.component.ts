@@ -18,6 +18,8 @@ import {ToastModule} from "primeng/toast";
 export class PerfilComponent implements OnInit{
 
   usuario : any = {}
+  errores: { [campo: string]: string } = {};
+
 
   constructor(private perfilService : PerfilServiceService, private msgSercive : MessageService) { }
 
@@ -50,9 +52,12 @@ export class PerfilComponent implements OnInit{
         setTimeout(() => {
           window.location.reload()
         }, 2000)
-      }else{
-        this.mostrarError()
       }
+    }, (error)=>{
+      this.errores = {};
+      error.error.errors.forEach((err: { path: string | number; msg: string; }) => {
+        this.errores[err.path] = err.msg;
+      });
     })
   }
 

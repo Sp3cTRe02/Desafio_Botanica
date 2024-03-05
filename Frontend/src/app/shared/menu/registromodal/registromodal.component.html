@@ -1,4 +1,5 @@
-<div class="modal fade modal-extended" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+<div class="modal fade modal-extended" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel"
+    aria-hidden="true" (hidden.bs.modal)="limpiarMensajes()">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,36 +12,53 @@
                     <div class="col-md-6">
                         <label for="nombre" class="form-label">Nombre</label>
                         <input type="text" [(ngModel)]="usuario.nombre" class="form-control" name="nombre" required>
+                        <small class="text-danger">{{ errores['nombre'] }}</small>
                     </div>
                     <div class="col-md-6">
                         <label for="apellido1" class="form-label">Primer Apellido</label>
                         <input type="text" [(ngModel)]="usuario.ap1" class="form-control" name="apellido1" required>
+                        <small class="text-danger">{{ errores['ap1'] }}</small>
                     </div>
                     <div class="col-md-6">
                         <label for="apellido2" class="form-label">Segundo Apellido</label>
                         <input type="text" [(ngModel)]="usuario.ap2" class="form-control" name="apellido2" required>
+                        <small class="text-danger">{{ errores['ap2'] }}</small>
                     </div>
 
                     <div class="col-md-6">
                         <label for="contrasena" class="form-label">Email</label>
                         <input type="email" [(ngModel)]="usuario.email" class="form-control" name="contrasena" required>
+                        <small class="text-danger">{{ errores['email'] }}</small>
                     </div>
 
                     <div class="col-md-6">
                         <label for="contrasena" class="form-label">Contraseña</label>
-                        <input type="password" [(ngModel)]="usuario.passwd" class="form-control" name="contrasena" required>
+                        <input type="password" [(ngModel)]="usuario.passwd" class="form-control" name="contrasena"
+                            required>
+                        <small class="text-danger">{{ errores['passwd'] }}</small>
                     </div>
                     <div class="col-md-6">
                         <label for="confirmarContrasena" class="form-label">Confirmar Contraseña</label>
-                        <input type="password" [(ngModel)]="confirmarContrasena" class="form-control" name="confirmarContrasena" required>
+                        <div class="input-group">
+                            <input [type]="passwordType" [(ngModel)]="confirmarContrasena" class="form-control"
+                                name="confirmarContrasena" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text" (click)="togglePasswordVisibility()">
+                                    <i [ngClass]="passwordVisible ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <small *ngIf="usuario.passwd !== confirmarContrasena && confirmarContrasena !== ''"
+                            class="text-danger">Las contraseñas no coinciden</small>
                     </div>
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary">Registrarse</button>
                     </div>
 
                     <div class="text-center">
-                        <p>¿Ya tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Inicia sesión aquí.</a></p>
-                      </div>
+                        <p>¿Ya tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal"
+                                data-bs-dismiss="modal">Inicia sesión aquí.</a></p>
+                    </div>
                 </form>
             </div>
         </div>

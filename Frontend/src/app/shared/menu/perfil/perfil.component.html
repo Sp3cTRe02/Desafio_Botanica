@@ -26,16 +26,19 @@
           <div class="form-group col-md-12">
             <label for="name">Nombre</label>
             <input type="text" class="form-control" id="name" placeholder="Nombre" [(ngModel)]="usuario.nombre" [ngModelOptions]="{standalone: true}">
+            <small class="text-danger">{{ errores['nombre'] }}</small>
           </div>
           <div class="form-group col-md-12">
             <label for="ap1">1er Apellido</label>
             <input type="text" class="form-control" id="ap1" placeholder="1er Apellido" [(ngModel)]="usuario.ap1" [ngModelOptions]="{standalone: true}">
+            <small class="text-danger">{{ errores['ap1'] }}</small>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group col-md-12">
             <label for="ap2">2do Apellido</label>
             <input type="text" class="form-control" id="ap2" placeholder="2do Apellido" [(ngModel)]="usuario.ap2" [ngModelOptions]="{standalone: true}">
+            <small class="text-danger">{{ errores['ap2'] }}</small>
           </div>
           <div class="form-group col-md-12">
             <label for="email">Correo</label>

@@ -7,12 +7,14 @@ import { ToastModule } from 'primeng/toast';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { UserRegsitro } from '../../interfaces/auth.interface';
+import { UserRegistro } from '../../interfaces/auth.interface';
+import { PasswordModule } from 'primeng/password';
+
 
 @Component({
   selector: 'app-registromodal',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule,MessagesModule, ToastModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MessagesModule, ToastModule,PasswordModule],
   templateUrl: './registromodal.component.html',
   styleUrl: './registromodal.component.scss'
 })
@@ -22,7 +24,7 @@ import { UserRegsitro } from '../../interfaces/auth.interface';
  */
 
 export class RegistromodalComponent {
-  usuario: UserRegsitro = {
+  usuario: UserRegistro = {
     nombre: '',
     ap1: '',
     ap2: '',
@@ -33,9 +35,21 @@ export class RegistromodalComponent {
   confirmarContrasena: string = ''
   msg: string = '';
 
+  errores: { [campo: string]: string } = {};
 
+  passwordVisible: boolean = false;
+  passwordType: string = 'password';
+
+  value: string | undefined;
   constructor(public router: Router, private authService: AuthService,
     private msgService: MessageService) { }
+
+  togglePasswordVisibility(): void {
+    this.passwordVisible = !this.passwordVisible;
+    this.passwordType = this.passwordVisible ? 'text' : 'password';
+    
+  }
+
 
   mostrarExito(msg: string) {
     this.msgService.add({ severity: 'success', summary: 'Éxito', detail: msg });
@@ -48,43 +62,42 @@ export class RegistromodalComponent {
   }
 
   registrar() {
+    if (this.usuario.passwd !== this.confirmarContrasena) {
+      return;
+    }
+
     this.authService.registrar(this.usuario)
-      .subscribe((response) => {
-        if (response?.success) {
-          this.msg = 'Usuario registrado exitosamente'
-          this.mostrarExito(this.msg);
-          this.limpiarCampos()
-          this.usuario = {
-            nombre: '',
-            ap1: '',
-            ap2: '',
-            email: '',
-            passwd: ''
+      .subscribe(
+        (response) => {
+          if (response?.success) {
+            this.mostrarExito('Usuario registrado exitosamente');
+            this.limpiarCampos();
           }
+        },
+        (error) => {
+          console.log(error);
+          this.errores = {};
+          error.error.errors.forEach((err: { path: string | number; msg: string; }) => {
+            this.errores[err.path] = err.msg;
+          });
         }
-
-      },
-      (error)=>{
-        console.log(error)
-        let mensajesError = [];
-        for (let i = 0; i < error.error.errors.length; i++) {
-          mensajesError.push(error.error.errors[i].msg);
-        }
-
-        this.mostrarError(mensajesError)
-        this.limpiarCampos()
-      })
+      );
   }
 
-  limpiarCampos(){
+  limpiarCampos() {
     this.usuario = {
       nombre: '',
       ap1: '',
       ap2: '',
       email: '',
       passwd: ''
-    }
+    };
+    this.confirmarContrasena = '';
+    this.errores = {};
+  }
 
+  limpiarMensajes() {
+    this.errores = {};
   }
 
 

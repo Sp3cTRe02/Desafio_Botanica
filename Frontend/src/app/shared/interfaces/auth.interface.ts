@@ -3,7 +3,7 @@ export interface UserLogin {
     passwd: string;
 }
 
-export interface UserRegsitro {
+export interface UserRegistro {
     nombre: string;
     ap1: string;
     ap2: string;

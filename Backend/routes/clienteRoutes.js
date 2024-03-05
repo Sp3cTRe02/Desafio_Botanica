@@ -26,6 +26,17 @@ const validatorRol = [
     validarCampos
 ]
 
+const validatorUpdate = [
+    check('nombre', 'El nombre es obligatorio').not().isEmpty(),
+    check('nombre', 'El nombre solo puede contener letras').isAlpha('es-ES', {ignore: ' '}),
+    check('ap1', 'El primer apellido es obligatorio').not().isEmpty(),
+    check('ap1', 'El primer apellido solo puede contener letras').isAlpha('es-ES', {ignore: ' '}),
+    check('ap2', 'El segundo apellido es obligatorio').not().isEmpty(),
+    check('ap2', 'El segundo apellido solo puede contener letras').isAlpha('es-ES', {ignore: ' '}),
+    validarCampos
+];
+
+
 /**
  * @Jaime_Rafael
  */
@@ -46,7 +57,7 @@ router.post('/subirImagen/', [midsJWT.validarJWT,validarArchivoSubir], controlad
 
 //RUTAS ACCEDER AL PERFIL
 router.get('/perfil', midsJWT.validarJWT,controladorPerfil.getUsuarioPorId); 
-router.post('/perfil',midsJWT.validarJWT, controladorPerfil.updateUsuarioPorId);
+router.post('/perfil',[midsJWT.validarJWT,validatorUpdate], controladorPerfil.updateUsuarioPorId);
 router.get('/fotoPerfil/:nombre', controlador.getFotoPerfil);
 
 module.exports = router
