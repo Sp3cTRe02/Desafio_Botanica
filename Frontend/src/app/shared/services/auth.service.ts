@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { authRoutes, environment } from '../../../environments/environment.development';
-import { Auth, Registro, UserLogin, UserRegsitro } from '../interfaces/auth.interface';
+import { Auth, Registro, UserLogin, UserRegistro } from '../interfaces/auth.interface';
 import { catchError, of, tap } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -34,7 +34,7 @@ export class AuthService {
     );
   }
 
-  registrar(usuario: UserRegsitro) {
+  registrar(usuario: UserRegistro) {
     return this.http.post<Registro>(environment.baseUrl + environment.authEndpoint + authRoutes.registro, usuario);
   }
 

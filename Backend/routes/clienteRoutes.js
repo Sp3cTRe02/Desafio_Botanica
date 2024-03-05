@@ -12,8 +12,14 @@ const { validarArchivoSubir } = require('../middlewares/validarArchivo')
 
 const validator = [
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
+    check('nombre', 'El nombre debe tener un maximo de 20 caracteres').isLength({ max: 20 }),
+    check('nombre', 'El nombre solo puede contener letras').isAlpha('es-ES', {ignore: ' '}),
     check('ap1', 'El primer apellido es obligatorio').not().isEmpty(),
+    check('ap1', 'El primer apellido solo puede contener letras').isAlpha('es-ES', {ignore: ' '}),
+    check('ap1', 'El primer apellido debe tener un maximo de 20 caracteres').isLength({ max: 20 }),
     check('ap2', 'El segundo apellido es obligatorio').not().isEmpty(),
+    check('ap2', 'El segundo apellido solo puede contener letras').isAlpha('es-ES', {ignore: ' '}),
+    check('ap2', 'El segundo apellido debe tener un maximo de 20 caracteres').isLength({ max: 20 }),
     check('email', 'El email es obligatorio').not().isEmpty().isEmail(),
     check('email', 'El email no es válido').isEmail(),
     check('passwd', 'El password es obligatorio').not().isEmpty(),
@@ -25,6 +31,20 @@ const validatorRol = [
     check('idRol', 'El idRol es obligatorio').not().isEmpty(),
     validarCampos
 ]
+
+const validatorUpdate = [
+    check('nombre', 'El nombre es obligatorio').not().isEmpty(),
+    check('nombre', 'El nombre debe tener un maximo de 20 caracteres').isLength({ max: 20 }),
+    check('nombre', 'El nombre solo puede contener letras').isAlpha('es-ES', {ignore: ' '}),
+    check('ap1', 'El primer apellido es obligatorio').not().isEmpty(),
+    check('ap1', 'El primer apellido solo puede contener letras').isAlpha('es-ES', {ignore: ' '}),
+    check('ap1', 'El primer apellido debe tener un maximo de 20 caracteres').isLength({ max: 20 }),
+    check('ap2', 'El segundo apellido es obligatorio').not().isEmpty(),
+    check('ap2', 'El segundo apellido solo puede contener letras').isAlpha('es-ES', {ignore: ' '}),
+    check('ap2', 'El segundo apellido debe tener un maximo de 20 caracteres').isLength({ max: 20 }),
+    validarCampos
+];
+
 
 /**
  * @Jaime_Rafael
@@ -46,7 +66,7 @@ router.post('/subirImagen/', [midsJWT.validarJWT,validarArchivoSubir], controlad
 
 //RUTAS ACCEDER AL PERFIL
 router.get('/perfil', midsJWT.validarJWT,controladorPerfil.getUsuarioPorId); 
-router.post('/perfil',midsJWT.validarJWT, controladorPerfil.updateUsuarioPorId);
+router.post('/perfil',[midsJWT.validarJWT,validatorUpdate], controladorPerfil.updateUsuarioPorId);
 router.get('/fotoPerfil/:nombre', controlador.getFotoPerfil);
 
 module.exports = router
