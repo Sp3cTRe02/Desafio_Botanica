@@ -58,7 +58,9 @@ export class FamiliaAdminComponent {
             if (response.status = "OK") {
                 this.msg = 'Familia registrada exitosamente'
                 this.mostrarExito(this.msg)
-                window.location.reload()
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000)
             }
         },
             (error) => {

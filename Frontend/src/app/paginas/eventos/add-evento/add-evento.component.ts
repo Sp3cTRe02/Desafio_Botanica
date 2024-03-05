@@ -11,6 +11,7 @@ import { Ubicacion } from '../../arboles-general/interfaces/arboles-general.inte
 import { UbicacionService } from '../../arboles-general/services/ubicacion.service';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-evento',
@@ -52,7 +53,7 @@ export class AddEventoComponent {
 
   msg: string = '';
   constructor(private eventoService: EventosService, private mapBoxService: UbicacionService,
-    private msgService: MessageService) {
+    private msgService: MessageService, private router: Router) {
     this.date = new Date()
   }
 
@@ -123,7 +124,7 @@ export class AddEventoComponent {
         this.mostrarExito(this.msg)
 
         setTimeout(() => {
-          window.location.reload()
+          this.router.navigate(['/mis-eventos'])
         }, 1200);
       }
     })

@@ -2,13 +2,16 @@ import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import {MenuComponent} from "../../../shared/menu/menu.component";
 import mapboxgl from "mapbox-gl";
 import {RutasService} from "../services/rutas.service";
+import {MessageService} from "primeng/api";
+import {ToastModule} from "primeng/toast";
 
 @Component({
   selector: 'app-rutas',
   standalone: true,
-  imports: [MenuComponent],
+  imports: [MenuComponent, ToastModule],
   templateUrl: './rutas.component.html',
-  styleUrl: './rutas.component.scss'
+  styleUrl: './rutas.component.scss',
+  providers: [MessageService]
 })
 export class RutasComponent implements AfterViewInit{
 
@@ -26,7 +29,7 @@ export class RutasComponent implements AfterViewInit{
   ubicaciones: any[] = []
 
 
-  constructor(private rutaService : RutasService) {
+  constructor(private rutaService : RutasService, private messageService: MessageService) {
   }
 
   ngAfterViewInit() {
@@ -78,10 +81,15 @@ export class RutasComponent implements AfterViewInit{
   }
 
   obtenerRuta(){
-    this.rutaService.getRutaArboles(this.ubicacionRuta.lat, this.ubicacionRuta.lng, this.radio).subscribe((response: any) => {
-      this.ubicaciones= response.ubicaciones
-      this.agregarMarcadoresAlMapa()
-    })
+    if(this.ubicacionRuta.lat == 0 || this.ubicacionRuta.lng == 0){
+      this.mostrarError()
+    }else {
+      this.rutaService.getRutaArboles(this.ubicacionRuta.lat, this.ubicacionRuta.lng, this.radio).subscribe((response: any) => {
+        this.ubicaciones= response.ubicaciones
+        this.agregarMarcadoresAlMapa()
+      })
+    }
+
   }
 
 
@@ -127,6 +135,9 @@ export class RutasComponent implements AfterViewInit{
     map.addControl(new mapboxgl.NavigationControl());
   }
 
+  mostrarError(){
+    this.messageService.add({severity:'error', summary: 'Error', detail: 'No se ha seleccionado una ubicación'})
+  }
 
 
 }

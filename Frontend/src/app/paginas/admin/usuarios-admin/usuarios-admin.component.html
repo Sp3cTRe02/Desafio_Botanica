@@ -5,16 +5,16 @@
       <p-table #dt1 [value]="usuarios" dataKey="id" [paginator]="true" [rows]="5" [showCurrentPageReport]="true">
         <ng-template pTemplate="header">
           <tr>
-<!--            <th class="centered-text">Numero de usuario</th>-->
+            <!--            <th class="centered-text">Numero de usuario</th>-->
             <th class="centered-text">Nombre</th>
             <th class="centered-text">Primer apellido</th>
             <th class="centered-text">Segundo apellido</th>
             <th class="centered-text">Correo</th>
-<!--            <th class="centered-text">Foto</th>-->
+            <!--            <th class="centered-text">Foto</th>-->
             <th class="centered-text">Estado</th>
-<!--            <th class="centered-text">Creado</th>-->
+            <!--            <th class="centered-text">Creado</th>-->
             <th class="centered-text">Acciones</th>
-<!--            <th class="centered-text">Modificado por ult. vez</th>-->
+            <!--            <th class="centered-text">Modificado por ult. vez</th>-->
           </tr>
         </ng-template>
 
@@ -28,17 +28,16 @@
 
         <ng-template pTemplate="body" let-usuario>
           <tr>
-<!--            <td class="centered-text">{{usuario.id}}</td>-->
+            <!--            <td class="centered-text">{{usuario.id}}</td>-->
             <td class="centered-text">{{usuario.nombre}}</td>
             <td class="centered-text">{{usuario.ap1}}</td>
             <td class="centered-text">{{usuario.ap2}}</td>
             <td class="centered-text">{{usuario.email}}</td>
-<!--            <td class="centered-text">{{usuario.foto}}</td>-->
+            <!--            <td class="centered-text">{{usuario.foto}}</td>-->
             <td class="centered-text">{{usuario.desactivado == 0 ? 'Activo' : 'Inactivo' }}</td>
             <td class="centered-text">
               <button class="btn btn-primary button-space" (click)="abrirEditar(usuario)">Editar</button>
-              <button class="btn btn-success button-space"
-                      (click)="abrirRoles(usuario)">Roles</button>
+              <button class="btn btn-success button-space" (click)="abrirRoles(usuario)">Roles</button>
             </td>
           </tr>
         </ng-template>
@@ -50,26 +49,21 @@
 <ng-template #anadir let-modalEditar>
   <div class="modal-body p-5 py-5 p-md-5">
     <h3 class="text-center mb-3">Añadir usuario</h3>
-    <form (ngSubmit)="crearUsuario()"  class="signup-form">
+    <form (ngSubmit)="crearUsuario()" class="signup-form">
       <div class="form-group mb-2">
         <label for="nombre">Nombre</label>
-        <input type="text" class="form-control mb-2" name="nombre" required
-               [(ngModel)]="usuario.nombre">
+        <input type="text" class="form-control mb-2" name="nombre" required [(ngModel)]="usuario.nombre">
         <label for="ap1">Primer apellido</label>
-        <input type="text" class="form-control mb-2" name="ap1" required
-               [(ngModel)]="usuario.ap1">
+        <input type="text" class="form-control mb-2" name="ap1" required [(ngModel)]="usuario.ap1">
         <label for="ap2">Segundo apellido</label>
-        <input type="text" class="form-control mb-2" name="ap2" required
-               [(ngModel)]="usuario.ap2">
+        <input type="text" class="form-control mb-2" name="ap2" required [(ngModel)]="usuario.ap2">
         <label for="correo">Correo</label>
-        <input type="text" class="form-control mb-2" name="correo" required
-               [(ngModel)]="usuario.email">
+        <input type="text" class="form-control mb-2" name="correo" required [(ngModel)]="usuario.email">
         <label for="contrasena">Contraseña</label>
-        <input type="password" class="form-control mb-2" name="contrasena" required
-               [(ngModel)]="usuario.passwd">
-<!--        <label for="foto">Foto</label>-->
-<!--        <input type="text" class="form-control mb-2" name="foto" required-->
-<!--               [(ngModel)]="usuario.foto">-->
+        <input type="password" class="form-control mb-2" name="contrasena" required [(ngModel)]="usuario.passwd">
+        <!--        <label for="foto">Foto</label>-->
+        <!--        <input type="text" class="form-control mb-2" name="foto" required-->
+        <!--               [(ngModel)]="usuario.foto">-->
 
       </div>
 
@@ -83,26 +77,24 @@
 
 <ng-template #mRoles let-modal>
   <div class="modal-dialog modal-confirm">
-    <div class="modal-content">
-      <div class="modal-header flex-column">
-        <h4 class="modal-title w-150">Modificando roles del usuario </h4>
-      </div>
-      <div class="modal-body">
-        @for (rol of roles; track rol.id){
-          <div class="form-group mb-2">
-            <p>{{ rol.nombre | uppercase }}
-             @if(tieneRol(rol, usuarioRoles)) {
-               <button class="btn btn-danger" (click)="removeRol(rol.id, usuarioSeleccionado.id)">Eliminar rol</button>
-             } @else {
-                <button class="btn btn-success" (click)="addRol(rol.id, usuarioSeleccionado.id)">Añadir rol</button>
-             }
+    <div class="modal-header flex-column">
+      <h4 class="modal-title w-150">Modificando roles del usuario </h4>
+    </div>
+    <div class="modal-body">
+      @for (rol of roles; track rol.id){
+      <div class="form-group mb-2">
+        <p>{{ rol.nombre | uppercase }}
+          @if(tieneRol(rol, usuarioRoles)) {
+          <button class="btn btn-danger" (click)="removeRol(rol.id, usuarioSeleccionado.id)">Eliminar rol</button>
+          } @else {
+          <button class="btn btn-success" (click)="addRol(rol.id, usuarioSeleccionado.id)">Añadir rol</button>
+          }
 
-          </div>
-        }
       </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-primary" (click)="modal.dismiss('Cancel click')">Cancelar</button>
-      </div>
+      }
+    </div>
+    <div class="modal-footer justify-content-center">
+      <button type="button" class="btn btn-primary" (click)="modal.dismiss('Cancel click')">Cancelar</button>
     </div>
   </div>
 </ng-template>
@@ -115,40 +107,37 @@
       <div class="form-group mb-2">
         <label for="name">Número de usuario</label>
         <input type="text" [readonly]="true" class="form-control mb-2" name="idUsuario" required
-               [ngModel]="usuarioSeleccionado?.id != null ? usuarioSeleccionado?.id : ''">
+          [ngModel]="usuarioSeleccionado?.id != null ? usuarioSeleccionado?.id : ''">
       </div>
 
       <div class="form-group mb-2">
         <label for="email">Nombre</label>
-        <input type="text" class="form-control mb-2" name="nombre" required
-               [(ngModel)]="usuarioSeleccionado.nombre">
+        <input type="text" class="form-control mb-2" name="nombre" required [(ngModel)]="usuarioSeleccionado.nombre">
       </div>
 
       <div class="form-group mb-2">
         <label for="ap1">Primer apellido</label>
-        <input type="text" class="form-control mb-2" name="ap1" required
-               [(ngModel)]="usuarioSeleccionado.ap1">
+        <input type="text" class="form-control mb-2" name="ap1" required [(ngModel)]="usuarioSeleccionado.ap1">
       </div>
 
       <div class="form-group mb-2">
         <label for="ap2">Segundo apellido</label>
-        <input type="text" class="form-control mb-2" name="ap2" required
-               [(ngModel)]="usuarioSeleccionado.ap2">
+        <input type="text" class="form-control mb-2" name="ap2" required [(ngModel)]="usuarioSeleccionado.ap2">
       </div>
 
       <div class="form-group mb-2">
         <label for="correo">Correo</label>
-        <input type="text" class="form-control mb-2" name="correo" required
-               [(ngModel)]="usuarioSeleccionado.email">
+        <input type="text" class="form-control mb-2" name="correo" required [(ngModel)]="usuarioSeleccionado.email">
       </div>
 
-          <div class="form-group mb-2">
-            <div class=" flex justify-content-center">
-              <p>Desactivado</p>
-              <p-inputSwitch class="input-switch" [(ngModel)]="usuarioSeleccionado.desactivado" [ngModelOptions]="{standalone : true}" ></p-inputSwitch>
+      <div class="form-group mb-2">
+        <div class=" flex justify-content-center">
+          <p>Desactivado</p>
+          <p-inputSwitch class="input-switch" [(ngModel)]="usuarioSeleccionado.desactivado"
+            [ngModelOptions]="{standalone : true}"></p-inputSwitch>
 
-            </div>
-          </div>
+        </div>
+      </div>
 
       <div class="form-group mb-2">
         <button type="submit" class="form-control btn btn-primary">Editar</button>

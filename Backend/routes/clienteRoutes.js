@@ -28,11 +28,14 @@ const validatorRol = [
 
 const validatorUpdate = [
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
+    check('nombre', 'El nombre debe tener un maximo de 20 caracteres').isLength({ max: 20 }),
     check('nombre', 'El nombre solo puede contener letras').isAlpha('es-ES', {ignore: ' '}),
     check('ap1', 'El primer apellido es obligatorio').not().isEmpty(),
     check('ap1', 'El primer apellido solo puede contener letras').isAlpha('es-ES', {ignore: ' '}),
+    check('ap1', 'El primer apellido debe tener un maximo de 20 caracteres').isLength({ max: 20 }),
     check('ap2', 'El segundo apellido es obligatorio').not().isEmpty(),
     check('ap2', 'El segundo apellido solo puede contener letras').isAlpha('es-ES', {ignore: ' '}),
+    check('ap2', 'El segundo apellido debe tener un maximo de 20 caracteres').isLength({ max: 20 }),
     validarCampos
 ];
 

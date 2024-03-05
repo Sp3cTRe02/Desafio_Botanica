@@ -254,7 +254,6 @@ constructor(private adminService: ArbolesAdminService, private modalService: Ngb
 
     abrirEditar(arbol: arboles) {
         this.arbolSeccionado = arbol
-        console.log(this.arbolSeccionado.nombre)
         let numMes = this.sacarMes(this.arbolSeccionado.epFloracion)
         this.fechaArbol = new Date(this.fecha.getFullYear(), numMes, 1)
         this.modalService.open(this.editar, { ariaLabelledBy: 'modal-basic-title' })

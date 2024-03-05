@@ -208,13 +208,11 @@ export class EventoComponent {
                 this.msg = 'Inscripción realizada con éxito';
                 this.mostrarExito(this.msg);
                 this.eventoPost.cantidadEntradas = null;
-                this.participa = true;
                 this.showModal()
             }else{
                 
             }
         }, (error) => {
-            this.participa=true
             this.mostrarError(error.error.data.msg);
             this.eventoPost.cantidadEntradas = null;
         });

@@ -4,14 +4,16 @@ import mapboxgl, {Map, Marker} from 'mapbox-gl';
 import {ActivatedRoute, Router} from "@angular/router";
 import {UbicacionService} from "../services/ubicacion.service";
 import {Ubicacion} from "../interfaces/arboles-general.interface";
-
+import {MessageService} from 'primeng/api';
+import {ToastModule} from 'primeng/toast';
 
 @Component({
   selector: 'app-add-ubicacion',
   standalone: true,
-  imports: [MenuComponent, ],
+  imports: [MenuComponent, ToastModule],
   templateUrl: './add-ubicacion.component.html',
-  styleUrl: './add-ubicacion.component.scss'
+  styleUrl: './add-ubicacion.component.scss',
+  providers: [MessageService]
 })
 //JaimeRafael
 export class AddUbicacionComponent implements AfterViewInit{
@@ -33,7 +35,7 @@ export class AddUbicacionComponent implements AfterViewInit{
   ubicaciones: any[] = []
 
   constructor(private route:  ActivatedRoute, private mapBoxService : UbicacionService,
-        private router : Router) {
+        private router : Router, private msgService: MessageService) {
     this.route.params.subscribe(params => {
       this.arbolId = params['id']
     });
@@ -85,9 +87,34 @@ export class AddUbicacionComponent implements AfterViewInit{
   agregarUbicacion(){
     this.mapBoxService.agregarUbicacion(this.arbolId, this.ubicacion).subscribe((response: any) => {
       if(response.status === "OK"){
-        alert('Ubicacion añadida correctamente')
-        this.router.navigate(['/arboles', this.arbolId])
+        this.mostrarConfirmacion()
+        setTimeout(() => {
+          this.router.navigate(['/arboles', this.arbolId])
+        }, 2000);
       }
-    })
+    },
+    (error) => {
+      let mensajesError = [];
+                if (error.error && error.error.errors) {
+                    for (let i = 0; i < error.error.errors.length; i++) {
+                        mensajesError.push(error.error.errors[i].msg);
+                    }
+                }
+
+                this.mostrarError(mensajesError)
+    }
+    )
+    
+  }
+  
+  mostrarConfirmacion() {
+    this.msgService.add({severity:'success', summary: 'Ubicación', detail: 'Ubicación agregada con éxito'});
+  }
+
+  
+  mostrarError(mensajes: string[]) {
+    mensajes.forEach((msg) => {
+        this.msgService.add({ severity: 'error', summary: 'Error', detail: msg });
+    });
   }
 }

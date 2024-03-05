@@ -1,10 +1,9 @@
-import { HttpInterceptorFn, HttpRequest, HttpHandler } from '@angular/common/http';
+import { HttpInterceptorFn} from '@angular/common/http';
 
 //JaimeRafael
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   let clonPeticion = req
-  console.log(req);
 
   const param = req.params.get('auth')
   if(param){

@@ -80,7 +80,6 @@ export class NoticiasComponent implements OnInit {
 
     ngOnInit(): void {
         this.socketService.recibirNoticia().subscribe((contenido) => {
-            console.log(contenido)
         })
     }
 
@@ -95,7 +94,6 @@ export class NoticiasComponent implements OnInit {
             this.noticia.descripcion = event.html;
         }
 
-        console.log(this.noticia.descripcion)
 
     }
 
@@ -103,7 +101,6 @@ export class NoticiasComponent implements OnInit {
     obtenerContenido() {
         this.noticiasService.getContenido().subscribe((response: any) => {
             this.noticias = response.data.contenido
-            console.log(this.noticias)
         })
     }
 
@@ -113,9 +110,6 @@ export class NoticiasComponent implements OnInit {
         formData.append('archivo', event.files[0], event.files[0].name);
         this.archivoSubido.push(formData);
 
-        formData.forEach((value, key) => {
-            console.log(key, value);
-        });
 
         formData.append('titulo', this.noticia.titulo);
         formData.append('resumenDesc', this.noticia.resumenDesc);
@@ -127,6 +121,9 @@ export class NoticiasComponent implements OnInit {
             if (response.success == true) {
                 this.msg = 'Noticia agregada correctamente'
                 this.mostrarExito(this.msg)
+                setTimeout(() => {
+                    window.location.reload()
+                },2000)
             }
         })
 

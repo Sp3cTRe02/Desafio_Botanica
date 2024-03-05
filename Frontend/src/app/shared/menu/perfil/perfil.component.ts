@@ -30,7 +30,15 @@ export class PerfilComponent implements OnInit{
   conseguirPerfil(){
     this.perfilService.getPerfil().subscribe((response) => {
       this.usuario = response
-      console.log(this.usuario)
+      let url = this.usuario.foto
+      let urlSeparada = url.split('/')
+      let nombreImagen = urlSeparada[urlSeparada.length - 1]
+      
+      
+      if(nombreImagen == 'null'){
+        this.usuario.foto = null
+      }
+      
     })
   }
 
@@ -60,7 +68,7 @@ export class PerfilComponent implements OnInit{
       });
     })
   }
-
+  
   mostrarExito() {
     this.msgSercive.add({severity:'success', summary: 'Exito', detail: 'Perfil actualizado correctamente'});
   }

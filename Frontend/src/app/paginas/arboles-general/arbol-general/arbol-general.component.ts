@@ -158,6 +158,9 @@ export class ArbolGeneralComponent implements OnInit{
     this.arbolService.subirImagenArbol(formData, this.arbolId).subscribe((response) => {
       if (response?.status == 'OK') {
         this.mostrarExito('Imagen subida correctamente');
+        setTimeout(() => {
+          window.location.reload();
+        },100)
       } else {
         this.mostrarError('Error al subir la imagen');
       }

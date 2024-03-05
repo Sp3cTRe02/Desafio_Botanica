@@ -1,5 +1,6 @@
 <app-menu></app-menu>
 <div class="container container-table">
+    
     <div class="row">
         <div class="col">
             <p-table #dt1 [value]="arboles" dataKey="id" [paginator]="true" [rows]="5" [showCurrentPageReport]="true">
@@ -60,7 +61,7 @@
                 <input type="text" class="form-control mb-2" name="nombre" required
                     [(ngModel)]="arbolSeccionado.nombre">
             </div>
-            <label>Familia</label>
+            <label>Familia</label><br>
               <select (change)="actualizarFamilia($event)" name="idFamilia" >
                 @for (familia of Familias; track familia.id) {
                   @if (familia.id == arbolSeccionado.idFamilia) {
@@ -117,7 +118,7 @@
                 <label>Nombre del arbol</label>
                 <input type="text" class="form-control mb-2" name="descTarea" required
                     [(ngModel)]="arbol.nombre">
-                <label >Familia</label>
+                <label >Familia</label><br>
                 <select (change)="actualizarFamilia($event)" name="idFamilia" id="">
                     @for (familia of Familias; track familia.id) {
                         <option value="{{familia.id}}">{{familia.nombre}}</option>
@@ -136,7 +137,7 @@
                 </div>
 
                 <div class="form-group mb-2">
-                  <label >Imagen principal</label>
+                  <label >Imagen principal <strong>(Obligatoria)</strong></label>
                   <p-fileUpload #fileUpload mode="advanced" chooseLabel="Seleccionar imagen" name="archivo" [customUpload]="true"
                                 (uploadHandler)="anadirArboles($event)"
                                 [maxFileSize]="5000000" accept="image/*" cancelLabel="Cancelar"

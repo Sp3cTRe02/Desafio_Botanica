@@ -6,11 +6,8 @@
     <div class="col-md-6 user-image">
       <h1>Foto de perfil</h1>
       @if (usuario.foto === null){
-        <button class="btn btn-outline-primary me-2 avatar" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-          {{ obtenerInicial(usuario.nombre) }}
-        </button>
-
+        
+        <img src="../../../../assets/avatar.jpg" alt="Foto de perfil" class="img-fluid avatar">
       } @else {
         <img src="{{usuario.foto}}" alt="Foto de perfil" class="img-fluid avatar">
       }

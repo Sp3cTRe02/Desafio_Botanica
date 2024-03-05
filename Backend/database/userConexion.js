@@ -46,13 +46,14 @@ const updateUsuario = async (body, id) => {
     let resultado = 0 
     bd.conectar()
     try{
-        let passwd = await bcrypt.hash(body.passwd, 10)
-        body.passwd = passwd
-        const usuario = await models.Usuario.update(body, 
-            {where: 
-                {id: id}
+        const usuario = await models.sequelize.query(
+            `update usuarios set nombre = ?, ap1 = ?, ap2 = ?, email = ? where id = ?`,
+            {
+                replacements: [body.nombre, body.ap1, body.ap2, body.email, id],
+                type: Sequelize.QueryTypes.UPDATE
             }
         )
+
         resultado = 1
     }catch (error){
         if (error instanceof Sequelize.ValidationError) {
