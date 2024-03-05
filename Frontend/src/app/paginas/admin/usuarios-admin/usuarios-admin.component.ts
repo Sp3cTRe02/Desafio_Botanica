@@ -27,7 +27,6 @@ export class UsuariosAdminComponent implements OnInit{
   usuarios : Usuario[] = []
   usuarioSeleccionado : any
   usuarioRoles : Rol[] = []
-  // usuarioEditar : any
   roles : Rol[] = []
 
   usuario : UsuarioPost = {
@@ -78,7 +77,6 @@ export class UsuariosAdminComponent implements OnInit{
   traerRoles() {
     this.rolService.obtenerRoles().subscribe((response: any) => {
       if (response.status === "OK") {
-        console.log(response.roles)
         this.roles = response.roles
       }
     })
@@ -98,7 +96,6 @@ export class UsuariosAdminComponent implements OnInit{
     this.rolService.obtenerRolesUsuario(usuario.id).subscribe((response: any) => {
       if(response.status === "OK"){
         this.usuarioRoles = response.roles
-        console.log(this.usuarioRoles)
         this.modalService.open(this.mRoles, { ariaLabelledBy: 'modal-basic-title' })
       }
     })
@@ -141,7 +138,6 @@ export class UsuariosAdminComponent implements OnInit{
     console.log(usuarioRol)
     this.rolService.addRolUsuario(usuarioRol).subscribe( (response: any) => {
       if(response.status === "OK"){
-        // window.alert("Rol añadido")
         window.location.reload()
       }
     })
@@ -155,7 +151,6 @@ export class UsuariosAdminComponent implements OnInit{
     console.log(usuarioRol)
     this.rolService.deleteRolUsuario(usuarioRol).subscribe( (response: any) => {
       if(response.status === "OK"){
-        // window.alert("Rol eliminado")
         window.location.reload()
       }
     })

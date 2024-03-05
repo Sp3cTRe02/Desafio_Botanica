@@ -136,7 +136,6 @@ export class NoticiasComponent implements OnInit {
     }
 
     mostrarError(mensajes: string[]) {
-        console.log(mensajes)
         mensajes.forEach((msg) => {
             this.msgService.add({ severity: 'error', summary: 'Error', detail: msg });
         });

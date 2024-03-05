@@ -57,7 +57,6 @@ export class EventoComponent {
     modoEdicion: boolean = false
     msg: string = '';
     eventoControl = new FormControl()
-    misEventos: any[] = []
 
     public modulesQuill = {
         toolbar: [
@@ -77,7 +76,6 @@ export class EventoComponent {
     editar: boolean = true
     esMiEvento : boolean = true
     @ViewChild('miModal') miModal: TemplateRef<any> | undefined;
-    participa: boolean = false
 
 
     constructor(private eventosService: EventosService, private route: ActivatedRoute,
@@ -210,7 +208,7 @@ export class EventoComponent {
                 this.eventoPost.cantidadEntradas = null;
                 this.showModal()
             }else{
-                
+
             }
         }, (error) => {
             this.mostrarError(error.error.data.msg);
@@ -224,7 +222,6 @@ export class EventoComponent {
     }
 
     mostrarError(msg: string) {
-        console.log(msg)
         this.msgService.add({ severity: 'error', summary: 'Error', detail: msg });
     }
 
