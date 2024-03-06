@@ -40,6 +40,8 @@ export class MenuComponent {
             this.mostrarExito(msg);
 
         })
+        
+        
     }
 
     mostrarExito(msg: string) {

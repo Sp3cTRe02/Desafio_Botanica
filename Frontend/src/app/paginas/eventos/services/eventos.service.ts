@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { EventoGet, EventoPost, EventoPostRespuesta } from './../interfaces/eventos.interface';
-import { contenidoRoutes, environment, eventosRoutes } from '../../../../environments/environment.development';
+import { environment, eventosRoutes } from '../../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +36,7 @@ export class EventosService {
   }
 
   descargarPDF(): Observable<HttpResponse<Blob>> {
-    return this.http.get('http://localhost:9090/api/eventos/pdf/descargar-pdf', {
+    return this.http.get(environment.baseUrl+environment.eventosEndPoint+eventosRoutes.pdf, {
       responseType: 'blob',
       observe: 'response' 
     });

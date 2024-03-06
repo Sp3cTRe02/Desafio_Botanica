@@ -5,16 +5,12 @@
       <p-table #dt1 [value]="usuarios" dataKey="id" [paginator]="true" [rows]="5" [showCurrentPageReport]="true">
         <ng-template pTemplate="header">
           <tr>
-            <!--            <th class="centered-text">Numero de usuario</th>-->
             <th class="centered-text">Nombre</th>
             <th class="centered-text">Primer apellido</th>
             <th class="centered-text">Segundo apellido</th>
             <th class="centered-text">Correo</th>
-            <!--            <th class="centered-text">Foto</th>-->
             <th class="centered-text">Estado</th>
-            <!--            <th class="centered-text">Creado</th>-->
             <th class="centered-text">Acciones</th>
-            <!--            <th class="centered-text">Modificado por ult. vez</th>-->
           </tr>
         </ng-template>
 
@@ -28,12 +24,10 @@
 
         <ng-template pTemplate="body" let-usuario>
           <tr>
-            <!--            <td class="centered-text">{{usuario.id}}</td>-->
             <td class="centered-text">{{usuario.nombre}}</td>
             <td class="centered-text">{{usuario.ap1}}</td>
             <td class="centered-text">{{usuario.ap2}}</td>
             <td class="centered-text">{{usuario.email}}</td>
-            <!--            <td class="centered-text">{{usuario.foto}}</td>-->
             <td class="centered-text">{{usuario.desactivado == 0 ? 'Activo' : 'Inactivo' }}</td>
             <td class="centered-text">
               <button class="btn btn-primary button-space" (click)="abrirEditar(usuario)">Editar</button>
@@ -61,9 +55,6 @@
         <input type="text" class="form-control mb-2" name="correo" required [(ngModel)]="usuario.email">
         <label for="contrasena">Contraseña</label>
         <input type="password" class="form-control mb-2" name="contrasena" required [(ngModel)]="usuario.passwd">
-        <!--        <label for="foto">Foto</label>-->
-        <!--        <input type="text" class="form-control mb-2" name="foto" required-->
-        <!--               [(ngModel)]="usuario.foto">-->
 
       </div>
 

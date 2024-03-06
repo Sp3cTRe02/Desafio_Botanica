@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnInit,ViewChild} from '@angular/core';
 import {MenuComponent} from '../../../shared/menu/menu.component';
 import {MessageService} from "primeng/api";
 import {CommonModule} from "@angular/common";
@@ -27,7 +27,6 @@ export class UsuariosAdminComponent implements OnInit{
   usuarios : Usuario[] = []
   usuarioSeleccionado : any
   usuarioRoles : Rol[] = []
-  // usuarioEditar : any
   roles : Rol[] = []
 
   usuario : UsuarioPost = {
@@ -59,7 +58,6 @@ export class UsuariosAdminComponent implements OnInit{
     private adminService : UsuarioAdminService,
     private rolService : RolService,
     private modalService : NgbModal,
-    private msgService: MessageService
   ){}
 
   ngOnInit() {
@@ -141,7 +139,6 @@ export class UsuariosAdminComponent implements OnInit{
     console.log(usuarioRol)
     this.rolService.addRolUsuario(usuarioRol).subscribe( (response: any) => {
       if(response.status === "OK"){
-        // window.alert("Rol añadido")
         window.location.reload()
       }
     })
@@ -155,15 +152,9 @@ export class UsuariosAdminComponent implements OnInit{
     console.log(usuarioRol)
     this.rolService.deleteRolUsuario(usuarioRol).subscribe( (response: any) => {
       if(response.status === "OK"){
-        // window.alert("Rol eliminado")
         window.location.reload()
       }
     })
   }
 }
 
-
-/*
-
-
- */

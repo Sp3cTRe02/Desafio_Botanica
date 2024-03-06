@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Table } from 'primeng/table';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NoticiasService } from '../noticias/services/noticias.service';
-import { ContenidoGet, ContenidoPut, InicioGet, InicioPut } from '../noticias/interfaces/noticias.interface';
+import { ContenidoGet,InicioGet, InicioPut } from '../noticias/interfaces/noticias.interface';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
 import { MessageService } from 'primeng/api';
