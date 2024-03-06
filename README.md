@@ -45,7 +45,7 @@ ng serve
 Las crendenciales para el administrador serán
 admin@admin.com para el correo y admin123 para la contraseña
 
-# Dopcumentacion de la api
+# Documentacion de la api
 
 
 Para la selección de roles se usara la ruta /api/admin de base, a partir de esta se usaran las siguientes rutas : 
