@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Foto.init({
-    idArbol: DataTypes.BIGINT,
+    id_arbol: DataTypes.BIGINT,
     ruta: DataTypes.STRING
   }, {
     sequelize,

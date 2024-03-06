@@ -6,6 +6,7 @@ const fs = require('fs');
 const QRCode = require('qrcode')
 const PDFDocument = require('pdfkit')
 const {subirArchivoEvento,subirArchivoEventoPost} = require('../helpers/subir-archivo-evento');
+const { log } = require('console');
 
 /**
  * @David_Trujillo
@@ -159,7 +160,8 @@ class eventoController {
             const plazasTotales = await eventoConexion.getTotalPlazas(id)
             const plazasOcupadas = await eventoConexion.getPlazasOcupadas(id)
 
-            const plazasRestantes = plazasTotales.dataValues.cantidadMax - plazasOcupadas
+            const plazasRestantes = plazasTotales.dataValues.cantidad_max - plazasOcupadas
+            // console.log(plazasTotales);
 
             const response = {
                 success: true,

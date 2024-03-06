@@ -48,9 +48,9 @@ export class ArbolesAdminComponent {
     arbolEliminar: any
 
     arbol: ArbolPost = {
-        idFamilia: 1,
+        id_familia: 1,
         nombre: '',
-        epFloracion: '',
+        ep_floracion: '',
         descripcion: '',
         foto: '',
         desactivado:false,
@@ -58,8 +58,8 @@ export class ArbolesAdminComponent {
 
     arbolPut: actualizarArbolResponse = {
         id: 0,
-        idFamilia: 0,
-        epFloracion: '',
+        id_familia: 0,
+        ep_floracion: '',
         descripcion: '',
         desactivado:false,
         nombre: '',
@@ -98,9 +98,9 @@ constructor(private adminService: ArbolesAdminService, private modalService: Ngb
     }
 
     asignarNombresFamilia(arbol: arboles, familias: FamiliaAdmin[]){
-        let familia = familias.find(familia => familia.id === arbol.idFamilia)
+        let familia = familias.find(familia => familia.id === arbol.id_familia)
         if(familia){
-            arbol.nombreFamilia = familia.nombre
+            arbol.nombre_familia = familia.nombre
         }
     }
 
@@ -116,29 +116,29 @@ constructor(private adminService: ArbolesAdminService, private modalService: Ngb
     anadirArboles(event : any) {
 
         switch (this.fecha.getMonth()) {
-          case 0: this.arbol.epFloracion = this.meses[0].name
+          case 0: this.arbol.ep_floracion = this.meses[0].name
             break;
-          case 1: this.arbol.epFloracion = this.meses[1].name
+          case 1: this.arbol.ep_floracion = this.meses[1].name
             break;
-          case 2: this.arbol.epFloracion = this.meses[2].name
+          case 2: this.arbol.ep_floracion = this.meses[2].name
             break;
-          case 3: this.arbol.epFloracion = this.meses[3].name
+          case 3: this.arbol.ep_floracion = this.meses[3].name
             break;
-          case 4: this.arbol.epFloracion = this.meses[4].name
+          case 4: this.arbol.ep_floracion = this.meses[4].name
             break;
-          case 5: this.arbol.epFloracion = this.meses[5].name
+          case 5: this.arbol.ep_floracion = this.meses[5].name
             break;
-          case 6: this.arbol.epFloracion = this.meses[6].name
+          case 6: this.arbol.ep_floracion = this.meses[6].name
             break;
-          case 7: this.arbol.epFloracion = this.meses[7].name
+          case 7: this.arbol.ep_floracion = this.meses[7].name
             break;
-          case 8: this.arbol.epFloracion = this.meses[8].name
+          case 8: this.arbol.ep_floracion = this.meses[8].name
             break;
-          case 9: this.arbol.epFloracion = this.meses[9].name
+          case 9: this.arbol.ep_floracion = this.meses[9].name
             break;
-          case 10: this.arbol.epFloracion = this.meses[10].name
+          case 10: this.arbol.ep_floracion = this.meses[10].name
             break;
-          case 11: this.arbol.epFloracion = this.meses[11].name
+          case 11: this.arbol.ep_floracion = this.meses[11].name
             break;
 
         }
@@ -147,12 +147,11 @@ constructor(private adminService: ArbolesAdminService, private modalService: Ngb
         formData.append('archivo', event.files[0], event.files[0].name);
         formData.append('nombre', this.arbol.nombre);
         formData.append('descripcion', this.arbol.descripcion);
-        formData.append('epFloracion', this.arbol.epFloracion);
-        formData.append('idFamilia', this.arbol.idFamilia.toString());
+        formData.append('ep_floracion', this.arbol.ep_floracion);
+        formData.append('id_familia', this.arbol.id_familia.toString());
         formData.append('desactivado', this.arbol.desactivado.toString());
 
 
-      console.log(this.arbol)
         this.adminService.anadirArboles(formData).subscribe((response: any) => {
             if (response.status == "OK") {
                 this.msg = 'Arbol registrado exitosamente'
@@ -174,39 +173,49 @@ constructor(private adminService: ArbolesAdminService, private modalService: Ngb
                 this.mostrarError(mensajesError)
             })
     }
-    actualizarFamilia(event : Event){
-        this.arbol.idFamilia = +(<HTMLSelectElement>event.target).value
-
+    actualizarFamilia(event : any){
+        this.arbol.id_familia = event.target.value
+    }
+    actualizarFamiliaPut(event : any){
+        this.arbolPut.id_familia = event.target.value
     }
     editarArbol(idArbol:number, event: any){
         this.arbol = this.arbolSeccionado
-        this.arbolPut.id = idArbol
-        this.arbolPut = this.arbolSeccionado
+        this.arbolPut = {
+            id: idArbol,
+            id_familia: this.arbol.id_familia,
+            ep_floracion: this.arbolSeccionado.ep_floracion,
+            descripcion: this.arbolSeccionado.descripcion,
+            desactivado: this.arbolSeccionado.desactivado,
+            nombre: this.arbolSeccionado.nombre,
+            estado: this.arbolSeccionado.estado
+        }
+
 
         switch (this.fechaArbol?.getMonth()) {
-          case 0: this.arbolPut.epFloracion = this.meses[0].name
+          case 0: this.arbolPut.ep_floracion = this.meses[0].name
+            break
+          case 1: this.arbolPut.ep_floracion = this.meses[1].name
+            break
+          case 2: this.arbolPut.ep_floracion = this.meses[2].name
+            break
+          case 3: this.arbolPut.ep_floracion = this.meses[3].name
+            break
+          case 4: this.arbolPut.ep_floracion = this.meses[4].name
+            break
+          case 5: this.arbolPut.ep_floracion = this.meses[5].name
             break;
-          case 1: this.arbolPut.epFloracion = this.meses[1].name
+          case 6: this.arbolPut.ep_floracion = this.meses[6].name
             break;
-          case 2: this.arbolPut.epFloracion = this.meses[2].name
+          case 7: this.arbolPut.ep_floracion = this.meses[7].name
             break;
-          case 3: this.arbolPut.epFloracion = this.meses[3].name
+          case 8: this.arbolPut.ep_floracion = this.meses[8].name
             break;
-          case 4: this.arbolPut.epFloracion = this.meses[4].name
+          case 9: this.arbolPut.ep_floracion = this.meses[9].name
             break;
-          case 5: this.arbolPut.epFloracion = this.meses[5].name
+          case 10: this.arbolPut.ep_floracion = this.meses[10].name
             break;
-          case 6: this.arbolPut.epFloracion = this.meses[6].name
-            break;
-          case 7: this.arbolPut.epFloracion = this.meses[7].name
-            break;
-          case 8: this.arbolPut.epFloracion = this.meses[8].name
-            break;
-          case 9: this.arbolPut.epFloracion = this.meses[9].name
-            break;
-          case 10: this.arbolPut.epFloracion = this.meses[10].name
-            break;
-          case 11: this.arbolPut.epFloracion = this.meses[11].name
+          case 11: this.arbolPut.ep_floracion = this.meses[11].name
             break;
         }
 
@@ -219,9 +228,11 @@ constructor(private adminService: ArbolesAdminService, private modalService: Ngb
 
         formData.append('nombre', this.arbolPut.nombre);
         formData.append('descripcion', this.arbolPut.descripcion);
-        formData.append('epFloracion', this.arbolPut.epFloracion);
-        formData.append('idFamilia', this.arbolPut.idFamilia.toString());
+        formData.append('ep_floracion', this.arbolPut.ep_floracion);
+        formData.append('id_familia', this.arbol.id_familia.toString());
         formData.append('desactivado', this.arbolPut.desactivado.toString());
+
+
 
 
         this.adminService.editarArboles(idArbol,formData).subscribe((response:any)=>{
@@ -230,7 +241,7 @@ constructor(private adminService: ArbolesAdminService, private modalService: Ngb
                 this.mostrarExito(this.msg)
                 setTimeout(() => {
                     window.location.reload()
-                }, 1500)
+                }, 2000)
             }
         },
 
@@ -250,7 +261,7 @@ constructor(private adminService: ArbolesAdminService, private modalService: Ngb
 
     abrirEditar(arbol: arboles) {
         this.arbolSeccionado = arbol
-        let numMes = this.sacarMes(this.arbolSeccionado.epFloracion)
+        let numMes = this.sacarMes(this.arbolSeccionado.ep_floracion)
         this.fechaArbol = new Date(this.fecha.getFullYear(), numMes, 1)
         this.modalService.open(this.editar, { ariaLabelledBy: 'modal-basic-title' })
     }

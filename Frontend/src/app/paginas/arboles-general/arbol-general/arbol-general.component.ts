@@ -38,7 +38,7 @@ export class ArbolGeneralComponent implements OnInit{
   arbol: ArbolInfo ={
     id: 0,
     nombre: '',
-    epFloracion: '',
+    ep_floracion: '',
     descripcion: '',
     nombreFam: '',
     foto: ''

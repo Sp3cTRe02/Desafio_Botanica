@@ -8,10 +8,10 @@ const rolUsuarioFactory = require('../factories/rolUsuarioFactory');
 module.exports = {
   async up (queryInterface, Sequelize) {
     const rolUsuario = await rolUsuarioFactory(3);
-    await queryInterface.bulkInsert('rolusuario', rolUsuario, {});
+    await queryInterface.bulkInsert('rol_usuario', rolUsuario, {});
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('rolUsuario', null, {});
+    await queryInterface.bulkDelete('rol_usuario', null, {});
   }
 };

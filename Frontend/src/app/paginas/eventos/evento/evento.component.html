@@ -45,7 +45,7 @@
                 <div class="card-body">
                     <h3 class="card-title text-bold">Cantidad máxima</h3>
                     <input type="text" class="form-control mb-2" name="nombre" required
-                        [(ngModel)]="evento.cantidadMax">
+                        [(ngModel)]="evento.cantidad_max">
                 </div>
             </div>
         </div>
@@ -94,7 +94,7 @@
             <div class="card card-event">
                 <div class="card-body">
                     <h3 class="card-title text-bold">Plazas libres</h3>
-                    <h4 class="card-text">{{plazasRestantes}}</h4>
+                    <h4 class="card-text">{{plazas_restantes}}</h4>
 
                     @if(authService.estaLoggeado() && !esMiEvento){
                     <button class="btn btn-primary" data-bs-toggle="modal"
@@ -137,7 +137,7 @@
                     <div class="form-group mb-2">
                         <label for="cantidadBilletes">Cantidad de billetes:</label>
                         <input type="number" class="form-control" id="cantidadBilletes" name="cantidadBilletes" min="1"
-                            value="1" [(ngModel)]="eventoPost.cantidadEntradas">
+                            value="1" [(ngModel)]="eventoPost.cantidad_entradas">
                     </div>
                     <div class="form-group mb-2">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"

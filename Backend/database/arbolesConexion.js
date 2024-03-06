@@ -10,9 +10,9 @@ class ArbolesConexion{
     static getArbolesGeneral = async () => {
         try {
             const resultado = await models.sequelize.query(
-                `SELECT arb.id, arb.nombre, arb.epFloracion, arb.foto ,fam.nombre AS nombreFam 
+                `SELECT arb.id, arb.nombre, arb.ep_floracion, arb.foto ,fam.nombre AS nombre_fam 
                 FROM arboles arb 
-                JOIN familias fam ON arb.idFamilia = fam.id
+                JOIN familias fam ON arb.id_familia = fam.id
                 WHERE arb.desactivado = 0
                 ORDER BY arb.id`,
                 { type: Sequelize.QueryTypes.SELECT }
@@ -28,9 +28,9 @@ class ArbolesConexion{
     static getInformacionArbol = async (idArbol) =>{
         try{
             const resultado = await models.sequelize.query(
-                `SELECT arb.id, arb.nombre, arb.epFloracion, arb.descripcion, arb.foto, fam.nombre AS nombreFam 
+                `SELECT arb.id, arb.nombre, arb.ep_floracion, arb.descripcion, arb.foto, fam.nombre AS nombreFam 
                 FROM arboles arb 
-                JOIN familias fam ON arb.idFamilia = fam.id
+                JOIN familias fam ON arb.id_familia = fam.id
                 WHERE arb.id = ${idArbol}`,
                 { type: Sequelize.QueryTypes.SELECT }
             )
@@ -40,11 +40,11 @@ class ArbolesConexion{
         }
     }
 
-    static getUbicacionesArbol = async (idArbol) =>{
+    static getUbicacionesArbol = async (id_arbol) =>{
         try{
             const resultado = await models.Ubicacion.findAll({
                 where:{
-                    idArbol:idArbol
+                    id_arbol:id_arbol
                 }
             })
             return resultado

@@ -36,9 +36,9 @@ class AuthConexion {
     static obtenerRoles = async (id) => {
         const resultado = await models.sequelize.query(`
             SELECT DISTINCT r.nombre FROM roles r
-            JOIN rolusuario ru   
-                ON r.id=ru.idRol
-            WHERE ru.idUsuario = ${id}
+            JOIN rol_usuario ru   
+                ON r.id=ru.id_rol
+            WHERE ru.id_usuario = ${id}
         `, {type:QueryTypes.SELECT})
         return resultado;
     }

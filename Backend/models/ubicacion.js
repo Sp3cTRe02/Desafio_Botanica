@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Ubicacion.init({
-    idArbol: DataTypes.BIGINT,
+    id_arbol: DataTypes.BIGINT,
     latitud: DataTypes.STRING,
     longitud: DataTypes.STRING,
     ciudad: DataTypes.STRING

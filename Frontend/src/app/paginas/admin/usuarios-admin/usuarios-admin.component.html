@@ -67,24 +67,26 @@
 
 <ng-template #mRoles let-modal>
   <div class="modal-dialog modal-confirm">
-    <div class="modal-header flex-column">
-      <h4 class="modal-title w-150">Modificando roles del usuario </h4>
-    </div>
-    <div class="modal-body">
-      @for (rol of roles; track rol.id){
-      <div class="form-group mb-2">
-        <p>{{ rol.nombre | uppercase }}
-          @if(tieneRol(rol, usuarioRoles)) {
-          <button class="btn btn-danger" (click)="removeRol(rol.id, usuarioSeleccionado.id)">Eliminar rol</button>
-          } @else {
-          <button class="btn btn-success" (click)="addRol(rol.id, usuarioSeleccionado.id)">Añadir rol</button>
-          }
-
+    <div class="modal-content">
+      <div class="modal-header flex-column">
+        <h4 class="modal-title w-150">Modificando roles del usuario </h4>
       </div>
-      }
-    </div>
-    <div class="modal-footer justify-content-center">
-      <button type="button" class="btn btn-primary" (click)="modal.dismiss('Cancel click')">Cancelar</button>
+      <div class="modal-body">
+        @for (rol of roles; track rol.id){
+          <div class="form-group mb-2">
+            <p>{{ rol.nombre | uppercase }}
+              @if(tieneRol(rol, usuarioRoles)) {
+                <button class="btn btn-danger" (click)="removeRol(rol.id, usuarioSeleccionado.id)">Eliminar rol</button>
+              } @else {
+                <button class="btn btn-success" (click)="addRol(rol.id, usuarioSeleccionado.id)">Añadir rol</button>
+              }
+
+          </div>
+        }
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-primary" (click)="modal.dismiss('Cancel click')">Cancelar</button>
+      </div>
     </div>
   </div>
 </ng-template>

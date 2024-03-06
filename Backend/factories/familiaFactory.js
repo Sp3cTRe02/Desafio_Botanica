@@ -13,7 +13,6 @@ const crearFamilia = async (ctos = 1) => {
         const familia = {
             nombre : faker.lorem.word(),   
         }
-        console.log(familia);
         familias.push(familia)
     }
     return Promise.all(familias)

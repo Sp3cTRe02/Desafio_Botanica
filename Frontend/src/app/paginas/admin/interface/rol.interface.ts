@@ -4,6 +4,6 @@ export interface Rol {
 }
 
 export interface usuarioRol {
-  idRol: number;
-  idUsuario: number;
+  id_rol: number;
+  id_usuario: number;
 }

@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Usuario.hasMany(models.RolUsuario, {as: 'RolUsuario', foreignKey: 'idUsuario'})
+      Usuario.hasMany(models.RolUsuario, {as: 'RolUsuario', foreignKey: 'id_usuario'})
     }
   }
   Usuario.init({
@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     desactivado : DataTypes.BOOLEAN
   }, {
     sequelize,
+    timestamps: false,
     tableName: 'usuarios',
     modelName: 'Usuario',
   });

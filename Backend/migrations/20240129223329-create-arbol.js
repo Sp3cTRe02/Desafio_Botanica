@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.BIGINT
       },
 
-      idFamilia:{
+      id_familia:{
         type: Sequelize.BIGINT,
         references: {
           model:{
@@ -25,7 +25,7 @@ module.exports = {
         type: Sequelize.STRING
       }, 
 
-      epFloracion:{
+      ep_floracion:{
         type:Sequelize.STRING
       },
 

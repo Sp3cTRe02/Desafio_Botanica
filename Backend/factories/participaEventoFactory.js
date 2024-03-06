@@ -12,9 +12,9 @@ const participaEvento = async (ctos = 1) => {
 
     for (let i = 0; i < ctos; i++) {
         const evento = {
-            idEvento: eventos[Math.floor(Math.random() * eventos.length )],
-            idUsuario:  usuarios[Math.floor(Math.random() * usuarios.length)],
-            fechaParticipacion: faker.date.recent()
+            id_evento: eventos[Math.floor(Math.random() * eventos.length )],
+            id_usuario:  usuarios[Math.floor(Math.random() * usuarios.length)],
+            fecha_participacion: faker.date.recent()
         }
         eventosParticipa.push(evento)
     }

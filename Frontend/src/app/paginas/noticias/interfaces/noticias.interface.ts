@@ -1,8 +1,8 @@
 export interface ContenidoGet{
     id: number;
-    idUsuario: number,
+    id_usuario: number,
     titulo: string,
-    resumenDesc: string,
+    resumen_desc: string,
     descripcion: string,
     imagen: string | null
 }
@@ -20,7 +20,7 @@ export interface ContenidoPost{
 
 export interface ContenidoPut{
     titulo: string,
-    resumenDesc: string,
+    resumen_desc: string,
     descripcion: string,
 }
 

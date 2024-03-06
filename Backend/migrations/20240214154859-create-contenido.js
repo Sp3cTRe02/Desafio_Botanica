@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
 
-      idUsuario: {
+      id_usuario: {
         type: Sequelize.BIGINT,
         references: {
           model: {
@@ -26,7 +26,7 @@ module.exports = {
         type: Sequelize.STRING
       },
 
-      resumenDesc: {
+      resumen_desc: {
         type: Sequelize.STRING
       },
 

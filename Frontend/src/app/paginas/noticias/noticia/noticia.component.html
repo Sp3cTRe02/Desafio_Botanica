@@ -20,7 +20,7 @@
                 <div class="form-group mb-2">
                     <label for="email">Resumen de la descripción</label>
                     <input type="text" class="form-control mb-2" name="resumenDesc" required
-                        [(ngModel)]="noticia.resumenDesc">
+                        [(ngModel)]="noticia.resumen_desc">
                 </div>
             </div>
 
@@ -35,7 +35,7 @@
                   </div>
             </div>
 
-            
+
             <div class="col-lg-12">
                 <div class="form-group mb-2 margin-top" style="max-height: 300px ; overflow-y: auto;">
                     <label for="name">Contenido</label> <br>
@@ -43,7 +43,7 @@
                         [(ngModel)]="noticia.descripcion" name="descripcion"></quill-editor>
                 </div>
             </div>
-           
+
         </div>
     </form>
 

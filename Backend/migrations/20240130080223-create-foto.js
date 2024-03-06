@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
 
-      idArbol: {
+      id_arbol: {
         type: Sequelize.BIGINT,
         references: {
           model:{

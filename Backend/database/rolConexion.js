@@ -30,7 +30,7 @@ const getRolesUsuario = async (id) => {
     let roles = []
     bd.conectar()
     try {
-        roles = await models.sequelize.query('SELECT r.id, r.nombre FROM roles r, rolusuario ru WHERE r.id = ru.idRol AND ru.idUsuario = ' + id, { type: QueryTypes.SELECT });
+        roles = await models.sequelize.query('SELECT r.id, r.nombre FROM roles r, rol_usuario ru WHERE r.id = ru.id_rol AND ru.id_usuario = ' + id, { type: QueryTypes.SELECT });
     } catch (error) {
         console.log(error)
         throw error

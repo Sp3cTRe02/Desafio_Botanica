@@ -27,8 +27,8 @@ const validator = [
 ]
 
 const validatorRol = [
-    check('idUsuario', 'El idUsuario es obligatorio').not().isEmpty(),
-    check('idRol', 'El idRol es obligatorio').not().isEmpty(),
+    check('id_usuario', 'El idUsuario es obligatorio').not().isEmpty(),
+    check('id_rol', 'El idRol es obligatorio').not().isEmpty(),
     validarCampos
 ]
 

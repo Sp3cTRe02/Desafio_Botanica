@@ -9,11 +9,11 @@ const eventoParticipaFactory = require('../factories/participaEventoFactory')
 module.exports = {
   async up (queryInterface, Sequelize) {
     const participaEventos = await eventoParticipaFactory(4)
-    await queryInterface.bulkInsert('participaeventos',participaEventos,{})
+    await queryInterface.bulkInsert('participa_eventos',participaEventos,{})
    
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('participaeventos', null, {});
+    await queryInterface.bulkDelete('participa_eventos', null, {});
   }
 };

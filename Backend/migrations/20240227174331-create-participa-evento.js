@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('participaeventos', {
+    await queryInterface.createTable('participa_eventos', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,7 +12,7 @@ module.exports = {
 
      
 
-      idUsuario: {
+      id_usuario: {
         type: Sequelize.BIGINT,
         references: {
           model: {
@@ -23,7 +23,7 @@ module.exports = {
         allowNull: false,
       },
 
-      idEvento: {
+      id_evento: {
         type: Sequelize.BIGINT,
         references: {
           model: {
@@ -34,13 +34,13 @@ module.exports = {
         allowNull: false,
       },
 
-      fechaParticipacion: {
+      fecha_participacion: {
         allowNull: false,
         type: Sequelize.DATE
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('participaeventos');
+    await queryInterface.dropTable('participa_eventos');
   }
 };

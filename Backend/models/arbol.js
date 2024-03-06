@@ -11,15 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
 
     static associate(models) {
-      Arbol.hasMany(models.Ubicacion, {as: 'ArbolUbicacion', foreignKey: 'idArbol'});
-      Arbol.hasMany(models.Foto, {as:'ArbolFoto', foreignKey: 'idArbol'})
+      Arbol.hasMany(models.Ubicacion, {as: 'ArbolUbicacion', foreignKey: 'id_arbol'});
+      Arbol.hasMany(models.Foto, {as:'ArbolFoto', foreignKey: 'id_arbol'})
     }
  
   }
   Arbol.init({
-    idFamilia: DataTypes.BIGINT,
+    id_familia: DataTypes.BIGINT,
     nombre: DataTypes.STRING,
-    epFloracion: DataTypes.STRING,
+    ep_floracion: DataTypes.STRING,
     descripcion: DataTypes.STRING,
     foto: DataTypes.STRING,
     desactivado: DataTypes.BOOLEAN

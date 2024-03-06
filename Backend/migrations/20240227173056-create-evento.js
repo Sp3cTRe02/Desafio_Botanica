@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.BIGINT
       },
 
-      idUsuario: {
+      id_usuario: {
         type: Sequelize.BIGINT,
         references: {
           model: {
@@ -28,11 +28,11 @@ module.exports = {
       descripcion: {
         type: Sequelize.TEXT('medium')
       },
-      fechaInicio: {
+      fecha_inicio: {
         allowNull: false,
         type: Sequelize.DATE
       }, 
-      cantidadMax: {
+      cantidad_max: {
         allowNull: false,
         type: Sequelize.INTEGER
       },

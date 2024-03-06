@@ -33,7 +33,7 @@ class contenidoController {
 
             const contenido = {
                 ...req.body,
-                idUsuario: id,
+                id_usuario: id,
                 imagen: rutaImagen
             }
 
@@ -142,7 +142,7 @@ class contenidoController {
             console.log(imagen.dataValues.imagen)
 
             if (imagen) {
-                const pathImagen = path.join(__dirname, '../uploads', 'imgs/content', imagen.dataValues.imagen);
+                const pathImagen = path.join(__dirname, '../uploads/', 'imgs/content', imagen.dataValues.imagen);
                 console.log(pathImagen);
 
                 if (fs.existsSync(pathImagen)) {

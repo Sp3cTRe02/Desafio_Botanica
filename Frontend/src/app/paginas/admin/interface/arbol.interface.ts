@@ -1,9 +1,9 @@
 export interface arboles{
     id: number;
-    idFamilia: number;
-    nombreFamilia : string;
+    id_familia: number;
+    nombre_familia : string;
     nombre: string;
-    epFloracion: string;
+    ep_floracion: string;
     descripcion: string;
     foto: string;
     desactivado: boolean;
@@ -11,16 +11,16 @@ export interface arboles{
 }
 export interface crearArbolResponse {
   id: number;
-  idFamilia: number;
+  id_familia: number;
   nombre: string;
-  epFloracion: string;
+  ep_floracion: string;
   descripcion: string;
   desactivado: boolean;
 }
 export interface ArbolPost {
-  idFamilia: number;
+  id_familia: number;
   nombre: string;
-  epFloracion: string;
+  ep_floracion: string;
   descripcion: string;
   foto: string;
   desactivado: boolean;
@@ -37,9 +37,9 @@ export interface obtenerArbolesResponse {
 
 export interface Arbol {
   id: number;
-  idFamilia: number;
+  id_familia: number;
   nombre: string;
-  epFloracion: string;
+  ep_floracion: string;
   descripcion: string;
   foto: string;
   desactivado: boolean;
@@ -51,9 +51,9 @@ export interface Arbol {
 
 export interface actualizarArbolResponse {
   id: number;
-    idFamilia: number;
+    id_familia: number;
     nombre: string;
-    epFloracion: string;
+    ep_floracion: string;
     descripcion: string;
     desactivado: boolean;
    estado: number;

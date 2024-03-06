@@ -5,6 +5,7 @@ const {subirArchivo} = require('../helpers/subir-archivo')
 const fs = require('fs')
 const path = require('path')
 const { kMaxLength } = require('buffer')
+const { log } = require('console')
 require('dotenv').config()
 
 /**

@@ -19,7 +19,7 @@
           </div>
           <div class="form-group">
             <label for="cantidadMax">Cantidad máxima:</label>
-            <input type="number" class="form-control" id="cantidadMax" name="cantidadMax" [(ngModel)]="evento.cantidadMax" required>
+            <input type="number" class="form-control" id="cantidadMax" name="cantidadMax" [(ngModel)]="evento.cantidad_max" required>
           </div>
           <div class="form-group">
             <label for="ubicacion">Ubicación:</label>
@@ -32,7 +32,7 @@
             [showCancelButton]="true" uploadLabel="Subir imagen" [showUploadButton]="false">
           </p-fileUpload>
           </div>
-          
+
           <button type="submit" class="btn btn-primary" (click)="fileUpload.upload()">Enviar</button>
         </form>
       </div>

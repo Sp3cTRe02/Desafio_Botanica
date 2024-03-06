@@ -14,9 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Contenido.init({
-    idUsuario: DataTypes.BIGINT,
+    id_usuario: DataTypes.BIGINT,
     titulo: DataTypes.STRING,
-    resumenDesc: DataTypes.STRING,
+    resumen_desc: DataTypes.STRING,
     descripcion: DataTypes.STRING,
     imagen: DataTypes.STRING,
  

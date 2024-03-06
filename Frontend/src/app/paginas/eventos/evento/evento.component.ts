@@ -28,8 +28,8 @@ export class EventoComponent {
         id: 0,
         nombre: '',
         descripcion: '',
-        fechaInicio: '',
-        cantidadMax: 0,
+        fecha_inicio: '',
+        cantidad_max: 0,
         latitud: 0,
         longitud: 0,
         ubicacion: 0,
@@ -46,14 +46,14 @@ export class EventoComponent {
     eventoEditar: EventoPut = {
         nombre: '',
         descripcion: '',
-        cantidadMax: 0
+        cantidad_max: 0
     }
 
     eventoPost: EventoPost = {
-        cantidadEntradas: 0
+        cantidad_entradas: 0
     }
 
-    plazasRestantes: number = 0
+    plazas_restantes: number = 0
     modoEdicion: boolean = false
     msg: string = '';
     eventoControl = new FormControl()
@@ -111,7 +111,7 @@ export class EventoComponent {
 
     obtenerPlazas(idEvento: number) {
         this.eventosService.getPlazasRestantes(idEvento).subscribe((response: any) => {
-            this.plazasRestantes = response.data.plazasRestantes
+            this.plazas_restantes = response.data.plazasRestantes
         })
     }
 
@@ -129,11 +129,11 @@ export class EventoComponent {
 
         this.eventoEditar.nombre = this.evento.nombre
         this.eventoEditar.descripcion = this.evento.descripcion
-        this.eventoEditar.cantidadMax = this.evento.cantidadMax
+        this.eventoEditar.cantidad_max = this.evento.cantidad_max
 
         formData.append('nombre', this.eventoEditar.nombre)
         formData.append('descripcion', this.eventoEditar.descripcion)
-        formData.append('cantidadMax',this.eventoEditar.cantidadMax.toString())
+        formData.append('cantidad_max',this.eventoEditar.cantidad_max.toString())
 
         this.eventosService.modificarEvento(this.eventoId, formData).subscribe((response: any) => {
             if (response.success) {
@@ -205,14 +205,14 @@ export class EventoComponent {
             if (response.success) {
                 this.msg = 'Inscripción realizada con éxito';
                 this.mostrarExito(this.msg);
-                this.eventoPost.cantidadEntradas = null;
+                this.eventoPost.cantidad_entradas = null;
                 this.showModal()
             }else{
 
             }
         }, (error) => {
             this.mostrarError(error.error.data.msg);
-            this.eventoPost.cantidadEntradas = null;
+            this.eventoPost.cantidad_entradas = null;
         });
 
     }

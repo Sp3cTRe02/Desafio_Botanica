@@ -31,16 +31,16 @@ import { FileUploadModule } from "primeng/fileupload";
 export class NoticiaComponent implements OnInit{
     noticia: ContenidoGet = {
         id: 0,
-        idUsuario: 0,
+        id_usuario: 0,
         titulo: '',
-        resumenDesc: '',
+        resumen_desc: '',
         descripcion: '',
         imagen: null
     }
 
     noticiaEditar: ContenidoPut = {
         titulo: '',
-        resumenDesc: '',
+        resumen_desc: '',
         descripcion: ''
     }
 
@@ -110,12 +110,12 @@ export class NoticiaComponent implements OnInit{
 
 
         this.noticiaEditar.titulo = this.noticia.titulo
-        this.noticiaEditar.resumenDesc = this.noticia.resumenDesc
+        this.noticiaEditar.resumen_desc = this.noticia.resumen_desc
         this.noticiaEditar.descripcion = this.noticia.descripcion
 
 
         formData.append('titulo',this.noticiaEditar.titulo)
-        formData.append('resumenDesc',this.noticiaEditar.resumenDesc)
+        formData.append('resumen_desc',this.noticiaEditar.resumen_desc)
         formData.append('descripcion',this.noticiaEditar.descripcion)
 
 
