@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {arbolesRoutes, arbolRoutes, environment} from '../../../../environments/environment.development';
+import {arbolRoutes, environment} from '../../../../environments/environment.development';
 import {Ubicacion} from "../interfaces/arboles-general.interface";
 
 @Injectable({

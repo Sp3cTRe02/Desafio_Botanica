@@ -201,20 +201,24 @@ export class EventoComponent {
     }
 
     participarEvento() {
-        this.eventosService.participarEvento(this.eventoId, this.eventoPost).subscribe((response: any) => {
-            if (response.success) {
-                this.msg = 'Inscripción realizada con éxito';
-                this.mostrarExito(this.msg);
+        const fechaActual = new Date();
+        const fechaFin = new Date(this.evento.fechaInicio);
+    
+        if (fechaActual > fechaFin) {
+            this.mostrarError('No puedes participar, el evento ha finalizado');
+        } else {
+            this.eventosService.participarEvento(this.eventoId, this.eventoPost).subscribe((response: any) => {
+                if (response.success) {
+                    this.msg = 'Inscripción realizada con éxito';
+                    this.mostrarExito(this.msg);
+                    this.eventoPost.cantidadEntradas = null;
+                    this.showModal();
+                }
+            }, (error) => {
+                this.mostrarError(error.error.data.msg);
                 this.eventoPost.cantidadEntradas = null;
-                this.showModal()
-            }else{
-
-            }
-        }, (error) => {
-            this.mostrarError(error.error.data.msg);
-            this.eventoPost.cantidadEntradas = null;
-        });
-
+            });
+        }
     }
 
     showModal() {

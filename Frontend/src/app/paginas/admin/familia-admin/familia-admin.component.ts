@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { Table, TableModule } from 'primeng/table';
 import { MenuComponent } from '../../../shared/menu/menu.component';
-import { FamiliaAdmin, FamiliaPost, FamiliaPut } from '../interface/admin.interface';
+import { FamiliaAdmin, FamiliaPost} from '../interface/admin.interface';
 import { FamiliaAdminService } from '../services/familia-admin.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';

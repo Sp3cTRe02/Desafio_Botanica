@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuComponent } from "../../../shared/menu/menu.component";
 import { NoticiasService } from '../services/noticias.service';
-import { ContenidoGet, ContenidoPost, ContenidoPut } from '../interfaces/noticias.interface';
+import { ContenidoGet, ContenidoPut } from '../interfaces/noticias.interface';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { CommonModule } from '@angular/common';

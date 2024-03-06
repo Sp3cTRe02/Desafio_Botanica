@@ -29,6 +29,7 @@
                         <h5 class="card-title text-bold">Organizado por</h5>
                         <p>{{organizador.nombre}} {{organizador.ap1}} {{organizador.ap2}}</p>
                     </div>
+
                 </div>
             </div>
 
@@ -115,6 +116,12 @@
                 <div class="card-body">
                     <h5 class="card-title text-bold">Ubicación</h5>
                     <p>{{evento.ubicacion}}</p>
+                </div>
+
+                
+                <div class="card-body">
+                    <h5 class="card-title text-bold">Fecha del evento</h5>
+                    <p>{{ evento.fechaInicio | date:'dd/MM/yyyy HH:mm:ss' }}</p>
                 </div>
             </div>
 

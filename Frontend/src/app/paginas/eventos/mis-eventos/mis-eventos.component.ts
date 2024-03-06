@@ -3,7 +3,6 @@ import { MenuComponent } from "../../../shared/menu/menu.component";
 import { CommonModule } from '@angular/common';
 import { DataViewModule } from 'primeng/dataview';
 import { RouterLink } from '@angular/router';
-import { EventoGet } from '../interfaces/eventos.interface';
 import { EventosService } from '../services/eventos.service';
 
 @Component({

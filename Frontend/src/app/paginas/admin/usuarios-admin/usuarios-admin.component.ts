@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnInit,ViewChild} from '@angular/core';
 import {MenuComponent} from '../../../shared/menu/menu.component';
 import {MessageService} from "primeng/api";
 import {CommonModule} from "@angular/common";
@@ -58,7 +58,6 @@ export class UsuariosAdminComponent implements OnInit{
     private adminService : UsuarioAdminService,
     private rolService : RolService,
     private modalService : NgbModal,
-    private msgService: MessageService
   ){}
 
   ngOnInit() {
@@ -157,8 +156,3 @@ export class UsuariosAdminComponent implements OnInit{
   }
 }
 
-
-/*
-
-
- */
