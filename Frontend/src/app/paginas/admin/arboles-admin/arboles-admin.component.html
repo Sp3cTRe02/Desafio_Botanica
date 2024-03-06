@@ -62,7 +62,7 @@
                     [(ngModel)]="arbolSeccionado.nombre">
             </div>
             <label>Familia</label><br>
-              <select (change)="actualizarFamiliaPut($event)" name="id_familia" >
+              <select (change)="actualizarFamilia($event)" name="id_familia" >
                 @for (familia of Familias; track familia.id) {
                   @if (familia.id == arbolSeccionado.id_familia) {
                     <option value="{{familia.id}}" selected>{{familia.nombre}}</option>

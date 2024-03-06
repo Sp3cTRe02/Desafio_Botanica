@@ -112,8 +112,8 @@ export class AddEventoComponent {
 
     formData.append('nombre', this.evento.nombre)
     formData.append('descripcion', this.evento.descripcion)
-    formData.append('fechaInicio', this.evento.fecha_inicio?.toString() ?? '')
-    formData.append('cantidadMax', this.evento.cantidad_max.toString())
+    formData.append('fecha_inicio', this.evento.fecha_inicio?.toString() ?? '')
+    formData.append('cantidad_max', this.evento.cantidad_max.toString())
     formData.append('ubicacion', this.evento.ubicacion)
 
 

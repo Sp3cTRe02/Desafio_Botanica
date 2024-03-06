@@ -47,6 +47,8 @@ export class ArbolesAdminComponent {
     arbolSeccionado: any
     arbolEliminar: any
 
+    familiaSeleccionada : number = 0
+
     arbol: ArbolPost = {
         id_familia: 1,
         nombre: '',
@@ -148,7 +150,7 @@ constructor(private adminService: ArbolesAdminService, private modalService: Ngb
         formData.append('nombre', this.arbol.nombre);
         formData.append('descripcion', this.arbol.descripcion);
         formData.append('ep_floracion', this.arbol.ep_floracion);
-        formData.append('id_familia', this.arbol.id_familia.toString());
+        formData.append('id_familia', this.familiaSeleccionada.toString());
         formData.append('desactivado', this.arbol.desactivado.toString());
 
 
@@ -174,16 +176,14 @@ constructor(private adminService: ArbolesAdminService, private modalService: Ngb
             })
     }
     actualizarFamilia(event : any){
-        this.arbol.id_familia = event.target.value
+        this.familiaSeleccionada = event.target.value
     }
-    actualizarFamiliaPut(event : any){
-        this.arbolPut.id_familia = event.target.value
-    }
+
     editarArbol(idArbol:number, event: any){
         this.arbol = this.arbolSeccionado
         this.arbolPut = {
             id: idArbol,
-            id_familia: this.arbol.id_familia,
+            id_familia: this.familiaSeleccionada,
             ep_floracion: this.arbolSeccionado.ep_floracion,
             descripcion: this.arbolSeccionado.descripcion,
             desactivado: this.arbolSeccionado.desactivado,
@@ -229,7 +229,7 @@ constructor(private adminService: ArbolesAdminService, private modalService: Ngb
         formData.append('nombre', this.arbolPut.nombre);
         formData.append('descripcion', this.arbolPut.descripcion);
         formData.append('ep_floracion', this.arbolPut.ep_floracion);
-        formData.append('id_familia', this.arbol.id_familia.toString());
+        formData.append('id_familia', this.arbolPut.id_familia.toString());
         formData.append('desactivado', this.arbolPut.desactivado.toString());
 
 
