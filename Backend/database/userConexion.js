@@ -46,9 +46,9 @@ const updateUsuario = async (body, id) => {
     bd.conectar()
     try{
         const usuario = await models.sequelize.query(
-            `update usuarios set nombre = ?, ap1 = ?, ap2 = ?, email = ? where id = ?`,
+            `update usuarios set nombre = ?, ap1 = ?, ap2 = ?, email = ? , desactivado = ? where id = ?`,
             {
-                replacements: [body.nombre, body.ap1, body.ap2, body.email, id],
+                replacements: [body.nombre, body.ap1, body.ap2, body.email,body.desactivado, id],
                 type: Sequelize.QueryTypes.UPDATE
             }
         )

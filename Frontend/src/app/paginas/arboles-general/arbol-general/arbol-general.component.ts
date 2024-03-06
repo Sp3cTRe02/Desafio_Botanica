@@ -11,11 +11,10 @@ import {DialogModule} from "primeng/dialog";
 import {FileUploadModule} from "primeng/fileupload";
 import {ToastModule} from "primeng/toast";
 import {MessageService} from "primeng/api";
-import {environment, arbolRoutes} from "../../../../environments/environment.development";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DataViewModule } from 'primeng/dataview';
-import {Arbol, ArbolInfo, ubicaciones} from "../interfaces/arboles-general.interface";
+import {ArbolInfo, ubicaciones} from "../interfaces/arboles-general.interface";
 
 @Component({
   selector: 'app-arbol-general',
@@ -77,7 +76,7 @@ export class ArbolGeneralComponent implements OnInit{
     this.route.params.subscribe(params => {
       this.arbolId = params['id'];
       this.obtenerUbicacionesArbol(this.arbolId)
-
+      window.scrollTo(0, 0);
 
       });
 

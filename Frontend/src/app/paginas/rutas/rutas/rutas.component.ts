@@ -30,6 +30,7 @@ export class RutasComponent implements AfterViewInit{
 
 
   constructor(private rutaService : RutasService, private messageService: MessageService) {
+    window.scrollTo(0, 0);
   }
 
   ngAfterViewInit() {

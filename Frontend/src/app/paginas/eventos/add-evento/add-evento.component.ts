@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MenuComponent } from "../../../shared/menu/menu.component";
 import { EventosService } from '../services/eventos.service';
-import { EventoAdd, EventoPost } from '../interfaces/eventos.interface';
+import { EventoAdd} from '../interfaces/eventos.interface';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';

@@ -8,6 +8,11 @@ input{
   margin-top: 15px;
 }
 
+img{
+  object-fit: fill;
+  border-radius: 10px;
+}
+
 .wd-select{
   height:  50px
 }

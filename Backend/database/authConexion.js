@@ -12,7 +12,7 @@ class AuthConexion {
 
         try {
             resultado = await models.Usuario.findOne({
-                where: { email: email },
+                where: { email: email, desactivado:false  },
                 attributes: ['id', 'nombre', 'passwd']
             })
             
