@@ -68,20 +68,18 @@
 <ng-template #mRoles let-modal>
   <div class="modal-dialog modal-confirm">
     <div class="modal-content">
-      <div class="modal-header flex-column">
-        <h4 class="modal-title w-150">Modificando roles del usuario </h4>
-      </div>
+      <h4 class="modal-title w-150">Modificando roles del usuario </h4>
+
       <div class="modal-body">
         @for (rol of roles; track rol.id){
-          <div class="form-group mb-2">
-            <p>{{ rol.nombre | uppercase }}
-              @if(tieneRol(rol, usuarioRoles)) {
-                <button class="btn btn-danger" (click)="removeRol(rol.id, usuarioSeleccionado.id)">Eliminar rol</button>
-              } @else {
-                <button class="btn btn-success" (click)="addRol(rol.id, usuarioSeleccionado.id)">Añadir rol</button>
-              }
-
-          </div>
+        <div class="form-group mb-2 d-flex align-items-center"> <!-- Aplica la clase d-flex y align-items-center -->
+          <p>{{ rol.nombre | uppercase }}</p>
+          @if(tieneRol(rol, usuarioRoles)) {
+            <button class="btn btn-danger ms-auto" (click)="removeRol(rol.id, usuarioSeleccionado.id)">Eliminar rol</button> <!-- Aplica la clase ms-auto para mover el botón a la derecha -->
+          } @else {
+            <button class="btn btn-success ms-auto" (click)="addRol(rol.id, usuarioSeleccionado.id)">Añadir rol</button> <!-- Aplica la clase ms-auto para mover el botón a la derecha -->
+          }
+        </div>
         }
       </div>
       <div class="modal-footer justify-content-center">

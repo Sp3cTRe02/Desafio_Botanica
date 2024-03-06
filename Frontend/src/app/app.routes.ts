@@ -17,6 +17,7 @@ import { EventoComponent } from './paginas/eventos/evento/evento.component';
 import { MisEventosComponent } from './paginas/eventos/mis-eventos/mis-eventos.component';
 import {RutasComponent} from "./paginas/rutas/rutas/rutas.component";
 import { AddEventoComponent } from './paginas/eventos/add-evento/add-evento.component';
+import { orgGuard } from './shared/guards/org.guard';
 
 
 
@@ -92,12 +93,14 @@ export const routes: Routes = [
 
     {
         path: 'mis-eventos',
-        component: MisEventosComponent
+        component: MisEventosComponent,
+        canActivate: [orgGuard]
     },
 
     {
         path: 'crear-evento',
-        component: AddEventoComponent
+        component: AddEventoComponent,
+        canActivate: [orgGuard]
     },
 
     { path: '**', component: NotFoundComponent }

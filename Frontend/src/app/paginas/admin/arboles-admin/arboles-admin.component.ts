@@ -176,14 +176,15 @@ constructor(private adminService: ArbolesAdminService, private modalService: Ngb
             })
     }
     actualizarFamilia(event : any){
-        this.familiaSeleccionada = event.target.value
+        this.arbol.id_familia= +(<HTMLSelectElement>event.target).value
     }
 
     editarArbol(idArbol:number, event: any){
-        this.arbol = this.arbolSeccionado
+      this.arbol = this.arbolSeccionado
+      this.arbolPut.id = idArbol
         this.arbolPut = {
             id: idArbol,
-            id_familia: this.familiaSeleccionada,
+            id_familia: this.arbolSeccionado.id_familia,
             ep_floracion: this.arbolSeccionado.ep_floracion,
             descripcion: this.arbolSeccionado.descripcion,
             desactivado: this.arbolSeccionado.desactivado,
