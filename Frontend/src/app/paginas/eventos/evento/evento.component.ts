@@ -57,7 +57,6 @@ export class EventoComponent {
     modoEdicion: boolean = false
     msg: string = '';
     eventoControl = new FormControl()
-    misEventos: any[] = []
 
     public modulesQuill = {
         toolbar: [
@@ -77,7 +76,6 @@ export class EventoComponent {
     editar: boolean = true
     esMiEvento : boolean = true
     @ViewChild('miModal') miModal: TemplateRef<any> | undefined;
-    participa: boolean = false
 
 
     constructor(private eventosService: EventosService, private route: ActivatedRoute,

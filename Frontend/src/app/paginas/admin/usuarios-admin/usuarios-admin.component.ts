@@ -76,7 +76,6 @@ export class UsuariosAdminComponent implements OnInit{
   traerRoles() {
     this.rolService.obtenerRoles().subscribe((response: any) => {
       if (response.status === "OK") {
-        console.log(response.roles)
         this.roles = response.roles
       }
     })
@@ -96,7 +95,6 @@ export class UsuariosAdminComponent implements OnInit{
     this.rolService.obtenerRolesUsuario(usuario.id).subscribe((response: any) => {
       if(response.status === "OK"){
         this.usuarioRoles = response.roles
-        console.log(this.usuarioRoles)
         this.modalService.open(this.mRoles, { ariaLabelledBy: 'modal-basic-title' })
       }
     })

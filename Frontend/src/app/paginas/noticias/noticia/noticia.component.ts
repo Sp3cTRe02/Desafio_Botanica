@@ -83,8 +83,7 @@ export class NoticiaComponent implements OnInit{
     obtenerInfoNoticia(idNoticia: number) {
         this.noticiasService.getInfoNoticia(idNoticia).subscribe((response: any) => {
             this.noticia = response.data.contenido
-            console.log(this.noticia)
-            
+
         })
     }
 
@@ -119,16 +118,16 @@ export class NoticiaComponent implements OnInit{
         formData.append('resumenDesc',this.noticiaEditar.resumenDesc)
         formData.append('descripcion',this.noticiaEditar.descripcion)
 
-    
+
         this.noticiasService.modificarContenido(this.noticiaId, formData).subscribe((response: any) => {
             if (response.success) {
                 this.msg = 'Noticia modificada correctamente'
                 this.mostrarExito(this.msg)
-                
+
                 setTimeout(() => {
                     window.location.reload()
                 }, 1000)
-                
+
             }
         })
     }

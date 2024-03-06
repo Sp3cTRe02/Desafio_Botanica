@@ -109,7 +109,6 @@ export class AddEventoComponent {
 
     this.evento.fechaInicio = fechaFormateada;
 
-    console.log(this.evento.fechaInicio);
 
     formData.append('nombre', this.evento.nombre)
     formData.append('descripcion', this.evento.descripcion)

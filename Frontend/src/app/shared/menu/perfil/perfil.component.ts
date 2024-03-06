@@ -33,17 +33,13 @@ export class PerfilComponent implements OnInit{
       let url = this.usuario.foto
       let urlSeparada = url.split('/')
       let nombreImagen = urlSeparada[urlSeparada.length - 1]
-      
-      
+
+
       if(nombreImagen == 'null'){
         this.usuario.foto = null
       }
-      
-    })
-  }
 
-  obtenerInicial(nombre: string | null): string {
-    return nombre ? nombre.charAt(0).toUpperCase() : '';
+    })
   }
 
   actualizarPerfil(){
@@ -68,7 +64,7 @@ export class PerfilComponent implements OnInit{
       });
     })
   }
-  
+
   mostrarExito() {
     this.msgSercive.add({severity:'success', summary: 'Exito', detail: 'Perfil actualizado correctamente'});
   }
