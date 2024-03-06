@@ -76,7 +76,7 @@ export class ArbolGeneralComponent implements OnInit{
     this.route.params.subscribe(params => {
       this.arbolId = params['id'];
       this.obtenerUbicacionesArbol(this.arbolId)
-
+      window.scrollTo(0, 0);
 
       });
 
