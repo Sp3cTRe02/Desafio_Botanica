@@ -121,11 +121,7 @@ body {
         }
     }
 
-    .dropdown-menu {
-        left: 18.5% !important;
-        transform: translateX(-50%);
-    }
-
+  
     .nav-link:hover::before,
     .nav-link.active::before {
         width: 15%;
