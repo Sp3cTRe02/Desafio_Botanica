@@ -155,7 +155,7 @@ constructor(private adminService: ArbolesAdminService, private modalService: Ngb
       console.log(this.arbol)
         this.adminService.anadirArboles(formData).subscribe((response: any) => {
             if (response.status == "OK") {
-                this.msg = 'Arbol registrado exitosamente'
+                this.msg = 'Árbol registrado exitosamente'
                 this.mostrarExito(this.msg)
                  setTimeout(() => {
                   window.location.reload()
@@ -226,7 +226,7 @@ constructor(private adminService: ArbolesAdminService, private modalService: Ngb
 
         this.adminService.editarArboles(idArbol,formData).subscribe((response:any)=>{
             if(response.status==="OK"){
-                this.msg = 'Arbol editado correctamente';
+                this.msg = 'Árbol editado correctamente';
                 this.mostrarExito(this.msg)
                 setTimeout(() => {
                     window.location.reload()
