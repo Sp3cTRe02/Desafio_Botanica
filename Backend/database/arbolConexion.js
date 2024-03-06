@@ -101,7 +101,7 @@ const addUbicacionArbol = async  (ubicacion, idArbol) => {
             latitud: ubicacion.latitud,
             longitud: ubicacion.longitud,
             ciudad: ubicacion.ciudad,
-            idArbol: idArbol
+            id_arbol: idArbol
         })
         resultado = 1
     }catch (error){
@@ -121,7 +121,6 @@ const subirImagenArbol = async (idArbol, ruta) => {
     let resultado = 0 
     bd.conectar()
     try{
-        console.log(idArbol);
         const arbol = await models.Arbol.findOne({
             where: { id: idArbol }
         })
@@ -131,7 +130,7 @@ const subirImagenArbol = async (idArbol, ruta) => {
         }
         const nuevaImagen = await models.Foto.create({
             ruta: ruta,
-            idArbol: idArbol
+            id_arbol: idArbol
         })
         resultado = 1
     }catch (error){
@@ -153,7 +152,7 @@ const getRutaImagenes = async (idArbol) => {
     bd.conectar()
     try{
         const imagenes = await models.Foto.findAll({
-            where: { idArbol: idArbol }
+            where: { id_arbol: idArbol }
         })
         resultado = imagenes
     }catch (error){
@@ -196,7 +195,7 @@ const getTopUbicacionesArbol = async (idArbol) => {
         const ubicaciones = await models.sequelize.query(
             `select ub.ciudad , count(ub.ciudad) as cantidad
             from ubicaciones ub
-            join arboles arb on ub.idArbol = arb.id
+            join arboles arb on ub.id_arbol = arb.id
             where arb.id = ${idArbol} 
             group by ub.ciudad
             order by cantidad desc limit 3`

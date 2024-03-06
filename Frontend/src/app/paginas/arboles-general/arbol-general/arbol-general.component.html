@@ -15,7 +15,7 @@
       <div class="card-body">
         <h2 class="tree-title font-bold mb-3">{{arbol.nombre}}</h2>
         <p class="font-semibold mb-2">Familia: {{ arbol.nombreFam }}</p>
-        <p class="mb-2"><i class="pi pi-tag"></i> Época de floración: {{ arbol.epFloracion }}</p>
+        <p class="mb-2"><i class="pi pi-tag"></i> Época de floración: {{ arbol.ep_floracion }}</p>
       </div>
       <div class="card-body mt-3">
         <h3 class="font-bold mb-3">Descripción</h3>
@@ -71,7 +71,7 @@
           [style]="{width: '50vw'}">
           <p>Sube una imagen para este árbol</p>
           <div class="flex justify-content-center">
-            
+
             <p-fileUpload mode="advanced" chooseLabel="Seleccionar imagen" name="archivo" [customUpload]="true"
               (uploadHandler)="subirImagenArbol($event)" [maxFileSize]="5000000" accept="image/*" cancelLabel="Cancelar"
               [showCancelButton]="true" uploadLabel="Subir imagen" [showUploadButton]="true">

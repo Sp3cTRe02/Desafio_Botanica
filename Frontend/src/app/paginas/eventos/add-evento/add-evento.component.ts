@@ -25,11 +25,11 @@ import { Router } from '@angular/router';
 export class AddEventoComponent {
 
   evento: EventoAdd = {
-    idUsuario: 0,
+    id_usuario: 0,
     nombre: '',
     descripcion: '',
-    fechaInicio: '',
-    cantidadMax: 0,
+    fecha_inicio: '',
+    cantidad_max: 0,
     latitud: '',
     longitud: '',
     ubicacion: '',
@@ -107,13 +107,13 @@ export class AddEventoComponent {
 
     const fechaFormateada = `${this.zeroPad(dia)}/${this.zeroPad(mes)}/${this.zeroPad(año)} ${this.zeroPad(horas)}:${this.zeroPad(minutos)}`;
 
-    this.evento.fechaInicio = fechaFormateada;
+    this.evento.fecha_inicio = fechaFormateada;
 
 
     formData.append('nombre', this.evento.nombre)
     formData.append('descripcion', this.evento.descripcion)
-    formData.append('fechaInicio', this.evento.fechaInicio?.toString() ?? '')
-    formData.append('cantidadMax', this.evento.cantidadMax.toString())
+    formData.append('fecha_inicio', this.evento.fecha_inicio?.toString() ?? '')
+    formData.append('cantidad_max', this.evento.cantidad_max.toString())
     formData.append('ubicacion', this.evento.ubicacion)
 
 

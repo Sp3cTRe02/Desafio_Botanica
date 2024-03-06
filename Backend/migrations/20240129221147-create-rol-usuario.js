@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('rolUsuario', {
+    await queryInterface.createTable('rol_usuario', {
 
       id: {
         allowNull: false,
@@ -11,7 +11,7 @@ module.exports = {
         type: Sequelize.BIGINT
       },
 
-      idRol: {
+      id_rol: {
         type: Sequelize.BIGINT,
         references: {
           model: {
@@ -22,7 +22,7 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
       },
-      idUsuario: {
+      id_usuario: {
         type: Sequelize.BIGINT,
         references: {
           model: {
@@ -36,6 +36,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('rolUsuario');
+    await queryInterface.dropTable('rol_usuario');
   }
 };

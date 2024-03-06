@@ -19,11 +19,10 @@ const createUsuario = async (body) => {
 
     let pass = await bcrypt.hash(body.passwd, 10)
     body.passwd = pass
-    console.log("hola desde userConexion");
     try{
          const nuevoUsuario = await models.Usuario.create(body)
          const idRol = await models.sequelize.query('SELECT id FROM roles WHERE nombre = "cliente" ', { type: QueryTypes.SELECT });
-         await models.sequelize.query('INSERT INTO rolusuario (idRol, idUsuario) VALUES ('+idRol[0].id+', '+nuevoUsuario.id+')', { type: QueryTypes.INSERT });
+         await models.sequelize.query('INSERT INTO rol_usuario (id_rol, id_usuario) VALUES ('+idRol[0].id+', '+nuevoUsuario.id+')', { type: QueryTypes.INSERT });
          resultado = 1
     }catch (error){
         if (error instanceof Sequelize.ValidationError) {
@@ -140,18 +139,17 @@ const deleteUsuarios = async (id) => {
 const addRol = async (idUsuario, idRol) => {
     let resultado = 0
     bd.conectar()
-    console.log('añade rol');
     try{
         let hasRol = await models.RolUsuario.findOne({
             where: {
-                idUsuario: idUsuario,
-                idRol: idRol
+                id_usuario: idUsuario,
+                id_rol: idRol
             }
         })
         if(!hasRol){
             const rolUsuario = await models.RolUsuario.create({
-                idUsuario: idUsuario,
-                idRol: idRol
+                id_usuario: idUsuario,
+                id_rol: idRol
             })
             resultado = 1
         }else{
@@ -176,8 +174,8 @@ const removeRol = async (idUsuario, idRol) => {
     try {
         const rolUsuario = await models.RolUsuario.destroy({
             where: {
-                idUsuario: idUsuario,
-                idRol: idRol
+                id_usuario: idUsuario,
+                id_rol: idRol
             }
         })
         resultado = 1

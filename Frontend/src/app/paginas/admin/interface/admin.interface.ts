@@ -21,13 +21,11 @@ export interface Usuario {
   passwd:      string;
   foto:        string;
   desactivado: boolean;
-  createdAt:   null;
-  updatedAt:   null;
 }
 
 export interface RolUsuario {
-  idRol: number;
-  idUsuario: number;
+  id_rol: number;
+  id_usuario: number;
 }
 
 export interface UsuarioPost {

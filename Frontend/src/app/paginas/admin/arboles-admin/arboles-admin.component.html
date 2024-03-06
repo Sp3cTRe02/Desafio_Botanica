@@ -1,6 +1,6 @@
 <app-menu></app-menu>
 <div class="container container-table">
-    
+
     <div class="row">
         <div class="col">
             <p-table #dt1 [value]="arboles" dataKey="id" [paginator]="true" [rows]="5" [showCurrentPageReport]="true">
@@ -32,8 +32,8 @@
                         <td class="centered-text img-preview" ><img src="assets/fondo.jpg" alt="Imagen defecto" width="100" height="100"></td>
                       }
                         <td class="centered-text">{{arbol.nombre}}</td>
-                        <td class="centered-text">{{arbol.nombreFamilia}}</td>                        <td class="centered-text">{{arbol.descripcion}}</td>
-                        <td class="centered-text">{{arbol.epFloracion}}</td>
+                        <td class="centered-text">{{arbol.nombre_familia}}</td>                        <td class="centered-text">{{arbol.descripcion}}</td>
+                        <td class="centered-text">{{arbol.ep_floracion}}</td>
                         <td class="centered-text">{{arbol.desactivado == 0 ? 'Activo' : 'Inactivo' }}</td>
                         <td class="centered-text">
                             <button class="btn btn-primary button-space" (click)="abrirEditar(arbol)">Editar</button>
@@ -62,9 +62,9 @@
                     [(ngModel)]="arbolSeccionado.nombre">
             </div>
             <label>Familia</label><br>
-              <select (change)="actualizarFamilia($event)" name="idFamilia" >
+              <select (change)="actualizarFamilia($event)" name="id_familia" >
                 @for (familia of Familias; track familia.id) {
-                  @if (familia.id == arbolSeccionado.idFamilia) {
+                  @if (familia.id == arbolSeccionado.id_familia) {
                     <option value="{{familia.id}}" selected>{{familia.nombre}}</option>
                   } @else {
                     <option value="{{familia.id}}">{{familia.nombre}}</option>
@@ -119,7 +119,7 @@
                 <input type="text" class="form-control mb-2" name="descTarea" required
                     [(ngModel)]="arbol.nombre">
                 <label >Familia</label><br>
-                <select (change)="actualizarFamilia($event)" name="idFamilia" id="">
+                <select (change)="actualizarFamilia($event)" name="id_familia" id="">
                     @for (familia of Familias; track familia.id) {
                         <option value="{{familia.id}}">{{familia.nombre}}</option>
                     }

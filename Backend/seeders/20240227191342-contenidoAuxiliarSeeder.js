@@ -10,10 +10,10 @@ const contenidoAuxiliarFactory = require('../factories/contenidoAuxiliarFactory'
 module.exports = {
   async up (queryInterface, Sequelize) {
    const contenidoAuxiliar = await contenidoAuxiliarFactory(2)
-   await queryInterface.bulkInsert('contenidoauxiliar',contenidoAuxiliar,{})
+   await queryInterface.bulkInsert('contenido_auxiliar',contenidoAuxiliar,{})
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('contenidoauxiliar',null,{})
+    await queryInterface.bulkInsert('contenido_auxiliar',null,{})
   }
 };

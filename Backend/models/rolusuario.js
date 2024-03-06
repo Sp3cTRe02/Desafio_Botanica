@@ -14,12 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   RolUsuario.init({
-    idRol: DataTypes.BIGINT,
-    idUsuario: DataTypes.BIGINT
+    id_rol: DataTypes.BIGINT,
+    id_usuario: DataTypes.BIGINT
   }, {
     sequelize,
     timestamps: false,
-    tableName: 'rolUsuario',
+    tableName: 'rol_usuario',
     modelName: 'RolUsuario',
   });
   return RolUsuario;

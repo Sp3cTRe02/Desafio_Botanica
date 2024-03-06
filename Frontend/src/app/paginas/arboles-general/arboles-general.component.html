@@ -2,7 +2,7 @@
 
 <div class="card-wrapper container-fluid">
 
-    <p-dataView #dv [value]="arboles" [rows]="8" [paginator]="true" filterBy="nombre,nombreFam">
+    <p-dataView #dv [value]="arboles" [rows]="8" [paginator]="true" filterBy="nombre,nombre_fam">
 
         <ng-template let-arboles pTemplate="list">
             <span class="input">
@@ -28,10 +28,10 @@
                             <div class="card-body text-center">
                                 <h5 class="card-title">{{ item.nombre }}</h5>
                                 <p class="card-text">
-                                    <span class="font-semibold">{{item.nombreFam }}</span>
+                                    <span class="font-semibold">{{item.nombre_fam }}</span>
                                 </p>
                                 <p class="card-text">
-                                    <i class="pi pi-tag"></i> {{ item.epFloracion }}
+                                    <i class="pi pi-tag"></i> {{ item.ep_floracion }}
                                 </p>
                             </div>
                         </a>

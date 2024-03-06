@@ -47,7 +47,7 @@ class eventosConexion {
         try {
             const resultado = await models.sequelize.query(`
                 SELECT usu.nombre, usu.ap1, usu.ap2 FROM usuarios usu
-                JOIN eventos ev ON usu.id = ev.idUsuario
+                JOIN eventos ev ON usu.id = ev.id_usuario
                 WHERE ev.id = ${idEvento}`, { 
                     type: QueryTypes.SELECT 
                 });
@@ -61,7 +61,7 @@ class eventosConexion {
         try {
 
             const count = await models.ParticipaEvento.count({
-                where: { idEvento: idEvento }
+                where: { id_evento: idEvento }
             })
 
             return count
@@ -75,7 +75,7 @@ class eventosConexion {
         try {
             const total = await models.Evento.findOne({
                 where: { id: idEvento },
-                attributes: ['cantidadMax']
+                attributes: ['cantidad_max']
             })
 
             return total
@@ -107,7 +107,7 @@ class eventosConexion {
         try {
             resultado = await models.sequelize.query(`
             SELECT ev.id,ev.nombre,ev.descripcion,ev.imagen,ev.ubicacion FROM eventos ev 
-            WHERE ev.idUsuario = ${idUsuario}`, { type: QueryTypes.SELECT }
+            WHERE ev.id_usuario = ${idUsuario}`, { type: QueryTypes.SELECT }
 
             )
         } catch (error) {
@@ -155,16 +155,16 @@ class eventosConexion {
     
         try {
             resultado = await models.sequelize.query(`
-                SELECT pe.fechaParticipacion, u.nombre, u.ap1, u.ap2,
-                e.nombre AS nombreEvento, e.fechaInicio, e.ubicacion
-                FROM participaeventos pe
-                JOIN usuarios u ON pe.idUsuario = u.id
-                JOIN eventos e ON pe.idEvento = e.id
-                WHERE DATE(pe.fechaParticipacion) = CURDATE()
-                AND pe.fechaParticipacion = (
-                    SELECT MAX(fechaParticipacion) 
-                    FROM participaeventos
-                    WHERE DATE(fechaParticipacion) = CURDATE()
+                SELECT pe.fecha_participacion, u.nombre, u.ap1, u.ap2,
+                e.nombre AS nombreEvento, e.fecha_inicio, e.ubicacion
+                FROM participa_eventos pe
+                JOIN usuarios u ON pe.id_usuario = u.id
+                JOIN eventos e ON pe.id_evento = e.id
+                WHERE DATE(pe.fecha_participacion) = CURDATE()
+                AND pe.fecha_participacion = (
+                    SELECT MAX(fecha_participacion) 
+                    FROM participa_eventos
+                    WHERE DATE(fecha_participacion) = CURDATE()
                 )
             `);
         } catch (error) {

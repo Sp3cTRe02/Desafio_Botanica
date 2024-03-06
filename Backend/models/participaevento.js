@@ -14,13 +14,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   ParticipaEvento.init({
-    idEvento: DataTypes.BIGINT,
-    idUsuario: DataTypes.BIGINT,
-    fechaParticipacion: DataTypes.DATE
+    id_evento: DataTypes.BIGINT,
+    id_usuario: DataTypes.BIGINT,
+    fecha_participacion: DataTypes.DATE
   }, {
     sequelize,
     timestamps: false,
-    tableName: 'participaeventos',
+    tableName: 'participa_eventos',
     modelName: 'ParticipaEvento',
   });
   return ParticipaEvento;

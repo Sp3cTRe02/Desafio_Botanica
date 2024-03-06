@@ -37,7 +37,7 @@
 
       <div class="form-group mb-2">
         <label for="name">Contenido</label>
-        <quill-editor [modules]="modulesQuill" (onEditorChanged)="onChangedEditor($event)" 
+        <quill-editor [modules]="modulesQuill" (onEditorChanged)="onChangedEditor($event)"
         [(ngModel)]="contenidoInicio.descripcion" name="descripcion"></quill-editor>
       </div>
 
@@ -64,7 +64,7 @@
           <img [src]="noticia.imagen" class="card-img-top" alt="Tree Image">
           <div class="card-body text-center">
             <h5 class="card-title">{{ noticia.titulo }}</h5>
-            <p class="card-text">{{ noticia.resumenDesc }}</p>
+            <p class="card-text">{{ noticia.resumen_desc }}</p>
           </div>
         </a>
       </div>

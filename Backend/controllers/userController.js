@@ -147,8 +147,7 @@ const usuarioDelete = async (req = request, res = response) => {
  * @param {*} res 
  */
 const addRol = async (req = request, res = response) => {
-    console.log(req.body.idUsuario, req.body.idRol);
-    Conexion.addRol(req.body.idUsuario, req.body.idRol)
+    Conexion.addRol(req.body.id_usuario, req.body.id_rol)
         .then(resultado => {
             console.log(resultado);
             if (resultado === 1) {
@@ -166,7 +165,7 @@ const addRol = async (req = request, res = response) => {
         .catch(error => {
             console.log(error);
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-                'msg': 'Error en el servidor as`dijasdiajda0',
+                'msg': 'Error en el servidor',
                 'status': 'ERROR'
             })
         })
@@ -179,7 +178,7 @@ const addRol = async (req = request, res = response) => {
  */
 
 const removeRol = async (req = request, res = response) => {
-    Conexion.removeRol(req.body.idUsuario, req.body.idRol)
+    Conexion.removeRol(req.body.id_usuario, req.body.id_rol)
         .then(resultado => {
             if (resultado === 1) {
                 res.status(StatusCodes.OK).json({

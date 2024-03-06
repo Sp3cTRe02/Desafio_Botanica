@@ -9,7 +9,7 @@ export interface Arbol{
 export interface ArbolInfo{
   id:number;
   nombre: string;
-  epFloracion: string;
+  ep_floracion: string;
   descripcion: string;
   nombreFam: string;
   foto: string;

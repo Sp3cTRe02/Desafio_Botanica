@@ -14,11 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Evento.init({
-    idUsuario: DataTypes.BIGINT,
+    id_usuario: DataTypes.BIGINT,
     nombre: DataTypes.STRING,
     descripcion: DataTypes.STRING,
-    fechaInicio: DataTypes.DATE,
-    cantidadMax: DataTypes.INTEGER,
+    fecha_inicio: DataTypes.DATE,
+    cantidad_max: DataTypes.INTEGER,
     latitud: DataTypes.STRING,
     longitud: DataTypes.STRING,
     ubicacion: DataTypes.STRING,

@@ -2,8 +2,8 @@ export interface EventoGet{
     id: number;
     nombre:string;
     descripcion:string;
-    fechaInicio: string;
-    cantidadMax:number;
+    fecha_inicio: string;
+    cantidad_max:number;
     latitud:number;
     longitud:number;
     ubicacion:number;
@@ -13,19 +13,19 @@ export interface EventoGet{
 export interface EventoPut{
     nombre:string;
     descripcion:string;
-    cantidadMax:number;
+    cantidad_max:number;
 }
 
 export interface EventoPost{
-    cantidadEntradas:number | null
+    cantidad_entradas:number | null
 }
 
 export interface EventoAdd{
-    idUsuario:number;
+    id_usuario:number;
     nombre:string;
     descripcion:string;
-    fechaInicio:string;
-    cantidadMax:number;
+    fecha_inicio:string;
+    cantidad_max:number;
     latitud:string;
     longitud:string;
     ubicacion:string;

@@ -7,7 +7,7 @@ const  crearUbicacion = async (ctos = 1) => {
 
     for (let i = 0; i < ctos; i++) {
         ubicacion.push({
-            idArbol: arboles[Math.floor(Math.random() * arboles.length)],
+            id_arbol: arboles[Math.floor(Math.random() * arboles.length)],
             latitud: faker.location.latitude(),
             longitud: faker.location.longitude(),
             ciudad: fakerES.location.city(),

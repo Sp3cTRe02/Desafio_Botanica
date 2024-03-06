@@ -6,6 +6,7 @@ const fs = require('fs');
 const QRCode = require('qrcode')
 const PDFDocument = require('pdfkit')
 const {subirArchivoEvento,subirArchivoEventoPost} = require('../helpers/subir-archivo-evento');
+const { log } = require('console');
 
 /**
  * @David_Trujillo
@@ -36,7 +37,7 @@ class eventoController {
     
             const contenido = {
                 ...req.body,
-                idUsuario: id,
+                id_usuario: id,
                 imagen: rutaImagen
             }
     
@@ -159,7 +160,8 @@ class eventoController {
             const plazasTotales = await eventoConexion.getTotalPlazas(id)
             const plazasOcupadas = await eventoConexion.getPlazasOcupadas(id)
 
-            const plazasRestantes = plazasTotales.dataValues.cantidadMax - plazasOcupadas
+            const plazasRestantes = plazasTotales.dataValues.cantidad_max - plazasOcupadas
+            // console.log(plazasTotales);
 
             const response = {
                 success: true,
@@ -212,9 +214,9 @@ class eventoController {
 
             tickets.forEach((ticket, index) => {
                 doc.fontSize(20).text(`Detalles del billete ${index + 1}:`, { align: 'center' });
-                doc.text(`Fecha de emisión: ${ticket.fechaParticipacion}`);
+                doc.text(`Fecha de emisión: ${ticket.fecha_participacion}`);
                 doc.text(`Nombre del evento: ${ticket.nombreEvento}`);
-                doc.text(`Fecha del evento: ${ticket.fechaInicio}`);
+                doc.text(`Fecha del evento: ${ticket.fecha_inicio}`);
                 doc.text(`Ubicación: ${ticket.ubicacion}`);
                 doc.text(`Nombre: ${ticket.nombre}`);
                 doc.text(`Primer apellido: ${ticket.ap1}`);
@@ -240,7 +242,9 @@ class eventoController {
         try {
             const tickets = await eventoConexion.getDetallesEntradas();
             const detallesTickets = tickets[0]; 
-    
+            
+            console.log(tickets);
+
             const qrImages = await Promise.all(detallesTickets.map((ticket) => this.generarQR(ticket, { size: 300 })));
     
             const pdfBuffer = await this.generarPDF(detallesTickets, qrImages);
@@ -355,9 +359,9 @@ class eventoController {
     
             const plazasTotales = await eventoConexion.getTotalPlazas(idEvento);
             const plazasOcupadas = await eventoConexion.getPlazasOcupadas(idEvento);
-            const plazasRestantes = plazasTotales.dataValues.cantidadMax - plazasOcupadas;
+            const plazasRestantes = plazasTotales.dataValues.cantidad_max - plazasOcupadas;
     
-            const cantidadEntradas = req.body.cantidadEntradas;
+            const cantidadEntradas = req.body.cantidad_entradas;
 
             if (cantidadEntradas <= 0) {
                 return res.status(StatusCodes.BAD_REQUEST).json({
@@ -385,10 +389,11 @@ class eventoController {
     
                 const contenido = {
                     ...req.body,
-                    idUsuario: idUsuario,
-                    idEvento: idEvento,
-                    fechaParticipacion: fechaActual
+                    id_usuario: idUsuario,
+                    id_evento: idEvento,
+                    fecha_participacion: fechaActual
                 };
+                console.log(contenido);
                 inserciones.push(eventoConexion.participarEvento(contenido));
             }
     

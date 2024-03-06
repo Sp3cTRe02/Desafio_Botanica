@@ -38,15 +38,6 @@ module.exports = {
       desactivado:{
         type:Sequelize.BOOLEAN,
         defaultValue: 0
-      },
-
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
       }
     });
   },

@@ -46,8 +46,6 @@ export class UsuariosAdminComponent implements OnInit{
     passwd: '',
     foto: '',
     desactivado: false,
-    createdAt: null,
-    updatedAt: null
   }
 
   @ViewChild('editar') editar: Table | undefined
@@ -131,10 +129,11 @@ export class UsuariosAdminComponent implements OnInit{
 
   addRol(idRol : number, idUsuario : number){
     let usuarioRol : usuarioRol = {
-      idRol: idRol,
-      idUsuario: idUsuario
+      id_rol: idRol,
+      id_usuario: idUsuario
     }
-    console.log(usuarioRol)
+
+
     this.rolService.addRolUsuario(usuarioRol).subscribe( (response: any) => {
       if(response.status === "OK"){
         window.location.reload()
@@ -144,10 +143,9 @@ export class UsuariosAdminComponent implements OnInit{
 
   removeRol(idRol : number, idUsuario : number){
     let usuarioRol : usuarioRol = {
-      idRol: idRol,
-      idUsuario: idUsuario
+      id_rol: idRol,
+      id_usuario: idUsuario
     }
-    console.log(usuarioRol)
     this.rolService.deleteRolUsuario(usuarioRol).subscribe( (response: any) => {
       if(response.status === "OK"){
         window.location.reload()
